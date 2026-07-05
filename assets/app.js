@@ -53,6 +53,50 @@ const FALLBACK_DATA = {
     { value:  '48%', label: 'US share of global equity' },
     { value: '2.1×', label: 'equities vs. bonds' },
   ],
+  worldGdp: {
+    totalT: 126.0, asOf: '2026-01-01', source: 'IMF WEO, Apr 2026',
+    topCountries: [
+      { rank: 1, country: 'United States',  gdpT: 32.4 },
+      { rank: 2, country: 'China',          gdpT: 20.9 },
+      { rank: 3, country: 'Germany',        gdpT: 5.5  },
+      { rank: 4, country: 'Japan',          gdpT: 4.4  },
+      { rank: 5, country: 'United Kingdom', gdpT: 4.3  },
+      { rank: 6, country: 'India',          gdpT: 4.2  },
+      { rank: 7, country: 'France',         gdpT: 3.6  },
+      { rank: 8, country: 'Italy',          gdpT: 2.7  },
+      { rank: 9, country: 'Canada',         gdpT: 2.5  },
+      { rank: 10,country: 'Brazil',         gdpT: 2.1  },
+    ],
+  },
+  centralBanks: {
+    totalT: 24.2, peakTotalT: 30.5, peakYear: '2022',
+    asOf: '2026-06-01', source: 'Fed / ECB / BoJ / PBoC official releases',
+    banks: [
+      { name: "People's Bank of China", abbr: 'PBoC', flag: '🇨🇳', balanceSheetT: 6.75 },
+      { name: 'Federal Reserve',        abbr: 'Fed',  flag: '🇺🇸', balanceSheetT: 6.74 },
+      { name: 'European Central Bank',  abbr: 'ECB',  flag: '🇪🇺', balanceSheetT: 6.73 },
+      { name: 'Bank of Japan',          abbr: 'BoJ',  flag: '🇯🇵', balanceSheetT: 3.97 },
+    ],
+  },
+  globalDebt: {
+    totalT: 348, debtToGdpPct: 330,
+    asOf: '2025-12-31', source: 'IIF Global Debt Monitor, Feb 2026',
+    sectors: [
+      { id: 'govt', name: 'Government',          valueT: 106.7, color: '#4f81ff' },
+      { id: 'corp', name: 'Non-financial Corps', valueT: 100.6, color: '#a78bfa' },
+      { id: 'fin',  name: 'Financial Sector',    valueT:  76.1, color: '#fbbf24' },
+      { id: 'hh',   name: 'Households',          valueT:  64.6, color: '#34d399' },
+    ],
+  },
+  wealthDistribution: {
+    totalT: 477, asOf: '2024-12-31', source: 'UBS Global Wealth Report, 2025',
+    tiers: [
+      { group: 'Top 1%',     adultsM:   60, sharePct: 48.1 },
+      { group: 'Next 9%',    adultsM:  540, sharePct: 38.9 },
+      { group: 'Middle 40%', adultsM: 2400, sharePct: 11.2 },
+      { group: 'Bottom 50%', adultsM: 3000, sharePct:  1.8 },
+    ],
+  },
 };
 
 // ── Country flag lookup ───────────────────────────────────────────────────────
@@ -67,6 +111,8 @@ const FLAGS = {
   'Saudi Arabia':   '🇸🇦',
   'Germany':        '🇩🇪',
   'South Korea':    '🇰🇷',
+  'Italy':          '🇮🇹',
+  'Brazil':         '🇧🇷',
 };
 
 // ── Ordering for scale strip and panels ──────────────────────────────────────
@@ -748,6 +794,202 @@ function renderSources(data) {
   list.innerHTML = rows + derivRow + note;
 }
 
+function renderWorldGdp(data) {
+  const listEl = $('gdp-list');
+  if (!listEl) return;
+  const g = data.worldGdp;
+  if (!g) return;
+
+  const maxGdp = g.topCountries[0].gdpT;
+  const totalTracked = data.assetClasses.reduce((s, a) => s + a.valueT, 0);
+
+  listEl.innerHTML = g.topCountries.map(c => {
+    const pct  = (c.gdpT / maxGdp) * 100;
+    const flag = FLAGS[c.country] ?? '🌐';
+    return `
+      <div class="gdp-item">
+        <span class="league-rank mono">${c.rank}</span>
+        <span class="league-flag" role="img" aria-label="${c.country}">${flag}</span>
+        <span class="gdp-country">${c.country}</span>
+        <div class="gdp-bar-container bar-container" role="group" aria-label="${c.country} GDP bar">
+          <div class="gdp-bar-fill bar-fill"
+               style="--target-width: ${pct.toFixed(2)}%"
+               role="progressbar"
+               aria-valuenow="${c.gdpT}"
+               aria-valuemin="0"
+               aria-valuemax="${maxGdp}">
+          </div>
+        </div>
+        <span class="gdp-cap mono">${fmtT(c.gdpT)}</span>
+      </div>`;
+  }).join('');
+
+  const ratioEl = $('gdp-ratios');
+  if (ratioEl) {
+    const re = data.assetClasses.find(a => a.id === 're');
+    const eq = data.assetClasses.find(a => a.id === 'eq');
+    ratioEl.innerHTML = [
+      { label: 'All tracked assets vs. world GDP', value: `${fmt(totalTracked / g.totalT, 1)}×` },
+      { label: 'Global real estate vs. GDP',       value: `${fmt(re.valueT / g.totalT, 1)}×` },
+      { label: 'Global equities vs. GDP',          value: `${fmt(eq.valueT / g.totalT, 2)}×` },
+      { label: 'Crypto as % of world GDP',         value: `${fmt(data.crypto.totalT / g.totalT * 100, 1)}%` },
+    ].map(r => `
+      <div class="ratio-card">
+        <div class="ratio-value mono">${r.value}</div>
+        <div class="ratio-label">${r.label}</div>
+      </div>`).join('');
+  }
+}
+
+function renderCentralBanks(data) {
+  const barsEl = $('cb-bars');
+  if (!barsEl) return;
+  const cb = data.centralBanks;
+  if (!cb) return;
+
+  const maxB = Math.max(...cb.banks.map(b => b.balanceSheetT));
+
+  barsEl.innerHTML = cb.banks.map(b => {
+    const pct = (b.balanceSheetT / maxB) * 100;
+    return `
+      <div class="cb-item">
+        <span class="league-flag" role="img" aria-label="${b.name}">${b.flag}</span>
+        <span class="cb-abbr">${b.abbr}</span>
+        <span class="cb-name dim">${b.name}</span>
+        <div class="cb-bar-container bar-container" role="group" aria-label="${b.abbr} balance sheet bar">
+          <div class="cb-bar-fill bar-fill"
+               style="--target-width: ${pct.toFixed(2)}%"
+               role="progressbar"
+               aria-valuenow="${b.balanceSheetT}"
+               aria-valuemin="0"
+               aria-valuemax="${maxB}">
+          </div>
+        </div>
+        <span class="cb-cap mono">${fmtT(b.balanceSheetT)}</span>
+      </div>`;
+  }).join('');
+
+  const totalEl = $('cb-total');
+  if (totalEl) totalEl.textContent = fmtT(cb.totalT);
+
+  const factsEl = $('cb-facts');
+  if (factsEl) {
+    const cryptoT = data.crypto.totalT;
+    const goldT   = data.gold.impliedCapT;
+    const shrinkPct = fmt((1 - cb.totalT / cb.peakTotalT) * 100, 0);
+    factsEl.innerHTML = [
+      { label: 'vs. all crypto (×)',             value: `${fmt(cb.totalT / cryptoT, 1)}×` },
+      { label: 'vs. all above-ground gold',      value: `${fmt(cb.totalT / goldT * 100, 0)}%` },
+      { label: `QT shrinkage from ${cb.peakYear} peak`, value: `−${shrinkPct}%` },
+    ].map(r => `
+      <div class="ratio-card">
+        <div class="ratio-value mono">${r.value}</div>
+        <div class="ratio-label">${r.label}</div>
+      </div>`).join('');
+  }
+}
+
+function renderGlobalDebt(data) {
+  const barsEl = $('debt-bars');
+  if (!barsEl) return;
+  const d = data.globalDebt;
+  if (!d) return;
+
+  const maxSector = Math.max(...d.sectors.map(s => s.valueT));
+  const totalTracked = data.assetClasses.reduce((s, a) => s + a.valueT, 0);
+
+  barsEl.innerHTML = d.sectors.map(s => {
+    const pct = (s.valueT / maxSector) * 100;
+    return `
+      <div class="debt-item bar-row">
+        <div class="bar-label">
+          <span class="bar-name">${s.name}</span>
+        </div>
+        <div class="bar-container" role="group" aria-label="${s.name} debt bar">
+          <div class="bar-fill"
+               style="--target-width: ${pct.toFixed(2)}%; background: ${s.color};"
+               role="progressbar"
+               aria-valuenow="${s.valueT}"
+               aria-valuemin="0"
+               aria-valuemax="${maxSector}">
+          </div>
+          <span class="bar-value">${fmtT(s.valueT)}</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  const totalEl = $('debt-total');
+  if (totalEl) totalEl.textContent = fmtT(d.totalT);
+
+  const factsEl = $('debt-facts');
+  if (factsEl) {
+    factsEl.innerHTML = [
+      { label: 'debt-to-GDP (IIF measure)',         value: `${d.debtToGdpPct}%`,                    danger: false },
+      { label: 'vs. all tracked assets',            value: `${fmt(d.totalT / totalTracked, 2)}×`,   danger: true  },
+      { label: 'per person on earth (÷ 8.1B)',      value: `$${fmt(d.totalT / 8.1 * 1000, 0)}K`,   danger: false },
+    ].map(r => `
+      <div class="ratio-card${r.danger ? ' ratio-card--danger' : ''}">
+        <div class="ratio-value mono">${r.value}</div>
+        <div class="ratio-label">${r.label}</div>
+      </div>`).join('');
+  }
+}
+
+function renderWealthDistribution(data) {
+  const barEl = $('wealth-bar');
+  if (!barEl) return;
+  const w = data.wealthDistribution;
+  if (!w) return;
+
+  const TIER_COLORS = ['#4f81ff', '#a78bfa', '#34d399', '#fbbf24'];
+
+  const stackSegments = w.tiers.map((t, i) => `
+    <div class="wealth-segment"
+         style="width: ${t.sharePct}%; background: ${TIER_COLORS[i]};"
+         title="${t.group}: ${t.sharePct}% of $${w.totalT}T global household wealth">
+    </div>`).join('');
+
+  const legendItems = w.tiers.map((t, i) => {
+    const adultsFmt = t.adultsM >= 1000
+      ? `${(t.adultsM / 1000).toFixed(1)}B`
+      : `${t.adultsM}M`;
+    const wealthPerAdult = (w.totalT * 1e12 * t.sharePct / 100) / (t.adultsM * 1e6);
+    const wealthFmt = wealthPerAdult >= 1e6
+      ? `$${fmt(wealthPerAdult / 1e6, 1)}M avg`
+      : `$${fmt(wealthPerAdult / 1e3, 0)}K avg`;
+    return `
+      <div class="wealth-legend-item">
+        <span class="wealth-legend-swatch" style="background: ${TIER_COLORS[i]}"></span>
+        <span class="wealth-legend-group">${t.group}</span>
+        <span class="wealth-legend-pct mono">${t.sharePct}%</span>
+        <span class="wealth-legend-adults dim">${adultsFmt} people · ${wealthFmt}</span>
+      </div>`;
+  }).join('');
+
+  barEl.innerHTML = `
+    <div class="wealth-stack" role="img" aria-label="Global wealth distribution stacked bar">
+      ${stackSegments}
+    </div>
+    <div class="wealth-legend" aria-label="Wealth tier legend">${legendItems}</div>`;
+
+  const factsEl = $('wealth-facts');
+  if (factsEl) {
+    const top1  = w.tiers[0];
+    const bot50 = w.tiers[3];
+    const top1Wealth  = w.totalT * top1.sharePct / 100;
+    const bot50Wealth = w.totalT * bot50.sharePct / 100;
+    factsEl.innerHTML = [
+      { label: `Top 1% (${top1.adultsM}M people) hold`, value: fmtT(top1Wealth) },
+      { label: `Bottom 50% (${(bot50.adultsM/1000).toFixed(1)}B people) hold`, value: fmtT(bot50Wealth), danger: true },
+      { label: 'ratio: top 1% wealth per bottom 50%', value: `${fmt(top1Wealth / bot50Wealth, 0)}×`, danger: true },
+    ].map(r => `
+      <div class="ratio-card${r.danger ? ' ratio-card--danger' : ''}">
+        <div class="ratio-value mono">${r.value}</div>
+        <div class="ratio-label">${r.label}</div>
+      </div>`).join('');
+  }
+}
+
 // ── Main render dispatcher ────────────────────────────────────────────────────
 function renderAll(data) {
   // Run each section independently so one failure doesn't blank the whole page
@@ -758,8 +1000,12 @@ function renderAll(data) {
     renderHundredBill,
     renderAssetPanels,
     renderCountryLeague,
+    renderWorldGdp,
     renderCryptoAnatomy,
+    renderCentralBanks,
     renderDerivatives,
+    renderGlobalDebt,
+    renderWealthDistribution,
     renderTakeaways,
     renderSources,
   ];
@@ -779,7 +1025,7 @@ function renderAll(data) {
 // ── Animation: IntersectionObserver for bar rows ──────────────────────────────
 function setupObserver() {
   if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.bar-row').forEach(el => el.classList.add('animate'));
+    document.querySelectorAll('.bar-row, .gdp-item, .cb-item').forEach(el => el.classList.add('animate'));
     return;
   }
 
@@ -796,7 +1042,7 @@ function setupObserver() {
   );
 
   // Observe only rows that haven't animated yet
-  document.querySelectorAll('.bar-row:not(.animate)').forEach(el => obs.observe(el));
+  document.querySelectorAll('.bar-row:not(.animate), .gdp-item:not(.animate), .cb-item:not(.animate)').forEach(el => obs.observe(el));
 }
 
 // ── Done toast ────────────────────────────────────────────────────────────────
@@ -817,7 +1063,7 @@ async function refreshData() {
 
   try {
     const data = await loadData(true);   // bypassCache = true
-    document.querySelectorAll('.bar-row.animate').forEach(el => el.classList.remove('animate'));
+    document.querySelectorAll('.bar-row.animate, .gdp-item.animate, .cb-item.animate').forEach(el => el.classList.remove('animate'));
     renderAll(data);
     setupObserver();
     showDoneToast();

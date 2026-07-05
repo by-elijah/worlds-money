@@ -277,5 +277,58 @@
       "value": "2.1×",
       "label": "equities vs. bonds"
     }
-  ]
+  ],
+  "worldGdp": {
+    "totalT": 126.0,
+    "asOf": "2026-01-01",
+    "source": "IMF WEO, Apr 2026",
+    "topCountries": [
+      { "rank": 1, "country": "United States",  "gdpT": 32.4 },
+      { "rank": 2, "country": "China",          "gdpT": 20.9 },
+      { "rank": 3, "country": "Germany",        "gdpT": 5.5  },
+      { "rank": 4, "country": "Japan",          "gdpT": 4.4  },
+      { "rank": 5, "country": "United Kingdom", "gdpT": 4.3  },
+      { "rank": 6, "country": "India",          "gdpT": 4.2  },
+      { "rank": 7, "country": "France",         "gdpT": 3.6  },
+      { "rank": 8, "country": "Italy",          "gdpT": 2.7  },
+      { "rank": 9, "country": "Canada",         "gdpT": 2.5  },
+      { "rank": 10,"country": "Brazil",         "gdpT": 2.1  }
+    ]
+  },
+  "centralBanks": {
+    "totalT": 24.2,
+    "peakTotalT": 30.5,
+    "peakYear": "2022",
+    "asOf": "2026-06-01",
+    "source": "Fed / ECB / BoJ / PBoC official releases",
+    "banks": [
+      { "name": "People's Bank of China", "abbr": "PBoC", "flag": "🇨🇳", "balanceSheetT": 6.75 },
+      { "name": "Federal Reserve",        "abbr": "Fed",  "flag": "🇺🇸", "balanceSheetT": 6.74 },
+      { "name": "European Central Bank",  "abbr": "ECB",  "flag": "🇪🇺", "balanceSheetT": 6.73 },
+      { "name": "Bank of Japan",          "abbr": "BoJ",  "flag": "🇯🇵", "balanceSheetT": 3.97 }
+    ]
+  },
+  "globalDebt": {
+    "totalT": 348,
+    "debtToGdpPct": 330,
+    "asOf": "2025-12-31",
+    "source": "IIF Global Debt Monitor, Feb 2026",
+    "sectors": [
+      { "id": "govt", "name": "Government",          "valueT": 106.7, "color": "#4f81ff" },
+      { "id": "corp", "name": "Non-financial Corps", "valueT": 100.6, "color": "#a78bfa" },
+      { "id": "fin",  "name": "Financial Sector",    "valueT": 76.1,  "color": "#fbbf24" },
+      { "id": "hh",   "name": "Households",          "valueT": 64.6,  "color": "#34d399" }
+    ]
+  },
+  "wealthDistribution": {
+    "totalT": 477,
+    "asOf": "2024-12-31",
+    "source": "UBS Global Wealth Report, 2025",
+    "tiers": [
+      { "group": "Top 1%",     "adultsM": 60,   "sharePct": 48.1 },
+      { "group": "Next 9%",    "adultsM": 540,  "sharePct": 38.9 },
+      { "group": "Middle 40%", "adultsM": 2400, "sharePct": 11.2 },
+      { "group": "Bottom 50%", "adultsM": 3000, "sharePct": 1.8  }
+    ]
+  }
 }

@@ -90,6 +90,16 @@
       </div>
     </section>
 
+    <!-- World GDP — real-economy context -->
+    <section class="world-gdp-section" id="world-gdp" hidden aria-label="World GDP by country">
+      <div class="section-inner">
+        <h2 class="section-title">The Real Economy — World GDP</h2>
+        <p class="section-sub">All that wealth exists inside an economy. World nominal GDP anchors how large the asset totals really are. Source: IMF WEO, Apr 2026.</p>
+        <div class="gdp-list" id="gdp-list" role="list" aria-label="Top 10 countries by GDP"></div>
+        <div class="ratio-cards" id="gdp-ratios" aria-label="Asset-to-GDP ratios"></div>
+      </div>
+    </section>
+
     <!-- Crypto anatomy: donut + stats + optional sparkline -->
     <section class="crypto-anatomy-section" id="crypto-anatomy" hidden aria-label="Crypto market breakdown">
       <div class="section-inner">
@@ -103,12 +113,50 @@
       </div>
     </section>
 
+    <!-- Central bank balance sheets -->
+    <section class="central-banks-section" id="central-banks" hidden aria-label="Central bank balance sheets">
+      <div class="section-inner">
+        <h2 class="section-title">The Big Four Central Banks</h2>
+        <p class="section-sub">Combined balance sheet assets of the Fed, PBoC, ECB, and BoJ — created through quantitative easing, reduced via QT. Source: official central bank releases, Jun 2026.</p>
+        <div class="cb-total-row">
+          <span class="cb-total-num mono" id="cb-total">—</span>
+          <span class="cb-total-label">combined balance sheet assets</span>
+        </div>
+        <div class="cb-list" id="cb-bars" role="list" aria-label="Central bank balance sheets"></div>
+        <div class="ratio-cards" id="cb-facts" aria-label="Central bank context figures"></div>
+      </div>
+    </section>
+
     <!-- Derivatives ghost bar (not on the wealth scale) -->
     <section class="derivatives-section" id="derivatives" hidden aria-label="Derivatives context">
       <div class="section-inner">
         <h2 class="section-title">Derivatives — The Other Number</h2>
         <p class="ghost-bar-intro" id="ghost-bar-intro"></p>
         <div class="ghost-bar-wrap" id="ghost-bar-wrap"></div>
+      </div>
+    </section>
+
+    <!-- Global debt breakdown -->
+    <section class="global-debt-section" id="global-debt" hidden aria-label="Global debt breakdown">
+      <div class="section-inner">
+        <h2 class="section-title">Global Debt — The Other Ledger</h2>
+        <p class="section-sub">For every dollar of wealth there is a corresponding claim. Total global debt exceeds all tracked assets combined. Source: IIF Global Debt Monitor, Q4 2025.</p>
+        <div class="debt-total-row">
+          <span class="debt-total-num mono" id="debt-total">—</span>
+          <span class="debt-total-label">total global debt</span>
+        </div>
+        <div class="debt-bars" id="debt-bars" role="list" aria-label="Global debt by sector"></div>
+        <div class="ratio-cards" id="debt-facts" aria-label="Global debt context figures"></div>
+      </div>
+    </section>
+
+    <!-- Wealth distribution -->
+    <section class="wealth-distribution-section" id="wealth-distribution" hidden aria-label="Global wealth distribution">
+      <div class="section-inner">
+        <h2 class="section-title">Who Owns the Wealth?</h2>
+        <p class="section-sub">Share of global household wealth held by each population tier. Source: UBS Global Wealth Report 2025 (data: end-2024).</p>
+        <div id="wealth-bar"></div>
+        <div class="ratio-cards" id="wealth-facts" aria-label="Wealth distribution key figures"></div>
       </div>
     </section>
 

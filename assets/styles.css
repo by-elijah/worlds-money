@@ -6,6 +6,8 @@
 
 /* ── Design tokens (dark theme default) ─────────────────────────────────────── */
 :root {
+  --c-gdp: #10b981;
+  --c-cb:  #6366f1;
   /* Backgrounds */
   --bg:         #0c0f1a;
   --surface:    #111827;
@@ -1114,6 +1116,243 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
   text-transform: uppercase;
   margin-left: 0.4rem;
   vertical-align: middle;
+}
+
+/* ── Shared: ratio cards (used across GDP / CB / Debt / Wealth sections) ──── */
+.ratio-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+.ratio-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.9rem 0.65rem;
+  min-width: 130px;
+  flex: 1 1 130px;
+}
+.ratio-card--danger { border-color: color-mix(in srgb, var(--danger) 30%, var(--border)); }
+.ratio-value {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+.ratio-card--danger .ratio-value { color: var(--danger); }
+.ratio-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* ── World GDP Section ────────────────────────────────────────────────────── */
+.world-gdp-section { background: var(--surface); border-bottom: 1px solid var(--border); }
+
+.gdp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.gdp-item {
+  display: grid;
+  grid-template-columns: 22px 1.8rem 140px 1fr 72px;
+  gap: 0.35rem 0.6rem;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .gdp-item { grid-template-columns: 20px 1.5rem 1fr auto; }
+  .gdp-bar-container { grid-column: 1 / -1; }
+}
+.gdp-country {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gdp-bar-container {
+  position: relative;
+  height: 22px;
+  background: var(--surface-3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.gdp-bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--c-gdp);
+  border-radius: 4px 0 0 4px;
+  opacity: 0.8;
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gdp-item.animate .gdp-bar-fill { width: var(--target-width); }
+@media (prefers-reduced-motion: reduce) {
+  .gdp-bar-fill { transition: none !important; width: var(--target-width) !important; }
+}
+.gdp-cap {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Central Banks Section ────────────────────────────────────────────────── */
+.central-banks-section { border-bottom: 1px solid var(--border); }
+
+.cb-total-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.cb-total-num {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--c-cb);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.cb-total-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.cb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.cb-item {
+  display: grid;
+  grid-template-columns: 1.8rem 3.5rem 1fr 1fr 80px;
+  gap: 0.35rem 0.6rem;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .cb-item { grid-template-columns: 1.5rem 3rem 1fr auto; }
+  .cb-bar-container { grid-column: 1 / -1; }
+}
+.cb-abbr {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.cb-name {
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cb-bar-container {
+  position: relative;
+  height: 22px;
+  background: var(--surface-3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cb-bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--c-cb);
+  border-radius: 4px 0 0 4px;
+  opacity: 0.8;
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cb-item.animate .cb-bar-fill { width: var(--target-width); }
+@media (prefers-reduced-motion: reduce) {
+  .cb-bar-fill { transition: none !important; width: var(--target-width) !important; }
+}
+.cb-cap {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Global Debt Section ──────────────────────────────────────────────────── */
+.global-debt-section { background: var(--surface); border-bottom: 1px solid var(--border); }
+
+.debt-total-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.debt-total-num {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--danger);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.debt-total-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.debt-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.debt-item.bar-row { }
+
+/* ── Wealth Distribution Section ─────────────────────────────────────────── */
+.wealth-distribution-section { border-bottom: 1px solid var(--border); }
+
+.wealth-stack {
+  display: flex;
+  height: 44px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--border);
+}
+.wealth-segment {
+  height: 100%;
+  transition: opacity 0.2s, filter 0.2s;
+  cursor: default;
+}
+.wealth-segment:hover { opacity: 0.8; filter: brightness(1.15); }
+.wealth-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.wealth-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+}
+.wealth-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.wealth-legend-group {
+  font-weight: 700;
+  min-width: 5.5rem;
+}
+.wealth-legend-pct {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  min-width: 3.5rem;
+}
+.wealth-legend-adults {
+  font-size: 0.72rem;
+  color: var(--text-dim);
 }
 
 /* ── Footer ───────────────────────────────────────────────────────────────── */
