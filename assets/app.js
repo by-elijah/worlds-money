@@ -15,7 +15,7 @@ const FALLBACK_DATA = {
     { id: 're',    name: 'Real Estate',  sub: 'Global residential + commercial property', valueT: 393.3, asOf: '2025-01-01', source: 'Savills, 2025',      tier: 2, stale: false },
     { id: 'bond',  name: 'Bonds',        sub: 'Global debt securities outstanding',       valueT: 156.0, asOf: '2025-08-01', source: 'BIS, Aug 2025',     tier: 2, stale: false },
     { id: 'eq',    name: 'Equities',     sub: 'Global listed market capitalisation',      valueT: 135.0, asOf: '2025-12-01', source: 'Bloomberg/WFE',     tier: 2, stale: false },
-    { id: 'm2',    name: 'Broad Money',  sub: 'M2 — US + EZ + CN + JP',                  valueT: 101.7, asOf: '2026-07-01', source: 'StreetStats, Jul 2026', tier: 2, stale: false },
+    { id: 'm2',    name: 'Broad Money',  sub: 'Cash, bank deposits & savings — money created by central banks and the lending system',  valueT: 101.7, asOf: '2026-07-01', source: 'StreetStats, Jul 2026', tier: 2, stale: false },
     { id: 'gold',  name: 'Gold',         sub: 'All above-ground gold × spot price',       valueT:  23.5, asOf: '2026-07-03', source: 'Gold API / WGC',    tier: 1, stale: false },
     { id: 'crypto',name: 'Crypto',       sub: 'Total crypto market capitalisation',       valueT:   3.3, asOf: '2026-07-03', source: 'CoinGecko',         tier: 1, stale: false },
   ],
@@ -312,7 +312,7 @@ function renderHero(data) {
     re:     `${fmt((data.assetClasses.find(a=>a.id==='re').valueT / total)*100, 1)}% of all tracked wealth`,
     bond:   `${fmt(data.assetClasses.find(a=>a.id==='bond').valueT / crypto.valueT, 0)}× the size of crypto`,
     eq:     us ? `US alone: ${fmtT(us.capT)} — ${fmt(us.capT / eqA.valueT * 100, 0)}% of global equities` : '',
-    m2:     `${fmt(data.assetClasses.find(a=>a.id==='m2').valueT / crypto.valueT, 0)}× total crypto market cap`,
+    m2:     `M2 counts every dollar that could be spent quickly: coins, notes, checking accounts, savings accounts, and money-market funds. Covers US + Eurozone + China + Japan — ~70% of global GDP. ${fmt(data.assetClasses.find(a=>a.id==='m2').valueT / crypto.valueT, 0)}× the size of crypto.`,
     gold:   `${fmt(data.gold.aboveGroundTonnes / 1000, 0)}k tonnes above ground · ${fmt(data.gold.aboveGroundTonnes / 1000, 0)}k × 32,150 oz/tonne`,
     crypto: data.crypto.top5?.length >= 3
       ? data.crypto.top5.slice(0, 5).map(c => {
@@ -446,7 +446,7 @@ function renderAssetPanels(data) {
     re:     `${fmt((data.assetClasses.find(a=>a.id==='re').valueT / total)*100, 1)}% of all tracked wealth`,
     bond:   `${fmt(data.assetClasses.find(a=>a.id==='bond').valueT / crypto.valueT, 0)}× the size of crypto`,
     eq:     data.equityFacts.map(f => `<strong>${f.value}</strong> ${f.label}`).join(' · '),
-    m2:     `${fmt(data.assetClasses.find(a=>a.id==='m2').valueT / crypto.valueT, 0)}× total crypto market cap`,
+    m2:     `M2 = cash + bank deposits + money-market funds. Every loan a bank makes creates new M2. Covers US + EZ + CN + JP. ${fmt(data.assetClasses.find(a=>a.id==='m2').valueT / crypto.valueT, 0)}× the size of all crypto.`,
     gold:   `$${fmt(data.gold.spotUsdPerOz, 0)}/oz · ${fmt(data.gold.aboveGroundTonnes/1000, 0)}k tonnes above ground`,
     crypto: `${fmt((1 - crypto.valueT / data.crypto.athT) * 100, 0)}% below Oct ${data.crypto.athDate.slice(0,4)} ATH of ${fmtT(data.crypto.athT)}`,
   };
