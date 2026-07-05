@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-07-05T04:37:17.217Z",
+    "generatedAt": "2026-07-05T05:49:46.451Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -60,7 +60,7 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.2603,
+      "valueT": 2.2551,
       "asOf": "2026-07-05",
       "source": "CoinGecko",
       "tier": 1,
@@ -74,19 +74,19 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.2603,
+    "totalT": 2.2551,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 52.16,
+    "volume24hB": 51.9,
     "btc": {
-      "capT": 1.2603,
-      "dominancePct": 55.7192,
-      "priceUsd": 62856
+      "capT": 1.2559,
+      "dominancePct": 55.7,
+      "priceUsd": 62642
     },
     "eth": {
-      "capB": 213.43,
-      "dominancePct": 9.4275,
-      "priceUsd": 1768.4
+      "capB": 212.5,
+      "dominancePct": 9.4249,
+      "priceUsd": 1761.12
     },
     "stablecoinsB": 248.8,
     "top5": [
@@ -95,43 +95,43 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 62856,
-        "capB": 1260.3,
-        "change24hPct": 0.34
+        "priceUsd": 62642,
+        "capB": 1255.9,
+        "change24hPct": 0.19
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 1768.4,
-        "capB": 213.4,
-        "change24hPct": 0.7
+        "priceUsd": 1761.12,
+        "capB": 212.5,
+        "change24hPct": 0.24
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.999055,
+        "priceUsd": 0.999153,
         "capB": 184.1,
-        "change24hPct": -0.01
+        "change24hPct": 0
       },
       {
         "rank": 4,
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 571.19,
-        "capB": 77,
-        "change24hPct": -0.19
+        "priceUsd": 570.68,
+        "capB": 76.9,
+        "change24hPct": -0.01
       },
       {
         "rank": 5,
         "id": "usd-coin",
         "symbol": "USDC",
         "name": "USDC",
-        "priceUsd": 0.999793,
+        "priceUsd": 0.999851,
         "capB": 72.9,
         "change24hPct": -0.01
       }
@@ -143,7 +143,7 @@
       },
       {
         "date": "2026-07-05",
-        "totalT": 2.2603
+        "totalT": 2.2551
       }
     ]
   },
@@ -163,8 +163,8 @@
     "generatedAt": "2026-07-05",
     "day": {
       "crypto": {
-        "pct": 0.23,
-        "absT": 0.0051
+        "pct": 0,
+        "absT": -0.0001
       },
       "gold": {
         "pct": 0,
@@ -279,20 +279,60 @@
     }
   ],
   "worldGdp": {
-    "totalT": 126.0,
+    "totalT": 126,
     "asOf": "2026-01-01",
     "source": "IMF WEO, Apr 2026",
     "topCountries": [
-      { "rank": 1, "country": "United States",  "gdpT": 32.4 },
-      { "rank": 2, "country": "China",          "gdpT": 20.9 },
-      { "rank": 3, "country": "Germany",        "gdpT": 5.5  },
-      { "rank": 4, "country": "Japan",          "gdpT": 4.4  },
-      { "rank": 5, "country": "United Kingdom", "gdpT": 4.3  },
-      { "rank": 6, "country": "India",          "gdpT": 4.2  },
-      { "rank": 7, "country": "France",         "gdpT": 3.6  },
-      { "rank": 8, "country": "Italy",          "gdpT": 2.7  },
-      { "rank": 9, "country": "Canada",         "gdpT": 2.5  },
-      { "rank": 10,"country": "Brazil",         "gdpT": 2.1  }
+      {
+        "rank": 1,
+        "country": "United States",
+        "gdpT": 32.4
+      },
+      {
+        "rank": 2,
+        "country": "China",
+        "gdpT": 20.9
+      },
+      {
+        "rank": 3,
+        "country": "Germany",
+        "gdpT": 5.5
+      },
+      {
+        "rank": 4,
+        "country": "Japan",
+        "gdpT": 4.4
+      },
+      {
+        "rank": 5,
+        "country": "United Kingdom",
+        "gdpT": 4.3
+      },
+      {
+        "rank": 6,
+        "country": "India",
+        "gdpT": 4.2
+      },
+      {
+        "rank": 7,
+        "country": "France",
+        "gdpT": 3.6
+      },
+      {
+        "rank": 8,
+        "country": "Italy",
+        "gdpT": 2.7
+      },
+      {
+        "rank": 9,
+        "country": "Canada",
+        "gdpT": 2.5
+      },
+      {
+        "rank": 10,
+        "country": "Brazil",
+        "gdpT": 2.1
+      }
     ]
   },
   "centralBanks": {
@@ -302,10 +342,30 @@
     "asOf": "2026-06-01",
     "source": "Fed / ECB / BoJ / PBoC official releases",
     "banks": [
-      { "name": "People's Bank of China", "abbr": "PBoC", "flag": "🇨🇳", "balanceSheetT": 6.75 },
-      { "name": "Federal Reserve",        "abbr": "Fed",  "flag": "🇺🇸", "balanceSheetT": 6.74 },
-      { "name": "European Central Bank",  "abbr": "ECB",  "flag": "🇪🇺", "balanceSheetT": 6.73 },
-      { "name": "Bank of Japan",          "abbr": "BoJ",  "flag": "🇯🇵", "balanceSheetT": 3.97 }
+      {
+        "name": "People's Bank of China",
+        "abbr": "PBoC",
+        "flag": "🇨🇳",
+        "balanceSheetT": 6.75
+      },
+      {
+        "name": "Federal Reserve",
+        "abbr": "Fed",
+        "flag": "🇺🇸",
+        "balanceSheetT": 6.74
+      },
+      {
+        "name": "European Central Bank",
+        "abbr": "ECB",
+        "flag": "🇪🇺",
+        "balanceSheetT": 6.73
+      },
+      {
+        "name": "Bank of Japan",
+        "abbr": "BoJ",
+        "flag": "🇯🇵",
+        "balanceSheetT": 3.97
+      }
     ]
   },
   "globalDebt": {
@@ -314,10 +374,30 @@
     "asOf": "2025-12-31",
     "source": "IIF Global Debt Monitor, Feb 2026",
     "sectors": [
-      { "id": "govt", "name": "Government",          "valueT": 106.7, "color": "#4f81ff" },
-      { "id": "corp", "name": "Non-financial Corps", "valueT": 100.6, "color": "#a78bfa" },
-      { "id": "fin",  "name": "Financial Sector",    "valueT": 76.1,  "color": "#fbbf24" },
-      { "id": "hh",   "name": "Households",          "valueT": 64.6,  "color": "#34d399" }
+      {
+        "id": "govt",
+        "name": "Government",
+        "valueT": 106.7,
+        "color": "#4f81ff"
+      },
+      {
+        "id": "corp",
+        "name": "Non-financial Corps",
+        "valueT": 100.6,
+        "color": "#a78bfa"
+      },
+      {
+        "id": "fin",
+        "name": "Financial Sector",
+        "valueT": 76.1,
+        "color": "#fbbf24"
+      },
+      {
+        "id": "hh",
+        "name": "Households",
+        "valueT": 64.6,
+        "color": "#34d399"
+      }
     ]
   },
   "wealthDistribution": {
@@ -325,60 +405,302 @@
     "asOf": "2024-12-31",
     "source": "UBS Global Wealth Report, 2025",
     "tiers": [
-      { "group": "Top 1%",     "adultsM": 60,   "sharePct": 48.1 },
-      { "group": "Next 9%",    "adultsM": 540,  "sharePct": 38.9 },
-      { "group": "Middle 40%", "adultsM": 2400, "sharePct": 11.2 },
-      { "group": "Bottom 50%", "adultsM": 3000, "sharePct": 1.8  }
+      {
+        "group": "Top 1%",
+        "adultsM": 60,
+        "sharePct": 48.1
+      },
+      {
+        "group": "Next 9%",
+        "adultsM": 540,
+        "sharePct": 38.9
+      },
+      {
+        "group": "Middle 40%",
+        "adultsM": 2400,
+        "sharePct": 11.2
+      },
+      {
+        "group": "Bottom 50%",
+        "adultsM": 3000,
+        "sharePct": 1.8
+      }
     ]
   },
   "topPrivateCompanies": {
     "asOf": "2026-07-04",
     "source": "companiesmarketcap.com",
     "companies": [
-      { "rank": 1,  "name": "NVIDIA",    "ticker": "NVDA", "flag": "🇺🇸", "sector": "AI / Chips",       "capT": 4.72 },
-      { "rank": 2,  "name": "Apple",     "ticker": "AAPL", "flag": "🇺🇸", "sector": "Consumer Tech",    "capT": 4.53 },
-      { "rank": 3,  "name": "Alphabet",  "ticker": "GOOG", "flag": "🇺🇸", "sector": "Internet",         "capT": 4.35 },
-      { "rank": 4,  "name": "Microsoft", "ticker": "MSFT", "flag": "🇺🇸", "sector": "Cloud",            "capT": 2.90 },
-      { "rank": 5,  "name": "Amazon",    "ticker": "AMZN", "flag": "🇺🇸", "sector": "E-Commerce/Cloud", "capT": 2.61 },
-      { "rank": 6,  "name": "TSMC",      "ticker": "TSM",  "flag": "🇹🇼", "sector": "Semiconductors",   "capT": 2.25 },
-      { "rank": 7,  "name": "SpaceX",    "ticker": "SPCX", "flag": "🇺🇸", "sector": "Aerospace",        "capT": 2.13 },
-      { "rank": 8,  "name": "Broadcom",  "ticker": "AVGO", "flag": "🇺🇸", "sector": "Semiconductors",   "capT": 1.71 },
-      { "rank": 9,  "name": "Meta",      "ticker": "META", "flag": "🇺🇸", "sector": "Social Media",     "capT": 1.48 },
-      { "rank": 10, "name": "Tesla",     "ticker": "TSLA", "flag": "🇺🇸", "sector": "EVs / Energy",     "capT": 1.48 }
+      {
+        "rank": 1,
+        "name": "NVIDIA",
+        "ticker": "NVDA",
+        "flag": "🇺🇸",
+        "sector": "AI / Chips",
+        "capT": 4.72
+      },
+      {
+        "rank": 2,
+        "name": "Apple",
+        "ticker": "AAPL",
+        "flag": "🇺🇸",
+        "sector": "Consumer Tech",
+        "capT": 4.53
+      },
+      {
+        "rank": 3,
+        "name": "Alphabet",
+        "ticker": "GOOG",
+        "flag": "🇺🇸",
+        "sector": "Internet",
+        "capT": 4.35
+      },
+      {
+        "rank": 4,
+        "name": "Microsoft",
+        "ticker": "MSFT",
+        "flag": "🇺🇸",
+        "sector": "Cloud",
+        "capT": 2.9
+      },
+      {
+        "rank": 5,
+        "name": "Amazon",
+        "ticker": "AMZN",
+        "flag": "🇺🇸",
+        "sector": "E-Commerce/Cloud",
+        "capT": 2.61
+      },
+      {
+        "rank": 6,
+        "name": "TSMC",
+        "ticker": "TSM",
+        "flag": "🇹🇼",
+        "sector": "Semiconductors",
+        "capT": 2.25
+      },
+      {
+        "rank": 7,
+        "name": "SpaceX",
+        "ticker": "SPCX",
+        "flag": "🇺🇸",
+        "sector": "Aerospace",
+        "capT": 2.13
+      },
+      {
+        "rank": 8,
+        "name": "Broadcom",
+        "ticker": "AVGO",
+        "flag": "🇺🇸",
+        "sector": "Semiconductors",
+        "capT": 1.71
+      },
+      {
+        "rank": 9,
+        "name": "Meta",
+        "ticker": "META",
+        "flag": "🇺🇸",
+        "sector": "Social Media",
+        "capT": 1.48
+      },
+      {
+        "rank": 10,
+        "name": "Tesla",
+        "ticker": "TSLA",
+        "flag": "🇺🇸",
+        "sector": "EVs / Energy",
+        "capT": 1.48
+      }
     ]
   },
   "topStateEntities": {
     "asOf": "2025-12-31",
     "source": "SWFI, companiesmarketcap.com",
     "entities": [
-      { "rank": 1,  "name": "Norway GPFG",     "flag": "🇳🇴", "type": "SWF", "country": "Norway",       "valueT": 2.00 },
-      { "rank": 2,  "name": "Saudi Aramco",    "flag": "🇸🇦", "type": "SOE", "country": "Saudi Arabia", "valueT": 1.68 },
-      { "rank": 3,  "name": "China Inv. Corp", "flag": "🇨🇳", "type": "SWF", "country": "China",        "valueT": 1.24 },
-      { "rank": 4,  "name": "ADIA",            "flag": "🇦🇪", "type": "SWF", "country": "UAE",          "valueT": 1.10 },
-      { "rank": 5,  "name": "SAFE (China)",    "flag": "🇨🇳", "type": "SWF", "country": "China",        "valueT": 1.08 },
-      { "rank": 6,  "name": "Kuwait IA",       "flag": "🇰🇼", "type": "SWF", "country": "Kuwait",       "valueT": 1.00 },
-      { "rank": 7,  "name": "GIC Singapore",   "flag": "🇸🇬", "type": "SWF", "country": "Singapore",    "valueT": 0.94 },
-      { "rank": 8,  "name": "PIF",             "flag": "🇸🇦", "type": "SWF", "country": "Saudi Arabia", "valueT": 0.93 },
-      { "rank": 9,  "name": "Qatar IA",        "flag": "🇶🇦", "type": "SWF", "country": "Qatar",        "valueT": 0.56 },
-      { "rank": 10, "name": "Temasek",         "flag": "🇸🇬", "type": "SWF", "country": "Singapore",    "valueT": 0.49 }
+      {
+        "rank": 1,
+        "name": "Norway GPFG",
+        "flag": "🇳🇴",
+        "type": "SWF",
+        "country": "Norway",
+        "valueT": 2
+      },
+      {
+        "rank": 2,
+        "name": "Saudi Aramco",
+        "flag": "🇸🇦",
+        "type": "SOE",
+        "country": "Saudi Arabia",
+        "valueT": 1.68
+      },
+      {
+        "rank": 3,
+        "name": "China Inv. Corp",
+        "flag": "🇨🇳",
+        "type": "SWF",
+        "country": "China",
+        "valueT": 1.24
+      },
+      {
+        "rank": 4,
+        "name": "ADIA",
+        "flag": "🇦🇪",
+        "type": "SWF",
+        "country": "UAE",
+        "valueT": 1.1
+      },
+      {
+        "rank": 5,
+        "name": "SAFE (China)",
+        "flag": "🇨🇳",
+        "type": "SWF",
+        "country": "China",
+        "valueT": 1.08
+      },
+      {
+        "rank": 6,
+        "name": "Kuwait IA",
+        "flag": "🇰🇼",
+        "type": "SWF",
+        "country": "Kuwait",
+        "valueT": 1
+      },
+      {
+        "rank": 7,
+        "name": "GIC Singapore",
+        "flag": "🇸🇬",
+        "type": "SWF",
+        "country": "Singapore",
+        "valueT": 0.94
+      },
+      {
+        "rank": 8,
+        "name": "PIF",
+        "flag": "🇸🇦",
+        "type": "SWF",
+        "country": "Saudi Arabia",
+        "valueT": 0.93
+      },
+      {
+        "rank": 9,
+        "name": "Qatar IA",
+        "flag": "🇶🇦",
+        "type": "SWF",
+        "country": "Qatar",
+        "valueT": 0.56
+      },
+      {
+        "rank": 10,
+        "name": "Temasek",
+        "flag": "🇸🇬",
+        "type": "SWF",
+        "country": "Singapore",
+        "valueT": 0.49
+      }
     ]
   },
   "marketTrends": {
     "asOf": "2024-12-31",
     "source": "S&P Dow Jones, WGC, Bloomberg, BLS, Federal Reserve",
     "assetReturns": {
-      "years": ["2020", "2021", "2022", "2023", "2024"],
+      "years": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
       "series": [
-        { "id": "sp500", "label": "S&P 500", "color": "#34d399", "returns": [18.4,  28.7, -18.1,  26.3,  25.0] },
-        { "id": "gold",  "label": "Gold",    "color": "#fcd34d", "returns": [25.8,  -3.7,   2.1,  13.1,  27.2] },
-        { "id": "btc",   "label": "Bitcoin", "color": "#f97316", "returns": [303.0, 60.0, -65.0, 155.0, 121.0] },
-        { "id": "bonds", "label": "Bonds",   "color": "#a78bfa", "returns": [7.5,   -1.5, -13.0,   5.5,   1.7] }
+        {
+          "id": "sp500",
+          "label": "S&P 500",
+          "color": "#34d399",
+          "returns": [
+            18.4,
+            28.7,
+            -18.1,
+            26.3,
+            25
+          ]
+        },
+        {
+          "id": "gold",
+          "label": "Gold",
+          "color": "#fcd34d",
+          "returns": [
+            25.8,
+            -3.7,
+            2.1,
+            13.1,
+            27.2
+          ]
+        },
+        {
+          "id": "btc",
+          "label": "Bitcoin",
+          "color": "#f97316",
+          "returns": [
+            303,
+            60,
+            -65,
+            155,
+            121
+          ]
+        },
+        {
+          "id": "bonds",
+          "label": "Bonds",
+          "color": "#a78bfa",
+          "returns": [
+            7.5,
+            -1.5,
+            -13,
+            5.5,
+            1.7
+          ]
+        }
       ]
     },
     "rateAndInflation": {
-      "labels": ["Jan'20","Jul'20","Jan'21","Jul'21","Jan'22","Jul'22","Jan'23","Jul'23","Jan'24","Jul'24","Jan'25"],
-      "fedFunds": [1.55, 0.09, 0.09, 0.10, 0.08, 2.33, 4.33, 5.33, 5.33, 5.33, 4.33],
-      "cpiYoY":   [2.5,  1.0,  1.4,  5.4,  7.5,  8.5,  6.4,  3.2,  3.1,  2.9,  3.0]
+      "labels": [
+        "Jan'20",
+        "Jul'20",
+        "Jan'21",
+        "Jul'21",
+        "Jan'22",
+        "Jul'22",
+        "Jan'23",
+        "Jul'23",
+        "Jan'24",
+        "Jul'24",
+        "Jan'25"
+      ],
+      "fedFunds": [
+        1.55,
+        0.09,
+        0.09,
+        0.1,
+        0.08,
+        2.33,
+        4.33,
+        5.33,
+        5.33,
+        5.33,
+        4.33
+      ],
+      "cpiYoY": [
+        2.5,
+        1,
+        1.4,
+        5.4,
+        7.5,
+        8.5,
+        6.4,
+        3.2,
+        3.1,
+        2.9,
+        3
+      ]
     }
   }
 }
