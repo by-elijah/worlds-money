@@ -80,7 +80,7 @@ jobs:
       - name: Checkout (with latest data commit)
         uses: actions/checkout@v4
         with:
-          ref: main   # ensure we get the freshly committed data
+          ref: master   # ensure we get the freshly committed data
 
       - name: Configure Pages
         uses: actions/configure-pages@v4
