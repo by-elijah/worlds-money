@@ -56,16 +56,16 @@ const FALLBACK_DATA = {
   worldGdp: {
     totalT: 126.0, asOf: '2026-01-01', source: 'IMF WEO, Apr 2026',
     topCountries: [
-      { rank: 1, country: 'United States',  gdpT: 32.4 },
-      { rank: 2, country: 'China',          gdpT: 20.9 },
-      { rank: 3, country: 'Germany',        gdpT: 5.5  },
-      { rank: 4, country: 'Japan',          gdpT: 4.4  },
-      { rank: 5, country: 'United Kingdom', gdpT: 4.3  },
-      { rank: 6, country: 'India',          gdpT: 4.2  },
-      { rank: 7, country: 'France',         gdpT: 3.6  },
-      { rank: 8, country: 'Italy',          gdpT: 2.7  },
-      { rank: 9, country: 'Canada',         gdpT: 2.5  },
-      { rank: 10,country: 'Brazil',         gdpT: 2.1  },
+      { rank: 1,  country: 'United States',  gdpT: 32.4, popM: 341,  medianAge: 38.9, workPopPct: 65 },
+      { rank: 2,  country: 'China',          gdpT: 20.9, popM: 1408, medianAge: 39.0, workPopPct: 68 },
+      { rank: 3,  country: 'Germany',        gdpT: 5.5,  popM: 84,   medianAge: 44.6, workPopPct: 64 },
+      { rank: 4,  country: 'Japan',          gdpT: 4.4,  popM: 124,  medianAge: 49.0, workPopPct: 59 },
+      { rank: 5,  country: 'United Kingdom', gdpT: 4.3,  popM: 68,   medianAge: 40.7, workPopPct: 64 },
+      { rank: 6,  country: 'India',          gdpT: 4.2,  popM: 1441, medianAge: 28.7, workPopPct: 67 },
+      { rank: 7,  country: 'France',         gdpT: 3.6,  popM: 68,   medianAge: 42.3, workPopPct: 62 },
+      { rank: 8,  country: 'Italy',          gdpT: 2.7,  popM: 59,   medianAge: 46.6, workPopPct: 63 },
+      { rank: 9,  country: 'Canada',         gdpT: 2.5,  popM: 40,   medianAge: 41.8, workPopPct: 66 },
+      { rank: 10, country: 'Brazil',         gdpT: 2.1,  popM: 216,  medianAge: 33.7, workPopPct: 70 },
     ],
   },
   centralBanks: {
@@ -1135,13 +1135,25 @@ function renderWorldGdp(data) {
   const totalTracked = data.assetClasses.reduce((s, a) => s + a.valueT, 0);
 
   listEl.innerHTML = g.topCountries.map(c => {
-    const pct  = (c.gdpT / maxGdp) * 100;
-    const flag = FLAGS[c.country] ?? '🌐';
+    const pct     = (c.gdpT / maxGdp) * 100;
+    const flag    = FLAGS[c.country] ?? '🌐';
+    const popFmt  = c.popM >= 1000 ? `${(c.popM / 1000).toFixed(2)}B` : `${c.popM}M`;
+    const workM   = c.popM && c.workPopPct ? Math.round(c.popM * c.workPopPct / 100) : null;
+    const workFmt = workM ? (workM >= 1000 ? `${(workM / 1000).toFixed(2)}B` : `${workM}M`) : '';
+    const demogHtml = (c.popM || c.medianAge || c.workPopPct) ? `
+      <div class="gdp-demog">
+        ${c.popM      ? `<span class="gdp-stat"><span class="gdp-stat-lbl">pop</span> ${popFmt}</span>` : ''}
+        ${c.medianAge ? `<span class="gdp-stat"><span class="gdp-stat-lbl">med. age</span> ${c.medianAge}</span>` : ''}
+        ${workFmt     ? `<span class="gdp-stat"><span class="gdp-stat-lbl">workforce</span> ${workFmt} (${c.workPopPct}%)</span>` : ''}
+      </div>` : '';
     return `
       <div class="gdp-item">
         <span class="league-rank mono">${c.rank}</span>
         <span class="league-flag" role="img" aria-label="${c.country}">${flag}</span>
-        <span class="gdp-country">${c.country}</span>
+        <div class="gdp-country-info">
+          <span class="gdp-country">${c.country}</span>
+          ${demogHtml}
+        </div>
         <div class="gdp-bar-container bar-container" role="group" aria-label="${c.country} GDP bar">
           <div class="gdp-bar-fill bar-fill"
                style="--target-width: ${pct.toFixed(2)}%"
