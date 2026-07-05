@@ -1095,7 +1095,7 @@ function renderGlobalTrends(data) {
               <text x="${lx+11}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${s.label}</text>`;
     }).join('');
 
-    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Annual asset returns 2020-2024">${grid}${bars}${xLbls}${legend}</svg>`;
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Annual asset returns 2020-2025">${grid}${bars}${xLbls}${legend}</svg>`;
   }
 
   // ── Chart 3: Fed Funds Rate + CPI ─────────────────────────────────────────
@@ -1119,7 +1119,7 @@ function renderGlobalTrends(data) {
               <text x="${PL-3}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v}%</text>`;
     }).join('');
 
-    const xLbls = [0, 2, 4, 6, 8, 10].map(i => {
+    const xLbls = [0, 2, 4, 6, 8, 11].map(i => {
       const x = xS(i).toFixed(1);
       return `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="8" fill="var(--text-muted)" font-family="var(--font-mono)">${labels[i]}</text>`;
     }).join('');
@@ -1131,10 +1131,10 @@ function renderGlobalTrends(data) {
       <text x="${PL+81}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">Fed Rate</text>`;
 
     // Peak CPI annotation
-    const peakIdx = 5; // Jul'22 = 8.5%
-    const px = xS(peakIdx).toFixed(1), py = (yS(8.5) - 8).toFixed(1);
+    const peakIdx = 5; // Jul'22 = 9.1% peak
+    const px = xS(peakIdx).toFixed(1), py = (yS(9.1) - 8).toFixed(1);
     const annotation = `<text x="${px}" y="${py}" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444" font-family="var(--font-mono)">9.1%</text>
-      <line x1="${px}" y1="${(parseFloat(py)+2).toFixed(1)}" x2="${px}" y2="${yS(8.5).toFixed(1)}" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>`;
+      <line x1="${px}" y1="${(parseFloat(py)+2).toFixed(1)}" x2="${px}" y2="${yS(9.1).toFixed(1)}" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>`;
 
     return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Fed Funds Rate vs CPI inflation 2020-2025">
       ${grid}

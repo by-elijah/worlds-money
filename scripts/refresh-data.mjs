@@ -154,7 +154,7 @@ const TIER2 = {
   },
 
   marketTrends: {
-    asOf: '2024-12-31',
+    asOf: '2025-12-31',
     source: 'S&P Dow Jones, WGC, Bloomberg, BLS, Federal Reserve',
     assetReturns: {
       years: ['2020', '2021', '2022', '2023', '2024'],
