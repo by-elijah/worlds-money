@@ -69,6 +69,9 @@
   --accent:     #2563eb;
   --warning:    #d97706;
   --shadow:     0 4px 24px rgba(0,0,0,.12);
+  /* Yellow/amber colours are illegible on cream — swap for dark counterparts */
+  --c-gold:     #92400e;
+  --c-m2:       #b45309;
 }
 
 /* Respect system preference before JS sets the data-theme attribute */
@@ -86,6 +89,8 @@
     --accent:     #2563eb;
     --warning:    #d97706;
     --shadow:     0 4px 24px rgba(0,0,0,.12);
+    --c-gold:     #92400e;
+    --c-m2:       #b45309;
   }
 }
 
@@ -1135,7 +1140,7 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
   border-radius: var(--radius-lg);
   padding: 1rem 1rem 0.75rem;
 }
-.co-panel--state { border-color: color-mix(in srgb, #fbbf24 20%, var(--border)); }
+.co-panel--state { border-color: color-mix(in srgb, var(--c-m2) 30%, var(--border)); }
 .co-panel-hdr {
   display: flex;
   align-items: baseline;
@@ -1206,6 +1211,8 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
 }
 .co-type-swf { background: color-mix(in srgb, #fbbf24 15%, transparent); color: #fbbf24; }
 .co-type-soe { background: color-mix(in srgb, #a78bfa 15%, transparent); color: #a78bfa; }
+[data-theme="light"] .co-type-swf,
+:root:not([data-theme="dark"]) .co-type-swf { color: #92400e; background: color-mix(in srgb, #92400e 12%, transparent); }
 .co-bar-wrap {
   position: relative;
   height: 18px;
