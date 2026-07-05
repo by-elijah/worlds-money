@@ -138,6 +138,21 @@ const FALLBACK_DATA = {
         { id: 'bonds', label: 'Bonds',   color: '#a78bfa', returns: [7.5,   -1.5, -13.0,   5.5,   1.7] },
       ],
     },
+    longTermReturns: {
+      source: 'S&P 500 total return, gold spot, Bloomberg US Agg Bond TR — year-end cumulative from $1',
+      since1990: {
+        years: ['1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+        sp500: [0.97,1.27,1.36,1.50,1.52,2.09,2.57,3.43,4.41,5.33,4.85,4.27,3.33,4.28,4.75,4.98,5.77,6.09,3.83,4.85,5.58,5.70,6.61,8.75,9.95,10.09,11.30,13.77,13.16,17.31,20.49,26.37,21.60,27.28,34.09],
+        gold:  [1.00,0.90,0.85,1.00,0.98,0.99,0.94,0.74,0.74,0.74,0.70,0.71,0.89,1.06,1.12,1.31,1.63,2.14,2.23,2.78,3.63,4.00,4.24,3.07,3.03,2.71,2.95,3.33,3.28,3.88,4.85,4.68,4.67,5.28,6.72],
+        bonds: [1.09,1.26,1.36,1.49,1.45,1.72,1.78,1.95,2.12,2.10,2.35,2.54,2.81,2.92,3.05,3.12,3.25,3.48,3.66,3.88,4.13,4.45,4.64,4.55,4.82,4.85,4.98,5.15,5.15,5.60,6.02,5.93,5.16,5.44,5.61],
+      },
+      since2000: {
+        years: ['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+        sp500: [0.91,0.80,0.62,0.80,0.89,0.93,1.08,1.14,0.72,0.91,1.05,1.07,1.24,1.64,1.86,1.89,2.12,2.58,2.46,3.24,3.84,4.94,4.05,5.11,6.39],
+        gold:  [0.94,0.95,1.20,1.43,1.51,1.77,2.19,2.89,3.00,3.75,4.90,5.40,5.71,4.15,4.08,3.66,3.97,4.49,4.42,5.23,6.53,6.31,6.29,7.11,9.06],
+        bonds: [1.12,1.21,1.33,1.39,1.45,1.48,1.55,1.66,1.74,1.85,1.97,2.12,2.21,2.16,2.29,2.30,2.37,2.45,2.45,2.66,2.86,2.82,2.45,2.59,2.67],
+      },
+    },
     rateAndInflation: {
       labels: ["Jan'20","Jul'20","Jan'21","Jul'21","Jan'22","Jul'22","Jan'23","Jul'23","Jan'24","Jul'24","Jan'25"],
       fedFunds: [1.55, 0.09, 0.09, 0.10, 0.08, 2.33, 4.33, 5.33, 5.33, 5.33, 4.33],
@@ -953,46 +968,43 @@ function renderGlobalTrends(data) {
   const t = data.marketTrends;
   if (!t) return;
 
-  // ── Chart 1: Cumulative "$1 invested" — log scale ──────────────────────────
-  function makeCumulativeChart() {
-    // Compute cumulative multiplier from annual returns
-    const series = t.assetReturns.series;
-    const cumulatives = series.map(s => {
-      let v = 1.0;
-      const pts = [1.0];
-      for (const r of s.returns) { v = parseFloat((v * (1 + r / 100)).toFixed(4)); pts.push(v); }
-      return { ...s, cum: pts };
-    });
-
-    const W = 580, H = 220;
-    const PL = 42, PR = 68, PT = 18, PB = 36;
+  // ── Shared: build cumulative SVG from series + xLabels ────────────────────
+  function buildCumulativeChart(series, xLabels) {
+    const W = 580, H = 230;
+    const PL = 42, PR = 72, PT = 18, PB = 36;
     const CW = W - PL - PR, CH = H - PT - PB;
-    const xLabels = ['Jan\'20', 'Jan\'21', 'Jan\'22', 'Jan\'23', 'Jan\'24', 'Dec\'24'];
+    const n = series[0].cum.length;
 
-    // Log10 scale: span 0.75 → 14
-    const LY_MIN = Math.log10(0.75), LY_MAX = Math.log10(14);
+    const allVals = series.flatMap(s => s.cum);
+    const maxVal  = Math.max(...allVals);
+    const minFloor = Math.min(...allVals.filter(v => v > 0)) * 0.85;
+
+    const LY_MIN = Math.log10(Math.max(minFloor, 0.4));
+    const LY_MAX = Math.log10(maxVal * 1.18);
     const LY_RNG = LY_MAX - LY_MIN;
-    const xS = i  => PL + (i / (xLabels.length - 1)) * CW;
-    const yS = v  => PT + CH - ((Math.log10(Math.max(v, 0.75)) - LY_MIN) / LY_RNG) * CH;
-    const bottomY = yS(0.75);
+    const xS = i => PL + (i / (n - 1)) * CW;
+    const yS = v => PT + CH - ((Math.log10(Math.max(v, Math.pow(10, LY_MIN))) - LY_MIN) / LY_RNG) * CH;
+    const botY = yS(Math.pow(10, LY_MIN));
 
-    // Grid lines at log positions
-    const yTicks = [0.75, 1, 1.5, 2, 3, 5, 8, 13];
+    const TICK_POOL = [0.4, 0.5, 0.75, 1, 1.5, 2, 3, 5, 8, 10, 15, 20, 30, 40];
+    const yTicks = TICK_POOL.filter(v => v >= Math.pow(10, LY_MIN) * 0.95 && v <= maxVal * 1.15);
+
     const grid = yTicks.map(v => {
       const y = yS(v).toFixed(1);
       return `<line x1="${PL}" y1="${y}" x2="${PL+CW}" y2="${y}" stroke="currentColor" stroke-opacity="0.07" stroke-width="1"/>
-              <text x="${PL-4}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v >= 1 ? v+'×' : v+'×'}</text>`;
+              <text x="${PL-4}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v}×</text>`;
     }).join('');
 
     const xAxisLabels = xLabels.map((lb, i) => {
+      if (!lb) return '';
       const x = xS(i).toFixed(1);
       return `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${lb}</text>`;
     }).join('');
 
-    const chartPaths = cumulatives.map(s => {
+    const chartPaths = series.map(s => {
       const pts = s.cum.map((v, i) => [xS(i), yS(v)]);
       const lp  = smoothPath(pts);
-      const ap  = areaPath(pts, bottomY);
+      const ap  = areaPath(pts, botY);
       const ep  = pts[pts.length - 1];
       const val = s.cum[s.cum.length - 1];
       const lbl = val >= 10 ? val.toFixed(1) + '×' : val.toFixed(2) + '×';
@@ -1003,8 +1015,45 @@ function renderGlobalTrends(data) {
               <text x="${(ep[0]+7).toFixed(1)}" y="${(ep[1]+15).toFixed(1)}" font-size="9" font-family="var(--font-mono)" fill="${s.color}" opacity="0.75">${lbl}</text>`;
     }).join('');
 
-    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Cumulative performance: $1 invested Jan 2020 through Dec 2024">${grid}${xAxisLabels}${chartPaths}</svg>`;
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Cumulative $1 investment chart">${grid}${xAxisLabels}${chartPaths}</svg>`;
   }
+
+  // ── Build datasets for each period ─────────────────────────────────────────
+  // 2020: compute from annual returns, include BTC
+  const series2020 = t.assetReturns.series.map(s => {
+    let v = 1.0;
+    const cum = [1.0];
+    for (const r of s.returns) { v = parseFloat((v * (1 + r / 100)).toFixed(4)); cum.push(v); }
+    const color = s.id === 'gold' ? '#d97706' : s.color;
+    return { label: s.label, color, cum };
+  });
+  const labels2020 = ["Jan '20", "Jan '21", "Jan '22", "Jan '23", "Jan '24", "Dec '24"];
+
+  // 2000 & 1990: from stored long-term cumulative arrays (S&P 500, Gold, Bonds only)
+  function mkLongTermDataset(lr, startLabel) {
+    if (!lr) return null;
+    const series = [
+      { label: 'S&P 500', color: '#34d399', cum: [1.00, ...lr.sp500] },
+      { label: 'Gold',    color: '#d97706', cum: [1.00, ...lr.gold]  },
+      { label: 'Bonds',   color: '#a78bfa', cum: [1.00, ...lr.bonds] },
+    ];
+    const labels = [startLabel, ...lr.years.map((y, i) => {
+      const yr = parseInt(y);
+      const isFirst = yr === parseInt(lr.years[0]);
+      const isLast  = i === lr.years.length - 1;
+      return (!isFirst && yr % 5 === 0) || isLast ? y : '';
+    })];
+    return { series, labels };
+  }
+
+  const ds2000 = mkLongTermDataset(t.longTermReturns?.since2000, "Jan '00");
+  const ds1990 = mkLongTermDataset(t.longTermReturns?.since1990, "Jan '90");
+
+  const DATASETS = {
+    '2020': { series: series2020, labels: labels2020, sub: `S&P 500, Gold, Bitcoin, Bonds · log scale · ${t.source}` },
+    '2000': ds2000 ? { series: ds2000.series, labels: ds2000.labels, sub: `S&P 500, Gold, Bonds (no BTC) · log scale · ${t.source}` } : null,
+    '1990': ds1990 ? { series: ds1990.series, labels: ds1990.labels, sub: `S&P 500, Gold, Bonds (no BTC) · log scale · ${t.source}` } : null,
+  };
 
   // ── Chart 2: Annual returns bar chart (S&P 500, Gold, Bonds) ──────────────
   function makeReturnsChart() {
@@ -1102,11 +1151,18 @@ function renderGlobalTrends(data) {
   el.innerHTML = `
     <div class="trends-grid">
       <div class="trend-card trend-card--full">
-        <div class="trend-card-hdr">
-          <span class="trend-card-title">$1 Invested in Jan 2020</span>
-          <span class="trend-card-sub">Cumulative growth to Dec 2024 · log scale · source: ${t.source}</span>
+        <div class="trend-card-hdr trend-card-hdr--row">
+          <div>
+            <span class="trend-card-title" id="cumChart-title">$1 Invested Jan 2020</span>
+            <span class="trend-card-sub" id="cumChart-sub">${DATASETS['2020'].sub}</span>
+          </div>
+          <div class="chart-toggles" role="group" aria-label="Select time period">
+            <button class="chart-toggle chart-toggle--active" data-period="2020">Since 2020</button>
+            ${ds2000 ? '<button class="chart-toggle" data-period="2000">Since 2000</button>' : ''}
+            ${ds1990 ? '<button class="chart-toggle" data-period="1990">Since 1990</button>' : ''}
+          </div>
         </div>
-        ${makeCumulativeChart()}
+        <div id="cumChart-wrap">${buildCumulativeChart(series2020, labels2020)}</div>
       </div>
       <div class="trend-card">
         <div class="trend-card-hdr">
@@ -1123,6 +1179,22 @@ function renderGlobalTrends(data) {
         ${makeRateChart()}
       </div>
     </div>`;
+
+  // Wire toggle buttons
+  const wrapEl  = document.getElementById('cumChart-wrap');
+  const titleEl = document.getElementById('cumChart-title');
+  const subEl   = document.getElementById('cumChart-sub');
+  el.querySelectorAll('.chart-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const period = btn.dataset.period;
+      const ds = DATASETS[period];
+      if (!ds) return;
+      el.querySelectorAll('.chart-toggle').forEach(b => b.classList.toggle('chart-toggle--active', b === btn));
+      titleEl.textContent = `$1 Invested Jan ${period}`;
+      subEl.textContent   = ds.sub;
+      wrapEl.innerHTML    = buildCumulativeChart(ds.series, ds.labels);
+    });
+  });
 }
 
 function renderWorldGdp(data) {

@@ -1245,6 +1245,40 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
 /* ── Global Trends (SVG Charts) ──────────────────────────────────────────── */
 .trends-section { border-bottom: 1px solid var(--border); }
 
+.trend-card-hdr--row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.chart-toggles {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.chart-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 99px;
+  border: 1px solid var(--border-2);
+  color: var(--text-dim);
+  background: var(--surface-2);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.chart-toggle:hover { color: var(--text); border-color: var(--accent); }
+.chart-toggle--active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
+
 .trends-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
