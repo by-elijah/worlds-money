@@ -330,5 +330,55 @@
       { "group": "Middle 40%", "adultsM": 2400, "sharePct": 11.2 },
       { "group": "Bottom 50%", "adultsM": 3000, "sharePct": 1.8  }
     ]
+  },
+  "topPrivateCompanies": {
+    "asOf": "2026-07-04",
+    "source": "companiesmarketcap.com",
+    "companies": [
+      { "rank": 1,  "name": "NVIDIA",    "ticker": "NVDA", "flag": "🇺🇸", "sector": "AI / Chips",       "capT": 4.72 },
+      { "rank": 2,  "name": "Apple",     "ticker": "AAPL", "flag": "🇺🇸", "sector": "Consumer Tech",    "capT": 4.53 },
+      { "rank": 3,  "name": "Alphabet",  "ticker": "GOOG", "flag": "🇺🇸", "sector": "Internet",         "capT": 4.35 },
+      { "rank": 4,  "name": "Microsoft", "ticker": "MSFT", "flag": "🇺🇸", "sector": "Cloud",            "capT": 2.90 },
+      { "rank": 5,  "name": "Amazon",    "ticker": "AMZN", "flag": "🇺🇸", "sector": "E-Commerce/Cloud", "capT": 2.61 },
+      { "rank": 6,  "name": "TSMC",      "ticker": "TSM",  "flag": "🇹🇼", "sector": "Semiconductors",   "capT": 2.25 },
+      { "rank": 7,  "name": "SpaceX",    "ticker": "SPCX", "flag": "🇺🇸", "sector": "Aerospace",        "capT": 2.13 },
+      { "rank": 8,  "name": "Broadcom",  "ticker": "AVGO", "flag": "🇺🇸", "sector": "Semiconductors",   "capT": 1.71 },
+      { "rank": 9,  "name": "Meta",      "ticker": "META", "flag": "🇺🇸", "sector": "Social Media",     "capT": 1.48 },
+      { "rank": 10, "name": "Tesla",     "ticker": "TSLA", "flag": "🇺🇸", "sector": "EVs / Energy",     "capT": 1.48 }
+    ]
+  },
+  "topStateEntities": {
+    "asOf": "2025-12-31",
+    "source": "SWFI, companiesmarketcap.com",
+    "entities": [
+      { "rank": 1,  "name": "Norway GPFG",     "flag": "🇳🇴", "type": "SWF", "country": "Norway",       "valueT": 2.00 },
+      { "rank": 2,  "name": "Saudi Aramco",    "flag": "🇸🇦", "type": "SOE", "country": "Saudi Arabia", "valueT": 1.68 },
+      { "rank": 3,  "name": "China Inv. Corp", "flag": "🇨🇳", "type": "SWF", "country": "China",        "valueT": 1.24 },
+      { "rank": 4,  "name": "ADIA",            "flag": "🇦🇪", "type": "SWF", "country": "UAE",          "valueT": 1.10 },
+      { "rank": 5,  "name": "SAFE (China)",    "flag": "🇨🇳", "type": "SWF", "country": "China",        "valueT": 1.08 },
+      { "rank": 6,  "name": "Kuwait IA",       "flag": "🇰🇼", "type": "SWF", "country": "Kuwait",       "valueT": 1.00 },
+      { "rank": 7,  "name": "GIC Singapore",   "flag": "🇸🇬", "type": "SWF", "country": "Singapore",    "valueT": 0.94 },
+      { "rank": 8,  "name": "PIF",             "flag": "🇸🇦", "type": "SWF", "country": "Saudi Arabia", "valueT": 0.93 },
+      { "rank": 9,  "name": "Qatar IA",        "flag": "🇶🇦", "type": "SWF", "country": "Qatar",        "valueT": 0.56 },
+      { "rank": 10, "name": "Temasek",         "flag": "🇸🇬", "type": "SWF", "country": "Singapore",    "valueT": 0.49 }
+    ]
+  },
+  "marketTrends": {
+    "asOf": "2024-12-31",
+    "source": "S&P Dow Jones, WGC, Bloomberg, BLS, Federal Reserve",
+    "assetReturns": {
+      "years": ["2020", "2021", "2022", "2023", "2024"],
+      "series": [
+        { "id": "sp500", "label": "S&P 500", "color": "#34d399", "returns": [18.4,  28.7, -18.1,  26.3,  25.0] },
+        { "id": "gold",  "label": "Gold",    "color": "#fcd34d", "returns": [25.8,  -3.7,   2.1,  13.1,  27.2] },
+        { "id": "btc",   "label": "Bitcoin", "color": "#f97316", "returns": [303.0, 60.0, -65.0, 155.0, 121.0] },
+        { "id": "bonds", "label": "Bonds",   "color": "#a78bfa", "returns": [7.5,   -1.5, -13.0,   5.5,   1.7] }
+      ]
+    },
+    "rateAndInflation": {
+      "labels": ["Jan'20","Jul'20","Jan'21","Jul'21","Jan'22","Jul'22","Jan'23","Jul'23","Jan'24","Jul'24","Jan'25"],
+      "fedFunds": [1.55, 0.09, 0.09, 0.10, 0.08, 2.33, 4.33, 5.33, 5.33, 5.33, 4.33],
+      "cpiYoY":   [2.5,  1.0,  1.4,  5.4,  7.5,  8.5,  6.4,  3.2,  3.1,  2.9,  3.0]
+    }
   }
 }

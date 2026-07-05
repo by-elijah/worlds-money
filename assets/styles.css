@@ -1118,6 +1118,170 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
   vertical-align: middle;
 }
 
+/* ── Company Rankings ─────────────────────────────────────────────────────── */
+.company-section { background: var(--surface); border-bottom: 1px solid var(--border); }
+
+.co-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 720px) {
+  .co-panels { grid-template-columns: 1fr; }
+}
+.co-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1rem 0.75rem;
+}
+.co-panel--state { border-color: color-mix(in srgb, #fbbf24 20%, var(--border)); }
+.co-panel-hdr {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.co-panel-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.co-panel-sub {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+.co-list { display: flex; flex-direction: column; gap: 0.25rem; }
+.co-item {
+  display: grid;
+  grid-template-columns: 1.5rem 1.6rem 1fr 1fr 62px;
+  gap: 0.2rem 0.45rem;
+  align-items: center;
+  padding: 0.3rem 0.25rem;
+  border-radius: 5px;
+  transition: background 0.12s;
+}
+.co-item:hover { background: var(--surface-3); }
+.co-rank {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+.co-flag { font-size: 1.1rem; line-height: 1; }
+.co-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+  overflow: hidden;
+}
+.co-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+.co-sector {
+  font-size: 0.6rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.co-type-badge {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 0.08rem 0.4rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.co-type-swf { background: color-mix(in srgb, #fbbf24 15%, transparent); color: #fbbf24; }
+.co-type-soe { background: color-mix(in srgb, #a78bfa 15%, transparent); color: #a78bfa; }
+.co-bar-wrap {
+  position: relative;
+  height: 18px;
+  background: var(--surface-3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.co-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 4px 0 0 4px;
+  opacity: 0.75;
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.co-item.animate .co-bar-fill { width: var(--target-width); }
+@media (prefers-reduced-motion: reduce) {
+  .co-bar-fill { transition: none !important; width: var(--target-width) !important; }
+}
+.co-bar-priv  { background: linear-gradient(90deg, #4f81ff 0%, #34d399 100%); }
+.co-bar-state { background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%); }
+.co-cap {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--text-dim);
+}
+
+/* ── Global Trends (SVG Charts) ──────────────────────────────────────────── */
+.trends-section { border-bottom: 1px solid var(--border); }
+
+.trends-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+.trend-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1rem 0.75rem;
+  overflow: hidden;
+}
+.trend-card--full {
+  grid-column: 1 / -1;
+}
+@media (max-width: 640px) {
+  .trends-grid { grid-template-columns: 1fr; }
+  .trend-card--full { grid-column: auto; }
+}
+.trend-card-hdr {
+  margin-bottom: 0.65rem;
+}
+.trend-card-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+.trend-card-sub {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  display: block;
+  line-height: 1.4;
+}
+.trend-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
 /* ── Shared: ratio cards (used across GDP / CB / Debt / Wealth sections) ──── */
 .ratio-cards {
   display: flex;

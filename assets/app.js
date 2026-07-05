@@ -97,6 +97,53 @@ const FALLBACK_DATA = {
       { group: 'Bottom 50%', adultsM: 3000, sharePct:  1.8 },
     ],
   },
+  topPrivateCompanies: {
+    asOf: '2026-07-04', source: 'companiesmarketcap.com',
+    companies: [
+      { rank:  1, name: 'NVIDIA',    ticker: 'NVDA', flag: '🇺🇸', sector: 'AI / Chips',       capT: 4.72 },
+      { rank:  2, name: 'Apple',     ticker: 'AAPL', flag: '🇺🇸', sector: 'Consumer Tech',    capT: 4.53 },
+      { rank:  3, name: 'Alphabet',  ticker: 'GOOG', flag: '🇺🇸', sector: 'Internet',         capT: 4.35 },
+      { rank:  4, name: 'Microsoft', ticker: 'MSFT', flag: '🇺🇸', sector: 'Cloud',            capT: 2.90 },
+      { rank:  5, name: 'Amazon',    ticker: 'AMZN', flag: '🇺🇸', sector: 'E-Commerce/Cloud', capT: 2.61 },
+      { rank:  6, name: 'TSMC',      ticker: 'TSM',  flag: '🇹🇼', sector: 'Semiconductors',   capT: 2.25 },
+      { rank:  7, name: 'SpaceX',    ticker: 'SPCX', flag: '🇺🇸', sector: 'Aerospace',        capT: 2.13 },
+      { rank:  8, name: 'Broadcom',  ticker: 'AVGO', flag: '🇺🇸', sector: 'Semiconductors',   capT: 1.71 },
+      { rank:  9, name: 'Meta',      ticker: 'META', flag: '🇺🇸', sector: 'Social Media',     capT: 1.48 },
+      { rank: 10, name: 'Tesla',     ticker: 'TSLA', flag: '🇺🇸', sector: 'EVs / Energy',     capT: 1.48 },
+    ],
+  },
+  topStateEntities: {
+    asOf: '2025-12-31', source: 'SWFI, companiesmarketcap.com',
+    entities: [
+      { rank:  1, name: 'Norway GPFG',     flag: '🇳🇴', type: 'SWF', country: 'Norway',       valueT: 2.00 },
+      { rank:  2, name: 'Saudi Aramco',    flag: '🇸🇦', type: 'SOE', country: 'Saudi Arabia', valueT: 1.68 },
+      { rank:  3, name: 'China Inv. Corp', flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.24 },
+      { rank:  4, name: 'ADIA',            flag: '🇦🇪', type: 'SWF', country: 'UAE',          valueT: 1.10 },
+      { rank:  5, name: 'SAFE (China)',    flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.08 },
+      { rank:  6, name: 'Kuwait IA',       flag: '🇰🇼', type: 'SWF', country: 'Kuwait',       valueT: 1.00 },
+      { rank:  7, name: 'GIC Singapore',   flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.94 },
+      { rank:  8, name: 'PIF',             flag: '🇸🇦', type: 'SWF', country: 'Saudi Arabia', valueT: 0.93 },
+      { rank:  9, name: 'Qatar IA',        flag: '🇶🇦', type: 'SWF', country: 'Qatar',        valueT: 0.56 },
+      { rank: 10, name: 'Temasek',         flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.49 },
+    ],
+  },
+  marketTrends: {
+    asOf: '2024-12-31', source: 'S&P Dow Jones, WGC, Bloomberg, BLS, Federal Reserve',
+    assetReturns: {
+      years: ['2020', '2021', '2022', '2023', '2024'],
+      series: [
+        { id: 'sp500', label: 'S&P 500', color: '#34d399', returns: [18.4,  28.7, -18.1,  26.3,  25.0] },
+        { id: 'gold',  label: 'Gold',    color: '#fcd34d', returns: [25.8,  -3.7,   2.1,  13.1,  27.2] },
+        { id: 'btc',   label: 'Bitcoin', color: '#f97316', returns: [303.0, 60.0, -65.0, 155.0, 121.0] },
+        { id: 'bonds', label: 'Bonds',   color: '#a78bfa', returns: [7.5,   -1.5, -13.0,   5.5,   1.7] },
+      ],
+    },
+    rateAndInflation: {
+      labels: ["Jan'20","Jul'20","Jan'21","Jul'21","Jan'22","Jul'22","Jan'23","Jul'23","Jan'24","Jul'24","Jan'25"],
+      fedFunds: [1.55, 0.09, 0.09, 0.10, 0.08, 2.33, 4.33, 5.33, 5.33, 5.33, 4.33],
+      cpiYoY:   [2.5,  1.0,  1.4,  5.4,  7.5,  8.5,  6.4,  3.2,  3.1,  2.9,  3.0],
+    },
+  },
 };
 
 // ── Country flag lookup ───────────────────────────────────────────────────────
@@ -794,6 +841,290 @@ function renderSources(data) {
   list.innerHTML = rows + derivRow + note;
 }
 
+// ── SVG chart helpers ─────────────────────────────────────────────────────────
+
+function smoothPath(pts) {
+  if (pts.length < 2) return '';
+  let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(i - 1, 0)];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[Math.min(i + 2, pts.length - 1)];
+    const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += ` C${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  return d;
+}
+function areaPath(pts, bottomY) {
+  if (!pts.length) return '';
+  return `${smoothPath(pts)} L${pts[pts.length-1][0].toFixed(1)},${bottomY} L${pts[0][0].toFixed(1)},${bottomY} Z`;
+}
+
+const SECTOR_COLORS = {
+  'AI / Chips':       '#f97316',
+  'Consumer Tech':    '#4f81ff',
+  'Internet':         '#34d399',
+  'Cloud':            '#a78bfa',
+  'E-Commerce/Cloud': '#06b6d4',
+  'Semiconductors':   '#fb923c',
+  'Aerospace':        '#38bdf8',
+  'Social Media':     '#ec4899',
+  'EVs / Energy':     '#10b981',
+};
+
+function renderCompanyRankings(data) {
+  const el = $('company-panels');
+  if (!el) return;
+  const priv  = data.topPrivateCompanies;
+  const state = data.topStateEntities;
+  if (!priv || !state) return;
+
+  const maxPriv  = priv.companies[0].capT;
+  const maxState = state.entities[0].valueT;
+
+  const privRows = priv.companies.map(c => {
+    const pct   = (c.capT  / maxPriv)  * 100;
+    const sColor = SECTOR_COLORS[c.sector] ?? 'var(--text-muted)';
+    return `
+      <div class="co-item">
+        <span class="co-rank mono">${c.rank}</span>
+        <span class="co-flag">${c.flag}</span>
+        <div class="co-info">
+          <span class="co-name">${c.name}</span>
+          <span class="co-sector" style="color:${sColor}">${c.sector}</span>
+        </div>
+        <div class="co-bar-wrap bar-container">
+          <div class="co-bar-fill co-bar-priv bar-fill"
+               style="--target-width:${pct.toFixed(1)}%"
+               role="progressbar" aria-valuenow="${c.capT}" aria-valuemax="${maxPriv}">
+          </div>
+        </div>
+        <span class="co-cap mono">${fmtT(c.capT)}</span>
+      </div>`;
+  }).join('');
+
+  const stateRows = state.entities.map(s => {
+    const pct     = (s.valueT / maxState) * 100;
+    const typeCls = s.type === 'SOE' ? 'co-type-soe' : 'co-type-swf';
+    return `
+      <div class="co-item">
+        <span class="co-rank mono">${s.rank}</span>
+        <span class="co-flag">${s.flag}</span>
+        <div class="co-info">
+          <span class="co-name">${s.name}</span>
+          <span class="co-type-badge ${typeCls}">${s.type}</span>
+        </div>
+        <div class="co-bar-wrap bar-container">
+          <div class="co-bar-fill co-bar-state bar-fill"
+               style="--target-width:${pct.toFixed(1)}%"
+               role="progressbar" aria-valuenow="${s.valueT}" aria-valuemax="${maxState}">
+          </div>
+        </div>
+        <span class="co-cap mono">${fmtT(s.valueT)}</span>
+      </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="co-panels">
+      <div class="co-panel">
+        <div class="co-panel-hdr">
+          <span class="co-panel-title">Private / Public Markets</span>
+          <span class="co-panel-sub dim">${priv.source} · ${priv.asOf.slice(0,7)}</span>
+        </div>
+        <div class="co-list">${privRows}</div>
+      </div>
+      <div class="co-panel co-panel--state">
+        <div class="co-panel-hdr">
+          <span class="co-panel-title">State-Owned Entities</span>
+          <span class="co-panel-sub dim">SWF = sovereign wealth fund · SOE = state enterprise</span>
+        </div>
+        <div class="co-list">${stateRows}</div>
+      </div>
+    </div>`;
+}
+
+function renderGlobalTrends(data) {
+  const el = $('trends-charts');
+  if (!el) return;
+  const t = data.marketTrends;
+  if (!t) return;
+
+  // ── Chart 1: Cumulative "$1 invested" — log scale ──────────────────────────
+  function makeCumulativeChart() {
+    // Compute cumulative multiplier from annual returns
+    const series = t.assetReturns.series;
+    const cumulatives = series.map(s => {
+      let v = 1.0;
+      const pts = [1.0];
+      for (const r of s.returns) { v = parseFloat((v * (1 + r / 100)).toFixed(4)); pts.push(v); }
+      return { ...s, cum: pts };
+    });
+
+    const W = 580, H = 220;
+    const PL = 42, PR = 68, PT = 18, PB = 36;
+    const CW = W - PL - PR, CH = H - PT - PB;
+    const xLabels = ['Jan\'20', 'Jan\'21', 'Jan\'22', 'Jan\'23', 'Jan\'24', 'Dec\'24'];
+
+    // Log10 scale: span 0.75 → 14
+    const LY_MIN = Math.log10(0.75), LY_MAX = Math.log10(14);
+    const LY_RNG = LY_MAX - LY_MIN;
+    const xS = i  => PL + (i / (xLabels.length - 1)) * CW;
+    const yS = v  => PT + CH - ((Math.log10(Math.max(v, 0.75)) - LY_MIN) / LY_RNG) * CH;
+    const bottomY = yS(0.75);
+
+    // Grid lines at log positions
+    const yTicks = [0.75, 1, 1.5, 2, 3, 5, 8, 13];
+    const grid = yTicks.map(v => {
+      const y = yS(v).toFixed(1);
+      return `<line x1="${PL}" y1="${y}" x2="${PL+CW}" y2="${y}" stroke="currentColor" stroke-opacity="0.07" stroke-width="1"/>
+              <text x="${PL-4}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v >= 1 ? v+'×' : v+'×'}</text>`;
+    }).join('');
+
+    const xAxisLabels = xLabels.map((lb, i) => {
+      const x = xS(i).toFixed(1);
+      return `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${lb}</text>`;
+    }).join('');
+
+    const chartPaths = cumulatives.map(s => {
+      const pts = s.cum.map((v, i) => [xS(i), yS(v)]);
+      const lp  = smoothPath(pts);
+      const ap  = areaPath(pts, bottomY);
+      const ep  = pts[pts.length - 1];
+      const val = s.cum[s.cum.length - 1];
+      const lbl = val >= 10 ? val.toFixed(1) + '×' : val.toFixed(2) + '×';
+      return `<path d="${ap}" fill="${s.color}" opacity="0.08"/>
+              <path d="${lp}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="${ep[0].toFixed(1)}" cy="${ep[1].toFixed(1)}" r="3.5" fill="${s.color}"/>
+              <text x="${(ep[0]+7).toFixed(1)}" y="${(ep[1]+4).toFixed(1)}" font-size="10" font-weight="700" font-family="var(--font-mono)" fill="${s.color}">${s.label}</text>
+              <text x="${(ep[0]+7).toFixed(1)}" y="${(ep[1]+15).toFixed(1)}" font-size="9" font-family="var(--font-mono)" fill="${s.color}" opacity="0.75">${lbl}</text>`;
+    }).join('');
+
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Cumulative performance: $1 invested Jan 2020 through Dec 2024">${grid}${xAxisLabels}${chartPaths}</svg>`;
+  }
+
+  // ── Chart 2: Annual returns bar chart (S&P 500, Gold, Bonds) ──────────────
+  function makeReturnsChart() {
+    const W = 340, H = 220;
+    const PL = 36, PR = 10, PT = 24, PB = 34;
+    const CW = W - PL - PR, CH = H - PT - PB;
+    const sub = t.assetReturns.series.filter(s => s.id !== 'btc');
+    const yrs = t.assetReturns.years;
+    const Y_MIN = -22, Y_MAX = 35;
+    const Y_RNG = Y_MAX - Y_MIN;
+    const yS = v => PT + CH - ((v - Y_MIN) / Y_RNG) * CH;
+    const y0 = yS(0);
+    const grpW = CW / yrs.length;
+    const barW = (grpW - 6) / sub.length;
+
+    const bars = sub.flatMap((s, si) =>
+      s.returns.map((v, yi) => {
+        const bx = PL + yi * grpW + 3 + si * barW;
+        const vClamped = Math.max(Y_MIN, Math.min(Y_MAX, v));
+        const top = v >= 0 ? yS(vClamped) : y0;
+        const ht  = Math.max(Math.abs(yS(vClamped) - y0), 2);
+        return `<rect x="${bx.toFixed(1)}" y="${top.toFixed(1)}" width="${barW.toFixed(1)}" height="${ht.toFixed(1)}" fill="${s.color}" rx="2" opacity="0.85"/>`;
+      })
+    ).join('');
+
+    const yTicks = [-20, -10, 0, 10, 20, 30];
+    const grid = yTicks.map(v => {
+      const y = yS(v).toFixed(1);
+      return `<line x1="${PL}" y1="${y}" x2="${PL+CW}" y2="${y}" stroke="currentColor" stroke-opacity="${v === 0 ? '0.3' : '0.07'}" stroke-width="1" ${v === 0 ? 'stroke-dasharray="3,3"' : ''}/>
+              <text x="${PL-3}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v}%</text>`;
+    }).join('');
+
+    const xLbls = yrs.map((yr, i) => {
+      const x = (PL + i * grpW + grpW / 2).toFixed(1);
+      return `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${yr}</text>`;
+    }).join('');
+
+    const legend = sub.map((s, i) => {
+      const lx = PL + i * 90;
+      return `<rect x="${lx}" y="${PT-14}" width="8" height="8" fill="${s.color}" rx="2" opacity="0.85"/>
+              <text x="${lx+11}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${s.label}</text>`;
+    }).join('');
+
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Annual asset returns 2020-2024">${grid}${bars}${xLbls}${legend}</svg>`;
+  }
+
+  // ── Chart 3: Fed Funds Rate + CPI ─────────────────────────────────────────
+  function makeRateChart() {
+    const W = 340, H = 220;
+    const PL = 30, PR = 14, PT = 24, PB = 34;
+    const CW = W - PL - PR, CH = H - PT - PB;
+    const { labels, fedFunds, cpiYoY } = t.rateAndInflation;
+    const n = labels.length;
+    const Y_MIN = 0, Y_MAX = 10, Y_RNG = Y_MAX - Y_MIN;
+    const xS  = i => PL + (i / (n - 1)) * CW;
+    const yS  = v => PT + CH - ((v - Y_MIN) / Y_RNG) * CH;
+    const bottomY = yS(0);
+    const fedPts = fedFunds.map((v, i) => [xS(i), yS(v)]);
+    const cpiPts = cpiYoY.map((v, i)  => [xS(i), yS(v)]);
+
+    const yTicks = [0, 2, 4, 6, 8, 10];
+    const grid = yTicks.map(v => {
+      const y = yS(v).toFixed(1);
+      return `<line x1="${PL}" y1="${y}" x2="${PL+CW}" y2="${y}" stroke="currentColor" stroke-opacity="0.08" stroke-width="1"/>
+              <text x="${PL-3}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v}%</text>`;
+    }).join('');
+
+    const xLbls = [0, 2, 4, 6, 8, 10].map(i => {
+      const x = xS(i).toFixed(1);
+      return `<text x="${x}" y="${H-6}" text-anchor="middle" font-size="8" fill="var(--text-muted)" font-family="var(--font-mono)">${labels[i]}</text>`;
+    }).join('');
+
+    const legend = `
+      <rect x="${PL}" y="${PT-14}" width="8" height="8" fill="#ef4444" rx="2" opacity="0.8"/>
+      <text x="${PL+11}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">CPI YoY</text>
+      <rect x="${PL+70}" y="${PT-14}" width="8" height="8" fill="#4f81ff" rx="2" opacity="0.8"/>
+      <text x="${PL+81}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">Fed Rate</text>`;
+
+    // Peak CPI annotation
+    const peakIdx = 5; // Jul'22 = 8.5%
+    const px = xS(peakIdx).toFixed(1), py = (yS(8.5) - 8).toFixed(1);
+    const annotation = `<text x="${px}" y="${py}" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444" font-family="var(--font-mono)">9.1%</text>
+      <line x1="${px}" y1="${(parseFloat(py)+2).toFixed(1)}" x2="${px}" y2="${yS(8.5).toFixed(1)}" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>`;
+
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Fed Funds Rate vs CPI inflation 2020-2025">
+      ${grid}
+      <path d="${areaPath(cpiPts, bottomY)}" fill="#ef4444" opacity="0.08"/>
+      <path d="${smoothPath(cpiPts)}" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${areaPath(fedPts, bottomY)}" fill="#4f81ff" opacity="0.08"/>
+      <path d="${smoothPath(fedPts)}" fill="none" stroke="#4f81ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      ${xLbls}${legend}${annotation}
+    </svg>`;
+  }
+
+  el.innerHTML = `
+    <div class="trends-grid">
+      <div class="trend-card trend-card--full">
+        <div class="trend-card-hdr">
+          <span class="trend-card-title">$1 Invested in Jan 2020</span>
+          <span class="trend-card-sub">Cumulative growth to Dec 2024 · log scale · source: ${t.source}</span>
+        </div>
+        ${makeCumulativeChart()}
+      </div>
+      <div class="trend-card">
+        <div class="trend-card-hdr">
+          <span class="trend-card-title">Annual Returns</span>
+          <span class="trend-card-sub">S&P 500 · Gold · Bonds · 2020–2024</span>
+        </div>
+        ${makeReturnsChart()}
+      </div>
+      <div class="trend-card">
+        <div class="trend-card-hdr">
+          <span class="trend-card-title">Rates &amp; Inflation</span>
+          <span class="trend-card-sub">US Fed Funds Rate vs. CPI · 2020–2025</span>
+        </div>
+        ${makeRateChart()}
+      </div>
+    </div>`;
+}
+
 function renderWorldGdp(data) {
   const listEl = $('gdp-list');
   if (!listEl) return;
@@ -1000,12 +1331,14 @@ function renderAll(data) {
     renderHundredBill,
     renderAssetPanels,
     renderCountryLeague,
+    renderCompanyRankings,
     renderWorldGdp,
     renderCryptoAnatomy,
     renderCentralBanks,
     renderDerivatives,
     renderGlobalDebt,
     renderWealthDistribution,
+    renderGlobalTrends,
     renderTakeaways,
     renderSources,
   ];
@@ -1025,7 +1358,7 @@ function renderAll(data) {
 // ── Animation: IntersectionObserver for bar rows ──────────────────────────────
 function setupObserver() {
   if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.bar-row, .gdp-item, .cb-item').forEach(el => el.classList.add('animate'));
+    document.querySelectorAll('.bar-row, .gdp-item, .cb-item, .co-item').forEach(el => el.classList.add('animate'));
     return;
   }
 
@@ -1042,7 +1375,7 @@ function setupObserver() {
   );
 
   // Observe only rows that haven't animated yet
-  document.querySelectorAll('.bar-row:not(.animate), .gdp-item:not(.animate), .cb-item:not(.animate)').forEach(el => obs.observe(el));
+  document.querySelectorAll('.bar-row:not(.animate), .gdp-item:not(.animate), .cb-item:not(.animate), .co-item:not(.animate)').forEach(el => obs.observe(el));
 }
 
 // ── Done toast ────────────────────────────────────────────────────────────────
@@ -1063,7 +1396,7 @@ async function refreshData() {
 
   try {
     const data = await loadData(true);   // bypassCache = true
-    document.querySelectorAll('.bar-row.animate, .gdp-item.animate, .cb-item.animate').forEach(el => el.classList.remove('animate'));
+    document.querySelectorAll('.bar-row.animate, .gdp-item.animate, .cb-item.animate, .co-item.animate').forEach(el => el.classList.remove('animate'));
     renderAll(data);
     setupObserver();
     showDoneToast();
