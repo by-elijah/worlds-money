@@ -1,0 +1,96 @@
+name: Refresh market data
+
+on:
+  schedule:
+    # 06:15 UTC daily — after most Asian markets open, before European
+    - cron: '15 6 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force commit even if data unchanged'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ── Job 1: refresh data and commit ────────────────────────────────────────
+  refresh:
+    name: Refresh data
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Run refresh script
+        run: node scripts/refresh-data.mjs
+        env:
+          # Optional: set GOLD_API_KEY in repo secrets to unlock a higher-rate tier
+          # The script degrades gracefully when this is absent.
+          GOLD_API_KEY: ${{ secrets.GOLD_API_KEY }}
+
+      - name: Commit if data changed
+        id: commit
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # Stage only the data files — never stage source code changes
+          git add data/market-data.json data/history/ || true
+
+          if git diff --cached --quiet && [ "${{ inputs.force }}" != "true" ]; then
+            echo "No changes to data — skipping commit"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            DATE=$(date -u +%Y-%m-%d)
+            git commit -m "chore(data): refresh ${DATE}" \
+              --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ── Job 2: deploy to GitHub Pages ─────────────────────────────────────────
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: refresh
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout (with latest data commit)
+        uses: actions/checkout@v4
+        with:
+          ref: main   # ensure we get the freshly committed data
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Serve the worlds-money/ directory as the site root
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

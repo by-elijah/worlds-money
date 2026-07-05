@@ -1,0 +1,14 @@
+{
+  "name": "worlds-money",
+  "version": "1.0.0",
+  "description": "The World's Money, to Scale — a macro wealth dashboard",
+  "type": "module",
+  "scripts": {
+    "refresh": "node scripts/refresh-data.mjs",
+    "dev": "npx serve . -p 3000",
+    "check": "node scripts/refresh-data.mjs && echo 'All checks passed'"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

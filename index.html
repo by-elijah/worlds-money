@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The World's Money, to Scale</title>
+  <meta name="description" content="A macro dashboard comparing total global wealth — real estate, bonds, equities, broad money, gold — against the entire crypto market, plus the world's 10 largest national stock markets.">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The World's Money, to Scale">
+  <meta property="og:description" content="Real estate, bonds, equities, gold, and crypto — all on one linear scale.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <!-- ── Sticky header ──────────────────────────────────────────────────── -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="site-brand">
+        <span class="site-title">The World's Money</span>
+        <span class="site-sub" aria-hidden="true">to Scale</span>
+      </div>
+      <div class="header-meta">
+        <span class="refresh-status" id="refresh-status" aria-live="polite" aria-atomic="true"></span>
+        <div class="refresh-wrap">
+          <button class="refresh-btn" id="refresh-btn" aria-label="Refresh live data" title="Re-fetch live prices now">↻</button>
+          <span class="refresh-toast" id="refresh-toast" role="status" aria-live="polite">Done!</span>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme" title="Toggle light/dark theme">☾</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main content — all sections populated by app.js ──────────────── -->
+  <main id="main-content">
+
+    <!-- Loading placeholder -->
+    <div class="loading-state" id="loading-state" role="status" aria-live="polite">
+      <p>Loading market data…</p>
+    </div>
+
+    <!-- Hero: total wealth + per-asset big numbers -->
+    <section class="hero" id="hero" hidden aria-label="Global wealth totals"></section>
+
+    <!-- Scale strip: all assets on one linear track -->
+    <section class="scale-strip-section" id="scale-strip" hidden aria-label="Asset class scale comparison">
+      <div class="section-inner">
+        <h2 class="section-title">All Asset Classes, One Scale</h2>
+        <p class="section-sub">Bar width = total value. Real estate anchors the full track width.</p>
+        <div class="scale-track" id="scale-track" role="list" aria-label="Asset class bars"></div>
+      </div>
+    </section>
+
+    <!-- $100 bill chips -->
+    <section class="hundred-bill-section" id="hundred-bill" hidden aria-label="If all global wealth were $100">
+      <div class="section-inner">
+        <h2 class="section-title">If all global wealth were $100…</h2>
+        <p class="section-sub">Proportional allocation across tracked asset classes.</p>
+        <div class="chips-row" id="chips-row" role="list" aria-label="Dollar allocation chips"></div>
+      </div>
+    </section>
+
+    <!-- Market-by-market panels -->
+    <section class="asset-panels-section" id="asset-panels" hidden aria-label="Market-by-market breakdown">
+      <div class="section-inner">
+        <h2 class="section-title">Market by Market</h2>
+        <div class="panels-grid" id="panels-grid"></div>
+      </div>
+    </section>
+
+    <!-- World's 10 largest stock markets -->
+    <section class="country-league-section" id="country-league" hidden aria-label="World's 10 largest stock markets">
+      <div class="section-inner">
+        <h2 class="section-title">World's 10 Largest Stock Markets</h2>
+        <p class="section-sub">Bar width = market cap (US = 100% baseline). Source: Bloomberg/WFE via Visual Capitalist, Apr 2026.</p>
+        <nav class="region-legend" aria-label="Region colour legend">
+          <span class="legend-americas"><span class="legend-dot" aria-hidden="true"></span>Americas</span>
+          <span class="legend-asia"><span class="legend-dot" aria-hidden="true"></span>Asia-Pacific</span>
+          <span class="legend-emea"><span class="legend-dot" aria-hidden="true"></span>EMEA</span>
+        </nav>
+        <div class="league-list" id="league-list" role="list" aria-label="Country equity market rankings"></div>
+      </div>
+    </section>
+
+    <!-- Crypto anatomy: donut + stats + optional sparkline -->
+    <section class="crypto-anatomy-section" id="crypto-anatomy" hidden aria-label="Crypto market breakdown">
+      <div class="section-inner">
+        <h2 class="section-title">Inside Crypto's $<span id="crypto-total-display" aria-live="polite">—</span>T</h2>
+        <p class="section-sub">Bitcoin, Ethereum, stablecoins, and everything else. Live via CoinGecko.</p>
+        <div class="crypto-grid">
+          <div class="donut-wrap" id="donut-wrap" aria-label="Crypto composition donut chart"></div>
+          <div class="crypto-stats" id="crypto-stats" role="list" aria-label="Crypto statistics"></div>
+        </div>
+        <div class="sparkline-wrap" id="sparkline-wrap" hidden aria-label="Crypto market cap trend sparkline"></div>
+      </div>
+    </section>
+
+    <!-- Derivatives ghost bar (not on the wealth scale) -->
+    <section class="derivatives-section" id="derivatives" hidden aria-label="Derivatives context">
+      <div class="section-inner">
+        <h2 class="section-title">Derivatives — The Other Number</h2>
+        <p class="ghost-bar-intro" id="ghost-bar-intro"></p>
+        <div class="ghost-bar-wrap" id="ghost-bar-wrap"></div>
+      </div>
+    </section>
+
+    <!-- Key numbers / takeaways -->
+    <section class="takeaways-section" id="takeaways" hidden aria-label="Key numbers and comparisons">
+      <div class="section-inner">
+        <h2 class="section-title">Key Numbers</h2>
+        <p class="section-sub">All figures computed live from the data above — no hardcoded values.</p>
+        <div class="takeaways-grid" id="takeaways-grid" role="list" aria-label="Key comparisons"></div>
+      </div>
+    </section>
+
+    <!-- Sources & method -->
+    <section class="sources-section" id="sources" hidden aria-label="Data sources and methodology">
+      <div class="section-inner">
+        <h2 class="section-title">Sources & Method</h2>
+        <p class="sources-intro">
+          Tier 1 sources are fetched automatically each day at 06:15 UTC by a GitHub Actions workflow.
+          Tier 2 sources are curated constants reviewed monthly.
+          Every data point carries its own <code>asOf</code> date.
+          Stale values (when a live fetch fails) are shown with a dotted underline.
+        </p>
+        <div class="sources-list" id="sources-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <p>
+      Data refreshed daily · Figures in USD · Not financial advice ·
+      <a href="https://github.com/anthropics/claude-code" rel="noopener">Built with Claude Code</a>
+    </p>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

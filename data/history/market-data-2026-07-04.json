@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "generatedAt": "2026-07-04T04:34:42.071Z",
+    "currency": "USD",
+    "unit": "trillion",
+    "version": 2
+  },
+  "assetClasses": [
+    {
+      "id": "re",
+      "name": "Real Estate",
+      "sub": "Global residential + commercial property",
+      "valueT": 393.3,
+      "asOf": "2025-01-01",
+      "source": "Savills, 2025",
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "bond",
+      "name": "Bonds",
+      "sub": "Global debt securities outstanding",
+      "valueT": 156,
+      "asOf": "2025-08-01",
+      "source": "BIS, Aug 2025",
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "eq",
+      "name": "Equities",
+      "sub": "Global listed market capitalisation",
+      "valueT": 135,
+      "asOf": "2025-12-01",
+      "source": "Bloomberg/WFE",
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "m2",
+      "name": "Broad Money",
+      "sub": "M2 — US + EZ + CN + JP",
+      "valueT": 101.7,
+      "asOf": "2026-07-01",
+      "source": "StreetStats, Jul 2026",
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "gold",
+      "name": "Gold",
+      "sub": "All above-ground gold × spot price",
+      "valueT": 29.538,
+      "asOf": "2026-07-04",
+      "source": "gold-api.com / WGC",
+      "tier": 1,
+      "stale": false
+    },
+    {
+      "id": "crypto",
+      "name": "Crypto",
+      "sub": "Total crypto market capitalisation",
+      "valueT": 2.2552,
+      "asOf": "2026-07-04",
+      "source": "CoinGecko",
+      "tier": 1,
+      "stale": false
+    }
+  ],
+  "derivatives": {
+    "notionalT": 846,
+    "grossMarketValueT": 21.8,
+    "asOf": "2025-06",
+    "source": "BIS, Jun 2025"
+  },
+  "crypto": {
+    "totalT": 2.2552,
+    "athT": 4.27,
+    "athDate": "2025-10",
+    "volume24hB": 64.57,
+    "btc": {
+      "capT": 1.2564,
+      "dominancePct": 55.701,
+      "priceUsd": 62661
+    },
+    "eth": {
+      "capB": 211.73,
+      "dominancePct": 9.3868
+    },
+    "stablecoinsB": 248.8,
+    "sparklineData": [
+      {
+        "date": "2026-07-04",
+        "totalT": 2.2552
+      }
+    ]
+  },
+  "gold": {
+    "spotUsdPerOz": 4176.1,
+    "aboveGroundTonnes": 220000,
+    "impliedCapT": 29.538
+  },
+  "countryEquityMarkets": [
+    {
+      "rank": 1,
+      "country": "United States",
+      "region": "americas",
+      "capT": 65,
+      "note": "NYSE + NASDAQ",
+      "badge": null
+    },
+    {
+      "rank": 2,
+      "country": "China",
+      "region": "asia",
+      "capT": 11.2,
+      "note": "Shanghai + Shenzhen + HK",
+      "badge": null
+    },
+    {
+      "rank": 3,
+      "country": "Japan",
+      "region": "asia",
+      "capT": 6.5,
+      "note": "TSE",
+      "badge": null
+    },
+    {
+      "rank": 4,
+      "country": "India",
+      "region": "asia",
+      "capT": 5.8,
+      "note": "BSE + NSE",
+      "badge": {
+        "text": "↑ +38%",
+        "dir": "up"
+      }
+    },
+    {
+      "rank": 5,
+      "country": "United Kingdom",
+      "region": "emea",
+      "capT": 3.7,
+      "note": "LSE",
+      "badge": null
+    },
+    {
+      "rank": 6,
+      "country": "Canada",
+      "region": "americas",
+      "capT": 3.4,
+      "note": "TSX",
+      "badge": null
+    },
+    {
+      "rank": 7,
+      "country": "France",
+      "region": "emea",
+      "capT": 3.2,
+      "note": "Euronext Paris",
+      "badge": null
+    },
+    {
+      "rank": 8,
+      "country": "Saudi Arabia",
+      "region": "emea",
+      "capT": 2.8,
+      "note": "Tadawul",
+      "badge": null
+    },
+    {
+      "rank": 9,
+      "country": "Germany",
+      "region": "emea",
+      "capT": 2.4,
+      "note": "Deutsche Börse",
+      "badge": null
+    },
+    {
+      "rank": 10,
+      "country": "South Korea",
+      "region": "asia",
+      "capT": 2.3,
+      "note": "KRX",
+      "badge": {
+        "text": "↑ +45%",
+        "dir": "up"
+      }
+    }
+  ],
+  "equityFacts": [
+    {
+      "value": "$65T",
+      "label": "USA market alone"
+    },
+    {
+      "value": "48%",
+      "label": "US share of global equity"
+    },
+    {
+      "value": "2.1×",
+      "label": "equities vs. bonds"
+    }
+  ]
+}
