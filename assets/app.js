@@ -164,6 +164,26 @@ const FALLBACK_DATA = {
       fedFunds: [1.55, 0.09, 0.09, 0.10, 0.08, 2.33, 4.33, 5.33, 5.33, 5.33, 4.33, 3.50],
       cpiYoY:   [2.5,  1.0,  1.4,  5.4,  7.5,  9.1,  6.4,  3.2,  3.1,  2.9,  3.0,  2.4],
     },
+    rateCycles: {
+      source: 'Federal Reserve H.15 — target rate, upper bound · annual year-end · cycle phases illustrative',
+      years: [1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+      rate:  [7.31,4.43,3.09,2.96,5.45,5.60,5.29,5.50,4.68,5.30,6.24,1.75,1.24,1.00,2.25,4.25,5.25,4.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.50,0.75,1.50,2.50,1.75,0.25,0.25,4.50,5.50,4.50,3.50],
+      phases: [
+        { from: 1990, to: 1993, phase: 'cut',  short: 'RECESSION',    label: "Early-'90s Recession" },
+        { from: 1994, to: 1995, phase: 'hike', short: 'PRE-EMPT',     label: 'Preemptive Tightening' },
+        { from: 1996, to: 1998, phase: 'hold', short: 'STABLE',       label: 'Great Moderation' },
+        { from: 1999, to: 2000, phase: 'hike', short: 'DOT-COM HIKE', label: 'Dot-Com Tightening' },
+        { from: 2001, to: 2003, phase: 'cut',  short: 'DOT-COM BUST', label: 'Dot-Com Bust' },
+        { from: 2004, to: 2006, phase: 'hike', short: 'MEASURED',     label: 'Measured Pace' },
+        { from: 2007, to: 2008, phase: 'cut',  short: 'GFC',          label: 'Global Financial Crisis' },
+        { from: 2009, to: 2014, phase: 'hold', short: 'ZIRP',         label: 'Zero Interest Rate Policy' },
+        { from: 2015, to: 2018, phase: 'hike', short: 'NORMALIZE',    label: 'Policy Normalization' },
+        { from: 2019, to: 2020, phase: 'cut',  short: 'COVID CUT',    label: 'Pre-COVID & COVID Cuts' },
+        { from: 2021, to: 2021, phase: 'hold', short: 'ZERO',         label: 'Zero Rate' },
+        { from: 2022, to: 2023, phase: 'hike', short: 'INFLATION',    label: 'Inflation Fight' },
+        { from: 2024, to: 2025, phase: 'cut',  short: 'EASING',       label: 'Easing Cycle' },
+      ],
+    },
   },
 };
 
@@ -1146,6 +1166,69 @@ function renderGlobalTrends(data) {
     </svg>`;
   }
 
+  // ── Chart 4: Fed Funds Rate Cycles (historical hike/cut/hold regimes) ─────
+  function makeRateCycleChart() {
+    const rc = t.rateCycles;
+    if (!rc) return '';
+    const { years, rate, phases } = rc;
+    const n = years.length;
+    const W = 1000, H = 260;
+    const PL = 34, PR = 14, PT = 40, PB = 32;
+    const CW = W - PL - PR, CH = H - PT - PB;
+    const cell  = CW / n;
+    const xCell = i => PL + i * cell;
+
+    const Y_MIN = 0, Y_MAX = 8, Y_RNG = Y_MAX - Y_MIN;
+    const yS = v => PT + CH - ((v - Y_MIN) / Y_RNG) * CH;
+
+    const PHASE_COLOR = { hike: '#ef4444', cut: '#4f81ff', hold: '#94a3b8' };
+    const PHASE_NAME   = { hike: 'Hiking', cut: 'Cutting', hold: 'Holding' };
+    const yearIdx = y => years.indexOf(y);
+
+    const bands = phases.map(p => {
+      const fi = yearIdx(p.from), ti = yearIdx(p.to);
+      const x = xCell(fi), w = (ti - fi + 1) * cell;
+      const color = PHASE_COLOR[p.phase];
+      const fits  = p.short.length * 5.1 <= w - 4;
+      const lbl   = fits
+        ? `<text x="${(x+w/2).toFixed(1)}" y="${(PT+11).toFixed(1)}" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="0.02em" fill="${color}" font-family="var(--font-mono)">${p.short}</text>`
+        : '';
+      return `<rect x="${x.toFixed(1)}" y="${PT}" width="${w.toFixed(1)}" height="${CH}" fill="${color}" opacity="0.10"><title>${p.label} (${p.from}–${p.to}) — ${PHASE_NAME[p.phase]}</title></rect>${lbl}`;
+    }).join('');
+
+    const yTicks = [0, 2, 4, 6, 8];
+    const grid = yTicks.map(v => {
+      const y = yS(v).toFixed(1);
+      return `<line x1="${PL}" y1="${y}" x2="${PL+CW}" y2="${y}" stroke="currentColor" stroke-opacity="0.07" stroke-width="1"/>
+              <text x="${PL-4}" y="${(parseFloat(y)+3.5).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${v}%</text>`;
+    }).join('');
+
+    let d = `M ${xCell(0).toFixed(1)} ${yS(rate[0]).toFixed(1)}`;
+    for (let i = 0; i < n; i++) {
+      d += ` L ${(xCell(i)+cell).toFixed(1)} ${yS(rate[i]).toFixed(1)}`;
+      if (i < n - 1) d += ` L ${(xCell(i)+cell).toFixed(1)} ${yS(rate[i+1]).toFixed(1)}`;
+    }
+
+    const xLbls = years.map((yr, i) => {
+      if (yr % 5 !== 0) return '';
+      const x = xCell(i).toFixed(1);
+      return `<text x="${x}" y="${H-8}" text-anchor="middle" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">'${String(yr).slice(2)}</text>`;
+    }).join('');
+
+    const legend = Object.entries(PHASE_NAME).map(([key, name], i) => {
+      const lx = PL + i * 100;
+      return `<rect x="${lx}" y="10" width="8" height="8" fill="${PHASE_COLOR[key]}" rx="2" opacity="0.85"/>
+              <text x="${lx+11}" y="18" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${name}</text>`;
+    }).join('');
+
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="US Federal Funds Rate hiking and cutting cycles, 1990 to 2025">
+      ${bands}
+      ${grid}
+      <path d="${d}" fill="none" stroke="var(--text)" stroke-width="1.75" stroke-linejoin="round" opacity="0.85"/>
+      ${xLbls}${legend}
+    </svg>`;
+  }
+
   const defaultDs = DATASETS[defaultPeriod];
   el.innerHTML = `
     <div class="trends-grid">
@@ -1177,6 +1260,14 @@ function renderGlobalTrends(data) {
         </div>
         ${makeRateChart()}
       </div>
+      ${t.rateCycles ? `
+      <div class="trend-card trend-card--full">
+        <div class="trend-card-hdr">
+          <span class="trend-card-title">Fed Funds Rate Cycles</span>
+          <span class="trend-card-sub">Hiking &amp; cutting regimes, 1990–2025 · target rate, upper bound · ${t.rateCycles.source}</span>
+        </div>
+        ${makeRateCycleChart()}
+      </div>` : ''}
     </div>`;
 
   // Wire toggle buttons

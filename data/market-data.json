@@ -1088,6 +1088,26 @@
         3,
         2.4
       ]
+    },
+    "rateCycles": {
+      "source": "Federal Reserve H.15 — target rate, upper bound · annual year-end · cycle phases illustrative",
+      "years": [1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+      "rate": [7.31,4.43,3.09,2.96,5.45,5.60,5.29,5.50,4.68,5.30,6.24,1.75,1.24,1.00,2.25,4.25,5.25,4.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.50,0.75,1.50,2.50,1.75,0.25,0.25,4.50,5.50,4.50,3.50],
+      "phases": [
+        { "from": 1990, "to": 1993, "phase": "cut",  "short": "RECESSION",    "label": "Early-'90s Recession" },
+        { "from": 1994, "to": 1995, "phase": "hike", "short": "PRE-EMPT",     "label": "Preemptive Tightening" },
+        { "from": 1996, "to": 1998, "phase": "hold", "short": "STABLE",       "label": "Great Moderation" },
+        { "from": 1999, "to": 2000, "phase": "hike", "short": "DOT-COM HIKE", "label": "Dot-Com Tightening" },
+        { "from": 2001, "to": 2003, "phase": "cut",  "short": "DOT-COM BUST", "label": "Dot-Com Bust" },
+        { "from": 2004, "to": 2006, "phase": "hike", "short": "MEASURED",     "label": "Measured Pace" },
+        { "from": 2007, "to": 2008, "phase": "cut",  "short": "GFC",          "label": "Global Financial Crisis" },
+        { "from": 2009, "to": 2014, "phase": "hold", "short": "ZIRP",         "label": "Zero Interest Rate Policy" },
+        { "from": 2015, "to": 2018, "phase": "hike", "short": "NORMALIZE",    "label": "Policy Normalization" },
+        { "from": 2019, "to": 2020, "phase": "cut",  "short": "COVID CUT",    "label": "Pre-COVID & COVID Cuts" },
+        { "from": 2021, "to": 2021, "phase": "hold", "short": "ZERO",         "label": "Zero Rate" },
+        { "from": 2022, "to": 2023, "phase": "hike", "short": "INFLATION",    "label": "Inflation Fight" },
+        { "from": 2024, "to": 2025, "phase": "cut",  "short": "EASING",       "label": "Easing Cycle" }
+      ]
     }
   }
 }
