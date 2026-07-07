@@ -48,11 +48,6 @@ const FALLBACK_DATA = {
     { rank:  9, country: 'Germany',        region: 'emea',     capT:  2.4, note: 'Deutsche Börse',            badge: null },
     { rank: 10, country: 'South Korea',    region: 'asia',     capT:  2.3, note: 'KRX',                       badge: { text: '↑ +45%', dir: 'up' } },
   ],
-  equityFacts: [
-    { value: '$65T', label: 'USA market alone' },
-    { value:  '48%', label: 'US share of global equity' },
-    { value: '2.1×', label: 'equities vs. bonds' },
-  ],
   worldGdp: {
     totalT: 126.0, asOf: '2026-01-01', source: 'IMF WEO, Apr 2026',
     topCountries: [
@@ -482,11 +477,21 @@ function renderAssetPanels(data) {
   const crypto = data.assetClasses.find(a => a.id === 'crypto');
   const total  = assets.reduce((s, a) => s + a.valueT, 0);
 
+  // Equities panel: US share + bonds ratio, computed live so they can't drift out of sync
+  const eqA   = data.assetClasses.find(a => a.id === 'eq');
+  const bondA = data.assetClasses.find(a => a.id === 'bond');
+  const usEq  = data.countryEquityMarkets?.find(m => m.rank === 1);
+  const eqFacts = [
+    usEq ? { value: fmtT(usEq.capT), label: 'USA market alone' } : null,
+    usEq ? { value: `${fmt(usEq.capT / eqA.valueT * 100, 0)}%`, label: 'US share of global equity' } : null,
+    { value: `${fmt(bondA.valueT / eqA.valueT, 2)}×`, label: 'bonds vs. equities' },
+  ].filter(Boolean);
+
   // One highlight fact per panel (all computed from raw values)
   const facts = {
     re:     `${fmt((data.assetClasses.find(a=>a.id==='re').valueT / total)*100, 1)}% of all tracked wealth`,
     bond:   `${fmt(data.assetClasses.find(a=>a.id==='bond').valueT / crypto.valueT, 0)}× the size of crypto`,
-    eq:     data.equityFacts.map(f => `<strong>${f.value}</strong> ${f.label}`).join(' · '),
+    eq:     eqFacts.map(f => `<strong>${f.value}</strong> ${f.label}`).join(' · '),
     m2:     `M2 = cash + bank deposits + money-market funds. Every loan a bank makes creates new M2. Covers US + EZ + CN + JP. ${fmt(data.assetClasses.find(a=>a.id==='m2').valueT / crypto.valueT, 0)}× the size of all crypto.`,
     gold:   `$${fmt(data.gold.spotUsdPerOz, 0)}/oz · ${fmt(data.gold.aboveGroundTonnes/1000, 0)}k tonnes above ground`,
     crypto: `${fmt((1 - crypto.valueT / data.crypto.athT) * 100, 0)}% below Oct ${data.crypto.athDate.slice(0,4)} ATH of ${fmtT(data.crypto.athT)}`,
@@ -1431,7 +1436,7 @@ function renderGlobalDebt(data) {
     factsEl.innerHTML = [
       { label: 'debt-to-GDP (IIF measure)',         value: `${d.debtToGdpPct}%`,                    danger: false },
       { label: 'vs. all tracked assets',            value: `${fmt(d.totalT / totalTracked, 2)}×`,   danger: true  },
-      { label: 'per person on earth (÷ 8.1B)',      value: `$${fmt(d.totalT / 8.1 * 1000, 0)}K`,   danger: false },
+      { label: 'per person on earth (÷ 8.1B)',      value: `$${fmt(d.totalT / 8.1 * 1000, 0)}`,   danger: false },
     ].map(r => `
       <div class="ratio-card${r.danger ? ' ratio-card--danger' : ''}">
         <div class="ratio-value mono">${r.value}</div>

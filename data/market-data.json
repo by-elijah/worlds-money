@@ -273,20 +273,6 @@
       }
     }
   ],
-  "equityFacts": [
-    {
-      "value": "$65T",
-      "label": "USA market alone"
-    },
-    {
-      "value": "48%",
-      "label": "US share of global equity"
-    },
-    {
-      "value": "2.1×",
-      "label": "equities vs. bonds"
-    }
-  ],
   "worldGdp": {
     "totalT": 126,
     "asOf": "2026-01-01",

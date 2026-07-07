@@ -56,12 +56,6 @@ const TIER2 = {
     { rank: 10, country: 'South Korea',   region: 'asia',     capT:  2.3,  note: 'KRX',                     badge: { text: '↑ +45%', dir: 'up' } },
   ],
 
-  equityFacts: [
-    { value: '$65T', label: 'USA market alone' },
-    { value:  '48%', label: 'US share of global equity' },
-    { value: '2.1×', label: 'equities vs. bonds' },
-  ],
-
   worldGdp: {
     totalT: 126.0,
     asOf: '2026-01-01',
@@ -311,7 +305,6 @@ const result = {
   },
   deltas: existing?.deltas ?? { day: {}, month: {} },
   countryEquityMarkets: TIER2.countryEquityMarkets,
-  equityFacts:          TIER2.equityFacts,
   worldGdp:             TIER2.worldGdp,
   centralBanks:         TIER2.centralBanks,
   globalDebt:           TIER2.globalDebt,
