@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-07-19T21:05:28.071Z",
+    "generatedAt": "2026-07-19T21:14:44.136Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -215,7 +215,7 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.2904,
+      "valueT": 2.2898,
       "asOf": "2026-07-19",
       "source": "CoinGecko",
       "tier": 1,
@@ -260,64 +260,64 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.2904,
+    "totalT": 2.2898,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 39.13,
+    "volume24hB": 38.94,
     "btc": {
-      "capT": 1.2937,
-      "dominancePct": 56.4745,
-      "priceUsd": 64490
+      "capT": 1.2927,
+      "dominancePct": 56.4701,
+      "priceUsd": 64457
     },
     "eth": {
-      "capB": 225.19,
-      "dominancePct": 9.8323,
-      "priceUsd": 1865.82
+      "capB": 224.97,
+      "dominancePct": 9.8291,
+      "priceUsd": 1864.16
     },
-    "stablecoinsB": 248.8,
+    "stablecoinsB": 248.7,
     "top5": [
       {
         "rank": 1,
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 64490,
-        "capB": 1293.7,
-        "change24hPct": -0.24
+        "priceUsd": 64457,
+        "capB": 1292.7,
+        "change24hPct": -0.33
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 1865.82,
-        "capB": 225.2,
-        "change24hPct": 0.52
+        "priceUsd": 1864.16,
+        "capB": 225,
+        "change24hPct": 0.25
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.999194,
+        "priceUsd": 0.999192,
         "capB": 184.1,
-        "change24hPct": -0.01
+        "change24hPct": -0.02
       },
       {
         "rank": 4,
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 569.3,
+        "priceUsd": 569.22,
         "capB": 75.8,
-        "change24hPct": -0.32
+        "change24hPct": -0.42
       },
       {
         "rank": 5,
         "id": "usd-coin",
         "symbol": "USDC",
         "name": "USDC",
-        "priceUsd": 0.999856,
+        "priceUsd": 0.999876,
         "capB": 73.3,
         "change24hPct": 0
       }
@@ -385,7 +385,7 @@
       },
       {
         "date": "2026-07-19",
-        "totalT": 2.2904
+        "totalT": 2.2898
       }
     ]
   },
@@ -475,8 +475,8 @@
     "generatedAt": "2026-07-19",
     "day": {
       "crypto": {
-        "pct": 0.73,
-        "absT": 0.0166
+        "pct": 0.7,
+        "absT": 0.016
       },
       "gold": {
         "pct": 0,
@@ -1584,7 +1584,7 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-07-19T21:05:34.451Z",
+    "asOf": "2026-07-19T21:14:49.241Z",
     "items": [
       "KOSPI −6.5% — biggest move among tracked markets",
       "Next: ECB rate decision in 4 days (2026-07-23)"
