@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beginner's Guide — The World's Money, to Scale</title>
+  <meta name="description" content="A plain-language guide to the World's Money dashboard: what each asset class is, how to read the charts, and where the numbers come from.">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Beginner's Guide — The World's Money">
+  <meta property="og:description" content="What is real estate worth? Why does money supply grow? A friendly guide to the dashboard.">
+  <meta property="og:type" content="article">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <!-- ── Sticky header ──────────────────────────────────────────────────── -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="site-brand site-brand--link" href="index.html">
+        <span class="site-title">The World's Money</span>
+        <span class="site-sub" aria-hidden="true">Beginner's Guide</span>
+      </a>
+      <div class="header-meta">
+        <a class="header-link" href="index.html">← Dashboard</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme" title="Toggle light/dark theme">☾</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <article class="guide-article">
+
+      <!-- 1. What is this? -->
+      <section class="section-inner" id="what-is-this">
+        <h1 class="section-title">What is this dashboard?</h1>
+        <p class="guide-lede">
+          Imagine you could take <strong>everything valuable in the world</strong> — every house, every company,
+          every government IOU, every gold bar, every bitcoin — and line it all up on one ruler.
+          That's what this dashboard does. It shows the world's biggest pools of money <em>to scale</em>,
+          so you can see with your own eyes how they compare.
+        </p>
+        <p>
+          The headline number is around <strong>$840&nbsp;trillion</strong>. A trillion is a thousand billion —
+          a million million. If you earned $1,000 every single day, it would take you almost
+          <strong>3&nbsp;million years</strong> to earn one trillion dollars. The world holds roughly 840 of those.
+        </p>
+      </section>
+
+      <!-- 2. Quick map -->
+      <section class="section-inner" id="quick-map">
+        <h2 class="section-title">Quick map of the page</h2>
+        <nav class="guide-toc" aria-label="Dashboard sections">
+          <a href="index.html#scale-strip">All assets on one scale</a>
+          <a href="index.html#hundred-bill">If all wealth were $100</a>
+          <a href="index.html#asset-panels">Market by market</a>
+          <a href="index.html#country-league">10 largest stock markets</a>
+          <a href="index.html#world-gdp">World GDP</a>
+          <a href="index.html#crypto-anatomy">Inside crypto</a>
+          <a href="index.html#central-banks">Central banks</a>
+          <a href="index.html#global-debt">Global debt</a>
+          <a href="index.html#wealth-distribution">Who owns the wealth</a>
+          <a href="index.html#global-trends">Market trends</a>
+        </nav>
+      </section>
+
+      <!-- 3. The six asset classes -->
+      <section class="section-inner" id="asset-classes">
+        <h2 class="section-title">The six asset classes</h2>
+        <p>An <strong>asset</strong> is anything you own that has value. The dashboard tracks the six biggest kinds.</p>
+
+        <div class="guide-card guide-card--re">
+          <h3>🏠 Real Estate — ~$393T</h3>
+          <p>Every home, apartment, office, shop and warehouse on Earth, added together.
+            It's the biggest pile of wealth by far — bigger than everything else on the dashboard <em>combined</em>.</p>
+          <p class="guide-example">Think of it this way: the flat you live in, the school you go to, the mall near you —
+            someone owns each of those buildings, and each one has a price.</p>
+        </div>
+
+        <div class="guide-card guide-card--bond">
+          <h3>🧾 Bonds — ~$156T</h3>
+          <p>A bond is an IOU. When a government or a company needs money, it borrows from investors and
+            promises to pay it back with interest. That promise can be bought and sold, like a trading card.</p>
+          <p class="guide-example">Lend a friend $10 and they promise you $11 next month — you basically own a tiny bond.
+            Now imagine that with governments borrowing trillions.</p>
+        </div>
+
+        <div class="guide-card guide-card--eq">
+          <h3>📈 Equities (Stocks) — ~$135T</h3>
+          <p>A stock is a small slice of ownership in a company. Own one share of Apple and you literally own a
+            (very tiny) piece of Apple. "Market cap" is the price of one share × all the shares — what the whole company is "worth."</p>
+          <p class="guide-example">If a company were a pizza cut into a billion slices, a stock is one slice —
+            and the price of a slice changes every day depending on how hungry people are for it.</p>
+        </div>
+
+        <div class="guide-card guide-card--m2">
+          <h3>💵 Broad Money (M2) — ~$102T</h3>
+          <p>All the actual <em>money</em> out there: coins, banknotes, and the balances in checking and savings accounts.
+            Here's the surprising part — banks <strong>create</strong> new money whenever they make loans.
+            That's why this number grows almost every year.</p>
+          <p class="guide-example">Your bank balance isn't a stack of notes in a vault with your name on it —
+            it's a number the bank owes you. Most money today is just numbers moving between computers.</p>
+        </div>
+
+        <div class="guide-card guide-card--gold">
+          <h3>🪙 Gold — ~$28T</h3>
+          <p>Humans have dug up about 220,000 tonnes of gold in all of history — it would fit in a cube about
+            22&nbsp;meters on each side. People have trusted it as a store of value for 5,000 years,
+            which is why its price often rises when people get nervous about everything else.</p>
+          <p class="guide-example">All the gold ever mined could fit inside four Olympic swimming pools —
+            yet it's worth more than ten times all of crypto.</p>
+        </div>
+
+        <div class="guide-card guide-card--crypto">
+          <h3>🌐 Crypto — ~$2.3T</h3>
+          <p>Digital money that runs on blockchains — public computer networks nobody controls alone.
+            Bitcoin is the biggest. Crypto is famous for wild swings: it has crashed by 60–80% several times
+            and then grown back. On the world scale it's still tiny — a rounding error next to real estate.</p>
+          <p class="guide-example">If all the world's wealth were $100, crypto would be about 27&nbsp;cents.
+            That surprises almost everyone.</p>
+        </div>
+      </section>
+
+      <!-- 4. How to read the charts -->
+      <section class="section-inner" id="reading-charts">
+        <h2 class="section-title">How to read the charts</h2>
+        <ul class="guide-list">
+          <li><strong>Bars to scale</strong> — in the first section, the width of each bar is proportional to real value.
+            Real estate spans the whole track; crypto is a thin sliver. That's the entire point: seeing size honestly.</li>
+          <li><strong>The $100 split</strong> — the same data, but imagined as a single $100 bill divided up.
+            Easier to feel than trillions.</li>
+          <li><strong>Yearly trend charts</strong> — the small curve in each "Market by Market" panel shows how that asset
+            grew (or shrank) year by year since 2015. A rising curve = the pile got bigger.</li>
+          <li><strong>30-day live sparklines</strong> — gold and crypto also show a small line of the last 30 days of
+            live prices, refreshed daily.</li>
+          <li><strong>▲ / ▼ badges</strong> — how much a live asset moved in the last day / 30 days.</li>
+          <li><strong>Log scale</strong> — some trend charts use a logarithmic scale, where each step up means
+            "×10" instead of "+10". It's the only honest way to put slow-growing bonds and fast-growing assets on one chart.</li>
+        </ul>
+      </section>
+
+      <!-- 5. Where the numbers come from -->
+      <section class="section-inner" id="data-rules">
+        <h2 class="section-title">Where the numbers come from</h2>
+        <p>The dashboard has two kinds of data, and it's honest about which is which:</p>
+        <ul class="guide-list">
+          <li><strong>Tier 1 — live</strong> (crypto, gold): fetched automatically every day at 06:15 UTC from public APIs
+            (CoinGecko, gold-api.com). These numbers move daily.</li>
+          <li><strong>Tier 2 — curated</strong> (everything else): giant totals like "all real estate on Earth" aren't measured
+            daily by anyone. They come from research reports (Savills, BIS, IMF, UBS…) and are reviewed monthly by hand.</li>
+        </ul>
+        <p>
+          Every figure carries an <strong>asOf date</strong> — when it was last true. If a live fetch fails,
+          the dashboard shows the previous value with a dotted underline and a <em>stale</em> badge instead of pretending.
+          Rule of the site: <strong>never fake freshness.</strong>
+        </p>
+      </section>
+
+      <!-- 6. Big ideas behind the trends -->
+      <section class="section-inner" id="big-ideas">
+        <h2 class="section-title">Big ideas behind the trends</h2>
+
+        <div class="guide-card">
+          <h3>Why does the money supply keep growing?</h3>
+          <p>Banks create money by lending, and central banks add more during crises (2008, 2020).
+            More money chasing the same goods is one reason prices creep up over time — that's <strong>inflation</strong>.
+            It's also why "$1 in 1990" bought much more than $1 today.</p>
+        </div>
+
+        <div class="guide-card">
+          <h3>Why is crypto so volatile?</h3>
+          <p>It's young, it's small (so single big trades move it), and its price is mostly driven by
+            what people <em>believe</em> it will be worth later. Belief changes fast; office buildings don't.</p>
+        </div>
+
+        <div class="guide-card">
+          <h3>What does the "$1 invested" chart mean?</h3>
+          <p>It answers: if you had put $1 into stocks (or gold, or bonds) in 1990 / 2000 / 2010 and just waited,
+            what would it be worth now? It shows the superpower of <strong>compounding</strong> —
+            growth on top of growth. Small yearly gains snowball over decades.</p>
+        </div>
+
+        <div class="guide-card">
+          <h3>Interest rates vs. inflation</h3>
+          <p>When inflation spiked to ~9% in 2022, the US central bank raised interest rates hard —
+            making borrowing expensive to cool prices down. Watch the two lines chase each other in the
+            Rates &amp; Inflation chart: that chase moves almost every other price on the dashboard.</p>
+        </div>
+
+        <div class="guide-card">
+          <h3>Wealth ≠ money</h3>
+          <p>The $840T isn't cash sitting somewhere — it's mostly <em>prices of things</em>.
+            If everyone tried to sell at once, prices would collapse. Wealth is a snapshot of what things
+            would trade for today, not a pile you could withdraw.</p>
+        </div>
+      </section>
+
+      <!-- 7. Glossary -->
+      <section class="section-inner" id="glossary">
+        <h2 class="section-title">Glossary</h2>
+        <dl class="guide-glossary">
+          <dt>Asset</dt><dd>Anything you own that has value and could be sold.</dd>
+          <dt>Market cap</dt><dd>Price of one share (or coin) × how many exist. What the whole thing is "worth."</dd>
+          <dt>Trillion</dt><dd>1,000,000,000,000 — a thousand billions.</dd>
+          <dt>Bond</dt><dd>A tradeable IOU from a government or company that pays interest.</dd>
+          <dt>M2</dt><dd>A measure of money: cash + checking + savings + money-market funds.</dd>
+          <dt>Central bank</dt><dd>The institution that issues a country's currency and sets interest rates (e.g. the Fed).</dd>
+          <dt>Inflation (CPI)</dt><dd>How much everyday prices rose versus a year ago, in percent.</dd>
+          <dt>ATH</dt><dd>All-time high — the highest price something has ever reached.</dd>
+          <dt>Volatility</dt><dd>How wildly a price swings. High volatility = big ups <em>and</em> big downs.</dd>
+          <dt>Notional</dt><dd>The face value a derivative contract references — a bookkeeping number, not money at risk.</dd>
+          <dt>Stale</dt><dd>On this site: a value whose live refresh failed, shown from the last good fetch.</dd>
+        </dl>
+      </section>
+
+      <!-- 8. Closing -->
+      <section class="section-inner" id="closing">
+        <div class="guide-card guide-card--closing">
+          <p><strong>One last thing:</strong> this dashboard is for understanding the world, not for picking investments.
+            Nothing here is financial advice. The best thing you can invest in at 15–18 is understanding how the machine works —
+            which is exactly what you just did.</p>
+          <p><a class="guide-back" href="index.html">← Back to the dashboard</a></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <p>
+      <a href="index.html">The World's Money, to Scale</a> · Not financial advice ·
+      <a href="https://github.com/anthropics/claude-code" rel="noopener">Built with Claude Code</a>
+    </p>
+  </footer>
+
+  <script>
+    // Mirrors the theme logic in assets/app.js (app.js is not loaded here —
+    // it would try to fetch data and render dashboard sections that don't exist).
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const currentTheme = () => document.documentElement.dataset.theme || (prefersDark() ? 'dark' : 'light');
+      function applyTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        if (btn) btn.textContent = theme === 'dark' ? '☀' : '☾';
+      }
+      applyTheme(prefersDark() ? 'dark' : 'light');
+      btn?.addEventListener('click', () => applyTheme(currentTheme() === 'dark' ? 'light' : 'dark'));
+    })();
+  </script>
+</body>
+</html>

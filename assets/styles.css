@@ -533,6 +533,27 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
   display: block;
 }
 
+/* ── Mini yearly trend chart in panels ────────────────────────────────────── */
+.mini-year {
+  margin: 0.6rem 0 0.25rem;
+}
+.mini-year-svg {
+  width: 100%;
+  max-width: 140px;
+  height: 36px;
+  overflow: visible;
+  display: block;
+}
+.mini-chart-caption {
+  display: flex;
+  justify-content: space-between;
+  max-width: 140px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
 /* Accent left-border per asset */
 .hero-item--re    { border-left: 3px solid var(--c-re); }
 .hero-item--bond  { border-left: 3px solid var(--c-bond); }
@@ -1604,3 +1625,104 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
   .chips-row { flex-direction: column; }
   .chip { width: 100%; }
 }
+
+/* ── Guide page ───────────────────────────────────────────────────────────── */
+.site-brand--link {
+  text-decoration: none;
+  color: inherit;
+}
+.site-brand--link:hover .site-title { color: var(--accent); }
+.header-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.header-link:hover { color: var(--accent); }
+
+.guide-article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem var(--gutter) 3rem;
+}
+.guide-article .section-inner { padding: 1.6rem 0 0.4rem; }
+.guide-article p,
+.guide-article li,
+.guide-article dd {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+.guide-article h1.section-title { font-size: clamp(1.5rem, 4vw, 2.1rem); }
+.guide-lede {
+  font-size: 1.08rem !important;
+  color: var(--text) !important;
+}
+.guide-article strong { color: var(--text); }
+
+.guide-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.guide-toc a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-2);
+  border-radius: 99px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+.guide-toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 10px);
+  padding: 1rem 1.2rem;
+  margin: 0.9rem 0;
+}
+.guide-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.guide-card p { margin: 0.35rem 0; }
+.guide-card--re     { border-left: 3px solid var(--c-re); }
+.guide-card--bond   { border-left: 3px solid var(--c-bond); }
+.guide-card--eq     { border-left: 3px solid var(--c-eq); }
+.guide-card--m2     { border-left: 3px solid var(--c-m2); }
+.guide-card--gold   { border-left: 3px solid var(--c-gold); }
+.guide-card--crypto { border-left: 3px solid var(--c-crypto); }
+.guide-card--closing { border-left: 3px solid var(--accent); }
+
+.guide-example {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+  border-left: 2px solid var(--border-2);
+  padding-left: 0.7rem;
+  font-style: italic;
+}
+
+.guide-list { padding-left: 1.1rem; }
+.guide-list li { margin: 0.45rem 0; }
+
+.guide-glossary dt {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 0.7rem;
+}
+.guide-glossary dd { margin-left: 0; }
+
+.guide-back {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+.guide-back:hover { text-decoration: underline; }

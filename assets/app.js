@@ -9,15 +9,25 @@
 'use strict';
 
 // ── Inline fallback (mirrors initial market-data.json; used for file:// opens) ──
+// Shared x-axis for all yearlyTrend series (2026 = latest value, mid-year).
+// Mirrors TREND_YEARS in scripts/refresh-data.mjs.
+const TREND_YEARS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+
 const FALLBACK_DATA = {
   meta: { generatedAt: '2026-07-03T00:00:00.000Z', currency: 'USD', unit: 'trillion', version: 2 },
   assetClasses: [
-    { id: 're',    name: 'Real Estate',  sub: 'Global residential + commercial property', valueT: 393.3, asOf: '2025-01-01', source: 'Savills, 2025',      tier: 2, stale: false },
-    { id: 'bond',  name: 'Bonds',        sub: 'Global debt securities outstanding',       valueT: 156.0, asOf: '2025-08-01', source: 'BIS, Aug 2025',     tier: 2, stale: false },
-    { id: 'eq',    name: 'Equities',     sub: 'Global listed market capitalisation',      valueT: 135.0, asOf: '2025-12-01', source: 'Bloomberg/WFE',     tier: 2, stale: false },
-    { id: 'm2',    name: 'Broad Money',  sub: 'Cash, bank deposits & savings — money created by central banks and the lending system',  valueT: 101.7, asOf: '2026-07-01', source: 'StreetStats, Jul 2026', tier: 2, stale: false },
-    { id: 'gold',  name: 'Gold',         sub: 'All above-ground gold × spot price',       valueT:  23.5, asOf: '2026-07-03', source: 'Gold API / WGC',    tier: 1, stale: false },
-    { id: 'crypto',name: 'Crypto',       sub: 'Total crypto market capitalisation',       valueT:   3.3, asOf: '2026-07-03', source: 'CoinGecko',         tier: 1, stale: false },
+    { id: 're',    name: 'Real Estate',  sub: 'Global residential + commercial property', valueT: 393.3, asOf: '2025-01-01', source: 'Savills, 2025',      tier: 2, stale: false,
+      yearlyTrend: { years: TREND_YEARS, valuesT: [217, 228, 281, 280, 297, 327, 380, 380, 380, 385, 393, 393], source: 'Savills World Research, year-end totals' } },
+    { id: 'bond',  name: 'Bonds',        sub: 'Global debt securities outstanding',       valueT: 156.0, asOf: '2025-08-01', source: 'BIS, Aug 2025',     tier: 2, stale: false,
+      yearlyTrend: { years: TREND_YEARS, valuesT: [97, 100, 106, 103, 115, 128, 130, 126, 133, 141, 150, 156], source: 'BIS debt securities statistics' } },
+    { id: 'eq',    name: 'Equities',     sub: 'Global listed market capitalisation',      valueT: 135.0, asOf: '2025-12-01', source: 'Bloomberg/WFE',     tier: 2, stale: false,
+      yearlyTrend: { years: TREND_YEARS, valuesT: [67, 70, 85, 74, 88, 105, 122, 98, 111, 128, 135, 135], source: 'WFE / Bloomberg year-end market cap' } },
+    { id: 'm2',    name: 'Broad Money',  sub: 'Cash, bank deposits & savings — money created by central banks and the lending system',  valueT: 101.7, asOf: '2026-07-01', source: 'StreetStats, Jul 2026', tier: 2, stale: false,
+      yearlyTrend: { years: TREND_YEARS, valuesT: [53, 57, 62, 64, 68, 78, 85, 82, 86, 92, 98, 102], source: 'Fed + ECB + PBoC + BoJ, year-end M2' } },
+    { id: 'gold',  name: 'Gold',         sub: 'All above-ground gold × spot price',       valueT:  23.5, asOf: '2026-07-03', source: 'Gold API / WGC',    tier: 1, stale: false,
+      yearlyTrend: { years: TREND_YEARS, valuesT: [7.5, 8.1, 9.2, 9.1, 10.8, 13.4, 12.9, 12.9, 14.6, 18.6, 29.0, 29.2], source: 'WGC 220k tonnes × year-end spot' } },
+    { id: 'crypto',name: 'Crypto',       sub: 'Total crypto market capitalisation',       valueT:   3.3, asOf: '2026-07-03', source: 'CoinGecko',         tier: 1, stale: false,
+      yearlyTrend: { years: TREND_YEARS, valuesT: [0.007, 0.02, 0.6, 0.13, 0.19, 0.77, 2.3, 0.8, 1.7, 3.4, 3.5, 2.3], source: 'CoinGecko year-end total cap' } },
   ],
   derivatives: { notionalT: 846, grossMarketValueT: 21.8, asOf: '2025-06', source: 'BIS, Jun 2025' },
   crypto: {
@@ -249,6 +259,32 @@ function miniSparklineSVG(points, color) {
     </div>`;
 }
 
+// Renders a small area chart of curated year-by-year totals ($T) with a caption row.
+function miniYearChartSVG(trend, color) {
+  if (!trend?.years?.length || trend.years.length < 3 || trend.years.length !== trend.valuesT?.length) return '';
+  const { years, valuesT } = trend;
+  const min   = Math.min(...valuesT);
+  const max   = Math.max(...valuesT);
+  const range = max - min || 0.001;
+  const W = 120, H = 36, PAD = 3;
+  const pts = valuesT.map((v, i) => [
+    (i / (valuesT.length - 1)) * W,
+    H - PAD - ((v - min) / range) * (H - PAD * 2),
+  ]);
+  const y0 = years[0], y1 = years[years.length - 1];
+  const v0 = valuesT[0], v1 = valuesT[valuesT.length - 1];
+  const tip = `${y0}: $${fmt(v0)}T → ${y1}: $${fmt(v1)}T · ${trend.source ?? ''}`;
+  return `
+    <div class="mini-year" title="${tip}">
+      <svg viewBox="0 0 ${W} ${H + 2}" class="mini-year-svg" role="img" aria-label="${y0}–${y1} yearly trend">
+        <path d="${areaPath(pts, H - 1)}" fill="${color}" fill-opacity="0.12"/>
+        <path d="${smoothPath(pts)}" fill="none" stroke="${color}" stroke-width="1.5"
+          stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <div class="mini-chart-caption"><span class="mono">${y0}</span><span>yearly · $T</span><span class="mono">${y1}</span></div>
+    </div>`;
+}
+
 // ── Data loading ─────────────────────────────────────────────────────────────
 async function loadData(bypassCache = false) {
   try {
@@ -472,7 +508,14 @@ function renderAssetPanels(data) {
     crypto: `${fmt((1 - crypto.valueT / data.crypto.athT) * 100, 0)}% below Oct ${data.crypto.athDate.slice(0,4)} ATH of ${fmtT(data.crypto.athT)}`,
   };
 
-  const SPARK_COLOR = { gold: 'var(--c-gold)', crypto: 'var(--c-crypto)' };
+  const PANEL_COLOR = {
+    re:     'var(--c-re)',
+    bond:   'var(--c-bond)',
+    eq:     'var(--c-eq)',
+    m2:     'var(--c-m2)',
+    gold:   'var(--c-gold)',
+    crypto: 'var(--c-crypto)',
+  };
   const SPARK_POINTS = {
     gold:   data.gold?.sparklineData?.map(p => ({ ...p, totalT: p.impliedCapT })),
     crypto: data.crypto?.sparklineData,
@@ -481,9 +524,11 @@ function renderAssetPanels(data) {
   grid.innerHTML = assets.map(a => {
     const dayD   = data.deltas?.day?.[a.id]   ?? null;
     const monthD = data.deltas?.month?.[a.id] ?? null;
+    const yearHtml = miniYearChartSVG(a.yearlyTrend, PANEL_COLOR[a.id]);
     const sparkPts = SPARK_POINTS[a.id];
     const sparkHtml = sparkPts?.length >= 3
-      ? miniSparklineSVG(sparkPts.slice(-30), SPARK_COLOR[a.id])
+      ? miniSparklineSVG(sparkPts.slice(-30), PANEL_COLOR[a.id])
+        + '<div class="mini-chart-caption"><span></span><span>30-day live</span><span></span></div>'
       : '';
     const deltaRow = (dayD || monthD) ? `
       <div class="panel-deltas">
@@ -501,6 +546,7 @@ function renderAssetPanels(data) {
       ${deltaRow}
       <p class="panel-sub">${a.sub}</p>
       <p class="panel-fact">${facts[a.id] ?? ''}</p>
+      ${yearHtml}
       ${sparkHtml}
       <p class="panel-source dim">
         ${a.source}${a.asOf ? ` · ${a.asOf.slice(0,7)}` : ''}

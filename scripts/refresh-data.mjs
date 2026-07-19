@@ -21,11 +21,22 @@ const OUT        = join(DATA_DIR, 'market-data.json');
 
 // ─── Tier 2 constants ────────────────────────────────────────────────────────
 // Update these monthly; see README for the exact URLs to check.
+// Shared x-axis for all yearlyTrend series (2026 = latest value, mid-year)
+const TREND_YEARS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+
 const TIER2 = {
-  re:   { valueT: 393.3,  asOf: '2025-01-01', source: 'Savills, 2025' },
-  bond: { valueT: 156.0,  asOf: '2025-08-01', source: 'BIS, Aug 2025' },
-  eq:   { valueT: 135.0,  asOf: '2025-12-01', source: 'Bloomberg/WFE' },
-  m2:   { valueT: 101.7,  asOf: '2026-07-01', source: 'StreetStats, Jul 2026' },
+  re:   { valueT: 393.3,  asOf: '2025-01-01', source: 'Savills, 2025',
+          yearlyTrend: { years: TREND_YEARS, valuesT: [217, 228, 281, 280, 297, 327, 380, 380, 380, 385, 393, 393], source: 'Savills World Research, year-end totals' } },
+  bond: { valueT: 156.0,  asOf: '2025-08-01', source: 'BIS, Aug 2025',
+          yearlyTrend: { years: TREND_YEARS, valuesT: [97, 100, 106, 103, 115, 128, 130, 126, 133, 141, 150, 156], source: 'BIS debt securities statistics' } },
+  eq:   { valueT: 135.0,  asOf: '2025-12-01', source: 'Bloomberg/WFE',
+          yearlyTrend: { years: TREND_YEARS, valuesT: [67, 70, 85, 74, 88, 105, 122, 98, 111, 128, 135, 135], source: 'WFE / Bloomberg year-end market cap' } },
+  m2:   { valueT: 101.7,  asOf: '2026-07-01', source: 'StreetStats, Jul 2026',
+          yearlyTrend: { years: TREND_YEARS, valuesT: [53, 57, 62, 64, 68, 78, 85, 82, 86, 92, 98, 102], source: 'Fed + ECB + PBoC + BoJ, year-end M2' } },
+
+  // Yearly series for the two Tier-1 assets (live APIs only give 90-day history)
+  goldYearlyTrend:   { years: TREND_YEARS, valuesT: [7.5, 8.1, 9.2, 9.1, 10.8, 13.4, 12.9, 12.9, 14.6, 18.6, 29.0, 29.2], source: 'WGC 220k tonnes × year-end spot' },
+  cryptoYearlyTrend: { years: TREND_YEARS, valuesT: [0.007, 0.02, 0.6, 0.13, 0.19, 0.77, 2.3, 0.8, 1.7, 3.4, 3.5, 2.3], source: 'CoinGecko year-end total cap' },
 
   // Physical constant: troy oz per metric tonne — do not change
   TROY_OZ_PER_TONNE: 32150.7,
@@ -479,6 +490,7 @@ result.assetClasses = [
     asOf:   goldStale ? (prevAc('gold')?.asOf ?? today) : today,
     source: goldStale ? (prevAc('gold')?.source ?? 'cached') : 'gold-api.com / WGC',
     tier: 1, stale: goldStale,
+    yearlyTrend: TIER2.goldYearlyTrend,
   },
   {
     id: 'crypto', name: 'Crypto', sub: 'Total crypto market capitalisation',
@@ -486,6 +498,7 @@ result.assetClasses = [
     asOf:   cryptoStale ? (prevAc('crypto')?.asOf ?? today) : today,
     source: cryptoStale ? (prevAc('crypto')?.source ?? 'cached') : 'CoinGecko',
     tier: 1, stale: cryptoStale,
+    yearlyTrend: TIER2.cryptoYearlyTrend,
   },
 ];
 
@@ -500,6 +513,9 @@ try {
     assert(typeof ac.valueT === 'number' && isFinite(ac.valueT) && ac.valueT >= 0, `${ac.id}.valueT invalid: ${ac.valueT}`);
     assert(typeof ac.asOf   === 'string' && ac.asOf.length >= 7,                   `${ac.id}.asOf missing`);
     assert(typeof ac.source === 'string' && ac.source.length > 0,                  `${ac.id}.source missing`);
+    assert(ac.yearlyTrend && Array.isArray(ac.yearlyTrend.years) && Array.isArray(ac.yearlyTrend.valuesT)
+      && ac.yearlyTrend.years.length === ac.yearlyTrend.valuesT.length
+      && ac.yearlyTrend.years.length >= 3,                                         `${ac.id}.yearlyTrend invalid`);
   }
   assert(typeof result.crypto.totalT === 'number'       && result.crypto.totalT > 0,   'crypto.totalT invalid');
   assert(typeof result.gold.spotUsdPerOz === 'number'   && result.gold.spotUsdPerOz > 0, 'gold.spotUsdPerOz invalid');
