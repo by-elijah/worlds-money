@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-07-19T03:41:35.677Z",
+    "generatedAt": "2026-07-19T04:55:27.117Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -215,7 +215,7 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.2931,
+      "valueT": 2.296,
       "asOf": "2026-07-19",
       "source": "CoinGecko",
       "tier": 1,
@@ -260,19 +260,19 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.2931,
+    "totalT": 2.296,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 38.14,
+    "volume24hB": 37.88,
     "btc": {
-      "capT": 1.2962,
-      "dominancePct": 56.5252,
-      "priceUsd": 64624
+      "capT": 1.2974,
+      "dominancePct": 56.5395,
+      "priceUsd": 64672
     },
     "eth": {
-      "capB": 225.01,
-      "dominancePct": 9.8121,
-      "priceUsd": 1864.5
+      "capB": 225.18,
+      "dominancePct": 9.8183,
+      "priceUsd": 1865.41
     },
     "stablecoinsB": 248.8,
     "top5": [
@@ -281,17 +281,17 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 64624,
-        "capB": 1296.2,
-        "change24hPct": 1.12
+        "priceUsd": 64672,
+        "capB": 1297.4,
+        "change24hPct": 1.18
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 1864.5,
-        "capB": 225,
+        "priceUsd": 1865.41,
+        "capB": 225.2,
         "change24hPct": 1.2
       },
       {
@@ -299,7 +299,7 @@
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.999315,
+        "priceUsd": 0.999243,
         "capB": 184.1,
         "change24hPct": 0
       },
@@ -310,16 +310,16 @@
         "name": "BNB",
         "priceUsd": 568.6,
         "capB": 75.7,
-        "change24hPct": 0.16
+        "change24hPct": 0.31
       },
       {
         "rank": 5,
         "id": "usd-coin",
         "symbol": "USDC",
         "name": "USDC",
-        "priceUsd": 0.999829,
+        "priceUsd": 0.999833,
         "capB": 73.3,
-        "change24hPct": 0
+        "change24hPct": -0.01
       }
     ],
     "sparklineData": [
@@ -385,7 +385,7 @@
       },
       {
         "date": "2026-07-19",
-        "totalT": 2.2931
+        "totalT": 2.296
       }
     ]
   },
@@ -475,8 +475,8 @@
     "generatedAt": "2026-07-19",
     "day": {
       "crypto": {
-        "pct": 0.85,
-        "absT": 0.0193
+        "pct": 0.98,
+        "absT": 0.0222
       },
       "gold": {
         "pct": 0,
