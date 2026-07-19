@@ -203,18 +203,71 @@ const TIER2 = {
       cpiYoY:   [2.5,  1.0,  1.4,  5.4,  7.5,  9.1,  6.4,  3.2,  3.1,  2.9,  3.0,  2.4],
     },
   },
+
+  // High-profile scheduled events — curated ~3 months ahead from official calendars
+  // (Fed FOMC calendar, BLS CPI schedule, BLS NFP first-Friday, ECB, BoJ). Decision-day dates.
+  economicEvents: [
+    { date: '2026-07-23', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-07-29', label: 'FOMC rate decision',   kind: 'fed'  },
+    { date: '2026-07-31', label: 'BoJ policy decision',  kind: 'boj',  note: 'incl. Outlook Report' },
+    { date: '2026-08-07', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-08-12', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-09-04', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-09-10', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-09-11', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-09-16', label: 'FOMC rate decision',   kind: 'fed',  note: 'incl. dot plot' },
+    { date: '2026-09-18', label: 'BoJ policy decision',  kind: 'boj'  },
+    { date: '2026-10-02', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-10-14', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-10-28', label: 'FOMC rate decision',   kind: 'fed'  },
+    { date: '2026-10-29', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-10-30', label: 'BoJ policy decision',  kind: 'boj',  note: 'incl. Outlook Report' },
+    { date: '2026-11-06', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-11-10', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-12-04', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-12-09', label: 'FOMC rate decision',   kind: 'fed',  note: 'incl. dot plot' },
+    { date: '2026-12-17', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-12-18', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-12-18', label: 'BoJ policy decision',  kind: 'boj'  },
+  ],
+
+  // Hand-written pinned note for special days (crash days, halts, geopolitics).
+  // Set to a short string to pin it in the insight banner; null hides it.
+  editorNote: null,
+
+  // Curated gold all-time-high spot ($/oz) — used for the "near ATH" insight; revisit when broken
+  goldAthUsdPerOz: 4250,
 };
 // ─────────────────────────────────────────────────────────────────────────────
+
+// ─── Market Pulse universe (Tier 1, Yahoo Finance chart API, no key needed) ──
+const PULSE_MARKETS = [
+  { id: 'sp500',  symbol: '^GSPC',     label: 'S&P 500',    flag: '🇺🇸', region: 'americas' },
+  { id: 'nasdaq', symbol: '^IXIC',     label: 'NASDAQ',     flag: '🇺🇸', region: 'americas' },
+  { id: 'kospi',  symbol: '^KS11',     label: 'KOSPI',      flag: '🇰🇷', region: 'asia' },
+  { id: 'nikkei', symbol: '^N225',     label: 'Nikkei 225', flag: '🇯🇵', region: 'asia' },
+  { id: 'sse',    symbol: '000001.SS', label: 'Shanghai',   flag: '🇨🇳', region: 'asia' },
+  { id: 'dax',    symbol: '^GDAXI',    label: 'DAX',        flag: '🇩🇪', region: 'emea' },
+  { id: 'ftse',   symbol: '^FTSE',     label: 'FTSE 100',   flag: '🇬🇧', region: 'emea' },
+];
+
+// Static last-resort seed so the schema always has ≥1 market (first run + total outage)
+const PULSE_SEED = PULSE_MARKETS.map(m => ({
+  id: m.id, label: m.label, flag: m.flag, region: m.region,
+  price: 0.01, changePct: 0, stale: true,
+}));
+
+const YF_HEADERS = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 const delay = ms => new Promise(r => setTimeout(r, ms));
 
-async function fetchWithRetry(url, retries = 2) {
+async function fetchWithRetry(url, retries = 2, extraHeaders = {}) {
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const res = await fetch(url, {
         signal:  AbortSignal.timeout(12000),
-        headers: { 'Accept': 'application/json' },
+        headers: { 'Accept': 'application/json', ...extraHeaders },
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
@@ -310,6 +363,10 @@ const result = {
   topPrivateCompanies:  TIER2.topPrivateCompanies,
   topStateEntities:     TIER2.topStateEntities,
   marketTrends:         TIER2.marketTrends,
+  marketPulse:          existing?.marketPulse ?? { asOf: today, markets: [] },
+  economicEvents:       TIER2.economicEvents,
+  editorNote:           TIER2.editorNote,
+  insights:             existing?.insights ?? { asOf: new Date().toISOString(), items: [] },
 };
 
 const failures = [];
@@ -420,6 +477,60 @@ if (!goldFetched) {
   }
 }
 
+// ─── Tier 1: Market Pulse — major index closes via Yahoo Finance ─────────────
+console.log('\n[4/4] Market Pulse (Yahoo Finance) …');
+try {
+  const pulseMarkets = [];
+  const prevPulse = id => existing?.marketPulse?.markets?.find(m => m.id === id);
+
+  for (const mkt of PULSE_MARKETS) {
+    try {
+      await delay(350);
+      const yh = await fetchWithRetry(
+        `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(mkt.symbol)}?range=5d&interval=1d`,
+        2, YF_HEADERS
+      );
+      const meta   = yh?.chart?.result?.[0]?.meta;
+      let price    = meta?.regularMarketPrice;
+      let prevClose = meta?.chartPreviousClose;
+      if (typeof price !== 'number' || typeof prevClose !== 'number') {
+        // Fallback: last two non-null daily closes
+        const closes = (yh?.chart?.result?.[0]?.indicators?.quote?.[0]?.close ?? []).filter(c => c != null);
+        if (closes.length >= 2) { price = closes[closes.length - 1]; prevClose = closes[closes.length - 2]; }
+      }
+      const changePct = parseFloat(((price - prevClose) / prevClose * 100).toFixed(2));
+      if (!(price > 0) || !isFinite(changePct) || Math.abs(changePct) >= 25) {
+        throw new Error(`implausible quote: price=${price} chg=${changePct}`);
+      }
+      pulseMarkets.push({
+        id: mkt.id, label: mkt.label, flag: mkt.flag, region: mkt.region,
+        price: parseFloat(price.toFixed(2)), changePct, stale: false,
+      });
+      console.log(`  ✓ ${mkt.label.padEnd(11)} ${price.toFixed(0).padStart(7)}  ${changePct > 0 ? '+' : ''}${changePct}%`);
+    } catch (err) {
+      ghWarn(`MarketPulse/${mkt.id}`, err.message);
+      failures.push(`Pulse ${mkt.label}`);
+      const prev = prevPulse(mkt.id);
+      if (prev) {
+        pulseMarkets.push({ ...prev, stale: true });
+        console.log(`  → ${mkt.label}: carried over (stale)`);
+      } else {
+        console.log(`  → ${mkt.label}: skipped (no previous value)`);
+      }
+    }
+  }
+
+  result.marketPulse = {
+    asOf: today,
+    markets: pulseMarkets.length > 0
+      ? pulseMarkets
+      : (existing?.marketPulse?.markets?.length ? existing.marketPulse.markets.map(m => ({ ...m, stale: true })) : PULSE_SEED),
+  };
+} catch (err) {
+  ghWarn('MarketPulse', err.message);
+  result.marketPulse = existing?.marketPulse ?? { asOf: today, markets: PULSE_SEED };
+}
+
 // ─── Sanity bounds ────────────────────────────────────────────────────────────
 if (!cryptoStale && (result.crypto.totalT < 0.5 || result.crypto.totalT > 20)) {
   ghWarn('SanityBounds', `Crypto total $${result.crypto.totalT.toFixed(2)}T outside [0.5, 20] — reverting to cache`);
@@ -476,6 +587,46 @@ if (!goldStale) {
   console.log(`  Gold   30d: ${d.month.gold   ? `${d.month.gold.pct > 0 ? '+' : ''}${d.month.gold.pct}%`   : 'no snapshot'}`);
 }
 
+// ─── Daily insights (rule-based, computed from our own data) ─────────────────
+try {
+  const items = [];
+  const sign = p => `${p > 0 ? '+' : '−'}${Math.abs(p).toFixed(1)}%`;
+
+  // 1. Biggest mover among fresh pulse markets
+  const fresh = (result.marketPulse?.markets ?? []).filter(m => !m.stale);
+  if (fresh.length) {
+    const big = fresh.reduce((a, b) => Math.abs(b.changePct) > Math.abs(a.changePct) ? b : a);
+    if (Math.abs(big.changePct) >= 1) {
+      items.push(`${big.label} ${sign(big.changePct)} — biggest move among tracked markets`);
+    }
+  }
+
+  // 2. Crypto / gold 1-day moves worth calling out
+  const cd = result.deltas?.day?.crypto, gd = result.deltas?.day?.gold;
+  if (cd && Math.abs(cd.pct) > 2) items.push(`Crypto market cap ${sign(cd.pct)} in 24h`);
+  if (gd && Math.abs(gd.pct) > 2) items.push(`Gold ${sign(gd.pct)} in 24h`);
+
+  // 3. Gold near all-time high
+  if (result.gold.spotUsdPerOz >= 0.98 * TIER2.goldAthUsdPerOz) {
+    items.push(`Gold within 2% of all-time high ($${TIER2.goldAthUsdPerOz.toLocaleString()}/oz)`);
+  }
+
+  // 4. Next high-profile scheduled event
+  const next = [...TIER2.economicEvents].sort((a, b) => a.date.localeCompare(b.date)).find(e => e.date >= today);
+  if (next) {
+    const days = Math.round((Date.parse(next.date) - Date.parse(today)) / 864e5);
+    const when = days === 0 ? 'today' : days === 1 ? 'tomorrow' : `in ${days} days`;
+    items.push(`Next: ${next.label} ${when} (${next.date})`);
+  }
+
+  result.insights = { asOf: new Date().toISOString(), items: items.slice(0, 3) };
+  console.log(`\n── Insights ──────────────────────────────────────────────`);
+  result.insights.items.forEach(i => console.log(`  📌 ${i}`));
+} catch (err) {
+  ghWarn('Insights', err.message);
+  result.insights = existing?.insights ?? { asOf: new Date().toISOString(), items: [] };
+}
+
 // ─── Build assetClasses array ─────────────────────────────────────────────────
 const prevAc = id => existing?.assetClasses?.find(a => a.id === id);
 
@@ -521,6 +672,19 @@ try {
   assert(typeof result.gold.spotUsdPerOz === 'number'   && result.gold.spotUsdPerOz > 0, 'gold.spotUsdPerOz invalid');
   assert(typeof result.gold.impliedCapT === 'number'    && result.gold.impliedCapT > 0,  'gold.impliedCapT invalid');
   assert(Array.isArray(result.countryEquityMarkets) && result.countryEquityMarkets.length === 10, 'need 10 country markets');
+  assert(Array.isArray(result.marketPulse?.markets) && result.marketPulse.markets.length >= 1, 'marketPulse.markets empty');
+  for (const m of result.marketPulse.markets) {
+    assert(typeof m.id === 'string' && typeof m.label === 'string',                `pulse ${m.id} id/label invalid`);
+    assert(typeof m.price === 'number' && isFinite(m.price) && m.price > 0,        `pulse ${m.id} price invalid`);
+    assert(typeof m.changePct === 'number' && isFinite(m.changePct),               `pulse ${m.id} changePct invalid`);
+  }
+  assert(Array.isArray(result.economicEvents) && result.economicEvents.length >= 1, 'economicEvents empty');
+  for (const e of result.economicEvents) {
+    assert(/^\d{4}-\d{2}-\d{2}$/.test(e.date) && !isNaN(Date.parse(e.date)),       `event date invalid: ${e.date}`);
+    assert(typeof e.label === 'string' && e.label.length > 0,                      'event label missing');
+    assert(['fed', 'cpi', 'jobs', 'ecb', 'boj', 'other'].includes(e.kind),         `event kind invalid: ${e.kind}`);
+  }
+  assert(Array.isArray(result.insights?.items), 'insights.items missing');
   console.log('\n✓ Schema validation passed');
 } catch (err) {
   ghWarn('SchemaValidation', err.message);

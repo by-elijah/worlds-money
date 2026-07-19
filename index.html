@@ -32,6 +32,8 @@
         <div class="nav-menu-wrap">
           <button class="nav-menu-toggle" id="nav-menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="nav-menu" aria-label="Open section navigation" title="Jump to section">☰</button>
           <nav class="nav-menu" id="nav-menu" aria-label="Page sections" hidden>
+            <a href="#market-pulse">Market Pulse</a>
+            <a href="#econ-events">Economic Calendar</a>
             <a href="#scale-strip">All Asset Classes</a>
             <a href="#hundred-bill">If Wealth Were $100</a>
             <a href="#asset-panels">Market by Market</a>
@@ -63,6 +65,9 @@
   <!-- ── Main content — all sections populated by app.js ──────────────── -->
   <main id="main-content">
 
+    <!-- Daily insight banner (managed by renderInsights — not a section) -->
+    <div class="insight-banner" id="insight-banner" hidden role="note" aria-label="Daily insight"></div>
+
     <!-- Loading placeholder -->
     <div class="loading-state" id="loading-state" role="status" aria-live="polite">
       <p>Loading market data…</p>
@@ -70,6 +75,24 @@
 
     <!-- Hero: total wealth + per-asset big numbers -->
     <section class="hero" id="hero" hidden aria-label="Global wealth totals"></section>
+
+    <!-- World Market Pulse: daily moves of major indices + BTC/gold -->
+    <section class="pulse-section" id="market-pulse" hidden aria-label="World market pulse">
+      <div class="section-inner">
+        <h2 class="section-title">World Market Pulse</h2>
+        <p class="section-sub">Latest close for major stock indices, plus Bitcoin and gold. Colour intensity = size of the move. <span id="pulse-asof" class="mono dim"></span></p>
+        <div class="pulse-grid" id="pulse-grid" role="list" aria-label="Market move tiles"></div>
+      </div>
+    </section>
+
+    <!-- Economic calendar: upcoming high-profile events -->
+    <section class="events-section" id="econ-events" hidden aria-label="Upcoming economic events">
+      <div class="section-inner">
+        <h2 class="section-title">Economic Calendar</h2>
+        <p class="section-sub">Curated high-profile dates — Fed, CPI, jobs reports, ECB and BoJ. The days markets watch (and often move on).</p>
+        <div class="events-list" id="events-list" role="list" aria-label="Upcoming events"></div>
+      </div>
+    </section>
 
     <!-- Scale strip: all assets on one linear track -->
     <section class="scale-strip-section" id="scale-strip" hidden aria-label="Asset class scale comparison">

@@ -175,6 +175,50 @@ const FALLBACK_DATA = {
       cpiYoY:   [2.5,  1.0,  1.4,  5.4,  7.5,  9.1,  6.4,  3.2,  3.1,  2.9,  3.0,  2.4],
     },
   },
+  marketPulse: {
+    asOf: '2026-07-19',
+    markets: [
+      { id: 'sp500',  label: 'S&P 500',    flag: '🇺🇸', region: 'americas', price: 7458,  changePct: -1.55, stale: false },
+      { id: 'nasdaq', label: 'NASDAQ',     flag: '🇺🇸', region: 'americas', price: 25520, changePct: -2.90, stale: false },
+      { id: 'kospi',  label: 'KOSPI',      flag: '🇰🇷', region: 'asia',     price: 6821,  changePct: -6.46, stale: false },
+      { id: 'nikkei', label: 'Nikkei 225', flag: '🇯🇵', region: 'asia',     price: 64141, changePct: -4.61, stale: false },
+      { id: 'sse',    label: 'Shanghai',   flag: '🇨🇳', region: 'asia',     price: 3764,  changePct: -3.82, stale: false },
+      { id: 'dax',    label: 'DAX',        flag: '🇩🇪', region: 'emea',     price: 24831, changePct: -0.94, stale: false },
+      { id: 'ftse',   label: 'FTSE 100',   flag: '🇬🇧', region: 'emea',     price: 10600, changePct:  0.98, stale: false },
+    ],
+  },
+  economicEvents: [
+    { date: '2026-07-23', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-07-29', label: 'FOMC rate decision',   kind: 'fed'  },
+    { date: '2026-07-31', label: 'BoJ policy decision',  kind: 'boj',  note: 'incl. Outlook Report' },
+    { date: '2026-08-07', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-08-12', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-09-04', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-09-10', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-09-11', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-09-16', label: 'FOMC rate decision',   kind: 'fed',  note: 'incl. dot plot' },
+    { date: '2026-09-18', label: 'BoJ policy decision',  kind: 'boj'  },
+    { date: '2026-10-02', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-10-14', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-10-28', label: 'FOMC rate decision',   kind: 'fed'  },
+    { date: '2026-10-29', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-10-30', label: 'BoJ policy decision',  kind: 'boj',  note: 'incl. Outlook Report' },
+    { date: '2026-11-06', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-11-10', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-12-04', label: 'US jobs report (NFP)', kind: 'jobs' },
+    { date: '2026-12-09', label: 'FOMC rate decision',   kind: 'fed',  note: 'incl. dot plot' },
+    { date: '2026-12-17', label: 'ECB rate decision',    kind: 'ecb'  },
+    { date: '2026-12-18', label: 'US CPI release',       kind: 'cpi'  },
+    { date: '2026-12-18', label: 'BoJ policy decision',  kind: 'boj'  },
+  ],
+  editorNote: null,
+  insights: {
+    asOf: '2026-07-19T00:00:00.000Z',
+    items: [
+      'KOSPI −6.5% — biggest move among tracked markets',
+      'Next: ECB rate decision in 4 days (2026-07-23)',
+    ],
+  },
 };
 
 // ── Country flag lookup ───────────────────────────────────────────────────────
@@ -513,6 +557,108 @@ function renderHundredBill(data) {
       </div>
     `;
   }).join('');
+}
+
+// ── Daily insight banner ──────────────────────────────────────────────────────
+function renderInsights(data) {
+  const el = $('insight-banner');
+  if (!el) return;
+  const parts = [];
+  if (data.editorNote) parts.push(`<span class="insight-item insight-editor">${data.editorNote}</span>`);
+  for (const item of data.insights?.items ?? []) {
+    parts.push(`<span class="insight-item mono">${item}</span>`);
+  }
+  if (parts.length === 0) { el.hidden = true; return; }
+  el.innerHTML = `<span class="insight-pin" aria-hidden="true">📌</span>${parts.join('<span class="insight-sep" aria-hidden="true">·</span>')}`;
+  el.hidden = false;
+}
+
+// ── World Market Pulse tiles ──────────────────────────────────────────────────
+function renderMarketPulse(data) {
+  const grid = $('pulse-grid');
+  if (!grid) return;
+
+  const tiles = [...(data.marketPulse?.markets ?? [])];
+
+  // Derived tiles from existing live data
+  const btcTop5 = data.crypto?.top5?.find(c => c.id === 'bitcoin');
+  if (data.crypto?.btc?.priceUsd) {
+    tiles.push({
+      id: 'btc', label: 'Bitcoin', flag: '🟠', region: 'crypto',
+      price: data.crypto.btc.priceUsd,
+      changePct: btcTop5?.change24hPct ?? data.deltas?.day?.crypto?.pct ?? null,
+      stale: false,
+    });
+  }
+  if (data.gold?.spotUsdPerOz) {
+    tiles.push({
+      id: 'goldoz', label: 'Gold /oz', flag: '🪙', region: 'metal',
+      price: data.gold.spotUsdPerOz,
+      changePct: data.deltas?.day?.gold?.pct ?? null,
+      stale: false,
+    });
+  }
+
+  const bucket = pct => { const a = Math.abs(pct); return a < 1 ? 0 : a < 2 ? 1 : a < 4 ? 2 : 3; };
+
+  grid.innerHTML = tiles.map(m => {
+    const has = typeof m.changePct === 'number' && isFinite(m.changePct);
+    const flat = !has || Math.abs(m.changePct) < 0.05;
+    const dir  = flat ? 'pulse-flat' : m.changePct > 0 ? 'pulse-up' : 'pulse-down';
+    const b    = has ? `pulse-b${bucket(m.changePct)}` : 'pulse-b0';
+    const chg  = has ? `${m.changePct > 0 ? '+' : m.changePct < 0 ? '−' : ''}${Math.abs(m.changePct).toFixed(2)}%` : '—';
+    const alert = has && Math.abs(m.changePct) > 3 ? '<span class="pulse-alert">⚠ big move</span>' : '';
+    return `
+      <div class="pulse-tile ${dir} ${b}" role="listitem"${staleAttrs(m)} aria-label="${m.label} ${chg}">
+        <div class="pulse-top"><span class="pulse-flag" aria-hidden="true">${m.flag}</span><span class="pulse-label">${m.label}</span></div>
+        <div class="pulse-price mono">${fmt(m.price, m.price >= 100 ? 0 : 2)}</div>
+        <div class="pulse-chg mono">${chg}</div>
+        ${alert}
+      </div>`;
+  }).join('');
+
+  const asof = $('pulse-asof');
+  if (asof && data.marketPulse?.asOf) asof.textContent = `as of ${data.marketPulse.asOf}`;
+}
+
+// ── Economic events calendar ──────────────────────────────────────────────────
+function renderEventsCalendar(data) {
+  const list = $('events-list');
+  if (!list) return;
+
+  const KIND_BADGE = { fed: '🏛', cpi: '📊', jobs: '👷', ecb: '🇪🇺', boj: '🇯🇵', other: '📅' };
+  const mid = new Date(); mid.setHours(0, 0, 0, 0);
+
+  const upcoming = (data.economicEvents ?? [])
+    .filter(e => Date.parse(e.date + 'T00:00:00') >= mid.getTime())
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(0, 6);
+
+  if (upcoming.length === 0) {
+    list.innerHTML = '<p class="events-empty dim">No upcoming events curated yet.</p>';
+    return;
+  }
+
+  const row = e => {
+    const days = Math.round((Date.parse(e.date + 'T00:00:00') - mid.getTime()) / 864e5);
+    const when = days === 0 ? 'today' : days === 1 ? 'tomorrow' : `in ${days} days`;
+    const d = new Date(e.date + 'T00:00:00');
+    const dateLbl = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    return `
+      <div class="event-row ${days <= 7 ? 'event-soon' : ''}" role="listitem">
+        <span class="event-date mono">${dateLbl}</span>
+        <span class="event-kind-badge event-kind--${e.kind}" aria-hidden="true">${KIND_BADGE[e.kind] ?? '📅'}</span>
+        <span class="event-label">${e.label}${e.note ? ` <span class="event-note dim">· ${e.note}</span>` : ''}</span>
+        <span class="event-countdown mono">${when}</span>
+      </div>`;
+  };
+
+  const soon  = upcoming.filter(e => Math.round((Date.parse(e.date + 'T00:00:00') - mid.getTime()) / 864e5) <= 7);
+  const later = upcoming.filter(e => !soon.includes(e));
+
+  list.innerHTML =
+    (soon.length  ? `<div class="events-group-hdr">This week</div>${soon.map(row).join('')}`   : '') +
+    (later.length ? `<div class="events-group-hdr">Upcoming</div>${later.map(row).join('')}` : '');
 }
 
 function renderAssetPanels(data) {
@@ -1480,7 +1626,10 @@ function renderAll(data) {
   // Run each section independently so one failure doesn't blank the whole page
   const steps = [
     renderRefreshStatus,
+    renderInsights,
     renderHero,
+    renderMarketPulse,
+    renderEventsCalendar,
     renderScaleStrip,
     renderHundredBill,
     renderAssetPanels,

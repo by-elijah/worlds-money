@@ -1775,3 +1775,127 @@ section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); scroll-margin-top
   text-decoration: none;
 }
 .guide-back:hover { text-decoration: underline; }
+
+/* ── Daily insight banner ─────────────────────────────────────────────────── */
+.insight-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.6rem;
+  padding: 0.5rem var(--gutter);
+  font-size: 0.72rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 4%, var(--bg));
+}
+.insight-pin { font-size: 0.8rem; }
+.insight-item { color: var(--text-dim); }
+.insight-sep { color: var(--text-muted); }
+.insight-editor {
+  color: var(--warning);
+  font-weight: 700;
+}
+
+/* ── World Market Pulse ───────────────────────────────────────────────────── */
+.pulse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+}
+.pulse-tile {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.7rem;
+  background: var(--surface);
+  transition: transform 0.15s;
+}
+.pulse-tile:hover { transform: translateY(-2px); }
+.pulse-top {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.3rem;
+}
+.pulse-flag  { font-size: 0.85rem; }
+.pulse-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.pulse-price { font-size: 0.85rem; color: var(--text); }
+.pulse-chg   { font-size: 0.95rem; font-weight: 600; }
+.pulse-up   .pulse-chg { color: var(--c-eq); }
+.pulse-down .pulse-chg { color: var(--danger); }
+.pulse-flat .pulse-chg { color: var(--text-muted); }
+.pulse-alert {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.12rem 0.45rem;
+  border-radius: 99px;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+}
+.pulse-up.pulse-b0   { background: color-mix(in srgb, var(--c-eq)  7%, var(--surface)); }
+.pulse-up.pulse-b1   { background: color-mix(in srgb, var(--c-eq) 15%, var(--surface)); }
+.pulse-up.pulse-b2   { background: color-mix(in srgb, var(--c-eq) 26%, var(--surface)); }
+.pulse-up.pulse-b3   { background: color-mix(in srgb, var(--c-eq) 38%, var(--surface)); }
+.pulse-down.pulse-b0 { background: color-mix(in srgb, var(--danger)  7%, var(--surface)); }
+.pulse-down.pulse-b1 { background: color-mix(in srgb, var(--danger) 15%, var(--surface)); }
+.pulse-down.pulse-b2 { background: color-mix(in srgb, var(--danger) 26%, var(--surface)); }
+.pulse-down.pulse-b3 { background: color-mix(in srgb, var(--danger) 38%, var(--surface)); }
+
+/* ── Economic calendar ────────────────────────────────────────────────────── */
+.events-list { max-width: 640px; }
+.events-group-hdr {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin: 0.9rem 0 0.4rem;
+}
+.events-group-hdr:first-child { margin-top: 0; }
+.event-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.35rem;
+  background: var(--surface);
+}
+.event-soon {
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+.event-date {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  min-width: 3.2rem;
+}
+.event-kind-badge { font-size: 0.8rem; }
+.event-label {
+  font-size: 0.82rem;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+}
+.event-note { font-size: 0.7rem; }
+.event-countdown {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.events-empty { font-size: 0.8rem; }
