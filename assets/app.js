@@ -328,6 +328,31 @@ function toggleTheme() {
   applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
 }
 
+// ── Section navigation menu ──────────────────────────────────────────────────
+function initNavMenu() {
+  const toggle = $('nav-menu-toggle');
+  const menu   = $('nav-menu');
+  if (!toggle || !menu) return;
+
+  const closeMenu = () => {
+    menu.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  const openMenu = () => {
+    menu.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+  };
+
+  toggle.addEventListener('click', () => (menu.hidden ? openMenu() : closeMenu()));
+  menu.addEventListener('click', e => { if (e.target.tagName === 'A') closeMenu(); });
+  document.addEventListener('click', e => {
+    if (!menu.hidden && !e.target.closest('.nav-menu-wrap')) closeMenu();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !menu.hidden) { closeMenu(); toggle.focus(); }
+  });
+}
+
 // ── Ordered asset class helper ───────────────────────────────────────────────
 function orderedAssets(assetClasses) {
   return ASSET_ORDER.map(id => assetClasses.find(a => a.id === id)).filter(Boolean);
@@ -1542,6 +1567,7 @@ async function init() {
   initTheme();
   $('theme-toggle')?.addEventListener('click', toggleTheme);
   $('refresh-btn')?.addEventListener('click', refreshData);
+  initNavMenu();
 
   try {
     const data = await loadData();

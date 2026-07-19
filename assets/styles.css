@@ -242,6 +242,50 @@ a:focus-visible, button:focus-visible {
 }
 .theme-toggle:hover { color: var(--text); background: var(--surface-2); }
 
+/* ── In-page section navigation menu ─────────────────────────────────────── */
+.nav-menu-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-menu-toggle {
+  font-size: 1.05rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-menu-toggle:hover { color: var(--text); background: var(--surface-2); }
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  max-height: min(70vh, 480px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 0.4rem;
+  z-index: 120;
+}
+.nav-menu a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0.45rem 0.6rem;
+  border-radius: calc(var(--radius) - 2px);
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.nav-menu a:hover,
+.nav-menu a:focus-visible { color: var(--accent); background: var(--surface-2); }
+
 /* ── Loading state ────────────────────────────────────────────────────────── */
 .loading-state {
   min-height: 60vh;
@@ -253,7 +297,7 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ── Section layout ───────────────────────────────────────────────────────── */
-section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); }
+section { padding: clamp(1.5rem, 3.5vw, 2.5rem) var(--gutter); scroll-margin-top: 72px; }
 .section-inner { max-width: var(--max-w); margin: 0 auto; }
 .section-title {
   font-size: clamp(1.1rem, 2.2vw, 1.5rem);
