@@ -233,6 +233,7 @@ a:focus-visible, button:focus-visible {
   100% { opacity: 0; transform: translateX(-50%) translateY(0);    }
 }
 
+/* Standalone theme toggle (still used on guide.html) */
 .theme-toggle {
   font-size: 1.1rem;
   padding: 0.25rem 0.5rem;
@@ -289,6 +290,38 @@ a:focus-visible, button:focus-visible {
   border: none;
   border-top: 1px solid var(--border);
   margin: 0.35rem 0.2rem;
+}
+
+/* Theme switcher row inside the nav menu */
+.nav-menu-theme {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  padding: 0.45rem 0.6rem;
+  border-radius: calc(var(--radius) - 2px);
+  transition: color 0.15s, background 0.15s;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.nav-menu-theme:hover,
+.nav-menu-theme:focus-visible {
+  color: var(--accent);
+  background: var(--surface-2);
+}
+.nav-menu-theme-icon {
+  font-size: 1rem;
+  line-height: 1;
+  width: 1.1rem;
+  text-align: center;
+}
+.nav-menu-theme-label {
+  flex: 1;
 }
 
 /* ── Loading state ────────────────────────────────────────────────────────── */
