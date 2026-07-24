@@ -362,7 +362,17 @@ function currentTheme() {
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
   const btn = $('theme-toggle');
-  if (btn) btn.textContent = theme === 'dark' ? '☀' : '☾';
+  if (!btn) return;
+  const icon = btn.querySelector('.nav-menu-theme-icon');
+  const label = btn.querySelector('.nav-menu-theme-label');
+  if (icon && label) {
+    // Menu-style button (dashboard header nav)
+    icon.textContent = theme === 'dark' ? '☀' : '☾';
+    label.textContent = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  } else {
+    // Simple icon button (e.g. guide.html)
+    btn.textContent = theme === 'dark' ? '☀' : '☾';
+  }
 }
 function initTheme() {
   const sys = prefersDark() ? 'dark' : 'light';
@@ -1389,7 +1399,7 @@ function renderGlobalTrends(data) {
       </div>
       <div class="trend-card">
         <div class="trend-card-hdr">
-          <span class="trend-card-title">Rates &amp; Inflation</span>
+          <span class="trend-card-title">Rates & Inflation</span>
           <span class="trend-card-sub">US Fed Funds Rate vs. CPI · Jan 2020 – Jul 2025</span>
         </div>
         ${makeRateChart()}
