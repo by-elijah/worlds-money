@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13F Institutional Holdings — The World's Money</title>
+  <meta name="description" content="Who owns and who bought the most, by SEC Form 13F filings — real, live-fetched holdings data for 24 well-known funds including Berkshire Hathaway.">
+  <meta name="color-scheme" content="dark light">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="site-brand site-brand--link" href="index.html">
+        <span class="site-title">The World's Money</span>
+        <span class="site-sub" aria-hidden="true">13F Institutional Holdings</span>
+      </a>
+      <div class="header-meta">
+        <a class="header-link" href="index.html">← Dashboard</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme" title="Toggle light/dark theme">☾</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="f13-wrap">
+
+      <section class="section-inner f13-hero">
+        <p class="f13-kicker mono" id="f13-kicker">SEC Form 13F</p>
+        <h1 class="section-title f13-h1">Who owns — and who bought — the most</h1>
+        <p class="guide-lede">
+          Real holdings data for 24 well-known funds, fetched live from SEC EDGAR — no key required, nothing hand-typed
+          except which funds to track. "Own the most" is shown two ways: largest reported 13F value, and highest
+          concentration in one name. "Buy the most" is consensus accumulation across the funds we could fully parse.
+        </p>
+        <div class="f13-meta-row mono" id="f13-meta-row"></div>
+      </section>
+
+      <section class="section-inner">
+        <div class="f13-kpis" id="f13-kpis"></div>
+      </section>
+
+      <section class="section-inner">
+        <nav class="f13-tabs" id="f13-tabs">
+          <button class="f13-tab f13-tab--active" data-tab="owners">Who Owns the Most</button>
+          <button class="f13-tab" data-tab="consensus">Who Bought the Most</button>
+          <button class="f13-tab" data-tab="mostowned">Most-Owned Stocks</button>
+          <button class="f13-tab" data-tab="bets">Concentrated Bets</button>
+          <button class="f13-tab" data-tab="brk">Berkshire Deep Dive</button>
+          <button class="f13-tab" data-tab="notes">How to Read 13F</button>
+        </nav>
+
+        <div class="f13-panel f13-panel--active" id="panel-owners">
+          <div class="f13-toolbar">
+            <input id="f13-search" type="search" class="f13-search" placeholder="Search fund or manager…">
+            <span class="f13-hint dim">Sorted by reported 13F value. Multi-strategy books look huge because they report thousands of long legs.</span>
+          </div>
+          <div class="f13-card">
+            <div class="f13-card-h">
+              <h2>Largest reported 13F portfolios</h2>
+              <p class="dim">Fetched live from each fund's most recent 13F-HR filing</p>
+            </div>
+            <div class="f13-scroll">
+              <table id="f13-owners-table">
+                <thead>
+                  <tr><th>#</th><th>Fund</th><th>Manager</th><th>Style</th><th>13F value</th><th>Positions</th><th>Book size</th><th>Report qtr</th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <p class="f13-note">
+            Citadel, Millennium, AQR, Two Sigma and Renaissance look like the "owners of everything" because they run
+            multi-strategy / market-neutral books with thousands of long positions — that's not concentrated economic
+            ownership. For conviction, see the Concentrated Bets tab.
+          </p>
+        </div>
+
+        <div class="f13-panel" id="panel-consensus">
+          <div class="f13-grid-2">
+            <div class="f13-card">
+              <div class="f13-card-h"><h2>Consensus buys</h2><p class="dim">Added or increased, quarter over quarter</p></div>
+              <div class="f13-scroll">
+                <table><thead><tr><th>Name</th><th>Funds adding</th><th>Net Δ value</th></tr></thead><tbody id="f13-buys-body"></tbody></table>
+              </div>
+            </div>
+            <div class="f13-card">
+              <div class="f13-card-h"><h2>Consensus sells</h2><p class="dim">Reduced or exited, quarter over quarter</p></div>
+              <div class="f13-scroll">
+                <table><thead><tr><th>Name</th><th>Funds reducing</th><th>Net Δ value</th></tr></thead><tbody id="f13-sells-body"></tbody></table>
+              </div>
+            </div>
+          </div>
+          <p class="f13-note" id="f13-consensus-note"></p>
+        </div>
+
+        <div class="f13-panel" id="panel-mostowned">
+          <div class="f13-card">
+            <div class="f13-card-h"><h2>Most owned across our tracked sample</h2><p class="dim" id="f13-mostowned-sub"></p></div>
+            <div class="f13-scroll">
+              <table><thead><tr><th>#</th><th>Name</th><th>Owned by</th><th>Share of sample</th></tr></thead><tbody id="f13-mostowned-body"></tbody></table>
+            </div>
+          </div>
+        </div>
+
+        <div class="f13-panel" id="panel-bets">
+          <div class="f13-card">
+            <div class="f13-card-h"><h2>Highest conviction — % of one fund's book</h2><p class="dim">The funds that actually "own" a name, not a small sleeve</p></div>
+            <div class="f13-scroll">
+              <table><thead><tr><th>Name</th><th>Weight</th><th>Manager</th><th>Fund</th></tr></thead><tbody id="f13-bets-body"></tbody></table>
+            </div>
+          </div>
+          <p class="f13-note">An 18% position in a $2B book can move a stock more than a 0.01% line in a $875B multi-strategy book. Always pair weight with fund size.</p>
+        </div>
+
+        <div class="f13-panel" id="panel-brk">
+          <div class="f13-card">
+            <div class="f13-card-h">
+              <div>
+                <h2>Berkshire Hathaway — full holdings</h2>
+                <p class="dim" id="f13-brk-sub"></p>
+              </div>
+            </div>
+            <div class="f13-scroll">
+              <table><thead><tr><th>#</th><th>Ticker</th><th>Company</th><th>Value</th><th>Weight</th><th>Shares</th><th>QoQ shares</th></tr></thead><tbody id="f13-brk-body"></tbody></table>
+            </div>
+          </div>
+        </div>
+
+        <div class="f13-panel" id="panel-notes">
+          <div class="f13-card f13-notes-card">
+            <h2>How to read this without fooling yourself</h2>
+            <p class="guide-lede">Form 13F is a delayed, partial photograph of long U.S. exchange-listed equity — not a live
+              portfolio, not shorts, not swaps, not private holdings, not cash.</p>
+            <table>
+              <thead><tr><th>Question</th><th>What 13F can answer</th><th>What it can't</th></tr></thead>
+              <tbody>
+                <tr><td>Who owns the most?</td><td>Largest reported long book vs. largest concentrated $ bet.</td><td>Beneficial exposure after hedges, shorts, and derivatives.</td></tr>
+                <tr><td>Who bought the most?</td><td>Quarter-over-quarter share-count increases and new CUSIPs.</td><td>Exact trade dates, average price, or a position flipped after quarter-end.</td></tr>
+                <tr><td>Is this "smart money"?</td><td>A crowdedness / consensus map.</td><td>Predictive of next-quarter returns — crowding can be a risk, not an edge.</td></tr>
+                <tr><td>Why 24 funds, not 9,400?</td><td>A curated, SEC-verified sample of well-known managers.</td><td>A claim of statistical representativeness across all institutional money.</td></tr>
+              </tbody>
+            </table>
+            <p class="f13-note">
+              Primary source is always the filer's own information table on
+              <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=13F-HR" rel="noopener">SEC EDGAR</a>.
+              This page fetches that data directly — nothing here is a hand-typed estimate. CUSIP→ticker mapping is a
+              small hand-maintained lookup (13F filings report CUSIP, never a ticker symbol); unmapped names fall back
+              to the filer's own company name. Filings with more than 600 reported lines (giant multi-strategy books)
+              show summary totals only — full holdings aren't fetched for those, since per-position detail isn't a
+              meaningful signal at that scale.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>
+      <a href="index.html">The World's Money, to Scale</a> · <a href="guide.html">Beginner's guide</a> ·
+      Data from SEC EDGAR · Not financial advice
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const currentTheme = () => document.documentElement.dataset.theme || (prefersDark() ? 'dark' : 'light');
+      function applyTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        if (btn) btn.textContent = theme === 'dark' ? '☀' : '☾';
+      }
+      applyTheme(prefersDark() ? 'dark' : 'light');
+      btn?.addEventListener('click', () => applyTheme(currentTheme() === 'dark' ? 'light' : 'dark'));
+    })();
+  </script>
+
+  <script src="data/13f-data.embed.js"></script>
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const fmtB = v => `$${(v / 1e9).toFixed(1)}B`;
+      const fmtPct = v => v == null ? '—' : `${v > 0 ? '+' : ''}${v.toFixed(1)}%`;
+      const fmtShares = v => v.toLocaleString('en-US', { maximumFractionDigits: 0 });
+      const STYLE_LABEL = { quant: 'quant', value: 'value', growth: 'growth', activist: 'activist' };
+
+      function nameOrTicker(ticker, name) {
+        return ticker ? `<span class="mono">${ticker}</span>` : `<span class="dim">${name}</span>`;
+      }
+
+      function render(data) {
+        const gen = new Date(data.meta.generatedAt);
+        $('f13-meta-row').textContent =
+          `${data.meta.fundsTracked} funds tracked · ${data.meta.fundsFullyParsed} fully parsed · updated ${gen.toISOString().slice(0, 10)}`;
+
+        const funds = data.funds;
+        const largest = funds[0];
+        const mostConcentrated = [...funds].filter(f => f.topHolding).sort((a, b) => b.topHolding.weightPct - a.topHolding.weightPct)[0];
+        const hottestBuy = data.consensusBuys[0];
+        const mostOwnedTop = data.mostOwned[0];
+        $('f13-kpis').innerHTML = `
+          <div class="f13-kpi"><div class="f13-kpi-lbl">Largest 13F book</div><div class="f13-kpi-val">${fmtB(largest.valueUsd)}</div><div class="f13-kpi-sub dim">${largest.name} · ${largest.manager} · ${largest.positionsCount.toLocaleString()} positions</div></div>
+          <div class="f13-kpi"><div class="f13-kpi-lbl">Most concentrated bet</div><div class="f13-kpi-val">${mostConcentrated.topHolding.weightPct.toFixed(1)}%</div><div class="f13-kpi-sub dim">${nameOrTicker(mostConcentrated.topHolding.ticker, mostConcentrated.topHolding.name)} · ${mostConcentrated.name}</div></div>
+          <div class="f13-kpi"><div class="f13-kpi-lbl">Hottest consensus buy</div><div class="f13-kpi-val">${nameOrTicker(hottestBuy.ticker, hottestBuy.name)}</div><div class="f13-kpi-sub dim">${hottestBuy.addCount} of ${data.meta.fundsFullyParsed} tracked funds adding</div></div>
+          <div class="f13-kpi"><div class="f13-kpi-lbl">Most widely held</div><div class="f13-kpi-val">${nameOrTicker(mostOwnedTop.ticker, mostOwnedTop.name)}</div><div class="f13-kpi-sub dim">owned by ${mostOwnedTop.count} of ${data.meta.fundsFullyParsed} tracked funds</div></div>`;
+
+        const maxVal = funds[0].valueUsd;
+        function renderOwners(list) {
+          $('f13-owners-table').querySelector('tbody').innerHTML = list.map((f, i) => `
+            <tr>
+              <td class="mono">${i + 1}</td>
+              <td>${f.name}</td>
+              <td>${f.manager}</td>
+              <td><span class="f13-pill f13-pill--${f.style}">${STYLE_LABEL[f.style] || f.style}</span></td>
+              <td class="mono">${fmtB(f.valueUsd)}</td>
+              <td class="mono">${f.positionsCount.toLocaleString()}</td>
+              <td><div class="f13-bar"><i style="width:${Math.max(4, f.valueUsd / maxVal * 100)}%"></i></div></td>
+              <td class="mono">${f.reportDate}</td>
+            </tr>`).join('');
+        }
+        renderOwners(funds);
+        $('f13-search').addEventListener('input', e => {
+          const q = e.target.value.toLowerCase();
+          renderOwners(funds.filter(f => (f.name + ' ' + f.manager + ' ' + f.style).toLowerCase().includes(q)));
+        });
+
+        $('f13-buys-body').innerHTML = data.consensusBuys.map(b => `
+          <tr><td>${nameOrTicker(b.ticker, b.name)}</td><td class="mono">${b.addCount}</td><td class="mono f13-up">${fmtB(Math.abs(b.netValueDelta))}</td></tr>`).join('');
+        $('f13-sells-body').innerHTML = data.consensusSells.map(s => `
+          <tr><td>${nameOrTicker(s.ticker, s.name)}</td><td class="mono">${s.reduceCount}</td><td class="mono ${s.netValueDelta < 0 ? 'f13-down' : 'f13-up'}">${s.netValueDelta < 0 ? '−' : '+'}${fmtB(Math.abs(s.netValueDelta))}</td></tr>`).join('');
+        $('f13-consensus-note').textContent =
+          `Computed by comparing the current and prior quarter's holdings across the ${data.meta.fundsFullyParsed} funds we could fully parse (excludes giant multi-strategy books — see the "How to Read" tab). "Net Δ value" is the combined change across all funds that moved a position, not a single trade.`;
+
+        $('f13-mostowned-sub').textContent = `Sample of ${data.meta.fundsFullyParsed} fully-parsed funds — not all 9,400+ SEC 13F filers`;
+        const maxCount = data.mostOwned[0].count;
+        $('f13-mostowned-body').innerHTML = data.mostOwned.map((o, i) => `
+          <tr><td class="mono">${i + 1}</td><td>${nameOrTicker(o.ticker, o.name)}</td><td class="mono">${o.count}</td>
+          <td><div class="f13-bar"><i style="width:${Math.max(4, o.count / maxCount * 100)}%"></i></div></td></tr>`).join('');
+
+        $('f13-bets-body').innerHTML = data.concentratedBets.map(b => `
+          <tr><td>${nameOrTicker(b.ticker, b.name)}</td><td class="mono">${b.weightPct.toFixed(1)}%</td><td>${b.manager}</td><td>${b.fundName}</td></tr>`).join('');
+
+        const brk = funds.find(f => f.id === 'berkshire');
+        if (brk && brk.holdings) {
+          $('f13-brk-sub').textContent = `${brk.positionsCount} positions · ${fmtB(brk.valueUsd)} · filed ${brk.filingDate} · report quarter ${brk.reportDate}`;
+          $('f13-brk-body').innerHTML = brk.holdings.map((h, i) => `
+            <tr>
+              <td class="mono">${i + 1}</td>
+              <td class="mono">${h.ticker || '—'}</td>
+              <td>${h.name}${h.isNew ? ' <span class="f13-new-badge">NEW</span>' : ''}</td>
+              <td class="mono">${fmtB(h.valueUsd)}</td>
+              <td class="mono">${h.weightPct.toFixed(1)}%</td>
+              <td class="mono">${fmtShares(h.shares)}</td>
+              <td class="mono ${h.qoqSharesPct > 0 ? 'f13-up' : h.qoqSharesPct < 0 ? 'f13-down' : ''}">${h.isNew ? 'new' : (h.qoqSharesPct === 0 ? 'hold' : fmtPct(h.qoqSharesPct))}</td>
+            </tr>`).join('');
+        }
+
+        document.querySelectorAll('.f13-tab').forEach(t => t.addEventListener('click', () => {
+          document.querySelectorAll('.f13-tab').forEach(x => x.classList.remove('f13-tab--active'));
+          document.querySelectorAll('.f13-panel').forEach(x => x.classList.remove('f13-panel--active'));
+          t.classList.add('f13-tab--active');
+          $('panel-' + t.dataset.tab).classList.add('f13-panel--active');
+        }));
+      }
+
+      fetch('data/13f-data.json', { cache: 'no-store' })
+        .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(render)
+        .catch(() => render(window.FALLBACK_13F_DATA));
+    })();
+  </script>
+</body>
+</html>

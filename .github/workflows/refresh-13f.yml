@@ -1,0 +1,90 @@
+name: Refresh 13F holdings data
+
+on:
+  schedule:
+    # Sundays 07:00 UTC — 13F-HR filings only change quarterly (~45 days after
+    # quarter-end), so a nightly run would just re-derive the same data most days.
+    - cron: '0 7 * * 0'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force commit even if data unchanged'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ── Job 1: refresh 13F data and commit ────────────────────────────────────
+  refresh:
+    name: Refresh 13F data
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run 13F refresh script
+        run: node scripts/refresh-13f.mjs
+
+      - name: Commit if data changed
+        id: commit
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git add data/13f-data.json data/13f-data.embed.js || true
+
+          if git diff --cached --quiet && [ "${{ inputs.force }}" != "true" ]; then
+            echo "No changes to data — skipping commit"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            DATE=$(date -u +%Y-%m-%d)
+            git commit -m "chore(data): refresh 13F holdings ${DATE}" \
+              --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ── Job 2: deploy to GitHub Pages ─────────────────────────────────────────
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: refresh
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout (with latest data commit)
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
