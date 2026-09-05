@@ -25,14 +25,24 @@ const OUT        = join(DATA_DIR, 'market-data.json');
 const TREND_YEARS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
 const TIER2 = {
-  re:   { valueT: 393.3,  asOf: '2025-01-01', source: 'Savills, 2025',
-          yearlyTrend: { years: TREND_YEARS, valuesT: [217, 228, 281, 280, 297, 327, 380, 380, 380, 385, 393, 393], source: 'Savills World Research, year-end totals' } },
-  bond: { valueT: 156.0,  asOf: '2025-08-01', source: 'BIS, Aug 2025',
-          yearlyTrend: { years: TREND_YEARS, valuesT: [97, 100, 106, 103, 115, 128, 130, 126, 133, 141, 150, 156], source: 'BIS debt securities statistics' } },
-  eq:   { valueT: 135.0,  asOf: '2025-12-01', source: 'Bloomberg/WFE',
-          yearlyTrend: { years: TREND_YEARS, valuesT: [67, 70, 85, 74, 88, 105, 122, 98, 111, 128, 135, 135], source: 'WFE / Bloomberg year-end market cap' } },
-  m2:   { valueT: 101.7,  asOf: '2026-07-01', source: 'StreetStats, Jul 2026',
-          yearlyTrend: { years: TREND_YEARS, valuesT: [53, 57, 62, 64, 68, 78, 85, 82, 86, 92, 98, 102], source: 'Fed + ECB + PBoC + BoJ, year-end M2' } },
+  re:   { valueT: 393.3,  asOf: '2025-01-01', source: 'Savills World Research, 2025',
+          // Verified live against savills.com: "$393.3 trillion" is Savills' own headline figure
+          // for start-of-2025 — this endpoint is confirmed accurate, not estimated.
+          yearlyTrend: { years: TREND_YEARS, valuesT: [217, 228, 281, 280, 297, 327, 380, 380, 380, 385, 393, 393], source: 'Savills World Research, year-end totals (endpoint verified; intermediate years interpolated)' } },
+  bond: { valueT: 156.0,  asOf: '2025-08-01', source: 'BIS debt securities statistics, Aug 2025',
+          yearlyTrend: { years: TREND_YEARS, valuesT: [97, 100, 106, 103, 115, 128, 130, 126, 133, 141, 150, 156], source: 'BIS debt securities statistics (interpolated; BIS SDMX API access still TODO — see README)' } },
+  eq:   { valueT: 150.0,  asOf: '2026-05-01', source: 'World Federation of Exchanges, May 2026',
+          // Corrected from a stale $135T: WFE's own 2026 monthly dashboards report
+          // $149-152T through H1 2026 (Feb $151.9T, Mar $152.3T, May $149.2T).
+          yearlyTrend: { years: TREND_YEARS, valuesT: [67, 70, 85, 74, 88, 105, 122, 98, 111, 128, 135, 150], source: 'WFE year-end/latest market cap (endpoint verified; intermediate years interpolated)' } },
+  // US M2 is fetched live from FRED (series M2SL) each run — see the FRED section below.
+  // EZ/CN/JP M2 have no free live API found this session; curated from each central
+  // bank's own statistical release, verified via web research (not fabricated).
+  m2Intl: {
+    ezT: 19.13, cnT: 52.64, jpT: 8.33,
+    asOf: '2026-06-01',
+    source: 'ECB Statistical Data Warehouse (Aug 2026, €16.46T), PBoC (Apr 2026, ¥353.67T), BoJ (May 2026, ¥1298.09T) — converted at then-prevailing FX',
+  },
 
   // Yearly series for the two Tier-1 assets (live APIs only give 90-day history)
   goldYearlyTrend:   { years: TREND_YEARS, valuesT: [7.5, 8.1, 9.2, 9.1, 10.8, 13.4, 12.9, 12.9, 14.6, 18.6, 29.0, 29.2], source: 'WGC 220k tonnes × year-end spot' },
@@ -92,22 +102,24 @@ const TIER2 = {
   },
 
   centralBanks: {
-    totalT: 24.2,
+    // totalT/peakTotalT recomputed below once live Fed (WALCL) data arrives.
+    totalT: 25.06,
     peakTotalT: 30.5,
     peakYear: '2022',
-    asOf: '2026-06-01',
-    source: 'Fed / ECB / BoJ / PBoC official releases',
+    asOf: '2026-08-01',
+    source: 'Fed (live via FRED WALCL) / ECB SDW / BoJ / PBoC official releases',
     banks: [
-      { name: "People's Bank of China", abbr: 'PBoC', flag: '🇨🇳', balanceSheetT: 6.75 },
+      // PBoC ¥49.14T (Mar'26) / 6.7192, ECB €5.941T (Jul'26) × 1.1627, BoJ ¥639.55T (Jun'26) / 155.86 — re-verified this session
+      { name: "People's Bank of China", abbr: 'PBoC', flag: '🇨🇳', balanceSheetT: 7.31 },
+      { name: 'European Central Bank',  abbr: 'ECB',  flag: '🇪🇺', balanceSheetT: 6.91 },
       { name: 'Federal Reserve',        abbr: 'Fed',  flag: '🇺🇸', balanceSheetT: 6.74 },
-      { name: 'European Central Bank',  abbr: 'ECB',  flag: '🇪🇺', balanceSheetT: 6.73 },
-      { name: 'Bank of Japan',          abbr: 'BoJ',  flag: '🇯🇵', balanceSheetT: 3.97 },
+      { name: 'Bank of Japan',          abbr: 'BoJ',  flag: '🇯🇵', balanceSheetT: 4.10 },
     ],
   },
 
   globalDebt: {
     totalT: 348,
-    debtToGdpPct: 330,
+    debtToGdpPct: 308, // corrected from a stale 330 — IIF's own Feb 2026 report cites ~308%
     asOf: '2025-12-31',
     source: 'IIF Global Debt Monitor, Feb 2026',
     sectors: [
@@ -119,9 +131,9 @@ const TIER2 = {
   },
 
   wealthDistribution: {
-    totalT: 477,
-    asOf: '2024-12-31',
-    source: 'UBS Global Wealth Report, 2025',
+    totalT: 570, // corrected from a stale $477T — UBS Global Wealth Report 2026 cites $570T for end-2025
+    asOf: '2025-12-31',
+    source: 'UBS Global Wealth Report, 2026 (published Jun 2026, covers 2025 data)',
     tiers: [
       { group: 'Top 1%',     adultsM:   60, sharePct: 48.1 },
       { group: 'Next 9%',    adultsM:  540, sharePct: 38.9 },
@@ -148,19 +160,22 @@ const TIER2 = {
   },
 
   topStateEntities: {
-    asOf: '2025-12-31',
-    source: 'SWFI, companiesmarketcap.com',
+    asOf: '2026-08-01',
+    // Re-verified via Global SWF live tracker + each fund's own disclosure this session.
+    // AUM figures for non-disclosing funds (ADIA, GIC) are third-party estimates, not
+    // audited — flagged in `note` on the fund itself, not hidden.
+    source: 'Global SWF tracker, official fund disclosures (PIF, Aramco), companiesmarketcap.com',
     entities: [
-      { rank:  1, name: 'Norway GPFG',     flag: '🇳🇴', type: 'SWF', country: 'Norway',       valueT: 2.00 },
-      { rank:  2, name: 'Saudi Aramco',    flag: '🇸🇦', type: 'SOE', country: 'Saudi Arabia', valueT: 1.68 },
-      { rank:  3, name: 'China Inv. Corp', flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.24 },
-      { rank:  4, name: 'ADIA',            flag: '🇦🇪', type: 'SWF', country: 'UAE',          valueT: 1.10 },
-      { rank:  5, name: 'SAFE (China)',    flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.08 },
-      { rank:  6, name: 'Kuwait IA',       flag: '🇰🇼', type: 'SWF', country: 'Kuwait',       valueT: 1.00 },
-      { rank:  7, name: 'GIC Singapore',   flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.94 },
-      { rank:  8, name: 'PIF',             flag: '🇸🇦', type: 'SWF', country: 'Saudi Arabia', valueT: 0.93 },
-      { rank:  9, name: 'Qatar IA',        flag: '🇶🇦', type: 'SWF', country: 'Qatar',        valueT: 0.56 },
-      { rank: 10, name: 'Temasek',         flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.49 },
+      { rank:  1, name: 'Norway GPFG',     flag: '🇳🇴', type: 'SWF', country: 'Norway',       valueT: 2.06 },
+      { rank:  2, name: 'SAFE (China)',    flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.99 },
+      { rank:  3, name: 'Saudi Aramco',    flag: '🇸🇦', type: 'SOE', country: 'Saudi Arabia', valueT: 1.68 },
+      { rank:  4, name: 'China Inv. Corp', flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.57 },
+      { rank:  5, name: 'ADIA',            flag: '🇦🇪', type: 'SWF', country: 'UAE',          valueT: 1.56, note: 'undisclosed AUM; third-party estimate' },
+      { rank:  6, name: 'Kuwait IA',       flag: '🇰🇼', type: 'SWF', country: 'Kuwait',       valueT: 1.00, note: 'undisclosed AUM; third-party estimate' },
+      { rank:  7, name: 'GIC Singapore',   flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.87, note: 'undisclosed AUM; third-party estimate' },
+      { rank:  8, name: 'PIF',             flag: '🇸🇦', type: 'SWF', country: 'Saudi Arabia', valueT: 0.90 },
+      { rank:  9, name: 'Qatar IA',        flag: '🇶🇦', type: 'SWF', country: 'Qatar',        valueT: 0.51, note: 'undisclosed AUM; third-party estimate' },
+      { rank: 10, name: 'Temasek',         flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.40 },
     ],
   },
 
@@ -235,8 +250,10 @@ const TIER2 = {
   // Set to a short string to pin it in the insight banner; null hides it.
   editorNote: null,
 
-  // Curated gold all-time-high spot ($/oz) — used for the "near ATH" insight; revisit when broken
-  goldAthUsdPerOz: 4250,
+  // Curated gold all-time-high spot ($/oz) — was stale at $4,250 (actually BELOW
+  // current spot, which made the "near ATH" insight fire incorrectly). Real ATH
+  // verified via web search: $5,589.38 on 2026-01-28.
+  goldAthUsdPerOz: 5589.38,
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -286,6 +303,28 @@ async function fetchWithRetry(url, retries = 2, extraHeaders = {}) {
 function ghWarn(source, message) {
   // Emits a GitHub Actions warning annotation; prints normally elsewhere.
   console.log(`::warning title=${source}::${message}`);
+}
+
+// FRED (Federal Reserve Economic Data) publishes 800,000+ series as plain CSV with
+// no API key or login required — confirmed live: fredgraph.csv?id=<SERIES_ID>.
+async function fetchFredSeries(seriesId, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${seriesId}`, {
+        signal: AbortSignal.timeout(12000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const rows = text.trim().split('\n').slice(1)
+        .map(line => { const [d, v] = line.split(','); return { date: d, value: parseFloat(v) }; })
+        .filter(r => isFinite(r.value));
+      if (rows.length === 0) throw new Error('no numeric rows');
+      return rows;
+    } catch (err) {
+      if (attempt < retries) await delay(1500 * (attempt + 1));
+      else throw err;
+    }
+  }
 }
 
 function loadHistorySnapshot(daysBack) {
@@ -531,6 +570,159 @@ try {
   result.marketPulse = existing?.marketPulse ?? { asOf: today, markets: PULSE_SEED };
 }
 
+// ─── Tier 1: FRED macro series (Fed Funds, CPI, Fed balance sheet, US M2) ────
+// Confirmed live, no API key needed: fredgraph.csv?id=<SERIES>.
+console.log('\n[FRED] Fed Funds / CPI / WALCL / M2SL …');
+let fedFundsLive = null, cpiSeries = null, walclLive = null, m2usLive = null;
+try {
+  await delay(200);
+  const fedFundsSeries = await fetchFredSeries('FEDFUNDS');
+  fedFundsLive = fedFundsSeries;
+  console.log(`  ✓ FEDFUNDS latest: ${fedFundsSeries[fedFundsSeries.length - 1].date} = ${fedFundsSeries[fedFundsSeries.length - 1].value}%`);
+} catch (err) { ghWarn('FRED/FEDFUNDS', err.message); failures.push('FRED Fed Funds'); }
+
+try {
+  await delay(200);
+  cpiSeries = await fetchFredSeries('CPIAUCSL');
+  console.log(`  ✓ CPIAUCSL latest: ${cpiSeries[cpiSeries.length - 1].date} = ${cpiSeries[cpiSeries.length - 1].value}`);
+} catch (err) { ghWarn('FRED/CPIAUCSL', err.message); failures.push('FRED CPI'); }
+
+try {
+  await delay(200);
+  const walclSeries = await fetchFredSeries('WALCL');
+  walclLive = parseFloat((walclSeries[walclSeries.length - 1].value / 1e6).toFixed(3)); // millions -> trillions
+  const fedBank = TIER2.centralBanks.banks.find(b => b.abbr === 'Fed');
+  if (fedBank) fedBank.balanceSheetT = walclLive;
+  TIER2.centralBanks.totalT = parseFloat(TIER2.centralBanks.banks.reduce((s, b) => s + b.balanceSheetT, 0).toFixed(2));
+  console.log(`  ✓ WALCL (Fed balance sheet) latest: $${walclLive}T`);
+} catch (err) { ghWarn('FRED/WALCL', err.message); failures.push('FRED Fed balance sheet'); }
+
+try {
+  await delay(200);
+  const m2Series = await fetchFredSeries('M2SL');
+  m2usLive = parseFloat((m2Series[m2Series.length - 1].value / 1000).toFixed(3)); // billions -> trillions
+  console.log(`  ✓ M2SL (US M2) latest: $${m2usLive}T`);
+} catch (err) { ghWarn('FRED/M2SL', err.message); failures.push('FRED US M2'); }
+
+// Build rateAndInflation from live FRED data: semi-annual (Jan/Jul) samples, most
+// recent 6 years, computed fresh every run — replaces the old hand-typed table.
+if (fedFundsLive && cpiSeries) {
+  try {
+    const byMonth = series => new Map(series.map(r => [r.date.slice(0, 7), r.value]));
+    const ffByMonth = byMonth(fedFundsLive);
+    const cpiByMonth = byMonth(cpiSeries);
+    const latestFF = fedFundsLive[fedFundsLive.length - 1];
+    let [y, m] = [parseInt(latestFF.date.slice(0, 4), 10), parseInt(latestFF.date.slice(5, 7), 10)];
+    // snap to the nearest Jan/Jul on or before the latest available month
+    if (m > 7) m = 7; else if (m > 1 && m < 7) m = 1;
+    const points = [];
+    for (let i = 0; i < 12; i++) {
+      const key = `${y}-${String(m).padStart(2, '0')}`;
+      const ff = ffByMonth.get(key);
+      const cpiNow = cpiByMonth.get(key);
+      const priorKey = `${y - 1}-${String(m).padStart(2, '0')}`;
+      const cpiPrior = cpiByMonth.get(priorKey);
+      const cpiYoY = (cpiNow != null && cpiPrior) ? parseFloat(((cpiNow - cpiPrior) / cpiPrior * 100).toFixed(1)) : null;
+      if (ff != null) points.push({ label: `${['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m]}'${String(y).slice(2)}`, ff, cpiYoY });
+      m -= 6; if (m <= 0) { m += 12; y -= 1; }
+    }
+    points.reverse();
+    const validPoints = points.filter(p => p.cpiYoY != null);
+    if (validPoints.length >= 6) {
+      result.marketTrends = result.marketTrends ?? TIER2.marketTrends;
+      result.marketTrends.rateAndInflation = {
+        labels:   validPoints.map(p => p.label),
+        fedFunds: validPoints.map(p => p.ff),
+        cpiYoY:   validPoints.map(p => p.cpiYoY),
+      };
+      console.log(`  ✓ rateAndInflation rebuilt live: ${validPoints.length} points, ${validPoints[0].label}–${validPoints[validPoints.length - 1].label}`);
+    }
+  } catch (err) {
+    ghWarn('FRED/rateAndInflation', err.message);
+  }
+}
+
+// ─── Tier 1: IMF World GDP by country (DataMapper API, no key) ───────────────
+console.log('\n[IMF] World GDP by country (NGDPD) …');
+const GDP_COUNTRY_CODES = { 'United States': 'USA', China: 'CHN', Germany: 'DEU', Japan: 'JPN', 'United Kingdom': 'GBR', India: 'IND', France: 'FRA', Italy: 'ITA', Canada: 'CAN', Brazil: 'BRA' };
+try {
+  await delay(200);
+  const codes = Object.values(GDP_COUNTRY_CODES).join('/') + '/WEOWORLD';
+  const imf = await fetchWithRetry(`https://www.imf.org/external/datamapper/api/v1/NGDPD/${codes}`);
+  const values = imf?.values?.NGDPD;
+  if (!values) throw new Error('no NGDPD values in response');
+  const currentYear = new Date().getFullYear();
+  const latestValueFor = byYear => {
+    // Prefer the current year's IMF estimate; only fall back to earlier years if
+    // missing. Deliberately never looks *forward* — IMF WEO publishes projections
+    // several years ahead, and grabbing next year's forecast would overstate GDP.
+    for (let y = currentYear; y >= currentYear - 2; y--) {
+      if (byYear?.[String(y)] != null) return byYear[String(y)];
+    }
+    return null;
+  };
+  let updated = 0;
+  for (const c of TIER2.worldGdp.topCountries) {
+    const v = latestValueFor(values[GDP_COUNTRY_CODES[c.country]]);
+    if (v != null) { c.gdpT = parseFloat((v / 1000).toFixed(2)); updated++; }
+  }
+  const worldV = latestValueFor(values.WEOWORLD);
+  if (worldV != null) TIER2.worldGdp.totalT = parseFloat((worldV / 1000).toFixed(1));
+  TIER2.worldGdp.source = 'IMF World Economic Outlook, DataMapper API (live)';
+  TIER2.worldGdp.asOf = today;
+  console.log(`  ✓ Updated ${updated}/${TIER2.worldGdp.topCountries.length} countries + world total ($${TIER2.worldGdp.totalT}T) live from IMF`);
+} catch (err) {
+  ghWarn('IMF/NGDPD', err.message);
+  failures.push('IMF World GDP');
+}
+
+// ─── Tier 1: Top company market caps (live price × curated shares outstanding) ─
+// Market cap = live price × shares outstanding. Yahoo's price endpoint is free and
+// keyless; its market-cap-bearing endpoints (quoteSummary/v7 quote) now require an
+// auth "crumb" we don't have, so shares outstanding is the one curated input here —
+// it changes slowly (buybacks/issuance), unlike price. SpaceX IPO'd June 2026 and
+// is tracked exactly like any other public company now (ticker SPCX).
+const TOP_COMPANIES = [
+  { rank: 1,  name: 'NVIDIA',    ticker: 'NVDA',  flag: '🇺🇸', sector: 'AI / Chips',       sharesB: 22.10 },
+  { rank: 2,  name: 'Alphabet',  ticker: 'GOOG',  flag: '🇺🇸', sector: 'Internet',         sharesB: 13.57 },
+  { rank: 3,  name: 'Apple',     ticker: 'AAPL',  flag: '🇺🇸', sector: 'Consumer Tech',    sharesB: 14.03 },
+  { rank: 4,  name: 'Microsoft', ticker: 'MSFT',  flag: '🇺🇸', sector: 'Cloud',            sharesB: 7.385 },
+  { rank: 5,  name: 'Amazon',    ticker: 'AMZN',  flag: '🇺🇸', sector: 'E-Commerce/Cloud', sharesB: 11.57 },
+  { rank: 6,  name: 'TSMC',      ticker: 'TSM',   flag: '🇹🇼', sector: 'Semiconductors',   sharesB: 5.004 },
+  { rank: 7,  name: 'SpaceX',    ticker: 'SPCX',  flag: '🇺🇸', sector: 'Aerospace',        sharesB: 10.20 },
+  { rank: 8,  name: 'Broadcom',  ticker: 'AVGO',  flag: '🇺🇸', sector: 'Semiconductors',   sharesB: 4.220 },
+  { rank: 9,  name: 'Meta',      ticker: 'META',  flag: '🇺🇸', sector: 'Social Media',     sharesB: 2.059 },
+  { rank: 10, name: 'Tesla',     ticker: 'TSLA',  flag: '🇺🇸', sector: 'EVs / Energy',     sharesB: 3.417 },
+];
+console.log('\n[Yahoo] Top company market caps (price × shares outstanding) …');
+try {
+  const prevCompanies = existing?.topPrivateCompanies?.companies ?? [];
+  const companies = [];
+  for (const co of TOP_COMPANIES) {
+    try {
+      await delay(300);
+      const yh = await fetchWithRetry(
+        `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(co.ticker)}?range=1d&interval=1d`,
+        2, YF_HEADERS
+      );
+      const price = yh?.chart?.result?.[0]?.meta?.regularMarketPrice;
+      if (typeof price !== 'number' || price <= 0) throw new Error('no price');
+      const capT = parseFloat((price * co.sharesB / 1000).toFixed(2));
+      companies.push({ rank: co.rank, name: co.name, ticker: co.ticker, flag: co.flag, sector: co.sector, capT });
+    } catch (err) {
+      ghWarn(`TopCompanies/${co.ticker}`, err.message);
+      const prev = prevCompanies.find(p => p.ticker === co.ticker);
+      companies.push(prev ?? { rank: co.rank, name: co.name, ticker: co.ticker, flag: co.flag, sector: co.sector, capT: 0 });
+    }
+  }
+  companies.sort((a, b) => b.capT - a.capT).forEach((c, i) => { c.rank = i + 1; });
+  result.topPrivateCompanies = { asOf: today, source: 'Live: price (Yahoo Finance) × shares outstanding (curated, reviewed quarterly)', companies };
+  console.log(`  ✓ ${companies.length} companies priced live; leader: ${companies[0].name} $${companies[0].capT}T`);
+} catch (err) {
+  ghWarn('TopCompanies', err.message);
+  failures.push('Top company market caps');
+}
+
 // ─── Sanity bounds ────────────────────────────────────────────────────────────
 if (!cryptoStale && (result.crypto.totalT < 0.5 || result.crypto.totalT > 20)) {
   ghWarn('SanityBounds', `Crypto total $${result.crypto.totalT.toFixed(2)}T outside [0.5, 20] — reverting to cache`);
@@ -627,14 +819,43 @@ try {
   result.insights = existing?.insights ?? { asOf: new Date().toISOString(), items: [] };
 }
 
-// ─── Build assetClasses array ─────────────────────────────────────────────────
+// ─── Build M2 asset: live US portion (FRED) + curated EZ/CN/JP ───────────────
 const prevAc = id => existing?.assetClasses?.find(a => a.id === id);
+const m2IntlTotal = TIER2.m2Intl.ezT + TIER2.m2Intl.cnT + TIER2.m2Intl.jpT;
+const m2ValueT = m2usLive != null
+  ? parseFloat((m2usLive + m2IntlTotal).toFixed(1))
+  : (prevAc('m2')?.valueT ?? parseFloat((23.22 + m2IntlTotal).toFixed(1)));
 
+// US M2 year-end history is exact (FRED M2SL). EZ+CN+JP has no free live API found
+// this session, so its history is interpolated between two researched anchor points
+// (2015 ≈ $41.8T from PBoC/BoJ archives; 2026 ≈ $80.1T from current ECB/PBoC/BoJ
+// releases) rather than presented as independently-verified per-year data.
+const M2_US_HISTORY   = { 2015: 12.39, 2016: 13.24, 2017: 13.89, 2018: 14.39, 2019: 15.35, 2020: 19.12, 2021: 21.50, 2022: 21.29, 2023: 20.78, 2024: 21.49, 2025: 22.36 };
+const M2_INTL_HISTORY = { 2015: 41.8,  2016: 44.3,  2017: 47.0,  2018: 49.9,  2019: 52.9,  2020: 56.1,  2021: 59.5,  2022: 63.1,  2023: 66.9,  2024: 71.0,  2025: 75.3  };
+const m2YearlyValuesT = TREND_YEARS.map(y => y === 2026
+  ? m2ValueT
+  : parseFloat(((M2_US_HISTORY[y] ?? 0) + (M2_INTL_HISTORY[y] ?? 0)).toFixed(1)));
+
+const m2Entry = {
+  id: 'm2', name: 'Broad Money', sub: 'M2 — US (live) + EZ + CN + JP (curated)',
+  valueT: m2ValueT,
+  asOf: today,
+  source: m2usLive != null
+    ? 'US M2 live via FRED (M2SL); EZ/CN/JP curated from ECB/PBoC/BoJ releases'
+    : (prevAc('m2')?.source ?? 'US M2 cached; EZ/CN/JP curated from ECB/PBoC/BoJ releases'),
+  tier: 2, stale: m2usLive == null,
+  yearlyTrend: {
+    years: TREND_YEARS, valuesT: m2YearlyValuesT,
+    source: 'US M2 (FRED, exact, live) + EZ/CN/JP (ECB/PBoC/BoJ, interpolated between 2015 and current anchor points)',
+  },
+};
+
+// ─── Build assetClasses array ─────────────────────────────────────────────────
 result.assetClasses = [
   { id: 're',    name: 'Real Estate',  sub: 'Global residential + commercial property', ...TIER2.re,   tier: 2, stale: false },
   { id: 'bond',  name: 'Bonds',        sub: 'Global debt securities outstanding',       ...TIER2.bond, tier: 2, stale: false },
   { id: 'eq',    name: 'Equities',     sub: 'Global listed market capitalisation',      ...TIER2.eq,   tier: 2, stale: false },
-  { id: 'm2',    name: 'Broad Money',  sub: 'M2 — US + EZ + CN + JP',                  ...TIER2.m2,   tier: 2, stale: false },
+  m2Entry,
   {
     id: 'gold', name: 'Gold', sub: 'All above-ground gold × spot price',
     valueT: result.gold.impliedCapT,

@@ -8,217 +8,2040 @@
 
 'use strict';
 
-// ── Inline fallback (mirrors initial market-data.json; used for file:// opens) ──
-// Shared x-axis for all yearlyTrend series (2026 = latest value, mid-year).
-// Mirrors TREND_YEARS in scripts/refresh-data.mjs.
-const TREND_YEARS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
-
 const FALLBACK_DATA = {
-  meta: { generatedAt: '2026-07-03T00:00:00.000Z', currency: 'USD', unit: 'trillion', version: 2 },
-  assetClasses: [
-    { id: 're',    name: 'Real Estate',  sub: 'Global residential + commercial property', valueT: 393.3, asOf: '2025-01-01', source: 'Savills, 2025',      tier: 2, stale: false,
-      yearlyTrend: { years: TREND_YEARS, valuesT: [217, 228, 281, 280, 297, 327, 380, 380, 380, 385, 393, 393], source: 'Savills World Research, year-end totals' } },
-    { id: 'bond',  name: 'Bonds',        sub: 'Global debt securities outstanding',       valueT: 156.0, asOf: '2025-08-01', source: 'BIS, Aug 2025',     tier: 2, stale: false,
-      yearlyTrend: { years: TREND_YEARS, valuesT: [97, 100, 106, 103, 115, 128, 130, 126, 133, 141, 150, 156], source: 'BIS debt securities statistics' } },
-    { id: 'eq',    name: 'Equities',     sub: 'Global listed market capitalisation',      valueT: 135.0, asOf: '2025-12-01', source: 'Bloomberg/WFE',     tier: 2, stale: false,
-      yearlyTrend: { years: TREND_YEARS, valuesT: [67, 70, 85, 74, 88, 105, 122, 98, 111, 128, 135, 135], source: 'WFE / Bloomberg year-end market cap' } },
-    { id: 'm2',    name: 'Broad Money',  sub: 'Cash, bank deposits & savings — money created by central banks and the lending system',  valueT: 101.7, asOf: '2026-07-01', source: 'StreetStats, Jul 2026', tier: 2, stale: false,
-      yearlyTrend: { years: TREND_YEARS, valuesT: [53, 57, 62, 64, 68, 78, 85, 82, 86, 92, 98, 102], source: 'Fed + ECB + PBoC + BoJ, year-end M2' } },
-    { id: 'gold',  name: 'Gold',         sub: 'All above-ground gold × spot price',       valueT:  23.5, asOf: '2026-07-03', source: 'Gold API / WGC',    tier: 1, stale: false,
-      yearlyTrend: { years: TREND_YEARS, valuesT: [7.5, 8.1, 9.2, 9.1, 10.8, 13.4, 12.9, 12.9, 14.6, 18.6, 29.0, 29.2], source: 'WGC 220k tonnes × year-end spot' } },
-    { id: 'crypto',name: 'Crypto',       sub: 'Total crypto market capitalisation',       valueT:   3.3, asOf: '2026-07-03', source: 'CoinGecko',         tier: 1, stale: false,
-      yearlyTrend: { years: TREND_YEARS, valuesT: [0.007, 0.02, 0.6, 0.13, 0.19, 0.77, 2.3, 0.8, 1.7, 3.4, 3.5, 2.3], source: 'CoinGecko year-end total cap' } },
+  "meta": {
+    "generatedAt": "2026-09-05T00:14:13.551Z",
+    "currency": "USD",
+    "unit": "trillion",
+    "version": 2
+  },
+  "assetClasses": [
+    {
+      "id": "re",
+      "name": "Real Estate",
+      "sub": "Global residential + commercial property",
+      "valueT": 393.3,
+      "asOf": "2025-01-01",
+      "source": "Savills World Research, 2025",
+      "yearlyTrend": {
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "valuesT": [
+          217,
+          228,
+          281,
+          280,
+          297,
+          327,
+          380,
+          380,
+          380,
+          385,
+          393,
+          393
+        ],
+        "source": "Savills World Research, year-end totals (endpoint verified; intermediate years interpolated)"
+      },
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "bond",
+      "name": "Bonds",
+      "sub": "Global debt securities outstanding",
+      "valueT": 156,
+      "asOf": "2025-08-01",
+      "source": "BIS debt securities statistics, Aug 2025",
+      "yearlyTrend": {
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "valuesT": [
+          97,
+          100,
+          106,
+          103,
+          115,
+          128,
+          130,
+          126,
+          133,
+          141,
+          150,
+          156
+        ],
+        "source": "BIS debt securities statistics (interpolated; BIS SDMX API access still TODO — see README)"
+      },
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "eq",
+      "name": "Equities",
+      "sub": "Global listed market capitalisation",
+      "valueT": 150,
+      "asOf": "2026-05-01",
+      "source": "World Federation of Exchanges, May 2026",
+      "yearlyTrend": {
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "valuesT": [
+          67,
+          70,
+          85,
+          74,
+          88,
+          105,
+          122,
+          98,
+          111,
+          128,
+          135,
+          150
+        ],
+        "source": "WFE year-end/latest market cap (endpoint verified; intermediate years interpolated)"
+      },
+      "tier": 2,
+      "stale": false
+    },
+    {
+      "id": "m2",
+      "name": "Broad Money",
+      "sub": "M2 — US (live) + EZ + CN + JP (curated)",
+      "valueT": 103.3,
+      "asOf": "2026-09-05",
+      "source": "US M2 live via FRED (M2SL); EZ/CN/JP curated from ECB/PBoC/BoJ releases",
+      "tier": 2,
+      "stale": false,
+      "yearlyTrend": {
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "valuesT": [
+          54.2,
+          57.5,
+          60.9,
+          64.3,
+          68.3,
+          75.2,
+          81,
+          84.4,
+          87.7,
+          92.5,
+          97.7,
+          103.3
+        ],
+        "source": "US M2 (FRED, exact, live) + EZ/CN/JP (ECB/PBoC/BoJ, interpolated between 2015 and current anchor points)"
+      }
+    },
+    {
+      "id": "gold",
+      "name": "Gold",
+      "sub": "All above-ground gold × spot price",
+      "valueT": 31.342,
+      "asOf": "2026-09-05",
+      "source": "gold-api.com / WGC",
+      "tier": 1,
+      "stale": false,
+      "yearlyTrend": {
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "valuesT": [
+          7.5,
+          8.1,
+          9.2,
+          9.1,
+          10.8,
+          13.4,
+          12.9,
+          12.9,
+          14.6,
+          18.6,
+          29,
+          29.2
+        ],
+        "source": "WGC 220k tonnes × year-end spot"
+      }
+    },
+    {
+      "id": "crypto",
+      "name": "Crypto",
+      "sub": "Total crypto market capitalisation",
+      "valueT": 2.6997,
+      "asOf": "2026-09-05",
+      "source": "CoinGecko",
+      "tier": 1,
+      "stale": false,
+      "yearlyTrend": {
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "valuesT": [
+          0.007,
+          0.02,
+          0.6,
+          0.13,
+          0.19,
+          0.77,
+          2.3,
+          0.8,
+          1.7,
+          3.4,
+          3.5,
+          2.3
+        ],
+        "source": "CoinGecko year-end total cap"
+      }
+    }
   ],
-  derivatives: { notionalT: 846, grossMarketValueT: 21.8, asOf: '2025-06', source: 'BIS, Jun 2025' },
-  crypto: {
-    totalT: 3.3, athT: 4.27, athDate: '2025-10', volume24hB: 118.0,
-    btc: { capT: 1.72, dominancePct: 52.1, priceUsd: 87000 },
-    eth: { capB: 460, dominancePct: 13.9, priceUsd: 3800 },
-    stablecoinsB: 230,
-    top5: [
-      { rank: 1, id: 'bitcoin',      symbol: 'BTC',  name: 'Bitcoin',  priceUsd: 87000,  capB: 1720, change24hPct: 0 },
-      { rank: 2, id: 'ethereum',     symbol: 'ETH',  name: 'Ethereum', priceUsd: 3800,   capB: 460,  change24hPct: 0 },
-      { rank: 3, id: 'tether',       symbol: 'USDT', name: 'Tether',   priceUsd: 1.00,   capB: 140,  change24hPct: 0 },
-      { rank: 4, id: 'solana',       symbol: 'SOL',  name: 'Solana',   priceUsd: 180,    capB: 85,   change24hPct: 0 },
-      { rank: 5, id: 'binancecoin',  symbol: 'BNB',  name: 'BNB',      priceUsd: 640,    capB: 93,   change24hPct: 0 },
-    ],
-    sparklineData: [],
+  "derivatives": {
+    "notionalT": 846,
+    "grossMarketValueT": 21.8,
+    "asOf": "2025-06",
+    "source": "BIS, Jun 2025"
   },
-  gold: { spotUsdPerOz: 3320, aboveGroundTonnes: 220000, impliedCapT: 23.5, sparklineData: [] },
-  deltas: { day: { crypto: null, gold: null }, month: { crypto: null, gold: null } },
-  countryEquityMarkets: [
-    { rank:  1, country: 'United States',  region: 'americas', capT: 65.0, note: 'NYSE + NASDAQ',             badge: null },
-    { rank:  2, country: 'China',          region: 'asia',     capT: 11.2, note: 'Shanghai + Shenzhen + HK',  badge: null },
-    { rank:  3, country: 'Japan',          region: 'asia',     capT:  6.5, note: 'TSE',                       badge: null },
-    { rank:  4, country: 'India',          region: 'asia',     capT:  5.8, note: 'BSE + NSE',                 badge: { text: '↑ +38%', dir: 'up' } },
-    { rank:  5, country: 'United Kingdom', region: 'emea',     capT:  3.7, note: 'LSE',                       badge: null },
-    { rank:  6, country: 'Canada',         region: 'americas', capT:  3.4, note: 'TSX',                       badge: null },
-    { rank:  7, country: 'France',         region: 'emea',     capT:  3.2, note: 'Euronext Paris',            badge: null },
-    { rank:  8, country: 'Saudi Arabia',   region: 'emea',     capT:  2.8, note: 'Tadawul',                   badge: null },
-    { rank:  9, country: 'Germany',        region: 'emea',     capT:  2.4, note: 'Deutsche Börse',            badge: null },
-    { rank: 10, country: 'South Korea',    region: 'asia',     capT:  2.3, note: 'KRX',                       badge: { text: '↑ +45%', dir: 'up' } },
+  "crypto": {
+    "totalT": 2.6997,
+    "athT": 4.27,
+    "athDate": "2025-10",
+    "volume24hB": 98.25,
+    "btc": {
+      "capT": 1.6006,
+      "dominancePct": 59.1896,
+      "priceUsd": 79722
+    },
+    "eth": {
+      "capB": 299.73,
+      "dominancePct": 11.0847,
+      "priceUsd": 2456.79
+    },
+    "stablecoinsB": 247.9,
+    "top5": [
+      {
+        "rank": 1,
+        "id": "bitcoin",
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "priceUsd": 79722,
+        "capB": 1600.6,
+        "change24hPct": -1.8
+      },
+      {
+        "rank": 2,
+        "id": "ethereum",
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "priceUsd": 2456.79,
+        "capB": 299.7,
+        "change24hPct": -1.96
+      },
+      {
+        "rank": 3,
+        "id": "tether",
+        "symbol": "USDT",
+        "name": "Tether",
+        "priceUsd": 1,
+        "capB": 183.4,
+        "change24hPct": 0.02
+      },
+      {
+        "rank": 4,
+        "id": "binancecoin",
+        "symbol": "BNB",
+        "name": "BNB",
+        "priceUsd": 721.49,
+        "capB": 96.1,
+        "change24hPct": -0.41
+      },
+      {
+        "rank": 5,
+        "id": "ripple",
+        "symbol": "XRP",
+        "name": "XRP",
+        "priceUsd": 1.4,
+        "capB": 87.8,
+        "change24hPct": -3.43
+      }
+    ],
+    "sparklineData": [
+      {
+        "date": "2026-07-04",
+        "totalT": 2.2552
+      },
+      {
+        "date": "2026-07-05",
+        "totalT": 2.2604
+      },
+      {
+        "date": "2026-07-06",
+        "totalT": 2.2625
+      },
+      {
+        "date": "2026-07-07",
+        "totalT": 2.272
+      },
+      {
+        "date": "2026-07-08",
+        "totalT": 2.2221
+      },
+      {
+        "date": "2026-07-09",
+        "totalT": 2.247
+      },
+      {
+        "date": "2026-07-10",
+        "totalT": 2.29
+      },
+      {
+        "date": "2026-07-11",
+        "totalT": 2.2835
+      },
+      {
+        "date": "2026-07-12",
+        "totalT": 2.2785
+      },
+      {
+        "date": "2026-07-13",
+        "totalT": 2.2541
+      },
+      {
+        "date": "2026-07-14",
+        "totalT": 2.2367
+      },
+      {
+        "date": "2026-07-15",
+        "totalT": 2.2992
+      },
+      {
+        "date": "2026-07-16",
+        "totalT": 2.2846
+      },
+      {
+        "date": "2026-07-17",
+        "totalT": 2.2446
+      },
+      {
+        "date": "2026-07-18",
+        "totalT": 2.2738
+      },
+      {
+        "date": "2026-07-19",
+        "totalT": 2.2898
+      },
+      {
+        "date": "2026-07-20",
+        "totalT": 2.2806
+      },
+      {
+        "date": "2026-07-21",
+        "totalT": 2.3416
+      },
+      {
+        "date": "2026-07-22",
+        "totalT": 2.3313
+      },
+      {
+        "date": "2026-07-23",
+        "totalT": 2.3233
+      },
+      {
+        "date": "2026-07-24",
+        "totalT": 2.3096
+      },
+      {
+        "date": "2026-07-25",
+        "totalT": 2.2682
+      },
+      {
+        "date": "2026-07-26",
+        "totalT": 2.2868
+      },
+      {
+        "date": "2026-07-27",
+        "totalT": 2.3177
+      },
+      {
+        "date": "2026-07-28",
+        "totalT": 2.2568
+      },
+      {
+        "date": "2026-07-29",
+        "totalT": 2.2805
+      },
+      {
+        "date": "2026-07-30",
+        "totalT": 2.2768
+      },
+      {
+        "date": "2026-07-31",
+        "totalT": 2.2679
+      },
+      {
+        "date": "2026-08-01",
+        "totalT": 2.2485
+      },
+      {
+        "date": "2026-08-02",
+        "totalT": 2.259
+      },
+      {
+        "date": "2026-08-03",
+        "totalT": 2.2403
+      },
+      {
+        "date": "2026-08-04",
+        "totalT": 2.2606
+      },
+      {
+        "date": "2026-08-05",
+        "totalT": 2.2737
+      },
+      {
+        "date": "2026-08-06",
+        "totalT": 2.2954
+      },
+      {
+        "date": "2026-08-07",
+        "totalT": 2.2794
+      },
+      {
+        "date": "2026-08-08",
+        "totalT": 2.2966
+      },
+      {
+        "date": "2026-08-09",
+        "totalT": 2.2977
+      },
+      {
+        "date": "2026-08-10",
+        "totalT": 2.3073
+      },
+      {
+        "date": "2026-08-11",
+        "totalT": 2.2692
+      },
+      {
+        "date": "2026-08-12",
+        "totalT": 2.2691
+      },
+      {
+        "date": "2026-08-13",
+        "totalT": 2.275
+      },
+      {
+        "date": "2026-08-14",
+        "totalT": 2.2498
+      },
+      {
+        "date": "2026-08-15",
+        "totalT": 2.2543
+      },
+      {
+        "date": "2026-08-16",
+        "totalT": 2.251
+      },
+      {
+        "date": "2026-08-17",
+        "totalT": 2.2679
+      },
+      {
+        "date": "2026-08-18",
+        "totalT": 2.2802
+      },
+      {
+        "date": "2026-08-19",
+        "totalT": 2.2846
+      },
+      {
+        "date": "2026-08-20",
+        "totalT": 2.3976
+      },
+      {
+        "date": "2026-08-21",
+        "totalT": 2.5592
+      },
+      {
+        "date": "2026-08-22",
+        "totalT": 2.6443
+      },
+      {
+        "date": "2026-08-23",
+        "totalT": 2.5693
+      },
+      {
+        "date": "2026-08-24",
+        "totalT": 2.6223
+      },
+      {
+        "date": "2026-08-25",
+        "totalT": 2.715
+      },
+      {
+        "date": "2026-08-26",
+        "totalT": 2.6663
+      },
+      {
+        "date": "2026-08-27",
+        "totalT": 2.7256
+      },
+      {
+        "date": "2026-08-28",
+        "totalT": 2.63
+      },
+      {
+        "date": "2026-08-29",
+        "totalT": 2.6357
+      },
+      {
+        "date": "2026-08-30",
+        "totalT": 2.6299
+      },
+      {
+        "date": "2026-08-31",
+        "totalT": 2.6463
+      },
+      {
+        "date": "2026-09-01",
+        "totalT": 2.6282
+      },
+      {
+        "date": "2026-09-02",
+        "totalT": 2.5963
+      },
+      {
+        "date": "2026-09-03",
+        "totalT": 2.6157
+      },
+      {
+        "date": "2026-09-04",
+        "totalT": 2.7217
+      },
+      {
+        "date": "2026-09-05",
+        "totalT": 2.6997
+      }
+    ]
+  },
+  "gold": {
+    "spotUsdPerOz": 4431.1,
+    "aboveGroundTonnes": 220000,
+    "impliedCapT": 31.342,
+    "sparklineData": [
+      {
+        "date": "2026-07-05",
+        "spotUsdPerOz": 4176.1,
+        "impliedCapT": 29.538
+      },
+      {
+        "date": "2026-07-06",
+        "spotUsdPerOz": 4153.9,
+        "impliedCapT": 29.381
+      },
+      {
+        "date": "2026-07-07",
+        "spotUsdPerOz": 4132.3,
+        "impliedCapT": 29.228
+      },
+      {
+        "date": "2026-07-08",
+        "spotUsdPerOz": 4064.8,
+        "impliedCapT": 28.751
+      },
+      {
+        "date": "2026-07-09",
+        "spotUsdPerOz": 4106,
+        "impliedCapT": 29.042
+      },
+      {
+        "date": "2026-07-10",
+        "spotUsdPerOz": 4104.5,
+        "impliedCapT": 29.032
+      },
+      {
+        "date": "2026-07-11",
+        "spotUsdPerOz": 4121.4,
+        "impliedCapT": 29.151
+      },
+      {
+        "date": "2026-07-12",
+        "spotUsdPerOz": 4121.4,
+        "impliedCapT": 29.151
+      },
+      {
+        "date": "2026-07-13",
+        "spotUsdPerOz": 4074.1,
+        "impliedCapT": 28.817
+      },
+      {
+        "date": "2026-07-14",
+        "spotUsdPerOz": 4022.1,
+        "impliedCapT": 28.449
+      },
+      {
+        "date": "2026-07-15",
+        "spotUsdPerOz": 4029.9,
+        "impliedCapT": 28.504
+      },
+      {
+        "date": "2026-07-16",
+        "spotUsdPerOz": 4034.2,
+        "impliedCapT": 28.535
+      },
+      {
+        "date": "2026-07-17",
+        "spotUsdPerOz": 3994.4,
+        "impliedCapT": 28.253
+      },
+      {
+        "date": "2026-07-18",
+        "spotUsdPerOz": 4019.3,
+        "impliedCapT": 28.429
+      },
+      {
+        "date": "2026-07-19",
+        "spotUsdPerOz": 4019.3,
+        "impliedCapT": 28.429
+      },
+      {
+        "date": "2026-07-20",
+        "spotUsdPerOz": 4017,
+        "impliedCapT": 28.413
+      },
+      {
+        "date": "2026-07-21",
+        "spotUsdPerOz": 4063.6,
+        "impliedCapT": 28.742
+      },
+      {
+        "date": "2026-07-22",
+        "spotUsdPerOz": 4117.5,
+        "impliedCapT": 29.124
+      },
+      {
+        "date": "2026-07-23",
+        "spotUsdPerOz": 4091.8,
+        "impliedCapT": 28.942
+      },
+      {
+        "date": "2026-07-24",
+        "spotUsdPerOz": 4053.8,
+        "impliedCapT": 28.673
+      },
+      {
+        "date": "2026-07-25",
+        "spotUsdPerOz": 4053.7,
+        "impliedCapT": 28.672
+      },
+      {
+        "date": "2026-07-26",
+        "spotUsdPerOz": 4053.7,
+        "impliedCapT": 28.672
+      },
+      {
+        "date": "2026-07-27",
+        "spotUsdPerOz": 4094.4,
+        "impliedCapT": 28.96
+      },
+      {
+        "date": "2026-07-28",
+        "spotUsdPerOz": 4047.1,
+        "impliedCapT": 28.626
+      },
+      {
+        "date": "2026-07-29",
+        "spotUsdPerOz": 4038,
+        "impliedCapT": 28.561
+      },
+      {
+        "date": "2026-07-30",
+        "spotUsdPerOz": 4070.7,
+        "impliedCapT": 28.793
+      },
+      {
+        "date": "2026-07-31",
+        "spotUsdPerOz": 4057.7,
+        "impliedCapT": 28.701
+      },
+      {
+        "date": "2026-08-01",
+        "spotUsdPerOz": 4043.7,
+        "impliedCapT": 28.602
+      },
+      {
+        "date": "2026-08-02",
+        "spotUsdPerOz": 4043.7,
+        "impliedCapT": 28.602
+      },
+      {
+        "date": "2026-08-03",
+        "spotUsdPerOz": 4057.8,
+        "impliedCapT": 28.701
+      },
+      {
+        "date": "2026-08-04",
+        "spotUsdPerOz": 4054.4,
+        "impliedCapT": 28.677
+      },
+      {
+        "date": "2026-08-05",
+        "spotUsdPerOz": 4164.4,
+        "impliedCapT": 29.455
+      },
+      {
+        "date": "2026-08-06",
+        "spotUsdPerOz": 4280.3,
+        "impliedCapT": 30.275
+      },
+      {
+        "date": "2026-08-07",
+        "spotUsdPerOz": 4288.2,
+        "impliedCapT": 30.331
+      },
+      {
+        "date": "2026-08-08",
+        "spotUsdPerOz": 4343.3,
+        "impliedCapT": 30.721
+      },
+      {
+        "date": "2026-08-09",
+        "spotUsdPerOz": 4343.3,
+        "impliedCapT": 30.721
+      },
+      {
+        "date": "2026-08-10",
+        "spotUsdPerOz": 4355.9,
+        "impliedCapT": 30.81
+      },
+      {
+        "date": "2026-08-11",
+        "spotUsdPerOz": 4362.3,
+        "impliedCapT": 30.855
+      },
+      {
+        "date": "2026-08-12",
+        "spotUsdPerOz": 4409.9,
+        "impliedCapT": 31.192
+      },
+      {
+        "date": "2026-08-13",
+        "spotUsdPerOz": 4374.5,
+        "impliedCapT": 30.942
+      },
+      {
+        "date": "2026-08-14",
+        "spotUsdPerOz": 4341.6,
+        "impliedCapT": 30.709
+      },
+      {
+        "date": "2026-08-15",
+        "spotUsdPerOz": 4377.6,
+        "impliedCapT": 30.963
+      },
+      {
+        "date": "2026-08-16",
+        "spotUsdPerOz": 4377.6,
+        "impliedCapT": 30.963
+      },
+      {
+        "date": "2026-08-17",
+        "spotUsdPerOz": 4397.9,
+        "impliedCapT": 31.107
+      },
+      {
+        "date": "2026-08-18",
+        "spotUsdPerOz": 4398.6,
+        "impliedCapT": 31.112
+      },
+      {
+        "date": "2026-08-19",
+        "spotUsdPerOz": 4351.8,
+        "impliedCapT": 30.781
+      },
+      {
+        "date": "2026-08-20",
+        "spotUsdPerOz": 4489,
+        "impliedCapT": 31.751
+      },
+      {
+        "date": "2026-08-21",
+        "spotUsdPerOz": 4564.5,
+        "impliedCapT": 32.285
+      },
+      {
+        "date": "2026-08-22",
+        "spotUsdPerOz": 4604.4,
+        "impliedCapT": 32.568
+      },
+      {
+        "date": "2026-08-23",
+        "spotUsdPerOz": 4604.4,
+        "impliedCapT": 32.568
+      },
+      {
+        "date": "2026-08-24",
+        "spotUsdPerOz": 4645.2,
+        "impliedCapT": 32.856
+      },
+      {
+        "date": "2026-08-25",
+        "spotUsdPerOz": 4642.5,
+        "impliedCapT": 32.837
+      },
+      {
+        "date": "2026-08-26",
+        "spotUsdPerOz": 4638.5,
+        "impliedCapT": 32.809
+      },
+      {
+        "date": "2026-08-27",
+        "spotUsdPerOz": 4609.8,
+        "impliedCapT": 32.606
+      },
+      {
+        "date": "2026-08-28",
+        "spotUsdPerOz": 4455.2,
+        "impliedCapT": 31.512
+      },
+      {
+        "date": "2026-08-29",
+        "spotUsdPerOz": 4456.4,
+        "impliedCapT": 31.521
+      },
+      {
+        "date": "2026-08-30",
+        "spotUsdPerOz": 4456.4,
+        "impliedCapT": 31.521
+      },
+      {
+        "date": "2026-08-31",
+        "spotUsdPerOz": 4434,
+        "impliedCapT": 31.362
+      },
+      {
+        "date": "2026-09-01",
+        "spotUsdPerOz": 4382.4,
+        "impliedCapT": 30.997
+      },
+      {
+        "date": "2026-09-02",
+        "spotUsdPerOz": 4322.1,
+        "impliedCapT": 30.571
+      },
+      {
+        "date": "2026-09-03",
+        "spotUsdPerOz": 4432.9,
+        "impliedCapT": 31.355
+      },
+      {
+        "date": "2026-09-04",
+        "spotUsdPerOz": 4471.1,
+        "impliedCapT": 31.625
+      },
+      {
+        "date": "2026-09-05",
+        "spotUsdPerOz": 4431.1,
+        "impliedCapT": 31.342
+      }
+    ]
+  },
+  "deltas": {
+    "generatedAt": "2026-09-05",
+    "day": {
+      "crypto": {
+        "pct": -0.81,
+        "absT": -0.022
+      },
+      "gold": {
+        "pct": -0.89,
+        "absT": -0.283
+      }
+    },
+    "month": {
+      "crypto": {
+        "pct": 17.61,
+        "absT": 0.4043
+      },
+      "gold": {
+        "pct": 3.52,
+        "absT": 1.067
+      }
+    }
+  },
+  "countryEquityMarkets": [
+    {
+      "rank": 1,
+      "country": "United States",
+      "region": "americas",
+      "capT": 65,
+      "note": "NYSE + NASDAQ",
+      "badge": null
+    },
+    {
+      "rank": 2,
+      "country": "China",
+      "region": "asia",
+      "capT": 11.2,
+      "note": "Shanghai + Shenzhen + HK",
+      "badge": null
+    },
+    {
+      "rank": 3,
+      "country": "Japan",
+      "region": "asia",
+      "capT": 6.5,
+      "note": "TSE",
+      "badge": null
+    },
+    {
+      "rank": 4,
+      "country": "India",
+      "region": "asia",
+      "capT": 5.8,
+      "note": "BSE + NSE",
+      "badge": {
+        "text": "↑ +38%",
+        "dir": "up"
+      }
+    },
+    {
+      "rank": 5,
+      "country": "United Kingdom",
+      "region": "emea",
+      "capT": 3.7,
+      "note": "LSE",
+      "badge": null
+    },
+    {
+      "rank": 6,
+      "country": "Canada",
+      "region": "americas",
+      "capT": 3.4,
+      "note": "TSX",
+      "badge": null
+    },
+    {
+      "rank": 7,
+      "country": "France",
+      "region": "emea",
+      "capT": 3.2,
+      "note": "Euronext Paris",
+      "badge": null
+    },
+    {
+      "rank": 8,
+      "country": "Saudi Arabia",
+      "region": "emea",
+      "capT": 2.8,
+      "note": "Tadawul",
+      "badge": null
+    },
+    {
+      "rank": 9,
+      "country": "Germany",
+      "region": "emea",
+      "capT": 2.4,
+      "note": "Deutsche Börse",
+      "badge": null
+    },
+    {
+      "rank": 10,
+      "country": "South Korea",
+      "region": "asia",
+      "capT": 2.3,
+      "note": "KRX",
+      "badge": {
+        "text": "↑ +45%",
+        "dir": "up"
+      }
+    }
   ],
-  equityFacts: [
-    { value: '$65T', label: 'USA market alone' },
-    { value:  '48%', label: 'US share of global equity' },
-    { value: '2.1×', label: 'equities vs. bonds' },
+  "equityFacts": [
+    {
+      "value": "$65T",
+      "label": "USA market alone"
+    },
+    {
+      "value": "48%",
+      "label": "US share of global equity"
+    },
+    {
+      "value": "2.1×",
+      "label": "equities vs. bonds"
+    }
   ],
-  worldGdp: {
-    totalT: 126.0, asOf: '2026-01-01', source: 'IMF WEO, Apr 2026',
-    topCountries: [
-      { rank: 1,  country: 'United States',  gdpT: 32.4, popM: 341,  medianAge: 38.9, workPopPct: 65 },
-      { rank: 2,  country: 'China',          gdpT: 20.9, popM: 1408, medianAge: 39.0, workPopPct: 68 },
-      { rank: 3,  country: 'Germany',        gdpT: 5.5,  popM: 84,   medianAge: 44.6, workPopPct: 64 },
-      { rank: 4,  country: 'Japan',          gdpT: 4.4,  popM: 124,  medianAge: 49.0, workPopPct: 59 },
-      { rank: 5,  country: 'United Kingdom', gdpT: 4.3,  popM: 68,   medianAge: 40.7, workPopPct: 64 },
-      { rank: 6,  country: 'India',          gdpT: 4.2,  popM: 1441, medianAge: 28.7, workPopPct: 67 },
-      { rank: 7,  country: 'France',         gdpT: 3.6,  popM: 68,   medianAge: 42.3, workPopPct: 62 },
-      { rank: 8,  country: 'Italy',          gdpT: 2.7,  popM: 59,   medianAge: 46.6, workPopPct: 63 },
-      { rank: 9,  country: 'Canada',         gdpT: 2.5,  popM: 40,   medianAge: 41.8, workPopPct: 66 },
-      { rank: 10, country: 'Brazil',         gdpT: 2.1,  popM: 216,  medianAge: 33.7, workPopPct: 70 },
-    ],
+  "worldGdp": {
+    "totalT": 126.3,
+    "asOf": "2026-09-05",
+    "source": "IMF World Economic Outlook, DataMapper API (live)",
+    "topCountries": [
+      {
+        "rank": 1,
+        "country": "United States",
+        "gdpT": 32.38,
+        "popM": 341,
+        "medianAge": 38.9,
+        "workPopPct": 65
+      },
+      {
+        "rank": 2,
+        "country": "China",
+        "gdpT": 20.85,
+        "popM": 1408,
+        "medianAge": 39,
+        "workPopPct": 68
+      },
+      {
+        "rank": 3,
+        "country": "Germany",
+        "gdpT": 5.45,
+        "popM": 84,
+        "medianAge": 44.6,
+        "workPopPct": 64
+      },
+      {
+        "rank": 4,
+        "country": "Japan",
+        "gdpT": 4.38,
+        "popM": 124,
+        "medianAge": 49,
+        "workPopPct": 59
+      },
+      {
+        "rank": 5,
+        "country": "United Kingdom",
+        "gdpT": 4.26,
+        "popM": 68,
+        "medianAge": 40.7,
+        "workPopPct": 64
+      },
+      {
+        "rank": 6,
+        "country": "India",
+        "gdpT": 4.15,
+        "popM": 1441,
+        "medianAge": 28.7,
+        "workPopPct": 67
+      },
+      {
+        "rank": 7,
+        "country": "France",
+        "gdpT": 3.6,
+        "popM": 68,
+        "medianAge": 42.3,
+        "workPopPct": 62
+      },
+      {
+        "rank": 8,
+        "country": "Italy",
+        "gdpT": 2.74,
+        "popM": 59,
+        "medianAge": 46.6,
+        "workPopPct": 63
+      },
+      {
+        "rank": 9,
+        "country": "Canada",
+        "gdpT": 2.51,
+        "popM": 40,
+        "medianAge": 41.8,
+        "workPopPct": 66
+      },
+      {
+        "rank": 10,
+        "country": "Brazil",
+        "gdpT": 2.64,
+        "popM": 216,
+        "medianAge": 33.7,
+        "workPopPct": 70
+      }
+    ]
   },
-  centralBanks: {
-    totalT: 24.2, peakTotalT: 30.5, peakYear: '2022',
-    asOf: '2026-06-01', source: 'Fed / ECB / BoJ / PBoC official releases',
-    banks: [
-      { name: "People's Bank of China", abbr: 'PBoC', flag: '🇨🇳', balanceSheetT: 6.75 },
-      { name: 'Federal Reserve',        abbr: 'Fed',  flag: '🇺🇸', balanceSheetT: 6.74 },
-      { name: 'European Central Bank',  abbr: 'ECB',  flag: '🇪🇺', balanceSheetT: 6.73 },
-      { name: 'Bank of Japan',          abbr: 'BoJ',  flag: '🇯🇵', balanceSheetT: 3.97 },
-    ],
+  "centralBanks": {
+    "totalT": 25.06,
+    "peakTotalT": 30.5,
+    "peakYear": "2022",
+    "asOf": "2026-08-01",
+    "source": "Fed (live via FRED WALCL) / ECB SDW / BoJ / PBoC official releases",
+    "banks": [
+      {
+        "name": "People's Bank of China",
+        "abbr": "PBoC",
+        "flag": "🇨🇳",
+        "balanceSheetT": 7.31
+      },
+      {
+        "name": "European Central Bank",
+        "abbr": "ECB",
+        "flag": "🇪🇺",
+        "balanceSheetT": 6.91
+      },
+      {
+        "name": "Federal Reserve",
+        "abbr": "Fed",
+        "flag": "🇺🇸",
+        "balanceSheetT": 6.737
+      },
+      {
+        "name": "Bank of Japan",
+        "abbr": "BoJ",
+        "flag": "🇯🇵",
+        "balanceSheetT": 4.1
+      }
+    ]
   },
-  globalDebt: {
-    totalT: 348, debtToGdpPct: 330,
-    asOf: '2025-12-31', source: 'IIF Global Debt Monitor, Feb 2026',
-    sectors: [
-      { id: 'govt', name: 'Government',          valueT: 106.7, color: '#4f81ff' },
-      { id: 'corp', name: 'Non-financial Corps', valueT: 100.6, color: '#a78bfa' },
-      { id: 'fin',  name: 'Financial Sector',    valueT:  76.1, color: '#fbbf24' },
-      { id: 'hh',   name: 'Households',          valueT:  64.6, color: '#34d399' },
-    ],
+  "globalDebt": {
+    "totalT": 348,
+    "debtToGdpPct": 308,
+    "asOf": "2025-12-31",
+    "source": "IIF Global Debt Monitor, Feb 2026",
+    "sectors": [
+      {
+        "id": "govt",
+        "name": "Government",
+        "valueT": 106.7,
+        "color": "#4f81ff"
+      },
+      {
+        "id": "corp",
+        "name": "Non-financial Corps",
+        "valueT": 100.6,
+        "color": "#a78bfa"
+      },
+      {
+        "id": "fin",
+        "name": "Financial Sector",
+        "valueT": 76.1,
+        "color": "#fbbf24"
+      },
+      {
+        "id": "hh",
+        "name": "Households",
+        "valueT": 64.6,
+        "color": "#34d399"
+      }
+    ]
   },
-  wealthDistribution: {
-    totalT: 477, asOf: '2024-12-31', source: 'UBS Global Wealth Report, 2025',
-    tiers: [
-      { group: 'Top 1%',     adultsM:   60, sharePct: 48.1 },
-      { group: 'Next 9%',    adultsM:  540, sharePct: 38.9 },
-      { group: 'Middle 40%', adultsM: 2400, sharePct: 11.2 },
-      { group: 'Bottom 50%', adultsM: 3000, sharePct:  1.8 },
-    ],
+  "wealthDistribution": {
+    "totalT": 570,
+    "asOf": "2025-12-31",
+    "source": "UBS Global Wealth Report, 2026 (published Jun 2026, covers 2025 data)",
+    "tiers": [
+      {
+        "group": "Top 1%",
+        "adultsM": 60,
+        "sharePct": 48.1
+      },
+      {
+        "group": "Next 9%",
+        "adultsM": 540,
+        "sharePct": 38.9
+      },
+      {
+        "group": "Middle 40%",
+        "adultsM": 2400,
+        "sharePct": 11.2
+      },
+      {
+        "group": "Bottom 50%",
+        "adultsM": 3000,
+        "sharePct": 1.8
+      }
+    ]
   },
-  topPrivateCompanies: {
-    asOf: '2026-07-04', source: 'companiesmarketcap.com',
-    companies: [
-      { rank:  1, name: 'NVIDIA',    ticker: 'NVDA', flag: '🇺🇸', sector: 'AI / Chips',       capT: 4.72 },
-      { rank:  2, name: 'Apple',     ticker: 'AAPL', flag: '🇺🇸', sector: 'Consumer Tech',    capT: 4.53 },
-      { rank:  3, name: 'Alphabet',  ticker: 'GOOG', flag: '🇺🇸', sector: 'Internet',         capT: 4.35 },
-      { rank:  4, name: 'Microsoft', ticker: 'MSFT', flag: '🇺🇸', sector: 'Cloud',            capT: 2.90 },
-      { rank:  5, name: 'Amazon',    ticker: 'AMZN', flag: '🇺🇸', sector: 'E-Commerce/Cloud', capT: 2.61 },
-      { rank:  6, name: 'TSMC',      ticker: 'TSM',  flag: '🇹🇼', sector: 'Semiconductors',   capT: 2.25 },
-      { rank:  7, name: 'SpaceX',    ticker: 'SPCX', flag: '🇺🇸', sector: 'Aerospace',        capT: 2.13 },
-      { rank:  8, name: 'Broadcom',  ticker: 'AVGO', flag: '🇺🇸', sector: 'Semiconductors',   capT: 1.71 },
-      { rank:  9, name: 'Meta',      ticker: 'META', flag: '🇺🇸', sector: 'Social Media',     capT: 1.48 },
-      { rank: 10, name: 'Tesla',     ticker: 'TSLA', flag: '🇺🇸', sector: 'EVs / Energy',     capT: 1.48 },
-    ],
+  "topPrivateCompanies": {
+    "asOf": "2026-09-05",
+    "source": "Live: price (Yahoo Finance) × shares outstanding (curated, reviewed quarterly)",
+    "companies": [
+      {
+        "rank": 1,
+        "name": "NVIDIA",
+        "ticker": "NVDA",
+        "flag": "🇺🇸",
+        "sector": "AI / Chips",
+        "capT": 5.09
+      },
+      {
+        "rank": 2,
+        "name": "Alphabet",
+        "ticker": "GOOG",
+        "flag": "🇺🇸",
+        "sector": "Internet",
+        "capT": 4.55
+      },
+      {
+        "rank": 3,
+        "name": "Apple",
+        "ticker": "AAPL",
+        "flag": "🇺🇸",
+        "sector": "Consumer Tech",
+        "capT": 4.49
+      },
+      {
+        "rank": 4,
+        "name": "Microsoft",
+        "ticker": "MSFT",
+        "flag": "🇺🇸",
+        "sector": "Cloud",
+        "capT": 3.69
+      },
+      {
+        "rank": 5,
+        "name": "Amazon",
+        "ticker": "AMZN",
+        "flag": "🇺🇸",
+        "sector": "E-Commerce/Cloud",
+        "capT": 2.99
+      },
+      {
+        "rank": 6,
+        "name": "TSMC",
+        "ticker": "TSM",
+        "flag": "🇹🇼",
+        "sector": "Semiconductors",
+        "capT": 2.15
+      },
+      {
+        "rank": 7,
+        "name": "SpaceX",
+        "ticker": "SPCX",
+        "flag": "🇺🇸",
+        "sector": "Aerospace",
+        "capT": 1.51
+      },
+      {
+        "rank": 8,
+        "name": "Broadcom",
+        "ticker": "AVGO",
+        "flag": "🇺🇸",
+        "sector": "Semiconductors",
+        "capT": 1.51
+      },
+      {
+        "rank": 9,
+        "name": "Meta",
+        "ticker": "META",
+        "flag": "🇺🇸",
+        "sector": "Social Media",
+        "capT": 1.27
+      },
+      {
+        "rank": 10,
+        "name": "Tesla",
+        "ticker": "TSLA",
+        "flag": "🇺🇸",
+        "sector": "EVs / Energy",
+        "capT": 1.21
+      }
+    ]
   },
-  topStateEntities: {
-    asOf: '2025-12-31', source: 'SWFI, companiesmarketcap.com',
-    entities: [
-      { rank:  1, name: 'Norway GPFG',     flag: '🇳🇴', type: 'SWF', country: 'Norway',       valueT: 2.00 },
-      { rank:  2, name: 'Saudi Aramco',    flag: '🇸🇦', type: 'SOE', country: 'Saudi Arabia', valueT: 1.68 },
-      { rank:  3, name: 'China Inv. Corp', flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.24 },
-      { rank:  4, name: 'ADIA',            flag: '🇦🇪', type: 'SWF', country: 'UAE',          valueT: 1.10 },
-      { rank:  5, name: 'SAFE (China)',    flag: '🇨🇳', type: 'SWF', country: 'China',        valueT: 1.08 },
-      { rank:  6, name: 'Kuwait IA',       flag: '🇰🇼', type: 'SWF', country: 'Kuwait',       valueT: 1.00 },
-      { rank:  7, name: 'GIC Singapore',   flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.94 },
-      { rank:  8, name: 'PIF',             flag: '🇸🇦', type: 'SWF', country: 'Saudi Arabia', valueT: 0.93 },
-      { rank:  9, name: 'Qatar IA',        flag: '🇶🇦', type: 'SWF', country: 'Qatar',        valueT: 0.56 },
-      { rank: 10, name: 'Temasek',         flag: '🇸🇬', type: 'SWF', country: 'Singapore',    valueT: 0.49 },
-    ],
+  "topStateEntities": {
+    "asOf": "2026-08-01",
+    "source": "Global SWF tracker, official fund disclosures (PIF, Aramco), companiesmarketcap.com",
+    "entities": [
+      {
+        "rank": 1,
+        "name": "Norway GPFG",
+        "flag": "🇳🇴",
+        "type": "SWF",
+        "country": "Norway",
+        "valueT": 2.06
+      },
+      {
+        "rank": 2,
+        "name": "SAFE (China)",
+        "flag": "🇨🇳",
+        "type": "SWF",
+        "country": "China",
+        "valueT": 1.99
+      },
+      {
+        "rank": 3,
+        "name": "Saudi Aramco",
+        "flag": "🇸🇦",
+        "type": "SOE",
+        "country": "Saudi Arabia",
+        "valueT": 1.68
+      },
+      {
+        "rank": 4,
+        "name": "China Inv. Corp",
+        "flag": "🇨🇳",
+        "type": "SWF",
+        "country": "China",
+        "valueT": 1.57
+      },
+      {
+        "rank": 5,
+        "name": "ADIA",
+        "flag": "🇦🇪",
+        "type": "SWF",
+        "country": "UAE",
+        "valueT": 1.56,
+        "note": "undisclosed AUM; third-party estimate"
+      },
+      {
+        "rank": 6,
+        "name": "Kuwait IA",
+        "flag": "🇰🇼",
+        "type": "SWF",
+        "country": "Kuwait",
+        "valueT": 1,
+        "note": "undisclosed AUM; third-party estimate"
+      },
+      {
+        "rank": 7,
+        "name": "GIC Singapore",
+        "flag": "🇸🇬",
+        "type": "SWF",
+        "country": "Singapore",
+        "valueT": 0.87,
+        "note": "undisclosed AUM; third-party estimate"
+      },
+      {
+        "rank": 8,
+        "name": "PIF",
+        "flag": "🇸🇦",
+        "type": "SWF",
+        "country": "Saudi Arabia",
+        "valueT": 0.9
+      },
+      {
+        "rank": 9,
+        "name": "Qatar IA",
+        "flag": "🇶🇦",
+        "type": "SWF",
+        "country": "Qatar",
+        "valueT": 0.51,
+        "note": "undisclosed AUM; third-party estimate"
+      },
+      {
+        "rank": 10,
+        "name": "Temasek",
+        "flag": "🇸🇬",
+        "type": "SWF",
+        "country": "Singapore",
+        "valueT": 0.4
+      }
+    ]
   },
-  marketTrends: {
-    asOf: '2025-12-31', source: 'S&P Dow Jones, WGC, Bloomberg, BLS, Federal Reserve',
-    assetReturns: {
-      years: ['2020','2021','2022','2023','2024','2025'],
-      series: [
-        { id: 'sp500', label: 'S&P 500', color: '#34d399', returns: [18.4,  28.7, -18.1,  26.3,  25.0,  9.0] },
-        { id: 'gold',  label: 'Gold',    color: '#fcd34d', returns: [25.8,  -3.7,   2.1,  13.1,  27.2, 26.0] },
-        { id: 'btc',   label: 'Bitcoin', color: '#f97316', returns: [303.0, 60.0, -65.0, 155.0, 121.0, 22.0] },
-        { id: 'bonds', label: 'Bonds',   color: '#a78bfa', returns: [7.5,   -1.5, -13.0,   5.5,   1.3,  2.0] },
+  "marketTrends": {
+    "asOf": "2025-12-31",
+    "source": "S&P Dow Jones, WGC, Bloomberg, BLS, Federal Reserve",
+    "assetReturns": {
+      "years": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
       ],
+      "series": [
+        {
+          "id": "sp500",
+          "label": "S&P 500",
+          "color": "#34d399",
+          "returns": [
+            18.4,
+            28.7,
+            -18.1,
+            26.3,
+            25,
+            9
+          ]
+        },
+        {
+          "id": "gold",
+          "label": "Gold",
+          "color": "#fcd34d",
+          "returns": [
+            25.8,
+            -3.7,
+            2.1,
+            13.1,
+            27.2,
+            26
+          ]
+        },
+        {
+          "id": "btc",
+          "label": "Bitcoin",
+          "color": "#f97316",
+          "returns": [
+            303,
+            60,
+            -65,
+            155,
+            121,
+            22
+          ]
+        },
+        {
+          "id": "bonds",
+          "label": "Bonds",
+          "color": "#a78bfa",
+          "returns": [
+            7.5,
+            -1.5,
+            -13,
+            5.5,
+            1.3,
+            2
+          ]
+        }
+      ]
     },
-    longTermReturns: {
-      source: 'S&P 500 total return, gold spot, Bloomberg US Agg Bond TR — year-end cumulative from $1',
-      since2010: {
-        years: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
-        sp500: [1.15,1.18,1.36,1.80,2.05,2.08,2.33,2.84,2.71,3.57,4.23,5.44,4.46,5.63,7.03,7.67],
-        gold:  [1.31,1.44,1.52,1.10,1.09,0.98,1.06,1.20,1.18,1.39,1.74,1.68,1.68,1.90,2.41,3.03],
-        bonds: [1.07,1.15,1.20,1.17,1.24,1.25,1.28,1.33,1.33,1.44,1.55,1.53,1.33,1.40,1.42,1.45],
+    "longTermReturns": {
+      "source": "S&P 500 total return, gold spot, Bloomberg US Agg Bond TR — annual year-end cumulative from $1 base",
+      "since2010": {
+        "years": [
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "sp500": [
+          1.15,
+          1.18,
+          1.36,
+          1.8,
+          2.05,
+          2.08,
+          2.33,
+          2.84,
+          2.71,
+          3.57,
+          4.23,
+          5.44,
+          4.46,
+          5.63,
+          7.03,
+          7.67
+        ],
+        "gold": [
+          1.31,
+          1.44,
+          1.52,
+          1.1,
+          1.09,
+          0.98,
+          1.06,
+          1.2,
+          1.18,
+          1.39,
+          1.74,
+          1.68,
+          1.68,
+          1.9,
+          2.41,
+          3.03
+        ],
+        "bonds": [
+          1.07,
+          1.15,
+          1.2,
+          1.17,
+          1.24,
+          1.25,
+          1.28,
+          1.33,
+          1.33,
+          1.44,
+          1.55,
+          1.53,
+          1.33,
+          1.4,
+          1.42,
+          1.45
+        ]
       },
-      since2000: {
-        years: ['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
-        sp500: [0.91,0.80,0.62,0.80,0.89,0.93,1.08,1.14,0.72,0.91,1.05,1.07,1.24,1.64,1.86,1.89,2.12,2.58,2.46,3.24,3.84,4.94,4.05,5.11,6.39,6.97],
-        gold:  [0.94,0.95,1.20,1.43,1.51,1.77,2.19,2.89,3.00,3.75,4.90,5.40,5.71,4.15,4.08,3.66,3.97,4.49,4.42,5.23,6.53,6.31,6.29,7.11,9.06,11.42],
-        bonds: [1.12,1.21,1.33,1.39,1.45,1.48,1.55,1.66,1.74,1.85,1.97,2.12,2.21,2.16,2.29,2.30,2.37,2.45,2.45,2.66,2.86,2.82,2.45,2.59,2.62,2.67],
+      "since2000": {
+        "years": [
+          "2000",
+          "2001",
+          "2002",
+          "2003",
+          "2004",
+          "2005",
+          "2006",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "sp500": [
+          0.91,
+          0.8,
+          0.62,
+          0.8,
+          0.89,
+          0.93,
+          1.08,
+          1.14,
+          0.72,
+          0.91,
+          1.05,
+          1.07,
+          1.24,
+          1.64,
+          1.86,
+          1.89,
+          2.12,
+          2.58,
+          2.46,
+          3.24,
+          3.84,
+          4.94,
+          4.05,
+          5.11,
+          6.39,
+          6.97
+        ],
+        "gold": [
+          0.94,
+          0.95,
+          1.2,
+          1.43,
+          1.51,
+          1.77,
+          2.19,
+          2.89,
+          3,
+          3.75,
+          4.9,
+          5.4,
+          5.71,
+          4.15,
+          4.08,
+          3.66,
+          3.97,
+          4.49,
+          4.42,
+          5.23,
+          6.53,
+          6.31,
+          6.29,
+          7.11,
+          9.06,
+          11.42
+        ],
+        "bonds": [
+          1.12,
+          1.21,
+          1.33,
+          1.39,
+          1.45,
+          1.48,
+          1.55,
+          1.66,
+          1.74,
+          1.85,
+          1.97,
+          2.12,
+          2.21,
+          2.16,
+          2.29,
+          2.3,
+          2.37,
+          2.45,
+          2.45,
+          2.66,
+          2.86,
+          2.82,
+          2.45,
+          2.59,
+          2.62,
+          2.67
+        ]
       },
-      since1990: {
-        years: ['1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
-        sp500: [0.97,1.27,1.36,1.50,1.52,2.09,2.57,3.43,4.41,5.33,4.85,4.27,3.33,4.28,4.75,4.98,5.77,6.09,3.83,4.85,5.58,5.70,6.61,8.75,9.95,10.09,11.30,13.77,13.16,17.31,20.49,26.37,21.60,27.28,34.09,37.16],
-        gold:  [1.00,0.90,0.85,1.00,0.98,0.99,0.94,0.74,0.74,0.74,0.70,0.71,0.89,1.06,1.12,1.31,1.63,2.14,2.23,2.78,3.63,4.00,4.24,3.07,3.03,2.71,2.95,3.33,3.28,3.88,4.85,4.68,4.67,5.28,6.72,8.47],
-        bonds: [1.09,1.26,1.36,1.49,1.45,1.72,1.78,1.95,2.12,2.10,2.35,2.54,2.81,2.92,3.05,3.12,3.25,3.48,3.66,3.88,4.13,4.45,4.64,4.55,4.82,4.85,4.98,5.15,5.15,5.60,6.02,5.93,5.16,5.44,5.51,5.62],
-      },
+      "since1990": {
+        "years": [
+          "1990",
+          "1991",
+          "1992",
+          "1993",
+          "1994",
+          "1995",
+          "1996",
+          "1997",
+          "1998",
+          "1999",
+          "2000",
+          "2001",
+          "2002",
+          "2003",
+          "2004",
+          "2005",
+          "2006",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "sp500": [
+          0.97,
+          1.27,
+          1.36,
+          1.5,
+          1.52,
+          2.09,
+          2.57,
+          3.43,
+          4.41,
+          5.33,
+          4.85,
+          4.27,
+          3.33,
+          4.28,
+          4.75,
+          4.98,
+          5.77,
+          6.09,
+          3.83,
+          4.85,
+          5.58,
+          5.7,
+          6.61,
+          8.75,
+          9.95,
+          10.09,
+          11.3,
+          13.77,
+          13.16,
+          17.31,
+          20.49,
+          26.37,
+          21.6,
+          27.28,
+          34.09,
+          37.16
+        ],
+        "gold": [
+          1,
+          0.9,
+          0.85,
+          1,
+          0.98,
+          0.99,
+          0.94,
+          0.74,
+          0.74,
+          0.74,
+          0.7,
+          0.71,
+          0.89,
+          1.06,
+          1.12,
+          1.31,
+          1.63,
+          2.14,
+          2.23,
+          2.78,
+          3.63,
+          4,
+          4.24,
+          3.07,
+          3.03,
+          2.71,
+          2.95,
+          3.33,
+          3.28,
+          3.88,
+          4.85,
+          4.68,
+          4.67,
+          5.28,
+          6.72,
+          8.47
+        ],
+        "bonds": [
+          1.09,
+          1.26,
+          1.36,
+          1.49,
+          1.45,
+          1.72,
+          1.78,
+          1.95,
+          2.12,
+          2.1,
+          2.35,
+          2.54,
+          2.81,
+          2.92,
+          3.05,
+          3.12,
+          3.25,
+          3.48,
+          3.66,
+          3.88,
+          4.13,
+          4.45,
+          4.64,
+          4.55,
+          4.82,
+          4.85,
+          4.98,
+          5.15,
+          5.15,
+          5.6,
+          6.02,
+          5.93,
+          5.16,
+          5.44,
+          5.51,
+          5.62
+        ]
+      }
     },
-    rateAndInflation: {
-      labels: ["Jan'20","Jul'20","Jan'21","Jul'21","Jan'22","Jul'22","Jan'23","Jul'23","Jan'24","Jul'24","Jan'25","Jul'25"],
-      fedFunds: [1.55, 0.09, 0.09, 0.10, 0.08, 2.33, 4.33, 5.33, 5.33, 5.33, 4.33, 4.33],
-      cpiYoY:   [2.5,  1.0,  1.4,  5.4,  7.5,  9.1,  6.4,  3.2,  3.1,  2.9,  3.0,  2.4],
-    },
+    "rateAndInflation": {
+      "labels": [
+        "Jan'21",
+        "Jul'21",
+        "Jan'22",
+        "Jul'22",
+        "Jan'23",
+        "Jul'23",
+        "Jan'24",
+        "Jul'24",
+        "Jan'25",
+        "Jul'25",
+        "Jan'26",
+        "Jul'26"
+      ],
+      "fedFunds": [
+        0.09,
+        0.1,
+        0.08,
+        1.68,
+        4.33,
+        5.12,
+        5.33,
+        5.33,
+        4.33,
+        4.33,
+        3.64,
+        3.63
+      ],
+      "cpiYoY": [
+        1.4,
+        5.2,
+        7.6,
+        8.5,
+        6.3,
+        3.3,
+        3.1,
+        2.9,
+        3,
+        2.7,
+        2.4,
+        3.3
+      ]
+    }
   },
-  marketPulse: {
-    asOf: '2026-07-19',
-    markets: [
-      { id: 'sp500',  label: 'S&P 500',    flag: '🇺🇸', region: 'americas', price: 7458,  changePct: -1.55, stale: false },
-      { id: 'nasdaq', label: 'NASDAQ',     flag: '🇺🇸', region: 'americas', price: 25520, changePct: -2.90, stale: false },
-      { id: 'kospi',  label: 'KOSPI',      flag: '🇰🇷', region: 'asia',     price: 6821,  changePct: -6.46, stale: false },
-      { id: 'nikkei', label: 'Nikkei 225', flag: '🇯🇵', region: 'asia',     price: 64141, changePct: -4.61, stale: false },
-      { id: 'sse',    label: 'Shanghai',   flag: '🇨🇳', region: 'asia',     price: 3764,  changePct: -3.82, stale: false },
-      { id: 'dax',    label: 'DAX',        flag: '🇩🇪', region: 'emea',     price: 24831, changePct: -0.94, stale: false },
-      { id: 'ftse',   label: 'FTSE 100',   flag: '🇬🇧', region: 'emea',     price: 10600, changePct:  0.98, stale: false },
-    ],
+  "marketPulse": {
+    "asOf": "2026-09-05",
+    "markets": [
+      {
+        "id": "sp500",
+        "label": "S&P 500",
+        "flag": "🇺🇸",
+        "region": "americas",
+        "price": 7718.6,
+        "changePct": 0.09,
+        "stale": false
+      },
+      {
+        "id": "nasdaq",
+        "label": "NASDAQ",
+        "flag": "🇺🇸",
+        "region": "americas",
+        "price": 26506.99,
+        "changePct": 0.4,
+        "stale": false
+      },
+      {
+        "id": "kospi",
+        "label": "KOSPI",
+        "flag": "🇰🇷",
+        "region": "asia",
+        "price": 6687.21,
+        "changePct": -1.5,
+        "stale": false
+      },
+      {
+        "id": "nikkei",
+        "label": "Nikkei 225",
+        "flag": "🇯🇵",
+        "region": "asia",
+        "price": 65020.94,
+        "changePct": -1.95,
+        "stale": false
+      },
+      {
+        "id": "sse",
+        "label": "Shanghai",
+        "flag": "🇨🇳",
+        "region": "asia",
+        "price": 3930.12,
+        "changePct": -1.41,
+        "stale": false
+      },
+      {
+        "id": "dax",
+        "label": "DAX",
+        "flag": "🇩🇪",
+        "region": "emea",
+        "price": 26046.4,
+        "changePct": -1.97,
+        "stale": false
+      },
+      {
+        "id": "ftse",
+        "label": "FTSE 100",
+        "flag": "🇬🇧",
+        "region": "emea",
+        "price": 10831.09,
+        "changePct": 0.36,
+        "stale": false
+      }
+    ]
   },
-  economicEvents: [
-    { date: '2026-07-23', label: 'ECB rate decision',    kind: 'ecb'  },
-    { date: '2026-07-29', label: 'FOMC rate decision',   kind: 'fed'  },
-    { date: '2026-07-31', label: 'BoJ policy decision',  kind: 'boj',  note: 'incl. Outlook Report' },
-    { date: '2026-08-07', label: 'US jobs report (NFP)', kind: 'jobs' },
-    { date: '2026-08-12', label: 'US CPI release',       kind: 'cpi'  },
-    { date: '2026-09-04', label: 'US jobs report (NFP)', kind: 'jobs' },
-    { date: '2026-09-10', label: 'ECB rate decision',    kind: 'ecb'  },
-    { date: '2026-09-11', label: 'US CPI release',       kind: 'cpi'  },
-    { date: '2026-09-16', label: 'FOMC rate decision',   kind: 'fed',  note: 'incl. dot plot' },
-    { date: '2026-09-18', label: 'BoJ policy decision',  kind: 'boj'  },
-    { date: '2026-10-02', label: 'US jobs report (NFP)', kind: 'jobs' },
-    { date: '2026-10-14', label: 'US CPI release',       kind: 'cpi'  },
-    { date: '2026-10-28', label: 'FOMC rate decision',   kind: 'fed'  },
-    { date: '2026-10-29', label: 'ECB rate decision',    kind: 'ecb'  },
-    { date: '2026-10-30', label: 'BoJ policy decision',  kind: 'boj',  note: 'incl. Outlook Report' },
-    { date: '2026-11-06', label: 'US jobs report (NFP)', kind: 'jobs' },
-    { date: '2026-11-10', label: 'US CPI release',       kind: 'cpi'  },
-    { date: '2026-12-04', label: 'US jobs report (NFP)', kind: 'jobs' },
-    { date: '2026-12-09', label: 'FOMC rate decision',   kind: 'fed',  note: 'incl. dot plot' },
-    { date: '2026-12-17', label: 'ECB rate decision',    kind: 'ecb'  },
-    { date: '2026-12-18', label: 'US CPI release',       kind: 'cpi'  },
-    { date: '2026-12-18', label: 'BoJ policy decision',  kind: 'boj'  },
+  "economicEvents": [
+    {
+      "date": "2026-07-23",
+      "label": "ECB rate decision",
+      "kind": "ecb"
+    },
+    {
+      "date": "2026-07-29",
+      "label": "FOMC rate decision",
+      "kind": "fed"
+    },
+    {
+      "date": "2026-07-31",
+      "label": "BoJ policy decision",
+      "kind": "boj",
+      "note": "incl. Outlook Report"
+    },
+    {
+      "date": "2026-08-07",
+      "label": "US jobs report (NFP)",
+      "kind": "jobs"
+    },
+    {
+      "date": "2026-08-12",
+      "label": "US CPI release",
+      "kind": "cpi"
+    },
+    {
+      "date": "2026-09-04",
+      "label": "US jobs report (NFP)",
+      "kind": "jobs"
+    },
+    {
+      "date": "2026-09-10",
+      "label": "ECB rate decision",
+      "kind": "ecb"
+    },
+    {
+      "date": "2026-09-11",
+      "label": "US CPI release",
+      "kind": "cpi"
+    },
+    {
+      "date": "2026-09-16",
+      "label": "FOMC rate decision",
+      "kind": "fed",
+      "note": "incl. dot plot"
+    },
+    {
+      "date": "2026-09-18",
+      "label": "BoJ policy decision",
+      "kind": "boj"
+    },
+    {
+      "date": "2026-10-02",
+      "label": "US jobs report (NFP)",
+      "kind": "jobs"
+    },
+    {
+      "date": "2026-10-14",
+      "label": "US CPI release",
+      "kind": "cpi"
+    },
+    {
+      "date": "2026-10-28",
+      "label": "FOMC rate decision",
+      "kind": "fed"
+    },
+    {
+      "date": "2026-10-29",
+      "label": "ECB rate decision",
+      "kind": "ecb"
+    },
+    {
+      "date": "2026-10-30",
+      "label": "BoJ policy decision",
+      "kind": "boj",
+      "note": "incl. Outlook Report"
+    },
+    {
+      "date": "2026-11-06",
+      "label": "US jobs report (NFP)",
+      "kind": "jobs"
+    },
+    {
+      "date": "2026-11-10",
+      "label": "US CPI release",
+      "kind": "cpi"
+    },
+    {
+      "date": "2026-12-04",
+      "label": "US jobs report (NFP)",
+      "kind": "jobs"
+    },
+    {
+      "date": "2026-12-09",
+      "label": "FOMC rate decision",
+      "kind": "fed",
+      "note": "incl. dot plot"
+    },
+    {
+      "date": "2026-12-17",
+      "label": "ECB rate decision",
+      "kind": "ecb"
+    },
+    {
+      "date": "2026-12-18",
+      "label": "US CPI release",
+      "kind": "cpi"
+    },
+    {
+      "date": "2026-12-18",
+      "label": "BoJ policy decision",
+      "kind": "boj"
+    }
   ],
-  editorNote: null,
-  insights: {
-    asOf: '2026-07-19T00:00:00.000Z',
-    items: [
-      'KOSPI −6.5% — biggest move among tracked markets',
-      'Next: ECB rate decision in 4 days (2026-07-23)',
-    ],
-  },
+  "editorNote": null,
+  "insights": {
+    "asOf": "2026-09-05T00:14:24.973Z",
+    "items": [
+      "DAX −2.0% — biggest move among tracked markets",
+      "Next: ECB rate decision in 5 days (2026-09-10)"
+    ]
+  }
 };
 
 // ── Country flag lookup ───────────────────────────────────────────────────────
@@ -1322,7 +3145,7 @@ function renderGlobalTrends(data) {
               <text x="${lx+11}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">${s.label}</text>`;
     }).join('');
 
-    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Annual asset returns 2020-2025">${grid}${bars}${xLbls}${legend}</svg>`;
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Annual asset returns ${yrs[0]}-${yrs[yrs.length - 1]}">${grid}${bars}${xLbls}${legend}</svg>`;
   }
 
   // ── Chart 3: Fed Funds Rate + CPI ─────────────────────────────────────────
@@ -1358,12 +3181,15 @@ function renderGlobalTrends(data) {
       <text x="${PL+81}" y="${PT-6}" font-size="9" fill="var(--text-muted)" font-family="var(--font-mono)">Fed Rate</text>`;
 
     // Peak CPI annotation
-    const peakIdx = 5; // Jul'22 = 9.1% peak
-    const px = xS(peakIdx).toFixed(1), py = (yS(9.1) - 8).toFixed(1);
-    const annotation = `<text x="${px}" y="${py}" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444" font-family="var(--font-mono)">9.1%</text>
-      <line x1="${px}" y1="${(parseFloat(py)+2).toFixed(1)}" x2="${px}" y2="${yS(9.1).toFixed(1)}" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>`;
+    // rateAndInflation is now rebuilt live every run on a rolling window, so the
+    // peak's position and value must be derived from the actual data, not assumed.
+    const peakVal = Math.max(...cpiYoY);
+    const peakIdx = cpiYoY.indexOf(peakVal);
+    const px = xS(peakIdx).toFixed(1), py = (yS(peakVal) - 8).toFixed(1);
+    const annotation = `<text x="${px}" y="${py}" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444" font-family="var(--font-mono)">${peakVal.toFixed(1)}%</text>
+      <line x1="${px}" y1="${(parseFloat(py)+2).toFixed(1)}" x2="${px}" y2="${yS(peakVal).toFixed(1)}" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>`;
 
-    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Fed Funds Rate vs CPI inflation 2020-2025">
+    return `<svg viewBox="0 0 ${W} ${H}" class="trend-svg" role="img" aria-label="Fed Funds Rate vs CPI inflation ${labels[0]}-${labels[labels.length - 1]}">
       ${grid}
       <path d="${areaPath(cpiPts, bottomY)}" fill="#ef4444" opacity="0.08"/>
       <path d="${smoothPath(cpiPts)}" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1393,14 +3219,14 @@ function renderGlobalTrends(data) {
       <div class="trend-card">
         <div class="trend-card-hdr">
           <span class="trend-card-title">Annual Returns</span>
-          <span class="trend-card-sub">S&P 500 · Gold · Bitcoin · Bonds · 2020–2025</span>
+          <span class="trend-card-sub">S&P 500 · Gold · Bitcoin · Bonds · ${t.assetReturns.years[0]}–${t.assetReturns.years[t.assetReturns.years.length - 1]}</span>
         </div>
         ${makeReturnsChart()}
       </div>
       <div class="trend-card">
         <div class="trend-card-hdr">
           <span class="trend-card-title">Rates & Inflation</span>
-          <span class="trend-card-sub">US Fed Funds Rate vs. CPI · Jan 2020 – Jul 2025</span>
+          <span class="trend-card-sub">US Fed Funds Rate vs. CPI · ${t.rateAndInflation.labels[0]} – ${t.rateAndInflation.labels[t.rateAndInflation.labels.length - 1]}</span>
         </div>
         ${makeRateChart()}
       </div>
