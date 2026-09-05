@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-05T00:14:13.551Z",
+    "generatedAt": "2026-09-05T00:20:36.271Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -265,14 +265,14 @@
     "athDate": "2025-10",
     "volume24hB": 98.25,
     "btc": {
-      "capT": 1.6006,
+      "capT": 1.599,
       "dominancePct": 59.1896,
-      "priceUsd": 79722
+      "priceUsd": 79641
     },
     "eth": {
-      "capB": 299.73,
+      "capB": 299.46,
       "dominancePct": 11.0847,
-      "priceUsd": 2456.79
+      "priceUsd": 2454.4
     },
     "stablecoinsB": 247.9,
     "top5": [
@@ -281,18 +281,18 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 79722,
-        "capB": 1600.6,
-        "change24hPct": -1.8
+        "priceUsd": 79641,
+        "capB": 1599,
+        "change24hPct": -1.93
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 2456.79,
-        "capB": 299.7,
-        "change24hPct": -1.96
+        "priceUsd": 2454.4,
+        "capB": 299.5,
+        "change24hPct": -2.1
       },
       {
         "rank": 3,
@@ -308,9 +308,9 @@
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 721.49,
-        "capB": 96.1,
-        "change24hPct": -0.41
+        "priceUsd": 720.6,
+        "capB": 95.9,
+        "change24hPct": -0.84
       },
       {
         "rank": 5,
@@ -318,8 +318,8 @@
         "symbol": "XRP",
         "name": "XRP",
         "priceUsd": 1.4,
-        "capB": 87.8,
-        "change24hPct": -3.43
+        "capB": 87.7,
+        "change24hPct": -3.6
       }
     ],
     "sparklineData": [
@@ -1029,14 +1029,14 @@
     }
   ],
   "worldGdp": {
-    "totalT": 126.3,
-    "asOf": "2026-09-05",
-    "source": "IMF World Economic Outlook, DataMapper API (live)",
+    "totalT": 126,
+    "asOf": "2026-01-01",
+    "source": "IMF WEO, Apr 2026",
     "topCountries": [
       {
         "rank": 1,
         "country": "United States",
-        "gdpT": 32.38,
+        "gdpT": 32.4,
         "popM": 341,
         "medianAge": 38.9,
         "workPopPct": 65
@@ -1044,7 +1044,7 @@
       {
         "rank": 2,
         "country": "China",
-        "gdpT": 20.85,
+        "gdpT": 20.9,
         "popM": 1408,
         "medianAge": 39,
         "workPopPct": 68
@@ -1052,7 +1052,7 @@
       {
         "rank": 3,
         "country": "Germany",
-        "gdpT": 5.45,
+        "gdpT": 5.5,
         "popM": 84,
         "medianAge": 44.6,
         "workPopPct": 64
@@ -1060,7 +1060,7 @@
       {
         "rank": 4,
         "country": "Japan",
-        "gdpT": 4.38,
+        "gdpT": 4.4,
         "popM": 124,
         "medianAge": 49,
         "workPopPct": 59
@@ -1068,7 +1068,7 @@
       {
         "rank": 5,
         "country": "United Kingdom",
-        "gdpT": 4.26,
+        "gdpT": 4.3,
         "popM": 68,
         "medianAge": 40.7,
         "workPopPct": 64
@@ -1076,7 +1076,7 @@
       {
         "rank": 6,
         "country": "India",
-        "gdpT": 4.15,
+        "gdpT": 4.2,
         "popM": 1441,
         "medianAge": 28.7,
         "workPopPct": 67
@@ -1092,7 +1092,7 @@
       {
         "rank": 8,
         "country": "Italy",
-        "gdpT": 2.74,
+        "gdpT": 2.7,
         "popM": 59,
         "medianAge": 46.6,
         "workPopPct": 63
@@ -1100,7 +1100,7 @@
       {
         "rank": 9,
         "country": "Canada",
-        "gdpT": 2.51,
+        "gdpT": 2.5,
         "popM": 40,
         "medianAge": 41.8,
         "workPopPct": 66
@@ -1108,7 +1108,7 @@
       {
         "rank": 10,
         "country": "Brazil",
-        "gdpT": 2.64,
+        "gdpT": 2.1,
         "popM": 216,
         "medianAge": 33.7,
         "workPopPct": 70
@@ -2026,7 +2026,7 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-09-05T00:14:24.973Z",
+    "asOf": "2026-09-05T00:20:53.732Z",
     "items": [
       "DAX −2.0% — biggest move among tracked markets",
       "Next: ECB rate decision in 5 days (2026-09-10)"
