@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-05T00:22:19.142Z",
+    "generatedAt": "2026-09-05T00:23:24.609Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -265,14 +265,14 @@
     "athDate": "2025-10",
     "volume24hB": 97.86,
     "btc": {
-      "capT": 1.5991,
+      "capT": 1.5993,
       "dominancePct": 59.1914,
-      "priceUsd": 79642
+      "priceUsd": 79648
     },
     "eth": {
-      "capB": 299.42,
+      "capB": 299.47,
       "dominancePct": 11.0831,
-      "priceUsd": 2454.13
+      "priceUsd": 2454.37
     },
     "stablecoinsB": 247.9,
     "top5": [
@@ -281,17 +281,17 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 79642,
-        "capB": 1599.1,
-        "change24hPct": -1.94
+        "priceUsd": 79648,
+        "capB": 1599.3,
+        "change24hPct": -1.95
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 2454.13,
-        "capB": 299.4,
+        "priceUsd": 2454.37,
+        "capB": 299.5,
         "change24hPct": -2.14
       },
       {
@@ -308,9 +308,9 @@
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 720.32,
+        "priceUsd": 720.39,
         "capB": 95.9,
-        "change24hPct": -0.9
+        "change24hPct": -0.91
       },
       {
         "rank": 5,
@@ -319,7 +319,7 @@
         "name": "XRP",
         "priceUsd": 1.4,
         "capB": 87.7,
-        "change24hPct": -3.64
+        "change24hPct": -3.65
       }
     ],
     "sparklineData": [
@@ -2026,7 +2026,7 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-09-05T00:22:30.576Z",
+    "asOf": "2026-09-05T00:23:34.437Z",
     "items": [
       "DAX −2.0% — biggest move among tracked markets",
       "Next: ECB rate decision in 5 days (2026-09-10)"
