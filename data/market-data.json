@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-05T00:27:28.920Z",
+    "generatedAt": "2026-09-05T10:33:31.493Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -215,7 +215,7 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.6965,
+      "valueT": 2.7056,
       "asOf": "2026-09-05",
       "source": "CoinGecko",
       "tier": 1,
@@ -260,66 +260,66 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.6965,
+    "totalT": 2.7056,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 97.86,
+    "volume24hB": 82.55,
     "btc": {
-      "capT": 1.5995,
-      "dominancePct": 59.1914,
-      "priceUsd": 79658
+      "capT": 1.5992,
+      "dominancePct": 59.0173,
+      "priceUsd": 79641
     },
     "eth": {
-      "capB": 299.41,
-      "dominancePct": 11.0831,
-      "priceUsd": 2453.74
+      "capB": 299.6,
+      "dominancePct": 11.0581,
+      "priceUsd": 2455.31
     },
-    "stablecoinsB": 247.9,
+    "stablecoinsB": 247.8,
     "top5": [
       {
         "rank": 1,
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 79658,
-        "capB": 1599.5,
-        "change24hPct": -1.84
+        "priceUsd": 79641,
+        "capB": 1599.2,
+        "change24hPct": -1.68
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 2453.74,
-        "capB": 299.4,
-        "change24hPct": -2.05
+        "priceUsd": 2455.31,
+        "capB": 299.6,
+        "change24hPct": -2.7
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 1,
+        "priceUsd": 0.999885,
         "capB": 183.4,
-        "change24hPct": 0.02
+        "change24hPct": 0
       },
       {
         "rank": 4,
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 720.28,
-        "capB": 95.9,
-        "change24hPct": -0.77
+        "priceUsd": 747.62,
+        "capB": 99.5,
+        "change24hPct": 3.84
       },
       {
         "rank": 5,
         "id": "ripple",
         "symbol": "XRP",
         "name": "XRP",
-        "priceUsd": 1.4,
-        "capB": 87.7,
-        "change24hPct": -3.38
+        "priceUsd": 1.41,
+        "capB": 88.3,
+        "change24hPct": -2.77
       }
     ],
     "sparklineData": [
@@ -577,7 +577,7 @@
       },
       {
         "date": "2026-09-05",
-        "totalT": 2.6965
+        "totalT": 2.7056
       }
     ]
   },
@@ -907,8 +907,8 @@
     "generatedAt": "2026-09-05",
     "day": {
       "crypto": {
-        "pct": -0.93,
-        "absT": -0.0252
+        "pct": -0.59,
+        "absT": -0.0161
       },
       "gold": {
         "pct": -0.89,
@@ -917,8 +917,8 @@
     },
     "month": {
       "crypto": {
-        "pct": 17.47,
-        "absT": 0.4011
+        "pct": 17.87,
+        "absT": 0.4102
       },
       "gold": {
         "pct": 3.52,
@@ -1995,7 +1995,7 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-09-05T00:27:40.174Z",
+    "asOf": "2026-09-05T10:33:41.463Z",
     "items": [
       "DAX −2.0% — biggest move among tracked markets",
       "Next: ECB rate decision in 5 days (2026-09-10)"
