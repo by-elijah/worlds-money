@@ -403,7 +403,9 @@ const result = {
   topStateEntities:     TIER2.topStateEntities,
   marketTrends:         TIER2.marketTrends,
   marketPulse:          existing?.marketPulse ?? { asOf: today, markets: [] },
-  economicEvents:       TIER2.economicEvents,
+  // Prune past events at the source — the frontend already filters them client-side,
+  // but there's no reason to keep shipping stale dates in the committed JSON.
+  economicEvents:       TIER2.economicEvents.filter(e => e.date >= today),
   editorNote:           TIER2.editorNote,
   insights:             existing?.insights ?? { asOf: new Date().toISOString(), items: [] },
 };

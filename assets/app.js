@@ -10,7 +10,7 @@
 
 const FALLBACK_DATA = {
   "meta": {
-    "generatedAt": "2026-09-05T00:14:13.551Z",
+    "generatedAt": "2026-09-05T00:25:58.795Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -225,7 +225,7 @@ const FALLBACK_DATA = {
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.6997,
+      "valueT": 2.6965,
       "asOf": "2026-09-05",
       "source": "CoinGecko",
       "tier": 1,
@@ -270,19 +270,19 @@ const FALLBACK_DATA = {
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.6997,
+    "totalT": 2.6965,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 98.25,
+    "volume24hB": 97.86,
     "btc": {
-      "capT": 1.6006,
-      "dominancePct": 59.1896,
-      "priceUsd": 79722
+      "capT": 1.5994,
+      "dominancePct": 59.1914,
+      "priceUsd": 79652
     },
     "eth": {
-      "capB": 299.73,
-      "dominancePct": 11.0847,
-      "priceUsd": 2456.79
+      "capB": 299.45,
+      "dominancePct": 11.0831,
+      "priceUsd": 2453.99
     },
     "stablecoinsB": 247.9,
     "top5": [
@@ -291,18 +291,18 @@ const FALLBACK_DATA = {
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 79722,
-        "capB": 1600.6,
-        "change24hPct": -1.8
+        "priceUsd": 79652,
+        "capB": 1599.4,
+        "change24hPct": -1.94
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 2456.79,
-        "capB": 299.7,
-        "change24hPct": -1.96
+        "priceUsd": 2453.99,
+        "capB": 299.4,
+        "change24hPct": -2.14
       },
       {
         "rank": 3,
@@ -318,9 +318,9 @@ const FALLBACK_DATA = {
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 721.49,
-        "capB": 96.1,
-        "change24hPct": -0.41
+        "priceUsd": 720.39,
+        "capB": 95.9,
+        "change24hPct": -0.86
       },
       {
         "rank": 5,
@@ -328,8 +328,8 @@ const FALLBACK_DATA = {
         "symbol": "XRP",
         "name": "XRP",
         "priceUsd": 1.4,
-        "capB": 87.8,
-        "change24hPct": -3.43
+        "capB": 87.7,
+        "change24hPct": -3.5
       }
     ],
     "sparklineData": [
@@ -587,7 +587,7 @@ const FALLBACK_DATA = {
       },
       {
         "date": "2026-09-05",
-        "totalT": 2.6997
+        "totalT": 2.6965
       }
     ]
   },
@@ -917,8 +917,8 @@ const FALLBACK_DATA = {
     "generatedAt": "2026-09-05",
     "day": {
       "crypto": {
-        "pct": -0.81,
-        "absT": -0.022
+        "pct": -0.93,
+        "absT": -0.0252
       },
       "gold": {
         "pct": -0.89,
@@ -927,8 +927,8 @@ const FALLBACK_DATA = {
     },
     "month": {
       "crypto": {
-        "pct": 17.61,
-        "absT": 0.4043
+        "pct": 17.47,
+        "absT": 0.4011
       },
       "gold": {
         "pct": 3.52,
@@ -1920,37 +1920,6 @@ const FALLBACK_DATA = {
   },
   "economicEvents": [
     {
-      "date": "2026-07-23",
-      "label": "ECB rate decision",
-      "kind": "ecb"
-    },
-    {
-      "date": "2026-07-29",
-      "label": "FOMC rate decision",
-      "kind": "fed"
-    },
-    {
-      "date": "2026-07-31",
-      "label": "BoJ policy decision",
-      "kind": "boj",
-      "note": "incl. Outlook Report"
-    },
-    {
-      "date": "2026-08-07",
-      "label": "US jobs report (NFP)",
-      "kind": "jobs"
-    },
-    {
-      "date": "2026-08-12",
-      "label": "US CPI release",
-      "kind": "cpi"
-    },
-    {
-      "date": "2026-09-04",
-      "label": "US jobs report (NFP)",
-      "kind": "jobs"
-    },
-    {
       "date": "2026-09-10",
       "label": "ECB rate decision",
       "kind": "ecb"
@@ -2036,7 +2005,7 @@ const FALLBACK_DATA = {
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-09-05T00:14:24.973Z",
+    "asOf": "2026-09-05T00:26:10.312Z",
     "items": [
       "DAX −2.0% — biggest move among tracked markets",
       "Next: ECB rate decision in 5 days (2026-09-10)"
