@@ -648,7 +648,7 @@ const GDP_COUNTRY_CODES = { 'United States': 'USA', China: 'CHN', Germany: 'DEU'
 try {
   await delay(200);
   const codes = Object.values(GDP_COUNTRY_CODES).join('/') + '/WEOWORLD';
-  const imf = await fetchWithRetry(`https://www.imf.org/external/datamapper/api/v1/NGDPD/${codes}`);
+  const imf = await fetchWithRetry(`https://www.imf.org/external/datamapper/api/v1/NGDPD/${codes}`, 2, YF_HEADERS);
   const values = imf?.values?.NGDPD;
   if (!values) throw new Error('no NGDPD values in response');
   const currentYear = new Date().getFullYear();
