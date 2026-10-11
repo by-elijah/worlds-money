@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-10T12:29:36.004Z",
+    "generatedAt": "2026-10-11T12:47:23.295Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -134,10 +134,10 @@
       "name": "Broad Money",
       "sub": "M2 — US (live) + EZ + CN + JP (curated)",
       "valueT": 103.4,
-      "asOf": "2026-10-10",
+      "asOf": "2026-10-11",
       "source": "US M2 live via FRED (M2SL); EZ/CN/JP curated from ECB/PBoC/BoJ releases",
       "tier": 2,
-      "stale": true,
+      "stale": false,
       "yearlyTrend": {
         "years": [
           2015,
@@ -175,7 +175,7 @@
       "name": "Gold",
       "sub": "All above-ground gold × spot price",
       "valueT": 29.676,
-      "asOf": "2026-10-10",
+      "asOf": "2026-10-11",
       "source": "gold-api.com / WGC",
       "tier": 1,
       "stale": false,
@@ -215,8 +215,8 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.7849,
-      "asOf": "2026-10-10",
+      "valueT": 2.7899,
+      "asOf": "2026-10-11",
       "source": "CoinGecko",
       "tier": 1,
       "stale": false,
@@ -260,19 +260,19 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.7849,
+    "totalT": 2.7899,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 58.96,
+    "volume24hB": 43.68,
     "btc": {
-      "capT": 1.6634,
-      "dominancePct": 59.6244,
-      "priceUsd": 82774
+      "capT": 1.6696,
+      "dominancePct": 59.6699,
+      "priceUsd": 83081
     },
     "eth": {
-      "capB": 304.61,
-      "dominancePct": 10.9178,
-      "priceUsd": 2494.38
+      "capB": 305.78,
+      "dominancePct": 10.9274,
+      "priceUsd": 2503.86
     },
     "stablecoinsB": 248.8,
     "top5": [
@@ -281,52 +281,48 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 82774,
-        "capB": 1663.4,
-        "change24hPct": -0.32
+        "priceUsd": 83081,
+        "capB": 1669.6,
+        "change24hPct": 0.36
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 2494.38,
-        "capB": 304.6,
-        "change24hPct": -0.2
+        "priceUsd": 2503.86,
+        "capB": 305.8,
+        "change24hPct": 0.34
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.999236,
+        "priceUsd": 0.999115,
         "capB": 184.1,
-        "change24hPct": 0
+        "change24hPct": -0.01
       },
       {
         "rank": 4,
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 747.54,
-        "capB": 99.5,
-        "change24hPct": 0.77
+        "priceUsd": 749.05,
+        "capB": 99.7,
+        "change24hPct": 0.14
       },
       {
         "rank": 5,
         "id": "ripple",
         "symbol": "XRP",
         "name": "XRP",
-        "priceUsd": 1.4,
-        "capB": 88.5,
-        "change24hPct": 0.58
+        "priceUsd": 1.39,
+        "capB": 87.9,
+        "change24hPct": -0.71
       }
     ],
     "sparklineData": [
-      {
-        "date": "2026-07-13",
-        "totalT": 2.2541
-      },
       {
         "date": "2026-07-14",
         "totalT": 2.2367
@@ -682,6 +678,10 @@
       {
         "date": "2026-10-10",
         "totalT": 2.7849
+      },
+      {
+        "date": "2026-10-11",
+        "totalT": 2.7899
       }
     ]
   },
@@ -690,11 +690,6 @@
     "aboveGroundTonnes": 220000,
     "impliedCapT": 29.676,
     "sparklineData": [
-      {
-        "date": "2026-07-13",
-        "spotUsdPerOz": 4074.1,
-        "impliedCapT": 28.817
-      },
       {
         "date": "2026-07-14",
         "spotUsdPerOz": 4022.1,
@@ -1139,29 +1134,34 @@
         "date": "2026-10-10",
         "spotUsdPerOz": 4195.6,
         "impliedCapT": 29.676
+      },
+      {
+        "date": "2026-10-11",
+        "spotUsdPerOz": 4195.6,
+        "impliedCapT": 29.676
       }
     ]
   },
   "deltas": {
-    "generatedAt": "2026-10-10",
+    "generatedAt": "2026-10-11",
     "day": {
       "crypto": {
-        "pct": -0.8,
-        "absT": -0.0224
+        "pct": 0.18,
+        "absT": 0.005
       },
       "gold": {
-        "pct": 0.37,
-        "absT": 0.108
+        "pct": 0,
+        "absT": 0
       }
     },
     "month": {
       "crypto": {
-        "pct": 4.5,
-        "absT": 0.12
+        "pct": 6.14,
+        "absT": 0.1614
       },
       "gold": {
-        "pct": -4.3,
-        "absT": -1.333
+        "pct": -3.28,
+        "absT": -1.007
       }
     }
   },
@@ -1268,14 +1268,14 @@
     }
   ],
   "worldGdp": {
-    "totalT": 126,
-    "asOf": "2026-01-01",
-    "source": "IMF WEO, Apr 2026",
+    "totalT": 126.3,
+    "asOf": "2026-10-11",
+    "source": "IMF World Economic Outlook, DataMapper API (live)",
     "topCountries": [
       {
         "rank": 1,
         "country": "United States",
-        "gdpT": 32.4,
+        "gdpT": 32.38,
         "popM": 341,
         "medianAge": 38.9,
         "workPopPct": 65
@@ -1283,7 +1283,7 @@
       {
         "rank": 2,
         "country": "China",
-        "gdpT": 20.9,
+        "gdpT": 20.85,
         "popM": 1408,
         "medianAge": 39,
         "workPopPct": 68
@@ -1291,7 +1291,7 @@
       {
         "rank": 3,
         "country": "Germany",
-        "gdpT": 5.5,
+        "gdpT": 5.45,
         "popM": 84,
         "medianAge": 44.6,
         "workPopPct": 64
@@ -1299,7 +1299,7 @@
       {
         "rank": 4,
         "country": "Japan",
-        "gdpT": 4.4,
+        "gdpT": 4.38,
         "popM": 124,
         "medianAge": 49,
         "workPopPct": 59
@@ -1307,7 +1307,7 @@
       {
         "rank": 5,
         "country": "United Kingdom",
-        "gdpT": 4.3,
+        "gdpT": 4.26,
         "popM": 68,
         "medianAge": 40.7,
         "workPopPct": 64
@@ -1315,7 +1315,7 @@
       {
         "rank": 6,
         "country": "India",
-        "gdpT": 4.2,
+        "gdpT": 4.15,
         "popM": 1441,
         "medianAge": 28.7,
         "workPopPct": 67
@@ -1331,7 +1331,7 @@
       {
         "rank": 8,
         "country": "Italy",
-        "gdpT": 2.7,
+        "gdpT": 2.74,
         "popM": 59,
         "medianAge": 46.6,
         "workPopPct": 63
@@ -1339,7 +1339,7 @@
       {
         "rank": 9,
         "country": "Canada",
-        "gdpT": 2.5,
+        "gdpT": 2.51,
         "popM": 40,
         "medianAge": 41.8,
         "workPopPct": 66
@@ -1347,7 +1347,7 @@
       {
         "rank": 10,
         "country": "Brazil",
-        "gdpT": 2.1,
+        "gdpT": 2.64,
         "popM": 216,
         "medianAge": 33.7,
         "workPopPct": 70
@@ -1355,7 +1355,7 @@
     ]
   },
   "centralBanks": {
-    "totalT": 25.06,
+    "totalT": 25.07,
     "peakTotalT": 30.5,
     "peakYear": "2022",
     "asOf": "2026-08-01",
@@ -1377,7 +1377,7 @@
         "name": "Federal Reserve",
         "abbr": "Fed",
         "flag": "🇺🇸",
-        "balanceSheetT": 6.74
+        "balanceSheetT": 6.748
       },
       {
         "name": "Bank of Japan",
@@ -1447,7 +1447,7 @@
     ]
   },
   "topPrivateCompanies": {
-    "asOf": "2026-10-10",
+    "asOf": "2026-10-11",
     "source": "Live: price (Yahoo Finance) × shares outstanding (curated, reviewed quarterly)",
     "companies": [
       {
@@ -2036,8 +2036,6 @@
     },
     "rateAndInflation": {
       "labels": [
-        "Jan'20",
-        "Jul'20",
         "Jan'21",
         "Jul'21",
         "Jan'22",
@@ -2047,40 +2045,42 @@
         "Jan'24",
         "Jul'24",
         "Jan'25",
-        "Jul'25"
+        "Jul'25",
+        "Jan'26",
+        "Jul'26"
       ],
       "fedFunds": [
-        1.55,
-        0.09,
         0.09,
         0.1,
         0.08,
-        2.33,
+        1.68,
         4.33,
-        5.33,
+        5.12,
         5.33,
         5.33,
         4.33,
-        4.33
+        4.33,
+        3.64,
+        3.63
       ],
       "cpiYoY": [
-        2.5,
-        1,
         1.4,
-        5.4,
-        7.5,
-        9.1,
-        6.4,
-        3.2,
+        5.2,
+        7.6,
+        8.5,
+        6.3,
+        3.3,
         3.1,
         2.9,
         3,
-        2.4
+        2.7,
+        2.4,
+        3.3
       ]
     }
   },
   "marketPulse": {
-    "asOf": "2026-10-10",
+    "asOf": "2026-10-11",
     "markets": [
       {
         "id": "sp500",
@@ -2208,10 +2208,10 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-10-10T12:32:34.446Z",
+    "asOf": "2026-10-11T12:47:33.298Z",
     "items": [
       "KOSPI −3.1% — biggest move among tracked markets",
-      "Next: US CPI release in 4 days (2026-10-14)"
+      "Next: US CPI release in 3 days (2026-10-14)"
     ]
   }
 }
