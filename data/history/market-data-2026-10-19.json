@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-07-21T08:43:34.106Z",
+    "generatedAt": "2026-10-19T13:11:05.514Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -12,7 +12,7 @@
       "sub": "Global residential + commercial property",
       "valueT": 393.3,
       "asOf": "2025-01-01",
-      "source": "Savills, 2025",
+      "source": "Savills World Research, 2025",
       "yearlyTrend": {
         "years": [
           2015,
@@ -42,7 +42,7 @@
           393,
           393
         ],
-        "source": "Savills World Research, year-end totals"
+        "source": "Savills World Research, year-end totals (endpoint verified; intermediate years interpolated)"
       },
       "tier": 2,
       "stale": false
@@ -53,7 +53,7 @@
       "sub": "Global debt securities outstanding",
       "valueT": 156,
       "asOf": "2025-08-01",
-      "source": "BIS, Aug 2025",
+      "source": "BIS debt securities statistics, Aug 2025",
       "yearlyTrend": {
         "years": [
           2015,
@@ -83,7 +83,7 @@
           150,
           156
         ],
-        "source": "BIS debt securities statistics"
+        "source": "BIS debt securities statistics (interpolated; BIS SDMX API access still TODO — see README)"
       },
       "tier": 2,
       "stale": false
@@ -92,9 +92,9 @@
       "id": "eq",
       "name": "Equities",
       "sub": "Global listed market capitalisation",
-      "valueT": 135,
-      "asOf": "2025-12-01",
-      "source": "Bloomberg/WFE",
+      "valueT": 150,
+      "asOf": "2026-05-01",
+      "source": "World Federation of Exchanges, May 2026",
       "yearlyTrend": {
         "years": [
           2015,
@@ -122,9 +122,9 @@
           111,
           128,
           135,
-          135
+          150
         ],
-        "source": "WFE / Bloomberg year-end market cap"
+        "source": "WFE year-end/latest market cap (endpoint verified; intermediate years interpolated)"
       },
       "tier": 2,
       "stale": false
@@ -132,10 +132,12 @@
     {
       "id": "m2",
       "name": "Broad Money",
-      "sub": "M2 — US + EZ + CN + JP",
-      "valueT": 101.7,
-      "asOf": "2026-07-01",
-      "source": "StreetStats, Jul 2026",
+      "sub": "M2 — US (live) + EZ + CN + JP (curated)",
+      "valueT": 103.4,
+      "asOf": "2026-10-19",
+      "source": "US M2 live via FRED (M2SL); EZ/CN/JP curated from ECB/PBoC/BoJ releases",
+      "tier": 2,
+      "stale": false,
       "yearlyTrend": {
         "years": [
           2015,
@@ -152,30 +154,28 @@
           2026
         ],
         "valuesT": [
-          53,
-          57,
-          62,
-          64,
-          68,
-          78,
-          85,
-          82,
-          86,
-          92,
-          98,
-          102
+          54.2,
+          57.5,
+          60.9,
+          64.3,
+          68.3,
+          75.2,
+          81,
+          84.4,
+          87.7,
+          92.5,
+          97.7,
+          103.4
         ],
-        "source": "Fed + ECB + PBoC + BoJ, year-end M2"
-      },
-      "tier": 2,
-      "stale": false
+        "source": "US M2 (FRED, exact, live) + EZ/CN/JP (ECB/PBoC/BoJ, interpolated between 2015 and current anchor points)"
+      }
     },
     {
       "id": "gold",
       "name": "Gold",
       "sub": "All above-ground gold × spot price",
-      "valueT": 28.742,
-      "asOf": "2026-07-21",
+      "valueT": 29.467,
+      "asOf": "2026-10-19",
       "source": "gold-api.com / WGC",
       "tier": 1,
       "stale": false,
@@ -215,8 +215,8 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.3416,
-      "asOf": "2026-07-21",
+      "valueT": 2.7751,
+      "asOf": "2026-10-19",
       "source": "CoinGecko",
       "tier": 1,
       "stale": false,
@@ -260,250 +260,909 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.3416,
+    "totalT": 2.7751,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 73.1,
+    "volume24hB": 104080460.2,
     "btc": {
-      "capT": 1.3291,
-      "dominancePct": 56.6859,
-      "priceUsd": 66248
+      "capT": 1.6599,
+      "dominancePct": 59.6678,
+      "priceUsd": 82560
     },
     "eth": {
-      "capB": 234.06,
-      "dominancePct": 9.9878,
-      "priceUsd": 1939.56
+      "capB": 296.14,
+      "dominancePct": 10.6435,
+      "priceUsd": 2423.2
     },
-    "stablecoinsB": 248.7,
+    "stablecoinsB": 248,
     "top5": [
       {
         "rank": 1,
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 66248,
-        "capB": 1329.1,
-        "change24hPct": 3.66
+        "priceUsd": 82560,
+        "capB": 1659.9,
+        "change24hPct": 0.86
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 1939.56,
-        "capB": 234.1,
-        "change24hPct": 4.51
+        "priceUsd": 2423.2,
+        "capB": 296.1,
+        "change24hPct": 0.45
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.99921,
-        "capB": 184.1,
-        "change24hPct": 0.02
+        "priceUsd": 0.999331,
+        "capB": 183.5,
+        "change24hPct": 0.03
       },
       {
         "rank": 4,
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 577.6,
-        "capB": 76.9,
-        "change24hPct": 2.33
+        "priceUsd": 728.65,
+        "capB": 95.8,
+        "change24hPct": 0.91
       },
       {
         "rank": 5,
-        "id": "usd-coin",
-        "symbol": "USDC",
-        "name": "USDC",
-        "priceUsd": 0.999876,
-        "capB": 73.1,
-        "change24hPct": 0.01
+        "id": "ripple",
+        "symbol": "XRP",
+        "name": "XRP",
+        "priceUsd": 1.31,
+        "capB": 82.8,
+        "change24hPct": 1.28
       }
     ],
     "sparklineData": [
       {
-        "date": "2026-07-04",
-        "totalT": 2.2552
+        "date": "2026-07-22",
+        "totalT": 2.3313
       },
       {
-        "date": "2026-07-05",
-        "totalT": 2.2604
+        "date": "2026-07-23",
+        "totalT": 2.3233
       },
       {
-        "date": "2026-07-06",
-        "totalT": 2.2625
+        "date": "2026-07-24",
+        "totalT": 2.3096
       },
       {
-        "date": "2026-07-07",
-        "totalT": 2.272
+        "date": "2026-07-25",
+        "totalT": 2.2682
       },
       {
-        "date": "2026-07-08",
-        "totalT": 2.2221
+        "date": "2026-07-26",
+        "totalT": 2.2868
       },
       {
-        "date": "2026-07-09",
-        "totalT": 2.247
+        "date": "2026-07-27",
+        "totalT": 2.3177
       },
       {
-        "date": "2026-07-10",
-        "totalT": 2.29
+        "date": "2026-07-28",
+        "totalT": 2.2568
       },
       {
-        "date": "2026-07-11",
-        "totalT": 2.2835
+        "date": "2026-07-29",
+        "totalT": 2.2805
       },
       {
-        "date": "2026-07-12",
-        "totalT": 2.2785
+        "date": "2026-07-30",
+        "totalT": 2.2768
       },
       {
-        "date": "2026-07-13",
-        "totalT": 2.2541
+        "date": "2026-07-31",
+        "totalT": 2.2679
       },
       {
-        "date": "2026-07-14",
-        "totalT": 2.2367
+        "date": "2026-08-01",
+        "totalT": 2.2485
       },
       {
-        "date": "2026-07-15",
-        "totalT": 2.2992
+        "date": "2026-08-02",
+        "totalT": 2.259
       },
       {
-        "date": "2026-07-16",
+        "date": "2026-08-03",
+        "totalT": 2.2403
+      },
+      {
+        "date": "2026-08-04",
+        "totalT": 2.2606
+      },
+      {
+        "date": "2026-08-05",
+        "totalT": 2.2737
+      },
+      {
+        "date": "2026-08-06",
+        "totalT": 2.2954
+      },
+      {
+        "date": "2026-08-07",
+        "totalT": 2.2794
+      },
+      {
+        "date": "2026-08-08",
+        "totalT": 2.2966
+      },
+      {
+        "date": "2026-08-09",
+        "totalT": 2.2977
+      },
+      {
+        "date": "2026-08-10",
+        "totalT": 2.3073
+      },
+      {
+        "date": "2026-08-11",
+        "totalT": 2.2692
+      },
+      {
+        "date": "2026-08-12",
+        "totalT": 2.2691
+      },
+      {
+        "date": "2026-08-13",
+        "totalT": 2.275
+      },
+      {
+        "date": "2026-08-14",
+        "totalT": 2.2498
+      },
+      {
+        "date": "2026-08-15",
+        "totalT": 2.2543
+      },
+      {
+        "date": "2026-08-16",
+        "totalT": 2.251
+      },
+      {
+        "date": "2026-08-17",
+        "totalT": 2.2679
+      },
+      {
+        "date": "2026-08-18",
+        "totalT": 2.2802
+      },
+      {
+        "date": "2026-08-19",
         "totalT": 2.2846
       },
       {
-        "date": "2026-07-17",
-        "totalT": 2.2446
+        "date": "2026-08-20",
+        "totalT": 2.3976
       },
       {
-        "date": "2026-07-18",
-        "totalT": 2.2738
+        "date": "2026-08-21",
+        "totalT": 2.5592
       },
       {
-        "date": "2026-07-19",
-        "totalT": 2.2898
+        "date": "2026-08-22",
+        "totalT": 2.6443
       },
       {
-        "date": "2026-07-20",
-        "totalT": 2.2806
+        "date": "2026-08-23",
+        "totalT": 2.5693
       },
       {
-        "date": "2026-07-21",
-        "totalT": 2.3416
+        "date": "2026-08-24",
+        "totalT": 2.6223
+      },
+      {
+        "date": "2026-08-25",
+        "totalT": 2.715
+      },
+      {
+        "date": "2026-08-26",
+        "totalT": 2.6663
+      },
+      {
+        "date": "2026-08-27",
+        "totalT": 2.7256
+      },
+      {
+        "date": "2026-08-28",
+        "totalT": 2.63
+      },
+      {
+        "date": "2026-08-29",
+        "totalT": 2.6357
+      },
+      {
+        "date": "2026-08-30",
+        "totalT": 2.6299
+      },
+      {
+        "date": "2026-08-31",
+        "totalT": 2.6463
+      },
+      {
+        "date": "2026-09-01",
+        "totalT": 2.6282
+      },
+      {
+        "date": "2026-09-02",
+        "totalT": 2.5963
+      },
+      {
+        "date": "2026-09-03",
+        "totalT": 2.6157
+      },
+      {
+        "date": "2026-09-04",
+        "totalT": 2.7217
+      },
+      {
+        "date": "2026-09-05",
+        "totalT": 2.7056
+      },
+      {
+        "date": "2026-09-06",
+        "totalT": 2.706
+      },
+      {
+        "date": "2026-09-07",
+        "totalT": 2.6923
+      },
+      {
+        "date": "2026-09-08",
+        "totalT": 2.6636
+      },
+      {
+        "date": "2026-09-09",
+        "totalT": 2.6816
+      },
+      {
+        "date": "2026-09-10",
+        "totalT": 2.6649
+      },
+      {
+        "date": "2026-09-11",
+        "totalT": 2.6285
+      },
+      {
+        "date": "2026-09-12",
+        "totalT": 2.6639
+      },
+      {
+        "date": "2026-09-13",
+        "totalT": 2.6132
+      },
+      {
+        "date": "2026-09-14",
+        "totalT": 2.6672
+      },
+      {
+        "date": "2026-09-15",
+        "totalT": 2.6402
+      },
+      {
+        "date": "2026-09-16",
+        "totalT": 2.5983
+      },
+      {
+        "date": "2026-09-17",
+        "totalT": 2.6164
+      },
+      {
+        "date": "2026-09-18",
+        "totalT": 2.6837
+      },
+      {
+        "date": "2026-09-19",
+        "totalT": 2.7938
+      },
+      {
+        "date": "2026-09-20",
+        "totalT": 2.7294
+      },
+      {
+        "date": "2026-09-21",
+        "totalT": 2.8894
+      },
+      {
+        "date": "2026-09-22",
+        "totalT": 2.9199
+      },
+      {
+        "date": "2026-09-23",
+        "totalT": 2.9166
+      },
+      {
+        "date": "2026-09-24",
+        "totalT": 2.8266
+      },
+      {
+        "date": "2026-09-25",
+        "totalT": 2.8836
+      },
+      {
+        "date": "2026-09-26",
+        "totalT": 2.897
+      },
+      {
+        "date": "2026-09-27",
+        "totalT": 2.8937
+      },
+      {
+        "date": "2026-09-28",
+        "totalT": 2.892
+      },
+      {
+        "date": "2026-09-29",
+        "totalT": 2.9028
+      },
+      {
+        "date": "2026-09-30",
+        "totalT": 2.8892
+      },
+      {
+        "date": "2026-10-01",
+        "totalT": 2.8692
+      },
+      {
+        "date": "2026-10-02",
+        "totalT": 2.9534
+      },
+      {
+        "date": "2026-10-03",
+        "totalT": 2.8697
+      },
+      {
+        "date": "2026-10-04",
+        "totalT": 2.8856
+      },
+      {
+        "date": "2026-10-05",
+        "totalT": 2.9325
+      },
+      {
+        "date": "2026-10-06",
+        "totalT": 2.9376
+      },
+      {
+        "date": "2026-10-07",
+        "totalT": 2.8454
+      },
+      {
+        "date": "2026-10-08",
+        "totalT": 2.8148
+      },
+      {
+        "date": "2026-10-09",
+        "totalT": 2.8073
+      },
+      {
+        "date": "2026-10-10",
+        "totalT": 2.7849
+      },
+      {
+        "date": "2026-10-11",
+        "totalT": 2.7899
+      },
+      {
+        "date": "2026-10-12",
+        "totalT": 2.8069
+      },
+      {
+        "date": "2026-10-13",
+        "totalT": 2.8189
+      },
+      {
+        "date": "2026-10-14",
+        "totalT": 2.7988
+      },
+      {
+        "date": "2026-10-15",
+        "totalT": 2.7071
+      },
+      {
+        "date": "2026-10-16",
+        "totalT": 2.7867
+      },
+      {
+        "date": "2026-10-17",
+        "totalT": 2.759
+      },
+      {
+        "date": "2026-10-18",
+        "totalT": 2.7376
+      },
+      {
+        "date": "2026-10-19",
+        "totalT": 2.7751
       }
     ]
   },
   "gold": {
-    "spotUsdPerOz": 4063.6,
+    "spotUsdPerOz": 4166,
     "aboveGroundTonnes": 220000,
-    "impliedCapT": 28.742,
+    "impliedCapT": 29.467,
     "sparklineData": [
       {
-        "date": "2026-07-05",
-        "spotUsdPerOz": 4176.1,
-        "impliedCapT": 29.538
+        "date": "2026-07-22",
+        "spotUsdPerOz": 4117.5,
+        "impliedCapT": 29.124
       },
       {
-        "date": "2026-07-06",
-        "spotUsdPerOz": 4153.9,
-        "impliedCapT": 29.381
+        "date": "2026-07-23",
+        "spotUsdPerOz": 4091.8,
+        "impliedCapT": 28.942
       },
       {
-        "date": "2026-07-07",
-        "spotUsdPerOz": 4132.3,
-        "impliedCapT": 29.228
+        "date": "2026-07-24",
+        "spotUsdPerOz": 4053.8,
+        "impliedCapT": 28.673
       },
       {
-        "date": "2026-07-08",
-        "spotUsdPerOz": 4064.8,
-        "impliedCapT": 28.751
+        "date": "2026-07-25",
+        "spotUsdPerOz": 4053.7,
+        "impliedCapT": 28.672
       },
       {
-        "date": "2026-07-09",
-        "spotUsdPerOz": 4106,
-        "impliedCapT": 29.042
+        "date": "2026-07-26",
+        "spotUsdPerOz": 4053.7,
+        "impliedCapT": 28.672
       },
       {
-        "date": "2026-07-10",
-        "spotUsdPerOz": 4104.5,
-        "impliedCapT": 29.032
+        "date": "2026-07-27",
+        "spotUsdPerOz": 4094.4,
+        "impliedCapT": 28.96
       },
       {
-        "date": "2026-07-11",
-        "spotUsdPerOz": 4121.4,
-        "impliedCapT": 29.151
+        "date": "2026-07-28",
+        "spotUsdPerOz": 4047.1,
+        "impliedCapT": 28.626
       },
       {
-        "date": "2026-07-12",
-        "spotUsdPerOz": 4121.4,
-        "impliedCapT": 29.151
+        "date": "2026-07-29",
+        "spotUsdPerOz": 4038,
+        "impliedCapT": 28.561
       },
       {
-        "date": "2026-07-13",
-        "spotUsdPerOz": 4074.1,
-        "impliedCapT": 28.817
+        "date": "2026-07-30",
+        "spotUsdPerOz": 4070.7,
+        "impliedCapT": 28.793
       },
       {
-        "date": "2026-07-14",
-        "spotUsdPerOz": 4022.1,
-        "impliedCapT": 28.449
+        "date": "2026-07-31",
+        "spotUsdPerOz": 4057.7,
+        "impliedCapT": 28.701
       },
       {
-        "date": "2026-07-15",
-        "spotUsdPerOz": 4029.9,
-        "impliedCapT": 28.504
+        "date": "2026-08-01",
+        "spotUsdPerOz": 4043.7,
+        "impliedCapT": 28.602
       },
       {
-        "date": "2026-07-16",
-        "spotUsdPerOz": 4034.2,
-        "impliedCapT": 28.535
+        "date": "2026-08-02",
+        "spotUsdPerOz": 4043.7,
+        "impliedCapT": 28.602
       },
       {
-        "date": "2026-07-17",
-        "spotUsdPerOz": 3994.4,
-        "impliedCapT": 28.253
+        "date": "2026-08-03",
+        "spotUsdPerOz": 4057.8,
+        "impliedCapT": 28.701
       },
       {
-        "date": "2026-07-18",
-        "spotUsdPerOz": 4019.3,
-        "impliedCapT": 28.429
+        "date": "2026-08-04",
+        "spotUsdPerOz": 4054.4,
+        "impliedCapT": 28.677
       },
       {
-        "date": "2026-07-19",
-        "spotUsdPerOz": 4019.3,
-        "impliedCapT": 28.429
+        "date": "2026-08-05",
+        "spotUsdPerOz": 4164.4,
+        "impliedCapT": 29.455
       },
       {
-        "date": "2026-07-20",
-        "spotUsdPerOz": 4017,
-        "impliedCapT": 28.413
+        "date": "2026-08-06",
+        "spotUsdPerOz": 4280.3,
+        "impliedCapT": 30.275
       },
       {
-        "date": "2026-07-21",
-        "spotUsdPerOz": 4063.6,
-        "impliedCapT": 28.742
+        "date": "2026-08-07",
+        "spotUsdPerOz": 4288.2,
+        "impliedCapT": 30.331
+      },
+      {
+        "date": "2026-08-08",
+        "spotUsdPerOz": 4343.3,
+        "impliedCapT": 30.721
+      },
+      {
+        "date": "2026-08-09",
+        "spotUsdPerOz": 4343.3,
+        "impliedCapT": 30.721
+      },
+      {
+        "date": "2026-08-10",
+        "spotUsdPerOz": 4355.9,
+        "impliedCapT": 30.81
+      },
+      {
+        "date": "2026-08-11",
+        "spotUsdPerOz": 4362.3,
+        "impliedCapT": 30.855
+      },
+      {
+        "date": "2026-08-12",
+        "spotUsdPerOz": 4409.9,
+        "impliedCapT": 31.192
+      },
+      {
+        "date": "2026-08-13",
+        "spotUsdPerOz": 4374.5,
+        "impliedCapT": 30.942
+      },
+      {
+        "date": "2026-08-14",
+        "spotUsdPerOz": 4341.6,
+        "impliedCapT": 30.709
+      },
+      {
+        "date": "2026-08-15",
+        "spotUsdPerOz": 4377.6,
+        "impliedCapT": 30.963
+      },
+      {
+        "date": "2026-08-16",
+        "spotUsdPerOz": 4377.6,
+        "impliedCapT": 30.963
+      },
+      {
+        "date": "2026-08-17",
+        "spotUsdPerOz": 4397.9,
+        "impliedCapT": 31.107
+      },
+      {
+        "date": "2026-08-18",
+        "spotUsdPerOz": 4398.6,
+        "impliedCapT": 31.112
+      },
+      {
+        "date": "2026-08-19",
+        "spotUsdPerOz": 4351.8,
+        "impliedCapT": 30.781
+      },
+      {
+        "date": "2026-08-20",
+        "spotUsdPerOz": 4489,
+        "impliedCapT": 31.751
+      },
+      {
+        "date": "2026-08-21",
+        "spotUsdPerOz": 4564.5,
+        "impliedCapT": 32.285
+      },
+      {
+        "date": "2026-08-22",
+        "spotUsdPerOz": 4604.4,
+        "impliedCapT": 32.568
+      },
+      {
+        "date": "2026-08-23",
+        "spotUsdPerOz": 4604.4,
+        "impliedCapT": 32.568
+      },
+      {
+        "date": "2026-08-24",
+        "spotUsdPerOz": 4645.2,
+        "impliedCapT": 32.856
+      },
+      {
+        "date": "2026-08-25",
+        "spotUsdPerOz": 4642.5,
+        "impliedCapT": 32.837
+      },
+      {
+        "date": "2026-08-26",
+        "spotUsdPerOz": 4638.5,
+        "impliedCapT": 32.809
+      },
+      {
+        "date": "2026-08-27",
+        "spotUsdPerOz": 4609.8,
+        "impliedCapT": 32.606
+      },
+      {
+        "date": "2026-08-28",
+        "spotUsdPerOz": 4455.2,
+        "impliedCapT": 31.512
+      },
+      {
+        "date": "2026-08-29",
+        "spotUsdPerOz": 4456.4,
+        "impliedCapT": 31.521
+      },
+      {
+        "date": "2026-08-30",
+        "spotUsdPerOz": 4456.4,
+        "impliedCapT": 31.521
+      },
+      {
+        "date": "2026-08-31",
+        "spotUsdPerOz": 4434,
+        "impliedCapT": 31.362
+      },
+      {
+        "date": "2026-09-01",
+        "spotUsdPerOz": 4382.4,
+        "impliedCapT": 30.997
+      },
+      {
+        "date": "2026-09-02",
+        "spotUsdPerOz": 4322.1,
+        "impliedCapT": 30.571
+      },
+      {
+        "date": "2026-09-03",
+        "spotUsdPerOz": 4432.9,
+        "impliedCapT": 31.355
+      },
+      {
+        "date": "2026-09-04",
+        "spotUsdPerOz": 4471.1,
+        "impliedCapT": 31.625
+      },
+      {
+        "date": "2026-09-05",
+        "spotUsdPerOz": 4431.1,
+        "impliedCapT": 31.342
+      },
+      {
+        "date": "2026-09-06",
+        "spotUsdPerOz": 4431.1,
+        "impliedCapT": 31.342
+      },
+      {
+        "date": "2026-09-07",
+        "spotUsdPerOz": 4395,
+        "impliedCapT": 31.087
+      },
+      {
+        "date": "2026-09-08",
+        "spotUsdPerOz": 4397.4,
+        "impliedCapT": 31.103
+      },
+      {
+        "date": "2026-09-09",
+        "spotUsdPerOz": 4405.1,
+        "impliedCapT": 31.158
+      },
+      {
+        "date": "2026-09-10",
+        "spotUsdPerOz": 4384,
+        "impliedCapT": 31.009
+      },
+      {
+        "date": "2026-09-11",
+        "spotUsdPerOz": 4338,
+        "impliedCapT": 30.683
+      },
+      {
+        "date": "2026-09-12",
+        "spotUsdPerOz": 4349.7,
+        "impliedCapT": 30.766
+      },
+      {
+        "date": "2026-09-13",
+        "spotUsdPerOz": 4349.7,
+        "impliedCapT": 30.766
+      },
+      {
+        "date": "2026-09-14",
+        "spotUsdPerOz": 4283.4,
+        "impliedCapT": 30.297
+      },
+      {
+        "date": "2026-09-15",
+        "spotUsdPerOz": 4282.1,
+        "impliedCapT": 30.288
+      },
+      {
+        "date": "2026-09-16",
+        "spotUsdPerOz": 4351.9,
+        "impliedCapT": 30.782
+      },
+      {
+        "date": "2026-09-17",
+        "spotUsdPerOz": 4325.8,
+        "impliedCapT": 30.597
+      },
+      {
+        "date": "2026-09-18",
+        "spotUsdPerOz": 4388.4,
+        "impliedCapT": 31.04
+      },
+      {
+        "date": "2026-09-19",
+        "spotUsdPerOz": 4379,
+        "impliedCapT": 30.973
+      },
+      {
+        "date": "2026-09-20",
+        "spotUsdPerOz": 4379,
+        "impliedCapT": 30.973
+      },
+      {
+        "date": "2026-09-21",
+        "spotUsdPerOz": 4364,
+        "impliedCapT": 30.867
+      },
+      {
+        "date": "2026-09-22",
+        "spotUsdPerOz": 4314.9,
+        "impliedCapT": 30.52
+      },
+      {
+        "date": "2026-09-23",
+        "spotUsdPerOz": 4302.8,
+        "impliedCapT": 30.434
+      },
+      {
+        "date": "2026-09-24",
+        "spotUsdPerOz": 4260.7,
+        "impliedCapT": 30.137
+      },
+      {
+        "date": "2026-09-25",
+        "spotUsdPerOz": 4304.6,
+        "impliedCapT": 30.447
+      },
+      {
+        "date": "2026-09-26",
+        "spotUsdPerOz": 4286.2,
+        "impliedCapT": 30.317
+      },
+      {
+        "date": "2026-09-27",
+        "spotUsdPerOz": 4286.2,
+        "impliedCapT": 30.317
+      },
+      {
+        "date": "2026-09-28",
+        "spotUsdPerOz": 4159.8,
+        "impliedCapT": 29.423
+      },
+      {
+        "date": "2026-09-29",
+        "spotUsdPerOz": 4155.6,
+        "impliedCapT": 29.393
+      },
+      {
+        "date": "2026-09-30",
+        "spotUsdPerOz": 4219,
+        "impliedCapT": 29.842
+      },
+      {
+        "date": "2026-10-01",
+        "spotUsdPerOz": 4176.8,
+        "impliedCapT": 29.543
+      },
+      {
+        "date": "2026-10-02",
+        "spotUsdPerOz": 4219.6,
+        "impliedCapT": 29.846
+      },
+      {
+        "date": "2026-10-03",
+        "spotUsdPerOz": 4141.8,
+        "impliedCapT": 29.296
+      },
+      {
+        "date": "2026-10-04",
+        "spotUsdPerOz": 4141.8,
+        "impliedCapT": 29.296
+      },
+      {
+        "date": "2026-10-05",
+        "spotUsdPerOz": 4134.6,
+        "impliedCapT": 29.245
+      },
+      {
+        "date": "2026-10-06",
+        "spotUsdPerOz": 4172,
+        "impliedCapT": 29.509
+      },
+      {
+        "date": "2026-10-07",
+        "spotUsdPerOz": 4097.7,
+        "impliedCapT": 28.984
+      },
+      {
+        "date": "2026-10-08",
+        "spotUsdPerOz": 4124,
+        "impliedCapT": 29.17
+      },
+      {
+        "date": "2026-10-09",
+        "spotUsdPerOz": 4180.3,
+        "impliedCapT": 29.568
+      },
+      {
+        "date": "2026-10-10",
+        "spotUsdPerOz": 4195.6,
+        "impliedCapT": 29.676
+      },
+      {
+        "date": "2026-10-11",
+        "spotUsdPerOz": 4195.6,
+        "impliedCapT": 29.676
+      },
+      {
+        "date": "2026-10-12",
+        "spotUsdPerOz": 4171.4,
+        "impliedCapT": 29.505
+      },
+      {
+        "date": "2026-10-13",
+        "spotUsdPerOz": 4171.4,
+        "impliedCapT": 29.505
+      },
+      {
+        "date": "2026-10-14",
+        "spotUsdPerOz": 4139.1,
+        "impliedCapT": 29.276
+      },
+      {
+        "date": "2026-10-15",
+        "spotUsdPerOz": 4178.8,
+        "impliedCapT": 29.557
+      },
+      {
+        "date": "2026-10-16",
+        "spotUsdPerOz": 4178.4,
+        "impliedCapT": 29.554
+      },
+      {
+        "date": "2026-10-17",
+        "spotUsdPerOz": 4166.1,
+        "impliedCapT": 29.467
+      },
+      {
+        "date": "2026-10-18",
+        "spotUsdPerOz": 4166.1,
+        "impliedCapT": 29.467
+      },
+      {
+        "date": "2026-10-19",
+        "spotUsdPerOz": 4166,
+        "impliedCapT": 29.467
       }
     ]
   },
   "deltas": {
-    "generatedAt": "2026-07-21",
+    "generatedAt": "2026-10-19",
     "day": {
       "crypto": {
-        "pct": 2.67,
-        "absT": 0.061
+        "pct": 1.37,
+        "absT": 0.0375
       },
       "gold": {
-        "pct": 1.16,
-        "absT": 0.329
+        "pct": 0,
+        "absT": 0
       }
     },
     "month": {
-      "crypto": null,
-      "gold": null
+      "crypto": {
+        "pct": -0.67,
+        "absT": -0.0187
+      },
+      "gold": {
+        "pct": -4.86,
+        "absT": -1.506
+      }
     }
   },
   "countryEquityMarkets": [
@@ -696,41 +1355,41 @@
     ]
   },
   "centralBanks": {
-    "totalT": 24.2,
+    "totalT": 25.08,
     "peakTotalT": 30.5,
     "peakYear": "2022",
-    "asOf": "2026-06-01",
-    "source": "Fed / ECB / BoJ / PBoC official releases",
+    "asOf": "2026-08-01",
+    "source": "Fed (live via FRED WALCL) / ECB SDW / BoJ / PBoC official releases",
     "banks": [
       {
         "name": "People's Bank of China",
         "abbr": "PBoC",
         "flag": "🇨🇳",
-        "balanceSheetT": 6.75
-      },
-      {
-        "name": "Federal Reserve",
-        "abbr": "Fed",
-        "flag": "🇺🇸",
-        "balanceSheetT": 6.74
+        "balanceSheetT": 7.31
       },
       {
         "name": "European Central Bank",
         "abbr": "ECB",
         "flag": "🇪🇺",
-        "balanceSheetT": 6.73
+        "balanceSheetT": 6.91
+      },
+      {
+        "name": "Federal Reserve",
+        "abbr": "Fed",
+        "flag": "🇺🇸",
+        "balanceSheetT": 6.756
       },
       {
         "name": "Bank of Japan",
         "abbr": "BoJ",
         "flag": "🇯🇵",
-        "balanceSheetT": 3.97
+        "balanceSheetT": 4.1
       }
     ]
   },
   "globalDebt": {
     "totalT": 348,
-    "debtToGdpPct": 330,
+    "debtToGdpPct": 308,
     "asOf": "2025-12-31",
     "source": "IIF Global Debt Monitor, Feb 2026",
     "sectors": [
@@ -761,9 +1420,9 @@
     ]
   },
   "wealthDistribution": {
-    "totalT": 477,
-    "asOf": "2024-12-31",
-    "source": "UBS Global Wealth Report, 2025",
+    "totalT": 570,
+    "asOf": "2025-12-31",
+    "source": "UBS Global Wealth Report, 2026 (published Jun 2026, covers 2025 data)",
     "tiers": [
       {
         "group": "Top 1%",
@@ -788,24 +1447,24 @@
     ]
   },
   "topPrivateCompanies": {
-    "asOf": "2026-07-04",
-    "source": "companiesmarketcap.com",
+    "asOf": "2026-10-19",
+    "source": "Live: price (Yahoo Finance) × shares outstanding (curated, reviewed quarterly)",
     "companies": [
       {
         "rank": 1,
-        "name": "NVIDIA",
-        "ticker": "NVDA",
-        "flag": "🇺🇸",
-        "sector": "AI / Chips",
-        "capT": 4.72
-      },
-      {
-        "rank": 2,
         "name": "Apple",
         "ticker": "AAPL",
         "flag": "🇺🇸",
         "sector": "Consumer Tech",
-        "capT": 4.53
+        "capT": 4.82
+      },
+      {
+        "rank": 2,
+        "name": "NVIDIA",
+        "ticker": "NVDA",
+        "flag": "🇺🇸",
+        "sector": "AI / Chips",
+        "capT": 4.73
       },
       {
         "rank": 3,
@@ -813,7 +1472,7 @@
         "ticker": "GOOG",
         "flag": "🇺🇸",
         "sector": "Internet",
-        "capT": 4.35
+        "capT": 4.57
       },
       {
         "rank": 4,
@@ -821,7 +1480,7 @@
         "ticker": "MSFT",
         "flag": "🇺🇸",
         "sector": "Cloud",
-        "capT": 2.9
+        "capT": 3.91
       },
       {
         "rank": 5,
@@ -829,7 +1488,7 @@
         "ticker": "AMZN",
         "flag": "🇺🇸",
         "sector": "E-Commerce/Cloud",
-        "capT": 2.61
+        "capT": 2.89
       },
       {
         "rank": 6,
@@ -837,7 +1496,7 @@
         "ticker": "TSM",
         "flag": "🇹🇼",
         "sector": "Semiconductors",
-        "capT": 2.25
+        "capT": 2.06
       },
       {
         "rank": 7,
@@ -845,23 +1504,23 @@
         "ticker": "SPCX",
         "flag": "🇺🇸",
         "sector": "Aerospace",
-        "capT": 2.13
+        "capT": 1.49
       },
       {
         "rank": 8,
-        "name": "Broadcom",
-        "ticker": "AVGO",
-        "flag": "🇺🇸",
-        "sector": "Semiconductors",
-        "capT": 1.71
-      },
-      {
-        "rank": 9,
         "name": "Meta",
         "ticker": "META",
         "flag": "🇺🇸",
         "sector": "Social Media",
-        "capT": 1.48
+        "capT": 1.46
+      },
+      {
+        "rank": 9,
+        "name": "Broadcom",
+        "ticker": "AVGO",
+        "flag": "🇺🇸",
+        "sector": "Semiconductors",
+        "capT": 1.39
       },
       {
         "rank": 10,
@@ -869,13 +1528,13 @@
         "ticker": "TSLA",
         "flag": "🇺🇸",
         "sector": "EVs / Energy",
-        "capT": 1.48
+        "capT": 1.21
       }
     ]
   },
   "topStateEntities": {
-    "asOf": "2025-12-31",
-    "source": "SWFI, companiesmarketcap.com",
+    "asOf": "2026-08-01",
+    "source": "Global SWF tracker, official fund disclosures (PIF, Aramco), companiesmarketcap.com",
     "entities": [
       {
         "rank": 1,
@@ -883,10 +1542,18 @@
         "flag": "🇳🇴",
         "type": "SWF",
         "country": "Norway",
-        "valueT": 2
+        "valueT": 2.06
       },
       {
         "rank": 2,
+        "name": "SAFE (China)",
+        "flag": "🇨🇳",
+        "type": "SWF",
+        "country": "China",
+        "valueT": 1.99
+      },
+      {
+        "rank": 3,
         "name": "Saudi Aramco",
         "flag": "🇸🇦",
         "type": "SOE",
@@ -894,28 +1561,21 @@
         "valueT": 1.68
       },
       {
-        "rank": 3,
+        "rank": 4,
         "name": "China Inv. Corp",
         "flag": "🇨🇳",
         "type": "SWF",
         "country": "China",
-        "valueT": 1.24
+        "valueT": 1.57
       },
       {
-        "rank": 4,
+        "rank": 5,
         "name": "ADIA",
         "flag": "🇦🇪",
         "type": "SWF",
         "country": "UAE",
-        "valueT": 1.1
-      },
-      {
-        "rank": 5,
-        "name": "SAFE (China)",
-        "flag": "🇨🇳",
-        "type": "SWF",
-        "country": "China",
-        "valueT": 1.08
+        "valueT": 1.56,
+        "note": "undisclosed AUM; third-party estimate"
       },
       {
         "rank": 6,
@@ -923,7 +1583,8 @@
         "flag": "🇰🇼",
         "type": "SWF",
         "country": "Kuwait",
-        "valueT": 1
+        "valueT": 1,
+        "note": "undisclosed AUM; third-party estimate"
       },
       {
         "rank": 7,
@@ -931,7 +1592,8 @@
         "flag": "🇸🇬",
         "type": "SWF",
         "country": "Singapore",
-        "valueT": 0.94
+        "valueT": 0.87,
+        "note": "undisclosed AUM; third-party estimate"
       },
       {
         "rank": 8,
@@ -939,7 +1601,7 @@
         "flag": "🇸🇦",
         "type": "SWF",
         "country": "Saudi Arabia",
-        "valueT": 0.93
+        "valueT": 0.9
       },
       {
         "rank": 9,
@@ -947,7 +1609,8 @@
         "flag": "🇶🇦",
         "type": "SWF",
         "country": "Qatar",
-        "valueT": 0.56
+        "valueT": 0.51,
+        "note": "undisclosed AUM; third-party estimate"
       },
       {
         "rank": 10,
@@ -955,7 +1618,7 @@
         "flag": "🇸🇬",
         "type": "SWF",
         "country": "Singapore",
-        "valueT": 0.49
+        "valueT": 0.4
       }
     ]
   },
@@ -1373,8 +2036,6 @@
     },
     "rateAndInflation": {
       "labels": [
-        "Jan'20",
-        "Jul'20",
         "Jan'21",
         "Jul'21",
         "Jan'22",
@@ -1384,48 +2045,50 @@
         "Jan'24",
         "Jul'24",
         "Jan'25",
-        "Jul'25"
+        "Jul'25",
+        "Jan'26",
+        "Jul'26"
       ],
       "fedFunds": [
-        1.55,
-        0.09,
         0.09,
         0.1,
         0.08,
-        2.33,
+        1.68,
         4.33,
-        5.33,
+        5.12,
         5.33,
         5.33,
         4.33,
-        4.33
+        4.33,
+        3.64,
+        3.63
       ],
       "cpiYoY": [
-        2.5,
-        1,
         1.4,
-        5.4,
-        7.5,
-        9.1,
-        6.4,
-        3.2,
+        5.2,
+        7.6,
+        8.5,
+        6.3,
+        3.3,
         3.1,
         2.9,
         3,
-        2.4
+        2.7,
+        2.4,
+        3.3
       ]
     }
   },
   "marketPulse": {
-    "asOf": "2026-07-21",
+    "asOf": "2026-10-19",
     "markets": [
       {
         "id": "sp500",
         "label": "S&P 500",
         "flag": "🇺🇸",
         "region": "americas",
-        "price": 7443.28,
-        "changePct": -0.96,
+        "price": 7659.44,
+        "changePct": -1.95,
         "stale": false
       },
       {
@@ -1433,8 +2096,8 @@
         "label": "NASDAQ",
         "flag": "🇺🇸",
         "region": "americas",
-        "price": 25508.07,
-        "changePct": -1.41,
+        "price": 26140.03,
+        "changePct": -4.48,
         "stale": false
       },
       {
@@ -1442,8 +2105,8 @@
         "label": "KOSPI",
         "flag": "🇰🇷",
         "region": "asia",
-        "price": 6747.95,
-        "changePct": -0.87,
+        "price": 5768.01,
+        "changePct": -9.65,
         "stale": false
       },
       {
@@ -1451,8 +2114,8 @@
         "label": "Nikkei 225",
         "flag": "🇯🇵",
         "region": "asia",
-        "price": 66232.19,
-        "changePct": -2.23,
+        "price": 64916.7,
+        "changePct": -4.22,
         "stale": false
       },
       {
@@ -1460,8 +2123,8 @@
         "label": "Shanghai",
         "flag": "🇨🇳",
         "region": "asia",
-        "price": 3864.37,
-        "changePct": -2.31,
+        "price": 3730.92,
+        "changePct": -1.84,
         "stale": false
       },
       {
@@ -1469,8 +2132,8 @@
         "label": "DAX",
         "flag": "🇩🇪",
         "region": "emea",
-        "price": 24861.41,
-        "changePct": -1.14,
+        "price": 25255.74,
+        "changePct": -0.09,
         "stale": false
       },
       {
@@ -1478,75 +2141,13 @@
         "label": "FTSE 100",
         "flag": "🇬🇧",
         "region": "emea",
-        "price": 10531.1,
-        "changePct": 0.02,
+        "price": 10740.95,
+        "changePct": 0.79,
         "stale": false
       }
     ]
   },
   "economicEvents": [
-    {
-      "date": "2026-07-23",
-      "label": "ECB rate decision",
-      "kind": "ecb"
-    },
-    {
-      "date": "2026-07-29",
-      "label": "FOMC rate decision",
-      "kind": "fed"
-    },
-    {
-      "date": "2026-07-31",
-      "label": "BoJ policy decision",
-      "kind": "boj",
-      "note": "incl. Outlook Report"
-    },
-    {
-      "date": "2026-08-07",
-      "label": "US jobs report (NFP)",
-      "kind": "jobs"
-    },
-    {
-      "date": "2026-08-12",
-      "label": "US CPI release",
-      "kind": "cpi"
-    },
-    {
-      "date": "2026-09-04",
-      "label": "US jobs report (NFP)",
-      "kind": "jobs"
-    },
-    {
-      "date": "2026-09-10",
-      "label": "ECB rate decision",
-      "kind": "ecb"
-    },
-    {
-      "date": "2026-09-11",
-      "label": "US CPI release",
-      "kind": "cpi"
-    },
-    {
-      "date": "2026-09-16",
-      "label": "FOMC rate decision",
-      "kind": "fed",
-      "note": "incl. dot plot"
-    },
-    {
-      "date": "2026-09-18",
-      "label": "BoJ policy decision",
-      "kind": "boj"
-    },
-    {
-      "date": "2026-10-02",
-      "label": "US jobs report (NFP)",
-      "kind": "jobs"
-    },
-    {
-      "date": "2026-10-14",
-      "label": "US CPI release",
-      "kind": "cpi"
-    },
     {
       "date": "2026-10-28",
       "label": "FOMC rate decision",
@@ -1602,11 +2203,10 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-07-21T08:43:38.879Z",
+    "asOf": "2026-10-19T13:12:04.080Z",
     "items": [
-      "Shanghai −2.3% — biggest move among tracked markets",
-      "Crypto market cap +2.7% in 24h",
-      "Next: ECB rate decision in 2 days (2026-07-23)"
+      "KOSPI −9.7% — biggest move among tracked markets",
+      "Next: FOMC rate decision in 9 days (2026-10-28)"
     ]
   }
 }
