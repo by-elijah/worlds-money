@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-10-24T10:56:46.340Z",
+    "generatedAt": "2026-10-25T11:25:04.170Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -134,7 +134,7 @@
       "name": "Broad Money",
       "sub": "M2 — US (live) + EZ + CN + JP (curated)",
       "valueT": 103.4,
-      "asOf": "2026-10-24",
+      "asOf": "2026-10-25",
       "source": "US M2 live via FRED (M2SL); EZ/CN/JP curated from ECB/PBoC/BoJ releases",
       "tier": 2,
       "stale": false,
@@ -175,7 +175,7 @@
       "name": "Gold",
       "sub": "All above-ground gold × spot price",
       "valueT": 28.271,
-      "asOf": "2026-10-24",
+      "asOf": "2026-10-25",
       "source": "gold-api.com / WGC",
       "tier": 1,
       "stale": false,
@@ -215,8 +215,8 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.6906,
-      "asOf": "2026-10-24",
+      "valueT": 2.6848,
+      "asOf": "2026-10-25",
       "source": "CoinGecko",
       "tier": 1,
       "stale": false,
@@ -260,19 +260,19 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.6906,
+    "totalT": 2.6848,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 62.23,
+    "volume24hB": 53.12,
     "btc": {
-      "capT": 1.6193,
-      "dominancePct": 60.087,
-      "priceUsd": 80550
+      "capT": 1.6157,
+      "dominancePct": 60.1084,
+      "priceUsd": 80363
     },
     "eth": {
-      "capB": 289.04,
-      "dominancePct": 10.7321,
-      "priceUsd": 2366.16
+      "capB": 284.7,
+      "dominancePct": 10.5972,
+      "priceUsd": 2330.12
     },
     "stablecoinsB": 246.6,
     "top5": [
@@ -281,25 +281,25 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 80550,
-        "capB": 1619.3,
-        "change24hPct": -1.31
+        "priceUsd": 80363,
+        "capB": 1615.7,
+        "change24hPct": -0.16
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 2366.16,
-        "capB": 289,
-        "change24hPct": -1.25
+        "priceUsd": 2330.12,
+        "capB": 284.7,
+        "change24hPct": -1.4
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.999093,
+        "priceUsd": 0.999122,
         "capB": 182.5,
         "change24hPct": 0.01
       },
@@ -308,25 +308,21 @@
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 732,
-        "capB": 96.3,
-        "change24hPct": -1.92
+        "priceUsd": 740.7,
+        "capB": 97.4,
+        "change24hPct": 1.31
       },
       {
         "rank": 5,
         "id": "ripple",
         "symbol": "XRP",
         "name": "XRP",
-        "priceUsd": 1.28,
-        "capB": 80.7,
-        "change24hPct": -3.01
+        "priceUsd": 1.29,
+        "capB": 82,
+        "change24hPct": 1.23
       }
     ],
     "sparklineData": [
-      {
-        "date": "2026-07-27",
-        "totalT": 2.3177
-      },
       {
         "date": "2026-07-28",
         "totalT": 2.2568
@@ -682,6 +678,10 @@
       {
         "date": "2026-10-24",
         "totalT": 2.6906
+      },
+      {
+        "date": "2026-10-25",
+        "totalT": 2.6848
       }
     ]
   },
@@ -690,11 +690,6 @@
     "aboveGroundTonnes": 220000,
     "impliedCapT": 28.271,
     "sparklineData": [
-      {
-        "date": "2026-07-27",
-        "spotUsdPerOz": 4094.4,
-        "impliedCapT": 28.96
-      },
       {
         "date": "2026-07-28",
         "spotUsdPerOz": 4047.1,
@@ -1139,29 +1134,34 @@
         "date": "2026-10-24",
         "spotUsdPerOz": 3996.9,
         "impliedCapT": 28.271
+      },
+      {
+        "date": "2026-10-25",
+        "spotUsdPerOz": 3996.9,
+        "impliedCapT": 28.271
       }
     ]
   },
   "deltas": {
-    "generatedAt": "2026-10-24",
+    "generatedAt": "2026-10-25",
     "day": {
       "crypto": {
-        "pct": -1.36,
-        "absT": -0.0372
+        "pct": -0.22,
+        "absT": -0.0058
       },
       "gold": {
-        "pct": -0.72,
-        "absT": -0.206
+        "pct": 0,
+        "absT": 0
       }
     },
     "month": {
       "crypto": {
-        "pct": -4.81,
-        "absT": -0.136
+        "pct": -6.89,
+        "absT": -0.1988
       },
       "gold": {
-        "pct": -6.19,
-        "absT": -1.866
+        "pct": -7.15,
+        "absT": -2.176
       }
     }
   },
@@ -1269,7 +1269,7 @@
   ],
   "worldGdp": {
     "totalT": 128,
-    "asOf": "2026-10-24",
+    "asOf": "2026-10-25",
     "source": "IMF World Economic Outlook, DataMapper API (live)",
     "topCountries": [
       {
@@ -1447,7 +1447,7 @@
     ]
   },
   "topPrivateCompanies": {
-    "asOf": "2026-10-24",
+    "asOf": "2026-10-25",
     "source": "Live: price (Yahoo Finance) × shares outstanding (curated, reviewed quarterly)",
     "companies": [
       {
@@ -2080,7 +2080,7 @@
     }
   },
   "marketPulse": {
-    "asOf": "2026-10-24",
+    "asOf": "2026-10-25",
     "markets": [
       {
         "id": "sp500",
@@ -2203,10 +2203,10 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-10-24T10:56:56.537Z",
+    "asOf": "2026-10-25T11:25:16.964Z",
     "items": [
       "Nikkei 225 −3.4% — biggest move among tracked markets",
-      "Next: FOMC rate decision in 4 days (2026-10-28)"
+      "Next: FOMC rate decision in 3 days (2026-10-28)"
     ]
   }
 }
