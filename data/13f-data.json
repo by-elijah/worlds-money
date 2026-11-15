@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-11-08T13:56:22.339Z",
+    "generatedAt": "2026-11-15T14:23:53.106Z",
     "source": "SEC EDGAR (Form 13F filings) — data.sec.gov + www.sec.gov, no API key required",
     "fundsTracked": 24,
     "fundsFullyParsed": 16,
@@ -428,11 +428,11 @@
       "manager": "Jim Simons (fdr)",
       "style": "quant",
       "cik": "1037389",
-      "valueUsd": 72617871974,
-      "reportedLines": 3140,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-13",
-      "positionsCount": 3140,
+      "valueUsd": 73424247652,
+      "reportedLines": 3151,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-12",
+      "positionsCount": 3151,
       "topHolding": null,
       "holdings": null,
       "deep": false
@@ -612,6 +612,30 @@
       "deep": true
     },
     {
+      "id": "ark",
+      "name": "ARK Investment Management",
+      "manager": "Cathie Wood",
+      "style": "growth",
+      "cik": "1697748",
+      "valueUsd": 17374380716,
+      "reportedLines": 182,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-13",
+      "positionsCount": 182,
+      "topHolding": {
+        "fundId": "ark",
+        "fundName": "ARK Investment Management",
+        "manager": "Cathie Wood",
+        "name": "Tesla Inc",
+        "cusip": "88160R101",
+        "ticker": "TSLA",
+        "valueUsd": 1196306136,
+        "weightPct": 6.885460584493387
+      },
+      "holdings": null,
+      "deep": true
+    },
+    {
       "id": "lonepine",
       "name": "Lone Pine Capital",
       "manager": "Stephen Mandel (fdr)",
@@ -631,30 +655,6 @@
         "ticker": null,
         "valueUsd": 1175934069,
         "weightPct": 7.188845228385034
-      },
-      "holdings": null,
-      "deep": true
-    },
-    {
-      "id": "ark",
-      "name": "ARK Investment Management",
-      "manager": "Cathie Wood",
-      "style": "growth",
-      "cik": "1697748",
-      "valueUsd": 15402788184,
-      "reportedLines": 191,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 191,
-      "topHolding": {
-        "fundId": "ark",
-        "fundName": "ARK Investment Management",
-        "manager": "Cathie Wood",
-        "name": "Tesla Inc",
-        "cusip": "88160R101",
-        "ticker": "TSLA",
-        "valueUsd": 1160772073,
-        "weightPct": 7.5361165727499815
       },
       "holdings": null,
       "deep": true
@@ -689,11 +689,11 @@
       "manager": "Carl Icahn",
       "style": "activist",
       "cik": "921669",
-      "valueUsd": 8264090525,
-      "reportedLines": 18,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 12,
+      "valueUsd": 9428081917,
+      "reportedLines": 16,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-13",
+      "positionsCount": 10,
       "topHolding": {
         "fundId": "icahn",
         "fundName": "Icahn Capital",
@@ -701,8 +701,8 @@
         "name": "Icahn Enterprises LP",
         "cusip": "451100101",
         "ticker": null,
-        "valueUsd": 4458616003,
-        "weightPct": 53.95168396948314
+        "valueUsd": 4447740626,
+        "weightPct": 47.17545588970936
       },
       "holdings": null,
       "deep": true
@@ -713,20 +713,20 @@
       "manager": "George Soros",
       "style": "growth",
       "cik": "1029160",
-      "valueUsd": 8143628824,
-      "reportedLines": 266,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 266,
+      "valueUsd": 8508315961,
+      "reportedLines": 263,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-13",
+      "positionsCount": 263,
       "topHolding": {
         "fundId": "soros",
         "fundName": "Soros Fund Management",
         "manager": "George Soros",
-        "name": "AMAZON COM INC",
-        "cusip": "023135106",
-        "ticker": "AMZN",
-        "valueUsd": 281843962,
-        "weightPct": 3.460913655216956
+        "name": "SELECT SECTOR SPDR TR",
+        "cusip": "81369Y506",
+        "ticker": null,
+        "valueUsd": 670245450,
+        "weightPct": 7.87753361619665
       },
       "holdings": null,
       "deep": true
@@ -812,8 +812,8 @@
       "name": "Icahn Enterprises LP",
       "cusip": "451100101",
       "ticker": null,
-      "valueUsd": 4458616003,
-      "weightPct": 53.95168396948314
+      "valueUsd": 4447740626,
+      "weightPct": 47.17545588970936
     },
     {
       "fundId": "berkshire",
@@ -916,14 +916,14 @@
       "weightPct": 8.755124431867554
     },
     {
-      "fundId": "ark",
-      "fundName": "ARK Investment Management",
-      "manager": "Cathie Wood",
-      "name": "Tesla Inc",
-      "cusip": "88160R101",
-      "ticker": "TSLA",
-      "valueUsd": 1160772073,
-      "weightPct": 7.5361165727499815
+      "fundId": "soros",
+      "fundName": "Soros Fund Management",
+      "manager": "George Soros",
+      "name": "SELECT SECTOR SPDR TR",
+      "cusip": "81369Y506",
+      "ticker": null,
+      "valueUsd": 670245450,
+      "weightPct": 7.87753361619665
     }
   ],
   "mostOwned": [
@@ -931,106 +931,106 @@
       "name": "AMAZON COM INC",
       "cusip": "023135106",
       "count": 12,
-      "totalValue": 12640928303,
+      "totalValue": 12665776910,
       "ticker": "AMZN"
     },
     {
       "name": "ALPHABET INC",
       "cusip": "02079K305",
       "count": 10,
-      "totalValue": 35042787067,
+      "totalValue": 34986430009,
       "ticker": "GOOGL"
     },
     {
       "name": "TAIWAN SEMICONDUCTOR MANUFAC",
       "cusip": "874039100",
       "count": 10,
-      "totalValue": 10000060300,
+      "totalValue": 9978207428,
       "ticker": null
     },
     {
       "name": "META PLATFORMS INC",
       "cusip": "30303M102",
       "count": 9,
-      "totalValue": 6145421128,
+      "totalValue": 6463707514,
       "ticker": "META"
     },
     {
       "name": "MICROSOFT CORP",
       "cusip": "594918104",
       "count": 8,
-      "totalValue": 5091887842,
+      "totalValue": 5084299596,
       "ticker": "MSFT"
+    },
+    {
+      "name": "ALPHABET INC",
+      "cusip": "02079K107",
+      "count": 7,
+      "totalValue": 11703642377,
+      "ticker": "GOOG"
     },
     {
       "name": "NVIDIA CORPORATION",
       "cusip": "67066G104",
       "count": 7,
-      "totalValue": 4329412793,
+      "totalValue": 4620983114,
       "ticker": "NVDA"
     },
     {
       "name": "ADVANCED MICRO DEVICES INC",
       "cusip": "007903107",
       "count": 7,
-      "totalValue": 1457612788,
+      "totalValue": 1045951326,
       "ticker": null
     },
     {
       "name": "BROADCOM INC",
       "cusip": "11135F101",
       "count": 7,
-      "totalValue": 3579906531,
+      "totalValue": 3695701126,
       "ticker": null
-    },
-    {
-      "name": "STATE STR SPDR S&amp;P 500 ETF T",
-      "cusip": "78462F103",
-      "count": 7,
-      "totalValue": 4652910406,
-      "ticker": null
-    },
-    {
-      "name": "ALPHABET INC",
-      "cusip": "02079K107",
-      "count": 6,
-      "totalValue": 11723684098,
-      "ticker": "GOOG"
     },
     {
       "name": "SPACE EXPLORATION TECHN CORP",
       "cusip": "84615Q103",
       "count": 6,
-      "totalValue": 4274952719,
+      "totalValue": 4527603855,
       "ticker": null
     },
     {
       "name": "CAPITAL ONE FINL CORP",
       "cusip": "14040H105",
       "count": 5,
-      "totalValue": 3180205642,
+      "totalValue": 3181589210,
       "ticker": "COF"
     },
     {
       "name": "SEA LTD",
       "cusip": "81141R100",
       "count": 5,
-      "totalValue": 1914868132,
+      "totalValue": 1915865820,
       "ticker": null
     },
     {
       "name": "COUPANG INC",
       "cusip": "22266T109",
       "count": 5,
-      "totalValue": 1089211327,
+      "totalValue": 1088970575,
       "ticker": null
     },
     {
-      "name": "REDDIT INC",
-      "cusip": "75734B100",
+      "name": "DANAHER CORP DEL",
+      "cusip": "235851102",
       "count": 5,
-      "totalValue": 1206690197,
+      "totalValue": 270698222,
       "ticker": null
+    },
+    {
+      "name": "TESLA INC",
+      "cusip": "88160R101",
+      "count": 5,
+      "totalValue": 1535542377,
+      "ticker": "TSLA"
     }
   ],
   "consensusBuys": [
@@ -1039,7 +1039,7 @@
       "cusip": "023135106",
       "addCount": 11,
       "reduceCount": 1,
-      "netValueDelta": 3437963199,
+      "netValueDelta": 3489241074,
       "ticker": "AMZN"
     },
     {
@@ -1047,64 +1047,72 @@
       "cusip": "874039100",
       "addCount": 8,
       "reduceCount": 2,
-      "netValueDelta": 1828847557,
+      "netValueDelta": 1879890627,
       "ticker": null
     },
     {
-      "name": "ALPHABET INC",
-      "cusip": "02079K305",
-      "addCount": 7,
+      "name": "META PLATFORMS INC",
+      "cusip": "30303M102",
+      "addCount": 6,
       "reduceCount": 3,
-      "netValueDelta": 12249813757,
-      "ticker": "GOOGL"
-    },
-    {
-      "name": "ADVANCED MICRO DEVICES INC",
-      "cusip": "007903107",
-      "addCount": 7,
-      "reduceCount": 0,
-      "netValueDelta": 853649665,
-      "ticker": null
+      "netValueDelta": 316867088,
+      "ticker": "META"
     },
     {
       "name": "NVIDIA CORPORATION",
       "cusip": "67066G104",
       "addCount": 6,
       "reduceCount": 1,
-      "netValueDelta": 316612212,
+      "netValueDelta": 726649272,
       "ticker": "NVDA"
-    },
-    {
-      "name": "BROADCOM INC",
-      "cusip": "11135F101",
-      "addCount": 6,
-      "reduceCount": 1,
-      "netValueDelta": 592086100,
-      "ticker": null
     },
     {
       "name": "SPACE EXPLORATION TECHN CORP",
       "cusip": "84615Q103",
       "addCount": 6,
       "reduceCount": 0,
-      "netValueDelta": 4274952719,
+      "netValueDelta": 3762490574,
       "ticker": null
+    },
+    {
+      "name": "ALPHABET INC",
+      "cusip": "02079K305",
+      "addCount": 5,
+      "reduceCount": 5,
+      "netValueDelta": 12095325595,
+      "ticker": "GOOGL"
     },
     {
       "name": "ALPHABET INC",
       "cusip": "02079K107",
       "addCount": 5,
-      "reduceCount": 1,
-      "netValueDelta": 7482711630,
+      "reduceCount": 2,
+      "netValueDelta": 7300686612,
       "ticker": "GOOG"
     },
     {
-      "name": "META PLATFORMS INC",
-      "cusip": "30303M102",
+      "name": "MICROSOFT CORP",
+      "cusip": "594918104",
       "addCount": 5,
-      "reduceCount": 4,
-      "netValueDelta": 37552455,
-      "ticker": "META"
+      "reduceCount": 3,
+      "netValueDelta": 2310290711,
+      "ticker": "MSFT"
+    },
+    {
+      "name": "ADVANCED MICRO DEVICES INC",
+      "cusip": "007903107",
+      "addCount": 5,
+      "reduceCount": 2,
+      "netValueDelta": 148600627,
+      "ticker": null
+    },
+    {
+      "name": "BROADCOM INC",
+      "cusip": "11135F101",
+      "addCount": 5,
+      "reduceCount": 2,
+      "netValueDelta": 665864737,
+      "ticker": null
     },
     {
       "name": "DANAHER CORP DEL",
@@ -1119,113 +1127,73 @@
       "cusip": "632307104",
       "addCount": 5,
       "reduceCount": 0,
-      "netValueDelta": 1182270562,
+      "netValueDelta": 1170862271,
       "ticker": null
-    },
-    {
-      "name": "STATE STR SPDR S&amp;P 500 ETF T",
-      "cusip": "78462F103",
-      "addCount": 5,
-      "reduceCount": 2,
-      "netValueDelta": 4556829074,
-      "ticker": null
-    },
-    {
-      "name": "APPLE INC",
-      "cusip": "037833100",
-      "addCount": 4,
-      "reduceCount": 0,
-      "netValueDelta": 8379459247,
-      "ticker": "AAPL"
-    },
-    {
-      "name": "MICROSOFT CORP",
-      "cusip": "594918104",
-      "addCount": 4,
-      "reduceCount": 4,
-      "netValueDelta": 2310213912,
-      "ticker": "MSFT"
     },
     {
       "name": "MICRON TECHNOLOGY INC",
       "cusip": "595112103",
       "addCount": 4,
       "reduceCount": 0,
-      "netValueDelta": 4159095908,
+      "netValueDelta": 4146224076,
+      "ticker": null
+    },
+    {
+      "name": "LAM RESEARCH CORP",
+      "cusip": "512807306",
+      "addCount": 4,
+      "reduceCount": 0,
+      "netValueDelta": 2585820814,
+      "ticker": null
+    },
+    {
+      "name": "COREWEAVE INC",
+      "cusip": "21873S108",
+      "addCount": 4,
+      "reduceCount": 0,
+      "netValueDelta": 251128096,
       "ticker": null
     }
   ],
   "consensusSells": [
     {
-      "name": "MICROSOFT CORP",
-      "cusip": "594918104",
-      "addCount": 4,
-      "reduceCount": 4,
-      "netValueDelta": 2310213912,
-      "ticker": "MSFT"
-    },
-    {
-      "name": "META PLATFORMS INC",
-      "cusip": "30303M102",
+      "name": "ALPHABET INC",
+      "cusip": "02079K305",
       "addCount": 5,
-      "reduceCount": 4,
-      "netValueDelta": 37552455,
-      "ticker": "META"
+      "reduceCount": 5,
+      "netValueDelta": 12095325595,
+      "ticker": "GOOGL"
     },
     {
       "name": "COUPANG INC",
       "cusip": "22266T109",
       "addCount": 1,
       "reduceCount": 4,
-      "netValueDelta": 21247969,
+      "netValueDelta": 21932502,
       "ticker": null
     },
     {
-      "name": "NETFLIX INC.",
-      "cusip": "64110L106",
-      "addCount": 0,
-      "reduceCount": 4,
-      "netValueDelta": -494177894,
-      "ticker": null
+      "name": "MICROSOFT CORP",
+      "cusip": "594918104",
+      "addCount": 5,
+      "reduceCount": 3,
+      "netValueDelta": 2310290711,
+      "ticker": "MSFT"
     },
     {
-      "name": "ALPHABET INC",
-      "cusip": "02079K305",
-      "addCount": 7,
+      "name": "META PLATFORMS INC",
+      "cusip": "30303M102",
+      "addCount": 6,
       "reduceCount": 3,
-      "netValueDelta": 12249813757,
-      "ticker": "GOOGL"
-    },
-    {
-      "name": "CAPITAL ONE FINL CORP",
-      "cusip": "14040H105",
-      "addCount": 2,
-      "reduceCount": 3,
-      "netValueDelta": -366256602,
-      "ticker": "COF"
+      "netValueDelta": 316867088,
+      "ticker": "META"
     },
     {
       "name": "ALIBABA GROUP HLDG LTD",
       "cusip": "01609W102",
       "addCount": 0,
       "reduceCount": 3,
-      "netValueDelta": -329747562,
-      "ticker": null
-    },
-    {
-      "name": "NU HLDGS LTD",
-      "cusip": "G6683N103",
-      "addCount": 1,
-      "reduceCount": 3,
-      "netValueDelta": 41355924,
-      "ticker": "NU"
-    },
-    {
-      "name": "PONY AI INC",
-      "cusip": "732908108",
-      "addCount": 0,
-      "reduceCount": 3,
-      "netValueDelta": -38120787,
+      "netValueDelta": -253936294,
       "ticker": null
     },
     {
@@ -1233,7 +1201,23 @@
       "cusip": "580135101",
       "addCount": 0,
       "reduceCount": 3,
-      "netValueDelta": -380431606,
+      "netValueDelta": -380294452,
+      "ticker": null
+    },
+    {
+      "name": "ATI INC",
+      "cusip": "01741R102",
+      "addCount": 0,
+      "reduceCount": 3,
+      "netValueDelta": -268786675,
+      "ticker": null
+    },
+    {
+      "name": "NETFLIX INC.",
+      "cusip": "64110L106",
+      "addCount": 1,
+      "reduceCount": 3,
+      "netValueDelta": -486474920,
       "ticker": null
     },
     {
@@ -1245,6 +1229,30 @@
       "ticker": "CVX"
     },
     {
+      "name": "CHUBB LIMITED",
+      "cusip": "H1467J104",
+      "addCount": 1,
+      "reduceCount": 2,
+      "netValueDelta": 213358190,
+      "ticker": "CB"
+    },
+    {
+      "name": "ALPHABET INC",
+      "cusip": "02079K107",
+      "addCount": 5,
+      "reduceCount": 2,
+      "netValueDelta": 7300686612,
+      "ticker": "GOOG"
+    },
+    {
+      "name": "CAPITAL ONE FINL CORP",
+      "cusip": "14040H105",
+      "addCount": 3,
+      "reduceCount": 2,
+      "netValueDelta": -361520057,
+      "ticker": "COF"
+    },
+    {
       "name": "BROOKFIELD CORP",
       "cusip": "11271J107",
       "addCount": 0,
@@ -1253,19 +1261,11 @@
       "ticker": null
     },
     {
-      "name": "UBER TECHNOLOGIES INC",
-      "cusip": "90353T100",
-      "addCount": 2,
-      "reduceCount": 2,
-      "netValueDelta": -229695499,
-      "ticker": null
-    },
-    {
       "name": "HERTZ GLOBAL HLDGS INC",
       "cusip": "42806J700",
-      "addCount": 1,
+      "addCount": 0,
       "reduceCount": 2,
-      "netValueDelta": -7319904,
+      "netValueDelta": -8328298,
       "ticker": null
     },
     {
@@ -1273,7 +1273,7 @@
       "cusip": "874039100",
       "addCount": 8,
       "reduceCount": 2,
-      "netValueDelta": 1828847557,
+      "netValueDelta": 1879890627,
       "ticker": null
     }
   ],
