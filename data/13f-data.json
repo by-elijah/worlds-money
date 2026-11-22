@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-11-15T14:23:53.106Z",
+    "generatedAt": "2026-11-22T14:56:58.766Z",
     "source": "SEC EDGAR (Form 13F filings) — data.sec.gov + www.sec.gov, no API key required",
     "fundsTracked": 24,
     "fundsFullyParsed": 16,
@@ -14,11 +14,26 @@
       "manager": "Ken Griffin",
       "style": "quant",
       "cik": "1423053",
-      "valueUsd": 875011794337,
-      "reportedLines": 16122,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-09-02",
-      "positionsCount": 16122,
+      "valueUsd": 899604780240,
+      "reportedLines": 16527,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 16527,
+      "topHolding": null,
+      "holdings": null,
+      "deep": false
+    },
+    {
+      "id": "aqr",
+      "name": "AQR Capital Management",
+      "manager": "Cliff Asness",
+      "style": "quant",
+      "cik": "1167557",
+      "valueUsd": 337406348561,
+      "reportedLines": 25388,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 25388,
       "topHolding": null,
       "holdings": null,
       "deep": false
@@ -29,11 +44,11 @@
       "manager": "Warren Buffett",
       "style": "value",
       "cik": "1067983",
-      "valueUsd": 299253556246,
+      "valueUsd": 304196581325,
       "reportedLines": 89,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 29,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 30,
       "topHolding": {
         "fundId": "berkshire",
         "fundName": "Berkshire Hathaway",
@@ -41,16 +56,16 @@
         "name": "APPLE INC",
         "cusip": "037833100",
         "ticker": "AAPL",
-        "valueUsd": 65950296923,
-        "weightPct": 22.038266729497398
+        "valueUsd": 75901188420,
+        "weightPct": 24.95136141550127
       },
       "holdings": [
         {
           "name": "APPLE INC",
           "cusip": "037833100",
           "ticker": "AAPL",
-          "valueUsd": 65950296923,
-          "weightPct": 22.038266729497398,
+          "valueUsd": 75901188420,
+          "weightPct": 24.95136141550127,
           "shares": 227917808,
           "qoqSharesPct": 0,
           "isNew": false
@@ -59,8 +74,8 @@
           "name": "AMERICAN EXPRESS CO",
           "cusip": "025816109",
           "ticker": "AXP",
-          "valueUsd": 51282319275,
-          "weightPct": 17.136745146261052,
+          "valueUsd": 46104813870,
+          "weightPct": 15.15625641457889,
           "shares": 151610700,
           "qoqSharesPct": 0,
           "isNew": false
@@ -69,8 +84,8 @@
           "name": "COCA COLA CO",
           "cusip": "191216100",
           "ticker": "KO",
-          "valueUsd": 32508000000,
-          "weightPct": 10.863028799990918,
+          "valueUsd": 34432000000,
+          "weightPct": 11.318996370709788,
           "shares": 400000000,
           "qoqSharesPct": 0,
           "isNew": false
@@ -79,28 +94,28 @@
           "name": "ALPHABET INC",
           "cusip": "02079K305",
           "ticker": "GOOGL",
-          "valueUsd": 28157599351,
-          "weightPct": 9.40927810657434,
+          "valueUsd": 27110464741,
+          "weightPct": 8.9121529975498,
           "shares": 78791167,
-          "qoqSharesPct": 45.23771498651479,
+          "qoqSharesPct": 0,
           "isNew": false
         },
         {
           "name": "BANK OF AMER CORP",
           "cusip": "060505104",
           "ticker": "BAC",
-          "valueUsd": 27543790975,
-          "weightPct": 9.204164963158451,
-          "shares": 483394015,
-          "qoqSharesPct": -5.885655710922402,
+          "valueUsd": 24812509222,
+          "weightPct": 8.156735067147453,
+          "shares": 455860908,
+          "qoqSharesPct": -5.695789799962666,
           "isNew": false
         },
         {
           "name": "CHEVRON CORPORATION",
           "cusip": "166764100",
           "ticker": "CVX",
-          "valueUsd": 13986141890,
-          "weightPct": 4.673676084404744,
+          "valueUsd": 17230393553,
+          "weightPct": 5.664229847011743,
           "shares": 84375856,
           "qoqSharesPct": 0,
           "isNew": false
@@ -109,19 +124,9 @@
           "name": "OCCIDENTAL PETE CORP",
           "cusip": "674599105",
           "ticker": "OXY",
-          "valueUsd": 12868205304,
-          "weightPct": 4.300101046559243,
+          "valueUsd": 14656559963,
+          "weightPct": 4.818121196221172,
           "shares": 264941431,
-          "qoqSharesPct": 0,
-          "isNew": false
-        },
-        {
-          "name": "CHUBB LIMITED",
-          "cusip": "H1467J104",
-          "ticker": "CB",
-          "valueUsd": 11670066615,
-          "weightPct": 3.8997252902841617,
-          "shares": 34249183,
           "qoqSharesPct": 0,
           "isNew": false
         },
@@ -129,9 +134,19 @@
           "name": "MOODYS CORP",
           "cusip": "615369105",
           "ticker": "MCO",
-          "valueUsd": 11173435852,
-          "weightPct": 3.7337687786122506,
+          "valueUsd": 11203286284,
+          "weightPct": 3.6829099903757765,
           "shares": 24669778,
+          "qoqSharesPct": 0,
+          "isNew": false
+        },
+        {
+          "name": "CHUBB LIMITED",
+          "cusip": "H1467J104",
+          "ticker": "CB",
+          "valueUsd": 11139546771,
+          "weightPct": 3.661956594804279,
+          "shares": 34249183,
           "qoqSharesPct": 0,
           "isNew": false
         },
@@ -139,99 +154,99 @@
           "name": "ALPHABET INC",
           "cusip": "02079K107",
           "ticker": "GOOG",
-          "valueUsd": 9606489032,
-          "weightPct": 3.2101503328846093,
+          "valueUsd": 9264186660,
+          "weightPct": 3.045460478105194,
           "shares": 27188433,
-          "qoqSharesPct": 658.3487461700345,
+          "qoqSharesPct": 0,
           "isNew": false
         },
         {
           "name": "KRAFT HEINZ CO",
           "cusip": "500754106",
           "ticker": "KHC",
-          "valueUsd": 7691494401,
-          "weightPct": 2.5702265655540755,
+          "valueUsd": 7398423065,
+          "weightPct": 2.4321190701007955,
           "shares": 325634818,
           "qoqSharesPct": 0,
-          "isNew": false
-        },
-        {
-          "name": "DAVITA INC",
-          "cusip": "23918K108",
-          "ticker": "DVA",
-          "valueUsd": 6425268898,
-          "weightPct": 2.1470985937818354,
-          "shares": 28880209,
-          "qoqSharesPct": -4.0543265189032045,
           "isNew": false
         },
         {
           "name": "DELTA AIR LINES INC",
           "cusip": "247361702",
           "ticker": "DAL",
-          "valueUsd": 5368591200,
-          "weightPct": 1.7939941190161746,
-          "shares": 57320000,
-          "qoqSharesPct": 43.985891191278775,
+          "valueUsd": 5378997000,
+          "weightPct": 1.7682634619266624,
+          "shares": 64450000,
+          "qoqSharesPct": 12.43893928820656,
+          "isNew": false
+        },
+        {
+          "name": "DAVITA INC",
+          "cusip": "23918K108",
+          "ticker": "DVA",
+          "valueUsd": 5019719296,
+          "weightPct": 1.650156380500868,
+          "shares": 28697229,
+          "qoqSharesPct": -0.6335826724799671,
           "isNew": false
         },
         {
           "name": "SIRIUSXM HOLDINGS INC",
           "cusip": "829933100",
           "ticker": "SIRI",
-          "valueUsd": 3686802237,
-          "weightPct": 1.231999473372768,
+          "valueUsd": 3230008188,
+          "weightPct": 1.0618160710192523,
           "shares": 124807117,
           "qoqSharesPct": 0,
-          "isNew": false
-        },
-        {
-          "name": "VERISIGN INC",
-          "cusip": "92343E102",
-          "ticker": "VRSN",
-          "valueUsd": 2261494212,
-          "weightPct": 0.7557117249898107,
-          "shares": 8989880,
-          "qoqSharesPct": 0,
-          "isNew": false
-        },
-        {
-          "name": "KROGER CO",
-          "cusip": "501044101",
-          "ticker": "KR",
-          "valueUsd": 2165670000,
-          "weightPct": 0.7236906478797936,
-          "shares": 39000000,
-          "qoqSharesPct": -22,
-          "isNew": false
-        },
-        {
-          "name": "ALLY FINL INC",
-          "cusip": "02005N100",
-          "ticker": "ALLY",
-          "valueUsd": 1240650000,
-          "weightPct": 0.4145815393352016,
-          "shares": 27000000,
-          "qoqSharesPct": -6.896551724137931,
           "isNew": false
         },
         {
           "name": "LENNAR CORP",
           "cusip": "526057104",
           "ticker": "LEN",
-          "valueUsd": 1186481443,
-          "weightPct": 0.3964803151828406,
-          "shares": 13111741,
-          "qoqSharesPct": 29.823819497760418,
+          "valueUsd": 2124149633,
+          "weightPct": 0.6982818885563293,
+          "shares": 26034436,
+          "qoqSharesPct": 98.55819299664323,
+          "isNew": false
+        },
+        {
+          "name": "KROGER CO",
+          "cusip": "501044101",
+          "ticker": "KR",
+          "valueUsd": 2051700000,
+          "weightPct": 0.6744651734951578,
+          "shares": 35000000,
+          "qoqSharesPct": -10.256410256410255,
+          "isNew": false
+        },
+        {
+          "name": "VERISIGN INC",
+          "cusip": "92343E102",
+          "ticker": "VRSN",
+          "valueUsd": 1670101573,
+          "weightPct": 0.5490204938285231,
+          "shares": 5922136,
+          "qoqSharesPct": -34.12441545382141,
           "isNew": false
         },
         {
           "name": "LIBERTY LIVE HOLDINGS INC",
           "cusip": "530909308",
           "ticker": "LLYVA",
-          "valueUsd": 1118425787,
-          "weightPct": 0.37373851159202376,
+          "valueUsd": 1029599657,
+          "weightPct": 0.3384652294629137,
           "shares": 10587143,
+          "qoqSharesPct": 0,
+          "isNew": false
+        },
+        {
+          "name": "ALLY FINL INC",
+          "cusip": "02005N100",
+          "ticker": "ALLY",
+          "valueUsd": 1015740001,
+          "weightPct": 0.3339090783255041,
+          "shares": 27000000,
           "qoqSharesPct": 0,
           "isNew": false
         },
@@ -239,39 +254,29 @@
           "name": "NEW YORK TIMES CO MTN BE",
           "cusip": "650111107",
           "ticker": "NYT",
-          "valueUsd": 1098686000,
-          "weightPct": 0.36714216993191895,
+          "valueUsd": 1000090000,
+          "weightPct": 0.3287643784962579,
           "shares": 15700000,
-          "qoqSharesPct": 3.654070056286801,
+          "qoqSharesPct": 0,
           "isNew": false
         },
         {
-          "name": "CAPITAL ONE FINL CORP",
-          "cusip": "14040H105",
-          "ticker": "COF",
-          "valueUsd": 601860000,
-          "weightPct": 0.2011204169300644,
-          "shares": 3000000,
-          "qoqSharesPct": -58.04195804195804,
-          "isNew": false
+          "name": "BENDING SPOONS SPA",
+          "cusip": "T19377109",
+          "ticker": null,
+          "valueUsd": 689379305,
+          "weightPct": 0.22662296268986512,
+          "shares": 20689655,
+          "qoqSharesPct": null,
+          "isNew": true
         },
         {
           "name": "LIBERTY LIVE HOLDINGS INC",
           "cusip": "530909100",
           "ticker": "LLYVK",
-          "valueUsd": 504941901,
-          "weightPct": 0.1687338013069141,
+          "valueUsd": 471930689,
+          "weightPct": 0.1551400370590605,
           "shares": 4986588,
-          "qoqSharesPct": 0,
-          "isNew": false
-        },
-        {
-          "name": "LOUISIANA PAC CORP",
-          "cusip": "546347105",
-          "ticker": "LPX",
-          "valueUsd": 445592617,
-          "weightPct": 0.14890136063536122,
-          "shares": 5664793,
           "qoqSharesPct": 0,
           "isNew": false
         },
@@ -279,28 +284,48 @@
           "name": "NUCOR CORP",
           "cusip": "670346105",
           "ticker": "NUE",
-          "valueUsd": 413814258,
-          "weightPct": 0.13828215216257142,
-          "shares": 1857752,
-          "qoqSharesPct": -52.45159102397574,
+          "valueUsd": 369506390,
+          "weightPct": 0.12146960639417041,
+          "shares": 1580776,
+          "qoqSharesPct": -14.909202089406982,
+          "isNew": false
+        },
+        {
+          "name": "LOUISIANA PAC CORP",
+          "cusip": "546347105",
+          "ticker": "LPX",
+          "valueUsd": 365662388,
+          "weightPct": 0.12020594919484999,
+          "shares": 5664793,
+          "qoqSharesPct": 0,
+          "isNew": false
+        },
+        {
+          "name": "CAPITAL ONE FINL CORP",
+          "cusip": "14040H105",
+          "ticker": "COF",
+          "valueUsd": 222030500,
+          "weightPct": 0.07298915031618493,
+          "shares": 1150000,
+          "qoqSharesPct": -61.66666666666667,
           "isNew": false
         },
         {
           "name": "MACYS INC",
           "cusip": "55616P104",
           "ticker": "M",
-          "valueUsd": 173031882,
-          "weightPct": 0.05782116148279285,
-          "shares": 7347426,
-          "qoqSharesPct": 141.82249934586312,
+          "valueUsd": 171658476,
+          "weightPct": 0.05643011346554291,
+          "shares": 7538800,
+          "qoqSharesPct": 2.604640046732012,
           "isNew": false
         },
         {
           "name": "NVR INC",
           "cusip": "62944T105",
           "ticker": "NVR",
-          "valueUsd": 75710501,
-          "weightPct": 0.02529978321720011,
+          "valueUsd": 68387582,
+          "weightPct": 0.022481377569110655,
           "shares": 11112,
           "qoqSharesPct": 0,
           "isNew": false
@@ -309,18 +334,18 @@
           "name": "LENNAR CORP",
           "cusip": "526057302",
           "ticker": "LEN",
-          "valueUsd": 26445959,
-          "weightPct": 0.008837308178306233,
-          "shares": 298117,
-          "qoqSharesPct": 25.415749906395796,
+          "valueUsd": 44234470,
+          "weightPct": 0.014541409310823391,
+          "shares": 553000,
+          "qoqSharesPct": 85.49764018824824,
           "isNew": false
         },
         {
           "name": "JEFFERIES FINANCIAL GROUP IN",
           "cusip": "47233W109",
           "ticker": "JEF",
-          "valueUsd": 21669229,
-          "weightPct": 0.0072410932293773345,
+          "valueUsd": 19826607,
+          "weightPct": 0.006517695535446366,
           "shares": 433558,
           "qoqSharesPct": 0,
           "isNew": false
@@ -329,29 +354,14 @@
           "name": "D R HORTON INC",
           "cusip": "23331A109",
           "ticker": "DHI",
-          "valueUsd": 580504,
-          "weightPct": 0.0001939839938018312,
+          "valueUsd": 487021,
+          "weightPct": 0.0001601007473123679,
           "shares": 3564,
-          "qoqSharesPct": null,
-          "isNew": true
+          "qoqSharesPct": 0,
+          "isNew": false
         }
       ],
       "deep": true
-    },
-    {
-      "id": "aqr",
-      "name": "AQR Capital Management",
-      "manager": "Cliff Asness",
-      "style": "quant",
-      "cik": "1167557",
-      "valueUsd": 286847511937,
-      "reportedLines": 21077,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 21077,
-      "topHolding": null,
-      "holdings": null,
-      "deep": false
     },
     {
       "id": "millennium",
@@ -359,11 +369,11 @@
       "manager": "Izzy Englander",
       "style": "quant",
       "cik": "1273087",
-      "valueUsd": 276293649404,
-      "reportedLines": 5798,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 5798,
+      "valueUsd": 302248162268,
+      "reportedLines": 6103,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 6103,
       "topHolding": null,
       "holdings": null,
       "deep": false
@@ -374,11 +384,11 @@
       "manager": "Quant",
       "style": "quant",
       "cik": "1179392",
-      "valueUsd": 138117670065,
-      "reportedLines": 5017,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 5017,
+      "valueUsd": 141912496371,
+      "reportedLines": 4830,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 4830,
       "topHolding": null,
       "holdings": null,
       "deep": false
@@ -389,11 +399,11 @@
       "manager": "Steve Cohen",
       "style": "quant",
       "cik": "1603466",
-      "valueUsd": 90675333456,
-      "reportedLines": 3923,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 3923,
+      "valueUsd": 90042211133,
+      "reportedLines": 3856,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 3856,
       "topHolding": null,
       "holdings": null,
       "deep": false
@@ -404,23 +414,38 @@
       "manager": "Bill Nygren",
       "style": "value",
       "cik": "813917",
-      "valueUsd": 75422839842,
-      "reportedLines": 226,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 162,
+      "valueUsd": 76774722322,
+      "reportedLines": 238,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 176,
       "topHolding": {
         "fundId": "harris",
         "fundName": "Harris Associates (Oakmark)",
         "manager": "Bill Nygren",
         "name": "Unknown",
-        "cusip": "49271V100",
+        "cusip": "79466L302",
         "ticker": null,
-        "valueUsd": 3039121138,
-        "weightPct": 4.029444057485136
+        "valueUsd": 3482994292,
+        "weightPct": 4.536641991868121
       },
       "holdings": null,
       "deep": true
+    },
+    {
+      "id": "tudor",
+      "name": "Tudor Investment Corp",
+      "manager": "Paul Tudor Jones",
+      "style": "quant",
+      "cik": "923093",
+      "valueUsd": 76623373608,
+      "reportedLines": 3509,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 3509,
+      "topHolding": null,
+      "holdings": null,
+      "deep": false
     },
     {
       "id": "rentech",
@@ -438,31 +463,16 @@
       "deep": false
     },
     {
-      "id": "tudor",
-      "name": "Tudor Investment Corp",
-      "manager": "Paul Tudor Jones",
-      "style": "quant",
-      "cik": "923093",
-      "valueUsd": 71912518398,
-      "reportedLines": 3458,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 3458,
-      "topHolding": null,
-      "holdings": null,
-      "deep": false
-    },
-    {
       "id": "coatue",
       "name": "Coatue Management",
       "manager": "Philippe Laffont",
       "style": "growth",
       "cik": "1135730",
-      "valueUsd": 48629053706,
-      "reportedLines": 211,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 66,
+      "valueUsd": 54495247703,
+      "reportedLines": 263,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 73,
       "topHolding": {
         "fundId": "coatue",
         "fundName": "Coatue Management",
@@ -470,8 +480,8 @@
         "name": "TAIWAN SEMICONDUCTOR MANUFAC",
         "cusip": "874039100",
         "ticker": null,
-        "valueUsd": 4257534162,
-        "weightPct": 8.755124431867554
+        "valueUsd": 4305233363,
+        "weightPct": 7.900199640276144
       },
       "holdings": null,
       "deep": true
@@ -482,20 +492,20 @@
       "manager": "Andreas Halvorsen",
       "style": "growth",
       "cik": "1103804",
-      "valueUsd": 35079228595,
-      "reportedLines": 90,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 90,
+      "valueUsd": 32703894076,
+      "reportedLines": 79,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 79,
       "topHolding": {
         "fundId": "viking",
         "fundName": "Viking Global Investors",
         "manager": "Andreas Halvorsen",
-        "name": "VISA INC",
-        "cusip": "92826C839",
+        "name": "TAIWAN SEMICONDUCTOR MANUFAC",
+        "cusip": "874039100",
         "ticker": null,
-        "valueUsd": 2193581596,
-        "weightPct": 6.253220734485196
+        "valueUsd": 1780873153,
+        "weightPct": 5.445446798663977
       },
       "holdings": null,
       "deep": true
@@ -506,11 +516,11 @@
       "manager": "Bill Gates",
       "style": "value",
       "cik": "1166559",
-      "valueUsd": 34424791932,
-      "reportedLines": 24,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 24,
+      "valueUsd": 29893737492,
+      "reportedLines": 25,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 25,
       "topHolding": {
         "fundId": "gates",
         "fundName": "Gates Foundation Trust",
@@ -518,47 +528,8 @@
         "name": "BERKSHIRE HATHAWAY INC DEL",
         "cusip": "084670702",
         "ticker": null,
-        "valueUsd": 7350651039,
-        "weightPct": 21.352782766326932
-      },
-      "holdings": null,
-      "deep": true
-    },
-    {
-      "id": "bridgewater",
-      "name": "Bridgewater Associates",
-      "manager": "Ray Dalio (fdr)",
-      "style": "quant",
-      "cik": "1350694",
-      "valueUsd": 24376086530,
-      "reportedLines": 997,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 997,
-      "topHolding": null,
-      "holdings": null,
-      "deep": false
-    },
-    {
-      "id": "tigerglobal",
-      "name": "Tiger Global Management",
-      "manager": "Chase Coleman",
-      "style": "growth",
-      "cik": "1167483",
-      "valueUsd": 23981506027,
-      "reportedLines": 46,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 46,
-      "topHolding": {
-        "fundId": "tigerglobal",
-        "fundName": "Tiger Global Management",
-        "manager": "Chase Coleman",
-        "name": "TAIWAN SEMICONDUCTOR MANUFAC",
-        "cusip": "874039100",
-        "ticker": null,
-        "valueUsd": 2331022991,
-        "weightPct": 9.72008592110761
+        "valueUsd": 6199132421,
+        "weightPct": 20.73722773092183
       },
       "holdings": null,
       "deep": true
@@ -569,20 +540,20 @@
       "manager": "Paul Singer",
       "style": "activist",
       "cik": "1791786",
-      "valueUsd": 22669814953,
-      "reportedLines": 29,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 29,
+      "valueUsd": 28637999237,
+      "reportedLines": 39,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 39,
       "topHolding": {
         "fundId": "elliott",
         "fundName": "Elliott Investment Mgmt",
         "manager": "Paul Singer",
-        "name": "TRIPLE FLAG PRECIOUS METAL",
-        "cusip": "89679M104",
+        "name": "PHILLIPS 66",
+        "cusip": "718546104",
         "ticker": null,
-        "valueUsd": 3993248804,
-        "weightPct": 17.614827524084202
+        "valueUsd": 4914972810,
+        "weightPct": 17.1624168620338
       },
       "holdings": null,
       "deep": true
@@ -593,11 +564,11 @@
       "manager": "Andrew Spokes",
       "style": "value",
       "cik": "909661",
-      "valueUsd": 21675731270,
-      "reportedLines": 89,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 89,
+      "valueUsd": 23212840535,
+      "reportedLines": 116,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 116,
       "topHolding": {
         "fundId": "farallon",
         "fundName": "Farallon Capital",
@@ -605,8 +576,47 @@
         "name": "STATE STR SPDR S&amp;P 500 ETF T",
         "cusip": "78462F103",
         "ticker": null,
-        "valueUsd": 4480620000,
-        "weightPct": 20.671136508327823
+        "valueUsd": 3980928600,
+        "weightPct": 17.149683141955897
+      },
+      "holdings": null,
+      "deep": true
+    },
+    {
+      "id": "bridgewater",
+      "name": "Bridgewater Associates",
+      "manager": "Ray Dalio (fdr)",
+      "style": "quant",
+      "cik": "1350694",
+      "valueUsd": 22985792515,
+      "reportedLines": 974,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 974,
+      "topHolding": null,
+      "holdings": null,
+      "deep": false
+    },
+    {
+      "id": "tigerglobal",
+      "name": "Tiger Global Management",
+      "manager": "Chase Coleman",
+      "style": "growth",
+      "cik": "1167483",
+      "valueUsd": 20173101170,
+      "reportedLines": 45,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 45,
+      "topHolding": {
+        "fundId": "tigerglobal",
+        "fundName": "Tiger Global Management",
+        "manager": "Chase Coleman",
+        "name": "NVIDIA CORPORATION",
+        "cusip": "67066G104",
+        "ticker": "NVDA",
+        "valueUsd": 2740560000,
+        "weightPct": 13.585219133662829
       },
       "holdings": null,
       "deep": true
@@ -641,20 +651,20 @@
       "manager": "Stephen Mandel (fdr)",
       "style": "growth",
       "cik": "1061165",
-      "valueUsd": 16357760275,
-      "reportedLines": 34,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 34,
+      "valueUsd": 15329467248,
+      "reportedLines": 31,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 31,
       "topHolding": {
         "fundId": "lonepine",
         "fundName": "Lone Pine Capital",
         "manager": "Stephen Mandel (fdr)",
-        "name": "NEBIUS GROUP N.V.",
-        "cusip": "N97284108",
-        "ticker": null,
-        "valueUsd": 1175934069,
-        "weightPct": 7.188845228385034
+        "name": "AMAZON COM INC",
+        "cusip": "023135106",
+        "ticker": "AMZN",
+        "valueUsd": 1394866773,
+        "weightPct": 9.09925146408454
       },
       "holdings": null,
       "deep": true
@@ -737,44 +747,20 @@
       "manager": "David Tepper",
       "style": "value",
       "cik": "1656456",
-      "valueUsd": 7725383349,
-      "reportedLines": 27,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 27,
+      "valueUsd": 7559628593,
+      "reportedLines": 24,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 24,
       "topHolding": {
         "fundId": "appaloosa",
         "fundName": "Appaloosa Management",
         "manager": "David Tepper",
-        "name": "AMAZON COM INC",
-        "cusip": "023135106",
-        "ticker": "AMZN",
-        "valueUsd": 1191700000,
-        "weightPct": 15.42577172114388
-      },
-      "holdings": null,
-      "deep": true
-    },
-    {
-      "id": "duquesne",
-      "name": "Duquesne Family Office",
-      "manager": "Stanley Druckenmiller",
-      "style": "growth",
-      "cik": "1536411",
-      "valueUsd": 5210856000,
-      "reportedLines": 95,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 95,
-      "topHolding": {
-        "fundId": "duquesne",
-        "fundName": "Duquesne Family Office",
-        "manager": "Stanley Druckenmiller",
-        "name": "Natera Inc",
-        "cusip": "632307104",
+        "name": "MICRON TECHNOLOGY INC",
+        "cusip": "595112103",
         "ticker": null,
-        "valueUsd": 864923000,
-        "weightPct": 16.598482092001774
+        "valueUsd": 1331387500,
+        "weightPct": 17.611810998662378
       },
       "holdings": null,
       "deep": true
@@ -785,20 +771,44 @@
       "manager": "Dan Loeb",
       "style": "activist",
       "cik": "1040273",
-      "valueUsd": 4679571988,
-      "reportedLines": 43,
-      "reportDate": "2026-06-30",
-      "filingDate": "2026-08-14",
-      "positionsCount": 43,
+      "valueUsd": 4589115363,
+      "reportedLines": 39,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 39,
       "topHolding": {
         "fundId": "thirdpoint",
         "fundName": "Third Point",
         "manager": "Dan Loeb",
-        "name": "WARNER BROS DISCOVERY INC",
-        "cusip": "934423104",
+        "name": "META PLATFORMS INC",
+        "cusip": "30303M102",
+        "ticker": "META",
+        "valueUsd": 474992900,
+        "weightPct": 10.350424045332502
+      },
+      "holdings": null,
+      "deep": true
+    },
+    {
+      "id": "duquesne",
+      "name": "Duquesne Family Office",
+      "manager": "Stanley Druckenmiller",
+      "style": "growth",
+      "cik": "1536411",
+      "valueUsd": 4470867000,
+      "reportedLines": 65,
+      "reportDate": "2026-09-30",
+      "filingDate": "2026-11-16",
+      "positionsCount": 65,
+      "topHolding": {
+        "fundId": "duquesne",
+        "fundName": "Duquesne Family Office",
+        "manager": "Stanley Druckenmiller",
+        "name": "Natera Inc",
+        "cusip": "632307104",
         "ticker": null,
-        "valueUsd": 533200000,
-        "weightPct": 11.394204456461072
+        "valueUsd": 1306335000,
+        "weightPct": 29.21882936799507
       },
       "holdings": null,
       "deep": true
@@ -816,14 +826,24 @@
       "weightPct": 47.17545588970936
     },
     {
+      "fundId": "duquesne",
+      "fundName": "Duquesne Family Office",
+      "manager": "Stanley Druckenmiller",
+      "name": "Natera Inc",
+      "cusip": "632307104",
+      "ticker": null,
+      "valueUsd": 1306335000,
+      "weightPct": 29.21882936799507
+    },
+    {
       "fundId": "berkshire",
       "fundName": "Berkshire Hathaway",
       "manager": "Warren Buffett",
       "name": "APPLE INC",
       "cusip": "037833100",
       "ticker": "AAPL",
-      "valueUsd": 65950296923,
-      "weightPct": 22.038266729497398
+      "valueUsd": 75901188420,
+      "weightPct": 24.95136141550127
     },
     {
       "fundId": "gates",
@@ -832,18 +852,8 @@
       "name": "BERKSHIRE HATHAWAY INC DEL",
       "cusip": "084670702",
       "ticker": null,
-      "valueUsd": 7350651039,
-      "weightPct": 21.352782766326932
-    },
-    {
-      "fundId": "farallon",
-      "fundName": "Farallon Capital",
-      "manager": "Andrew Spokes",
-      "name": "STATE STR SPDR S&amp;P 500 ETF T",
-      "cusip": "78462F103",
-      "ticker": null,
-      "valueUsd": 4480620000,
-      "weightPct": 20.671136508327823
+      "valueUsd": 6199132421,
+      "weightPct": 20.73722773092183
     },
     {
       "fundId": "pershing",
@@ -856,54 +866,64 @@
       "weightPct": 17.616254803282665
     },
     {
-      "fundId": "elliott",
-      "fundName": "Elliott Investment Mgmt",
-      "manager": "Paul Singer",
-      "name": "TRIPLE FLAG PRECIOUS METAL",
-      "cusip": "89679M104",
-      "ticker": null,
-      "valueUsd": 3993248804,
-      "weightPct": 17.614827524084202
-    },
-    {
-      "fundId": "duquesne",
-      "fundName": "Duquesne Family Office",
-      "manager": "Stanley Druckenmiller",
-      "name": "Natera Inc",
-      "cusip": "632307104",
-      "ticker": null,
-      "valueUsd": 864923000,
-      "weightPct": 16.598482092001774
-    },
-    {
       "fundId": "appaloosa",
       "fundName": "Appaloosa Management",
       "manager": "David Tepper",
-      "name": "AMAZON COM INC",
-      "cusip": "023135106",
-      "ticker": "AMZN",
-      "valueUsd": 1191700000,
-      "weightPct": 15.42577172114388
+      "name": "MICRON TECHNOLOGY INC",
+      "cusip": "595112103",
+      "ticker": null,
+      "valueUsd": 1331387500,
+      "weightPct": 17.611810998662378
     },
     {
-      "fundId": "thirdpoint",
-      "fundName": "Third Point",
-      "manager": "Dan Loeb",
-      "name": "WARNER BROS DISCOVERY INC",
-      "cusip": "934423104",
+      "fundId": "elliott",
+      "fundName": "Elliott Investment Mgmt",
+      "manager": "Paul Singer",
+      "name": "PHILLIPS 66",
+      "cusip": "718546104",
       "ticker": null,
-      "valueUsd": 533200000,
-      "weightPct": 11.394204456461072
+      "valueUsd": 4914972810,
+      "weightPct": 17.1624168620338
+    },
+    {
+      "fundId": "farallon",
+      "fundName": "Farallon Capital",
+      "manager": "Andrew Spokes",
+      "name": "STATE STR SPDR S&amp;P 500 ETF T",
+      "cusip": "78462F103",
+      "ticker": null,
+      "valueUsd": 3980928600,
+      "weightPct": 17.149683141955897
     },
     {
       "fundId": "tigerglobal",
       "fundName": "Tiger Global Management",
       "manager": "Chase Coleman",
-      "name": "TAIWAN SEMICONDUCTOR MANUFAC",
-      "cusip": "874039100",
-      "ticker": null,
-      "valueUsd": 2331022991,
-      "weightPct": 9.72008592110761
+      "name": "NVIDIA CORPORATION",
+      "cusip": "67066G104",
+      "ticker": "NVDA",
+      "valueUsd": 2740560000,
+      "weightPct": 13.585219133662829
+    },
+    {
+      "fundId": "thirdpoint",
+      "fundName": "Third Point",
+      "manager": "Dan Loeb",
+      "name": "META PLATFORMS INC",
+      "cusip": "30303M102",
+      "ticker": "META",
+      "valueUsd": 474992900,
+      "weightPct": 10.350424045332502
+    },
+    {
+      "fundId": "lonepine",
+      "fundName": "Lone Pine Capital",
+      "manager": "Stephen Mandel (fdr)",
+      "name": "AMAZON COM INC",
+      "cusip": "023135106",
+      "ticker": "AMZN",
+      "valueUsd": 1394866773,
+      "weightPct": 9.09925146408454
     },
     {
       "fundId": "coatue",
@@ -912,18 +932,8 @@
       "name": "TAIWAN SEMICONDUCTOR MANUFAC",
       "cusip": "874039100",
       "ticker": null,
-      "valueUsd": 4257534162,
-      "weightPct": 8.755124431867554
-    },
-    {
-      "fundId": "soros",
-      "fundName": "Soros Fund Management",
-      "manager": "George Soros",
-      "name": "SELECT SECTOR SPDR TR",
-      "cusip": "81369Y506",
-      "ticker": null,
-      "valueUsd": 670245450,
-      "weightPct": 7.87753361619665
+      "valueUsd": 4305233363,
+      "weightPct": 7.900199640276144
     }
   ],
   "mostOwned": [
@@ -931,187 +941,171 @@
       "name": "AMAZON COM INC",
       "cusip": "023135106",
       "count": 12,
-      "totalValue": 12665776910,
+      "totalValue": 13546828803,
       "ticker": "AMZN"
     },
     {
       "name": "ALPHABET INC",
       "cusip": "02079K305",
       "count": 10,
-      "totalValue": 34986430009,
+      "totalValue": 33069026434,
       "ticker": "GOOGL"
+    },
+    {
+      "name": "META PLATFORMS INC",
+      "cusip": "30303M102",
+      "count": 10,
+      "totalValue": 11087492447,
+      "ticker": "META"
     },
     {
       "name": "TAIWAN SEMICONDUCTOR MANUFAC",
       "cusip": "874039100",
       "count": 10,
-      "totalValue": 9978207428,
+      "totalValue": 9753565319,
       "ticker": null
-    },
-    {
-      "name": "META PLATFORMS INC",
-      "cusip": "30303M102",
-      "count": 9,
-      "totalValue": 6463707514,
-      "ticker": "META"
     },
     {
       "name": "MICROSOFT CORP",
       "cusip": "594918104",
       "count": 8,
-      "totalValue": 5084299596,
+      "totalValue": 7277555591,
       "ticker": "MSFT"
+    },
+    {
+      "name": "NVIDIA CORPORATION",
+      "cusip": "67066G104",
+      "count": 8,
+      "totalValue": 5831483473,
+      "ticker": "NVDA"
     },
     {
       "name": "ALPHABET INC",
       "cusip": "02079K107",
       "count": 7,
-      "totalValue": 11703642377,
+      "totalValue": 11635900657,
       "ticker": "GOOG"
-    },
-    {
-      "name": "NVIDIA CORPORATION",
-      "cusip": "67066G104",
-      "count": 7,
-      "totalValue": 4620983114,
-      "ticker": "NVDA"
-    },
-    {
-      "name": "ADVANCED MICRO DEVICES INC",
-      "cusip": "007903107",
-      "count": 7,
-      "totalValue": 1045951326,
-      "ticker": null
-    },
-    {
-      "name": "BROADCOM INC",
-      "cusip": "11135F101",
-      "count": 7,
-      "totalValue": 3695701126,
-      "ticker": null
     },
     {
       "name": "SPACE EXPLORATION TECHN CORP",
       "cusip": "84615Q103",
       "count": 6,
-      "totalValue": 4527603855,
+      "totalValue": 4744466743,
+      "ticker": null
+    },
+    {
+      "name": "ALIBABA GROUP HLDG LTD",
+      "cusip": "01609W102",
+      "count": 6,
+      "totalValue": 732887896,
+      "ticker": null
+    },
+    {
+      "name": "SEA LTD",
+      "cusip": "81141R100",
+      "count": 6,
+      "totalValue": 1752514829,
+      "ticker": null
+    },
+    {
+      "name": "BROADCOM INC",
+      "cusip": "11135F101",
+      "count": 6,
+      "totalValue": 3780055717,
       "ticker": null
     },
     {
       "name": "CAPITAL ONE FINL CORP",
       "cusip": "14040H105",
       "count": 5,
-      "totalValue": 3181589210,
+      "totalValue": 2878596200,
       "ticker": "COF"
     },
     {
-      "name": "SEA LTD",
-      "cusip": "81141R100",
+      "name": "APPLIED MATLS INC",
+      "cusip": "038222105",
       "count": 5,
-      "totalValue": 1915865820,
+      "totalValue": 3088123589,
+      "ticker": null
+    },
+    {
+      "name": "INTEL CORP",
+      "cusip": "458140100",
+      "count": 5,
+      "totalValue": 3609615273,
       "ticker": null
     },
     {
       "name": "COUPANG INC",
       "cusip": "22266T109",
       "count": 5,
-      "totalValue": 1088970575,
+      "totalValue": 858283919,
       "ticker": null
-    },
-    {
-      "name": "DANAHER CORP DEL",
-      "cusip": "235851102",
-      "count": 5,
-      "totalValue": 270698222,
-      "ticker": null
-    },
-    {
-      "name": "TESLA INC",
-      "cusip": "88160R101",
-      "count": 5,
-      "totalValue": 1535542377,
-      "ticker": "TSLA"
     }
   ],
   "consensusBuys": [
     {
       "name": "AMAZON COM INC",
       "cusip": "023135106",
-      "addCount": 11,
-      "reduceCount": 1,
-      "netValueDelta": 3489241074,
+      "addCount": 9,
+      "reduceCount": 3,
+      "netValueDelta": 2137584437,
       "ticker": "AMZN"
-    },
-    {
-      "name": "TAIWAN SEMICONDUCTOR MANUFAC",
-      "cusip": "874039100",
-      "addCount": 8,
-      "reduceCount": 2,
-      "netValueDelta": 1879890627,
-      "ticker": null
     },
     {
       "name": "META PLATFORMS INC",
       "cusip": "30303M102",
-      "addCount": 6,
-      "reduceCount": 3,
-      "netValueDelta": 316867088,
-      "ticker": "META"
-    },
-    {
-      "name": "NVIDIA CORPORATION",
-      "cusip": "67066G104",
-      "addCount": 6,
-      "reduceCount": 1,
-      "netValueDelta": 726649272,
-      "ticker": "NVDA"
-    },
-    {
-      "name": "SPACE EXPLORATION TECHN CORP",
-      "cusip": "84615Q103",
-      "addCount": 6,
-      "reduceCount": 0,
-      "netValueDelta": 3762490574,
-      "ticker": null
-    },
-    {
-      "name": "ALPHABET INC",
-      "cusip": "02079K305",
-      "addCount": 5,
-      "reduceCount": 5,
-      "netValueDelta": 12095325595,
-      "ticker": "GOOGL"
-    },
-    {
-      "name": "ALPHABET INC",
-      "cusip": "02079K107",
-      "addCount": 5,
+      "addCount": 8,
       "reduceCount": 2,
-      "netValueDelta": 7300686612,
-      "ticker": "GOOG"
+      "netValueDelta": 4727798562,
+      "ticker": "META"
     },
     {
       "name": "MICROSOFT CORP",
       "cusip": "594918104",
-      "addCount": 5,
-      "reduceCount": 3,
-      "netValueDelta": 2310290711,
+      "addCount": 7,
+      "reduceCount": 1,
+      "netValueDelta": 5237851644,
       "ticker": "MSFT"
     },
     {
-      "name": "ADVANCED MICRO DEVICES INC",
-      "cusip": "007903107",
+      "name": "NVIDIA CORPORATION",
+      "cusip": "67066G104",
+      "addCount": 7,
+      "reduceCount": 1,
+      "netValueDelta": 1635057497,
+      "ticker": "NVDA"
+    },
+    {
+      "name": "TAIWAN SEMICONDUCTOR MANUFAC",
+      "cusip": "874039100",
       "addCount": 5,
-      "reduceCount": 2,
-      "netValueDelta": 148600627,
+      "reduceCount": 5,
+      "netValueDelta": -78314885,
       "ticker": null
     },
     {
-      "name": "BROADCOM INC",
-      "cusip": "11135F101",
+      "name": "ALIBABA GROUP HLDG LTD",
+      "cusip": "01609W102",
       "addCount": 5,
-      "reduceCount": 2,
-      "netValueDelta": 665864737,
+      "reduceCount": 1,
+      "netValueDelta": 527973660,
+      "ticker": null
+    },
+    {
+      "name": "SEA LTD",
+      "cusip": "81141R100",
+      "addCount": 5,
+      "reduceCount": 1,
+      "netValueDelta": -162353303,
+      "ticker": null
+    },
+    {
+      "name": "MERCADOLIBRE INC",
+      "cusip": "58733R102",
+      "addCount": 5,
+      "reduceCount": 0,
+      "netValueDelta": 490041266,
       "ticker": null
     },
     {
@@ -1119,39 +1113,55 @@
       "cusip": "235851102",
       "addCount": 5,
       "reduceCount": 0,
-      "netValueDelta": 100088937,
+      "netValueDelta": 1532261308,
+      "ticker": null
+    },
+    {
+      "name": "SPACE EXPLORATION TECHN CORP",
+      "cusip": "84615Q103",
+      "addCount": 4,
+      "reduceCount": 2,
+      "netValueDelta": 674546024,
+      "ticker": null
+    },
+    {
+      "name": "INTEL CORP",
+      "cusip": "458140100",
+      "addCount": 4,
+      "reduceCount": 1,
+      "netValueDelta": 1314311149,
+      "ticker": null
+    },
+    {
+      "name": "VISA INC",
+      "cusip": "92826C839",
+      "addCount": 4,
+      "reduceCount": 1,
+      "netValueDelta": 1044782104,
+      "ticker": null
+    },
+    {
+      "name": "MASTERCARD INCORPORATED",
+      "cusip": "57636Q104",
+      "addCount": 4,
+      "reduceCount": 0,
+      "netValueDelta": 1704895181,
       "ticker": null
     },
     {
       "name": "NATERA INC",
       "cusip": "632307104",
-      "addCount": 5,
+      "addCount": 4,
       "reduceCount": 0,
-      "netValueDelta": 1170862271,
+      "netValueDelta": 1878662012,
       "ticker": null
     },
     {
-      "name": "MICRON TECHNOLOGY INC",
-      "cusip": "595112103",
+      "name": "STATE STR SPDR S&amp;P 500 ETF T",
+      "cusip": "78462F103",
       "addCount": 4,
       "reduceCount": 0,
-      "netValueDelta": 4146224076,
-      "ticker": null
-    },
-    {
-      "name": "LAM RESEARCH CORP",
-      "cusip": "512807306",
-      "addCount": 4,
-      "reduceCount": 0,
-      "netValueDelta": 2585820814,
-      "ticker": null
-    },
-    {
-      "name": "COREWEAVE INC",
-      "cusip": "21873S108",
-      "addCount": 4,
-      "reduceCount": 0,
-      "netValueDelta": 251128096,
+      "netValueDelta": 4084421707,
       "ticker": null
     }
   ],
@@ -1159,121 +1169,121 @@
     {
       "name": "ALPHABET INC",
       "cusip": "02079K305",
-      "addCount": 5,
-      "reduceCount": 5,
-      "netValueDelta": 12095325595,
+      "addCount": 2,
+      "reduceCount": 8,
+      "netValueDelta": -2056573551,
       "ticker": "GOOGL"
-    },
-    {
-      "name": "COUPANG INC",
-      "cusip": "22266T109",
-      "addCount": 1,
-      "reduceCount": 4,
-      "netValueDelta": 21932502,
-      "ticker": null
-    },
-    {
-      "name": "MICROSOFT CORP",
-      "cusip": "594918104",
-      "addCount": 5,
-      "reduceCount": 3,
-      "netValueDelta": 2310290711,
-      "ticker": "MSFT"
-    },
-    {
-      "name": "META PLATFORMS INC",
-      "cusip": "30303M102",
-      "addCount": 6,
-      "reduceCount": 3,
-      "netValueDelta": 316867088,
-      "ticker": "META"
-    },
-    {
-      "name": "ALIBABA GROUP HLDG LTD",
-      "cusip": "01609W102",
-      "addCount": 0,
-      "reduceCount": 3,
-      "netValueDelta": -253936294,
-      "ticker": null
-    },
-    {
-      "name": "MCDONALDS CORP",
-      "cusip": "580135101",
-      "addCount": 0,
-      "reduceCount": 3,
-      "netValueDelta": -380294452,
-      "ticker": null
-    },
-    {
-      "name": "ATI INC",
-      "cusip": "01741R102",
-      "addCount": 0,
-      "reduceCount": 3,
-      "netValueDelta": -268786675,
-      "ticker": null
-    },
-    {
-      "name": "NETFLIX INC.",
-      "cusip": "64110L106",
-      "addCount": 1,
-      "reduceCount": 3,
-      "netValueDelta": -486474920,
-      "ticker": null
-    },
-    {
-      "name": "CHEVRON CORPORATION",
-      "cusip": "166764100",
-      "addCount": 0,
-      "reduceCount": 2,
-      "netValueDelta": -3471278255,
-      "ticker": "CVX"
-    },
-    {
-      "name": "CHUBB LIMITED",
-      "cusip": "H1467J104",
-      "addCount": 1,
-      "reduceCount": 2,
-      "netValueDelta": 213358190,
-      "ticker": "CB"
     },
     {
       "name": "ALPHABET INC",
       "cusip": "02079K107",
-      "addCount": 5,
-      "reduceCount": 2,
-      "netValueDelta": 7300686612,
+      "addCount": 2,
+      "reduceCount": 5,
+      "netValueDelta": -1932584441,
       "ticker": "GOOG"
-    },
-    {
-      "name": "CAPITAL ONE FINL CORP",
-      "cusip": "14040H105",
-      "addCount": 3,
-      "reduceCount": 2,
-      "netValueDelta": -361520057,
-      "ticker": "COF"
-    },
-    {
-      "name": "BROOKFIELD CORP",
-      "cusip": "11271J107",
-      "addCount": 0,
-      "reduceCount": 2,
-      "netValueDelta": -821706904,
-      "ticker": null
-    },
-    {
-      "name": "HERTZ GLOBAL HLDGS INC",
-      "cusip": "42806J700",
-      "addCount": 0,
-      "reduceCount": 2,
-      "netValueDelta": -8328298,
-      "ticker": null
     },
     {
       "name": "TAIWAN SEMICONDUCTOR MANUFAC",
       "cusip": "874039100",
-      "addCount": 8,
-      "reduceCount": 2,
-      "netValueDelta": 1879890627,
+      "addCount": 5,
+      "reduceCount": 5,
+      "netValueDelta": -78314885,
+      "ticker": null
+    },
+    {
+      "name": "COUPANG INC",
+      "cusip": "22266T109",
+      "addCount": 0,
+      "reduceCount": 5,
+      "netValueDelta": -230927408,
+      "ticker": null
+    },
+    {
+      "name": "APPLIED MATLS INC",
+      "cusip": "038222105",
+      "addCount": 1,
+      "reduceCount": 4,
+      "netValueDelta": -2012912536,
+      "ticker": null
+    },
+    {
+      "name": "ALLY FINL INC",
+      "cusip": "02005N100",
+      "addCount": 0,
+      "reduceCount": 3,
+      "netValueDelta": -464979833,
+      "ticker": "ALLY"
+    },
+    {
+      "name": "AMAZON COM INC",
+      "cusip": "023135106",
+      "addCount": 9,
+      "reduceCount": 3,
+      "netValueDelta": 2137584437,
+      "ticker": "AMZN"
+    },
+    {
+      "name": "UBER TECHNOLOGIES INC",
+      "cusip": "90353T100",
+      "addCount": 1,
+      "reduceCount": 3,
+      "netValueDelta": -367540033,
+      "ticker": null
+    },
+    {
+      "name": "BROADCOM INC",
+      "cusip": "11135F101",
+      "addCount": 3,
+      "reduceCount": 3,
+      "netValueDelta": 691904136,
+      "ticker": null
+    },
+    {
+      "name": "NU HLDGS LTD",
+      "cusip": "G6683N103",
+      "addCount": 1,
+      "reduceCount": 3,
+      "netValueDelta": -56886513,
+      "ticker": "NU"
+    },
+    {
+      "name": "DOORDASH INC",
+      "cusip": "25809K105",
+      "addCount": 1,
+      "reduceCount": 3,
+      "netValueDelta": -180627,
+      "ticker": null
+    },
+    {
+      "name": "CARVANA CO",
+      "cusip": "146869102",
+      "addCount": 0,
+      "reduceCount": 3,
+      "netValueDelta": -402565068,
+      "ticker": null
+    },
+    {
+      "name": "HUT 8 CORP",
+      "cusip": "44812J104",
+      "addCount": 0,
+      "reduceCount": 3,
+      "netValueDelta": -835254955,
+      "ticker": null
+    },
+    {
+      "name": "MASTEC INC",
+      "cusip": "576323109",
+      "addCount": 0,
+      "reduceCount": 3,
+      "netValueDelta": -137037178,
+      "ticker": null
+    },
+    {
+      "name": "INVESCO EXCHANGE TRADED FD T",
+      "cusip": "46137V357",
+      "addCount": 0,
+      "reduceCount": 3,
+      "netValueDelta": -6394253,
       "ticker": null
     }
   ],
