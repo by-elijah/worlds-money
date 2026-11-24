@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-11-23T18:03:22.006Z",
+    "generatedAt": "2026-11-24T17:40:39.677Z",
     "currency": "USD",
     "unit": "trillion",
     "version": 2
@@ -134,7 +134,7 @@
       "name": "Broad Money",
       "sub": "M2 — US (live) + EZ + CN + JP (curated)",
       "valueT": 103.5,
-      "asOf": "2026-11-23",
+      "asOf": "2026-11-24",
       "source": "US M2 live via FRED (M2SL); EZ/CN/JP curated from ECB/PBoC/BoJ releases",
       "tier": 2,
       "stale": false,
@@ -174,8 +174,8 @@
       "id": "gold",
       "name": "Gold",
       "sub": "All above-ground gold × spot price",
-      "valueT": 25.847,
-      "asOf": "2026-11-23",
+      "valueT": 25.203,
+      "asOf": "2026-11-24",
       "source": "gold-api.com / WGC",
       "tier": 1,
       "stale": false,
@@ -215,8 +215,8 @@
       "id": "crypto",
       "name": "Crypto",
       "sub": "Total crypto market capitalisation",
-      "valueT": 2.1287,
-      "asOf": "2026-11-23",
+      "valueT": 2.0833,
+      "asOf": "2026-11-24",
       "source": "CoinGecko",
       "tier": 1,
       "stale": false,
@@ -260,19 +260,19 @@
     "source": "BIS, Jun 2025"
   },
   "crypto": {
-    "totalT": 2.1287,
+    "totalT": 2.0833,
     "athT": 4.27,
     "athDate": "2025-10",
-    "volume24hB": 87.19,
+    "volume24hB": 77.72,
     "btc": {
-      "capT": 1.2397,
-      "dominancePct": 57.9306,
-      "priceUsd": 61626
+      "capT": 1.2067,
+      "dominancePct": 57.8539,
+      "priceUsd": 59986
     },
     "eth": {
-      "capB": 213.04,
-      "dominancePct": 9.9501,
-      "priceUsd": 1742.76
+      "capB": 205.81,
+      "dominancePct": 9.8671,
+      "priceUsd": 1683.57
     },
     "stablecoinsB": 236.1,
     "top5": [
@@ -281,52 +281,48 @@
         "id": "bitcoin",
         "symbol": "BTC",
         "name": "Bitcoin",
-        "priceUsd": 61626,
-        "capB": 1239.7,
-        "change24hPct": 1.43
+        "priceUsd": 59986,
+        "capB": 1206.7,
+        "change24hPct": -2.8
       },
       {
         "rank": 2,
         "id": "ethereum",
         "symbol": "ETH",
         "name": "Ethereum",
-        "priceUsd": 1742.76,
-        "capB": 213,
-        "change24hPct": 1.74
+        "priceUsd": 1683.57,
+        "capB": 205.8,
+        "change24hPct": -4.01
       },
       {
         "rank": 3,
         "id": "tether",
         "symbol": "USDT",
         "name": "Tether",
-        "priceUsd": 0.999214,
+        "priceUsd": 0.999118,
         "capB": 174.7,
-        "change24hPct": 0.04
+        "change24hPct": -0.01
       },
       {
         "rank": 4,
         "id": "binancecoin",
         "symbol": "BNB",
         "name": "BNB",
-        "priceUsd": 561.94,
-        "capB": 73.9,
-        "change24hPct": 0.89
+        "priceUsd": 549.2,
+        "capB": 72.2,
+        "change24hPct": -2.4
       },
       {
         "rank": 5,
         "id": "usd-coin",
         "symbol": "USDC",
         "name": "USDC",
-        "priceUsd": 0.999619,
-        "capB": 68.9,
-        "change24hPct": 0.02
+        "priceUsd": 0.99959,
+        "capB": 69.1,
+        "change24hPct": -0.01
       }
     ],
     "sparklineData": [
-      {
-        "date": "2026-08-26",
-        "totalT": 2.6663
-      },
       {
         "date": "2026-08-27",
         "totalT": 2.7256
@@ -682,19 +678,18 @@
       {
         "date": "2026-11-23",
         "totalT": 2.1287
+      },
+      {
+        "date": "2026-11-24",
+        "totalT": 2.0833
       }
     ]
   },
   "gold": {
-    "spotUsdPerOz": 3654.25,
+    "spotUsdPerOz": 3563.15,
     "aboveGroundTonnes": 220000,
-    "impliedCapT": 25.847,
+    "impliedCapT": 25.203,
     "sparklineData": [
-      {
-        "date": "2026-08-26",
-        "spotUsdPerOz": 4638.5,
-        "impliedCapT": 32.809
-      },
       {
         "date": "2026-08-27",
         "spotUsdPerOz": 4609.8,
@@ -1139,29 +1134,34 @@
         "date": "2026-11-23",
         "spotUsdPerOz": 3654.25,
         "impliedCapT": 25.847
+      },
+      {
+        "date": "2026-11-24",
+        "spotUsdPerOz": 3563.15,
+        "impliedCapT": 25.203
       }
     ]
   },
   "deltas": {
-    "generatedAt": "2026-11-23",
+    "generatedAt": "2026-11-24",
     "day": {
       "crypto": {
-        "pct": 1.43,
-        "absT": 0.03
+        "pct": -2.13,
+        "absT": -0.0454
       },
       "gold": {
-        "pct": 3.26,
-        "absT": 0.815
+        "pct": -2.49,
+        "absT": -0.644
       }
     },
     "month": {
       "crypto": {
-        "pct": -20.88,
-        "absT": -0.5619
+        "pct": -22.4,
+        "absT": -0.6015
       },
       "gold": {
-        "pct": -8.57,
-        "absT": -2.424
+        "pct": -10.85,
+        "absT": -3.068
       }
     }
   },
@@ -1269,7 +1269,7 @@
   ],
   "worldGdp": {
     "totalT": 128,
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "source": "IMF World Economic Outlook, DataMapper API (live)",
     "topCountries": [
       {
@@ -1447,7 +1447,7 @@
     ]
   },
   "topPrivateCompanies": {
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "source": "Live: price (Yahoo Finance) × shares outstanding (curated, reviewed quarterly)",
     "companies": [
       {
@@ -1456,7 +1456,7 @@
         "ticker": "AAPL",
         "flag": "🇺🇸",
         "sector": "Consumer Tech",
-        "capT": 4.89
+        "capT": 4.96
       },
       {
         "rank": 2,
@@ -1464,7 +1464,7 @@
         "ticker": "GOOG",
         "flag": "🇺🇸",
         "sector": "Internet",
-        "capT": 3.82
+        "capT": 3.76
       },
       {
         "rank": 3,
@@ -1472,7 +1472,7 @@
         "ticker": "MSFT",
         "flag": "🇺🇸",
         "sector": "Cloud",
-        "capT": 3.68
+        "capT": 3.69
       },
       {
         "rank": 4,
@@ -1480,7 +1480,7 @@
         "ticker": "NVDA",
         "flag": "🇺🇸",
         "sector": "AI / Chips",
-        "capT": 3.63
+        "capT": 3.39
       },
       {
         "rank": 5,
@@ -1488,7 +1488,7 @@
         "ticker": "AMZN",
         "flag": "🇺🇸",
         "sector": "E-Commerce/Cloud",
-        "capT": 2.99
+        "capT": 2.93
       },
       {
         "rank": 6,
@@ -1496,23 +1496,23 @@
         "ticker": "TSM",
         "flag": "🇹🇼",
         "sector": "Semiconductors",
-        "capT": 1.84
+        "capT": 1.74
       },
       {
         "rank": 7,
-        "name": "SpaceX",
-        "ticker": "SPCX",
-        "flag": "🇺🇸",
-        "sector": "Aerospace",
-        "capT": 1.39
-      },
-      {
-        "rank": 8,
         "name": "Tesla",
         "ticker": "TSLA",
         "flag": "🇺🇸",
         "sector": "EVs / Energy",
-        "capT": 1.33
+        "capT": 1.31
+      },
+      {
+        "rank": 8,
+        "name": "SpaceX",
+        "ticker": "SPCX",
+        "flag": "🇺🇸",
+        "sector": "Aerospace",
+        "capT": 1.29
       },
       {
         "rank": 9,
@@ -1520,7 +1520,7 @@
         "ticker": "AVGO",
         "flag": "🇺🇸",
         "sector": "Semiconductors",
-        "capT": 1.31
+        "capT": 1.28
       },
       {
         "rank": 10,
@@ -1528,7 +1528,7 @@
         "ticker": "META",
         "flag": "🇺🇸",
         "sector": "Social Media",
-        "capT": 1.23
+        "capT": 1.22
       }
     ]
   },
@@ -2080,15 +2080,15 @@
     }
   },
   "marketPulse": {
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "markets": [
       {
         "id": "sp500",
         "label": "S&P 500",
         "flag": "🇺🇸",
         "region": "americas",
-        "price": 7246.25,
-        "changePct": -2.3,
+        "price": 7212.23,
+        "changePct": -1.75,
         "stale": false
       },
       {
@@ -2096,8 +2096,8 @@
         "label": "NASDAQ",
         "flag": "🇺🇸",
         "region": "americas",
-        "price": 24132.81,
-        "changePct": -1.54,
+        "price": 23768.97,
+        "changePct": -2.3,
         "stale": false
       },
       {
@@ -2105,8 +2105,8 @@
         "label": "KOSPI",
         "flag": "🇰🇷",
         "region": "asia",
-        "price": 4708.54,
-        "changePct": -7.68,
+        "price": 5006.03,
+        "changePct": 0.76,
         "stale": false
       },
       {
@@ -2114,8 +2114,8 @@
         "label": "Nikkei 225",
         "flag": "🇯🇵",
         "region": "asia",
-        "price": 56436.65,
-        "changePct": -5.41,
+        "price": 58644.63,
+        "changePct": -0.37,
         "stale": false
       },
       {
@@ -2123,8 +2123,8 @@
         "label": "Shanghai",
         "flag": "🇨🇳",
         "region": "asia",
-        "price": 3538.95,
-        "changePct": -1.27,
+        "price": 3548.37,
+        "changePct": -1.1,
         "stale": false
       },
       {
@@ -2132,8 +2132,8 @@
         "label": "DAX",
         "flag": "🇩🇪",
         "region": "emea",
-        "price": 25337.27,
-        "changePct": -4.74,
+        "price": 25017.81,
+        "changePct": -3.95,
         "stale": false
       },
       {
@@ -2141,8 +2141,8 @@
         "label": "FTSE 100",
         "flag": "🇬🇧",
         "region": "emea",
-        "price": 10480.82,
-        "changePct": -3.68,
+        "price": 10467.07,
+        "changePct": -2.08,
         "stale": false
       }
     ]
@@ -2177,11 +2177,11 @@
   ],
   "editorNote": null,
   "insights": {
-    "asOf": "2026-11-23T18:03:31.932Z",
+    "asOf": "2026-11-24T17:40:50.903Z",
     "items": [
-      "KOSPI −7.7% — biggest move among tracked markets",
-      "Gold +3.3% in 24h",
-      "Next: US jobs report (NFP) in 11 days (2026-12-04)"
+      "DAX −4.0% — biggest move among tracked markets",
+      "Crypto market cap −2.1% in 24h",
+      "Gold −2.5% in 24h"
     ]
   }
 }
